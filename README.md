@@ -69,7 +69,6 @@ Before you begin, ensure you have the following installed:
 
 - **Frontend**: Next.js 14, React 18
 - **Styling**: Tailwind CSS
-- **UI Components**: Shadcn/UI
 - **Icons**: Lucide Icons
 - **Deployment**: Vercel
 
@@ -81,7 +80,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [Next.js](https://nextjs.org) - React framework
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
-- [Shadcn/UI](https://ui.shadcn.com) - UI component library
 - [Lucide Icons](https://lucide.dev) - Beautiful & consistent icons
 - [Vercel](https://vercel.com) - Deployment platform
 
@@ -89,7 +87,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - 📧 Email: [contact@studentlearningplatform.com](mailto:reginaldbrixton@gmail.com)
 - 💬 Discord: [Join our community](https://discord.gg/studentlearning)
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/student-learning-platform/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/reginaldbrixton/capstone-compass/issues)
 
 ## Contributing
 
