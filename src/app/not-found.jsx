@@ -146,7 +146,9 @@ const EnhancedAnimatedNotFound = () => {
     },
   };
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div style={styles.container}>
