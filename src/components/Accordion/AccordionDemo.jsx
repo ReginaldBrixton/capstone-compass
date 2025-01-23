@@ -1,11 +1,16 @@
 import React from 'react';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './index';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from './index';
 
 // Icon component for the demo
 const InfoIcon = () => (
   <svg
-    className="w-5 h-5"
+    className="h-5 w-5"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,51 +27,63 @@ const AccordionDemo = () => {
   return (
     <div className="space-y-8 p-4">
       <div>
-        <h2 className="text-lg font-semibold mb-4">Default Accordion</h2>
+        <h2 className="mb-4 text-lg font-semibold">Default Accordion</h2>
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Always Open Accordion</h2>
+        <h2 className="mb-4 text-lg font-semibold">Always Open Accordion</h2>
         <Accordion type="multiple">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Flush Accordion</h2>
+        <h2 className="mb-4 text-lg font-semibold">Flush Accordion</h2>
         <Accordion type="single" collapsible flush>
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Colored Accordion</h2>
+        <h2 className="mb-4 text-lg font-semibold">Colored Accordion</h2>
         <Accordion type="single" collapsible variant="colored">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Accordion with Icons</h2>
+        <h2 className="mb-4 text-lg font-semibold">Accordion with Icons</h2>
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger icon={<InfoIcon />}>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            <AccordionTrigger icon={<InfoIcon />}>
+              Is it accessible?
+            </AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>

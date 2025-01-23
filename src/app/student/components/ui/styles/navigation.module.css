@@ -109,7 +109,7 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-[data-theme="dark"] .sidebar {
+[data-theme='dark'] .sidebar {
   background: var(--sidebar-bg-dark, #111827);
   color: var(--text-primary-dark, #f9fafb);
   border-right-color: var(--border-color-dark, #1f2937);
@@ -150,7 +150,7 @@
   border-radius: 3px;
 }
 
-[data-theme="dark"] .sidebarNav::-webkit-scrollbar-thumb {
+[data-theme='dark'] .sidebarNav::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-dark, rgba(75, 85, 99, 0.7));
 }
 
@@ -160,45 +160,49 @@
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-[data-theme="dark"] .mobileNav {
+[data-theme='dark'] .mobileNav {
   background: var(--bg-primary-dark, #111827);
   border-top-color: var(--border-color-dark, #1f2937);
   box-shadow: 0 -2px 4px var(--shadow-color-dark, rgba(0, 0, 0, 0.35));
 }
 
-[data-theme="dark"] .navLink {
+[data-theme='dark'] .navLink {
   color: var(--text-secondary-dark, #9ca3af);
 }
 
-[data-theme="dark"] .navLink:hover {
+[data-theme='dark'] .navLink:hover {
   color: var(--primary-hover-dark, #818cf8);
 }
 
-[data-theme="dark"] .navLink.active {
+[data-theme='dark'] .navLink.active {
   color: var(--primary-dark, #6366f1);
 }
 
-[data-theme="dark"] .label.active {
+[data-theme='dark'] .label.active {
   color: var(--primary-dark, #6366f1);
 }
 
 /* Additional dark mode improvements */
-[data-theme="dark"] .icon {
+[data-theme='dark'] .icon {
   filter: brightness(1.2);
 }
 
-[data-theme="dark"] .navLink:hover .icon {
+[data-theme='dark'] .navLink:hover .icon {
   filter: brightness(1.4);
 }
 
-[data-theme="dark"] .sidebar::before {
+[data-theme='dark'] .sidebar::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.95));
+  background: linear-gradient(
+    to bottom,
+    rgba(17, 24, 39, 0.8),
+    rgba(17, 24, 39, 0.95)
+  );
   border-radius: 0 24px 24px 0;
   z-index: -1;
 }

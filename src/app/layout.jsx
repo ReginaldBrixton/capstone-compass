@@ -32,15 +32,9 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={inter.variable}
-      suppressHydrationWarning
-    >
-      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white antialiased min-h-screen font-sans">
-        <Providers>
-          {children}
-        </Providers>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-screen bg-white font-sans text-gray-900 antialiased dark:bg-gray-900 dark:text-white">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -18,9 +18,9 @@ const AlertDemo = () => {
   ];
 
   return (
-    <div className="p-4 space-y-8">
+    <div className="space-y-8 p-4">
       <div>
-        <h2 className="text-lg font-semibold mb-4">Default Alerts</h2>
+        <h2 className="mb-4 text-lg font-semibold">Default Alerts</h2>
         <Alert
           id="info-alert-1"
           variant="info"
@@ -59,7 +59,7 @@ const AlertDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Bordered Alerts</h2>
+        <h2 className="mb-4 text-lg font-semibold">Bordered Alerts</h2>
         <Alert
           id="info-alert-2"
           variant="info"
@@ -79,7 +79,7 @@ const AlertDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Border Accent Alerts</h2>
+        <h2 className="mb-4 text-lg font-semibold">Border Accent Alerts</h2>
         <Alert
           id="success-alert-3"
           variant="success"
@@ -99,7 +99,7 @@ const AlertDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Alerts with Links</h2>
+        <h2 className="mb-4 text-lg font-semibold">Alerts with Links</h2>
         <Alert
           id="info-alert-4"
           variant="info"
@@ -121,7 +121,7 @@ const AlertDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Alerts with Lists</h2>
+        <h2 className="mb-4 text-lg font-semibold">Alerts with Lists</h2>
         <Alert
           id="info-alert-5"
           variant="info"
@@ -139,7 +139,9 @@ const AlertDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Dismissible Alerts with Actions</h2>
+        <h2 className="mb-4 text-lg font-semibold">
+          Dismissible Alerts with Actions
+        </h2>
         <Alert
           id="info-alert-6"
           variant="info"

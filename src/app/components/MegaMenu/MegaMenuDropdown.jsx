@@ -10,13 +10,15 @@ const DropdownItem = memo(({ item, variant }) => {
   const itemClasses = useMemo(() => {
     const baseClasses =
       'text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-200';
-    return variant === 'icons' ? `flex items-center ${baseClasses} group` : baseClasses;
+    return variant === 'icons'
+      ? `flex items-center ${baseClasses} group`
+      : baseClasses;
   }, [variant]);
 
   return (
     <a href={item.href} className={itemClasses}>
       {item.icon && (
-        <span className="w-5 h-5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-200">
+        <span className="me-2 h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-500">
           {item.icon}
         </span>
       )}
@@ -29,7 +31,9 @@ DropdownItem.displayName = 'DropdownItem';
 
 const Section = memo(({ section }) => (
   <div className="space-y-4">
-    <h3 className="font-semibold text-gray-900 dark:text-white">{section.title}</h3>
+    <h3 className="font-semibold text-gray-900 dark:text-white">
+      {section.title}
+    </h3>
     <ul className="space-y-2">
       {section.items.map((item, index) => (
         <li key={index}>
@@ -43,16 +47,18 @@ const Section = memo(({ section }) => (
 Section.displayName = 'Section';
 
 const CTASection = memo(({ cta }) => (
-  <div className="md:col-span-1 space-y-4 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg transform hover:scale-[1.02] transition-transform duration-200">
+  <div className="transform space-y-4 rounded-lg bg-gray-50 p-6 transition-transform duration-200 hover:scale-[1.02] dark:bg-gray-800 md:col-span-1">
     <h3 className="font-semibold text-gray-900 dark:text-white">{cta.title}</h3>
-    <p className="text-sm text-gray-600 dark:text-gray-400">{cta.description}</p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">
+      {cta.description}
+    </p>
     <a
       href={cta.href}
-      className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+      className="inline-flex items-center text-sm font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
     >
       {cta.label}
       <svg
-        className="w-4 h-4 ms-2 rtl:rotate-180 transform group-hover:translate-x-1 transition-transform duration-200"
+        className="ms-2 h-4 w-4 transform transition-transform duration-200 group-hover:translate-x-1 rtl:rotate-180"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -109,12 +115,16 @@ const MegaMenuDropdown = ({ variant, content }) => {
             {content.sections?.map((section, index) => (
               <Section key={index} section={section} />
             ))}
-            {variant === 'full-width-cta' && content.cta && <CTASection cta={content.cta} />}
+            {variant === 'full-width-cta' && content.cta && (
+              <CTASection cta={content.cta} />
+            )}
           </>
         );
 
       default:
-        return content.items?.map((item, index) => <DropdownItem key={index} item={item} />);
+        return content.items?.map((item, index) => (
+          <DropdownItem key={index} item={item} />
+        ));
     }
   };
 

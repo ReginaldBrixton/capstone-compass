@@ -72,7 +72,8 @@ const Step = styled.div`
 const StepLabel = styled.span`
   font-size: 0.875rem;
   font-weight: 500;
-  color: ${(props) => (props.isActive ? 'var(--primary-color)' : 'var(--text-secondary)')};
+  color: ${(props) =>
+    props.isActive ? 'var(--primary-color)' : 'var(--text-secondary)'};
   text-align: center;
   max-width: 120px;
 `;
@@ -82,7 +83,11 @@ const ProgressTracker = ({ steps, currentStep }) => {
     <TrackerContainer>
       <StepsContainer>
         {steps.map((step, index) => (
-          <Step key={step.id} isCompleted={index < currentStep} isActive={index === currentStep}>
+          <Step
+            key={step.id}
+            isCompleted={index < currentStep}
+            isActive={index === currentStep}
+          >
             <StepLabel isActive={index === currentStep}>{step.label}</StepLabel>
           </Step>
         ))}

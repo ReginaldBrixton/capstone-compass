@@ -78,7 +78,11 @@ const RubricCriterion = ({
       min="0"
       max={maxScore}
       value={score}
-      onChange={(e) => onScoreChange(Math.min(maxScore, Math.max(0, parseInt(e.target.value) || 0)))}
+      onChange={(e) =>
+        onScoreChange(
+          Math.min(maxScore, Math.max(0, parseInt(e.target.value) || 0))
+        )
+      }
     />
     <CommentBox
       placeholder={`Comments on ${title.toLowerCase()}...`}
@@ -94,8 +98,8 @@ const EvaluationRubric = ({ criteria, feedback, onFeedbackChange }) => {
       ...feedback,
       [criterionId]: {
         ...feedback[criterionId],
-        score: value
-      }
+        score: value,
+      },
     });
   };
 
@@ -104,8 +108,8 @@ const EvaluationRubric = ({ criteria, feedback, onFeedbackChange }) => {
       ...feedback,
       [criterionId]: {
         ...feedback[criterionId],
-        comments: value
-      }
+        comments: value,
+      },
     });
   };
 
@@ -120,7 +124,9 @@ const EvaluationRubric = ({ criteria, feedback, onFeedbackChange }) => {
           score={feedback[criterion.id]?.score || 0}
           comments={feedback[criterion.id]?.comments || ''}
           onScoreChange={(value) => handleScoreChange(criterion.id, value)}
-          onCommentsChange={(value) => handleCommentsChange(criterion.id, value)}
+          onCommentsChange={(value) =>
+            handleCommentsChange(criterion.id, value)
+          }
         />
       ))}
     </RubricContainer>

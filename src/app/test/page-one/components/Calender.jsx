@@ -131,20 +131,20 @@ const CalendarInput = ({
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
     return (
-      <div className="calendar-component bg-white border border-gray-200 rounded-lg shadow-xl p-3 sm:p-4 md:p-5 w-[260px] sm:w-[280px] md:w-[300px] transition-all duration-200 ease-in-out">
+      <div className="calendar-component w-[260px] rounded-lg border border-gray-200 bg-white p-3 shadow-xl transition-all duration-200 ease-in-out sm:w-[280px] sm:p-4 md:w-[300px] md:p-5">
         {title && (
-          <div className="text-center font-bold text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-5 text-gray-800">
+          <div className="mb-3 text-center text-sm font-bold text-gray-800 sm:mb-4 sm:text-base md:mb-5 md:text-lg">
             {title}
           </div>
         )}
-        <div className="flex justify-between items-center mb-3 sm:mb-4 md:mb-5">
+        <div className="mb-3 flex items-center justify-between sm:mb-4 md:mb-5">
           <button
             onClick={handlePrevMonth}
-            className="p-1 sm:p-1.5 rounded-full hover:bg-gray-100 transition-colors duration-200"
+            className="rounded-full p-1 transition-colors duration-200 hover:bg-gray-100 sm:p-1.5"
             aria-label="Previous month"
           >
             <svg
-              className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600"
+              className="h-4 w-4 text-gray-600 sm:h-5 sm:w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -160,32 +160,37 @@ const CalendarInput = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowMonthYearSelect(!showMonthYearSelect)}
-              className="font-semibold text-sm sm:text-base text-gray-800 hover:text-blue-600 transition-colors duration-200"
+              className="text-sm font-semibold text-gray-800 transition-colors duration-200 hover:text-blue-600 sm:text-base"
             >
               {months[currentMonth]} {currentYear}
             </button>
           </div>
           <button
             onClick={handleNextMonth}
-            className="p-1 sm:p-1.5 rounded-full hover:bg-gray-100 transition-colors duration-200"
+            className="rounded-full p-1 transition-colors duration-200 hover:bg-gray-100 sm:p-1.5"
             aria-label="Next month"
           >
             <svg
-              className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600"
+              className="h-4 w-4 text-gray-600 sm:h-5 sm:w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
         {showMonthYearSelect && (
-          <div className="grid grid-cols-2 gap-2 mb-3 p-2 bg-gray-50 rounded-lg">
+          <div className="mb-3 grid grid-cols-2 gap-2 rounded-lg bg-gray-50 p-2">
             <select
               value={currentMonth}
               onChange={(e) => setCurrentMonth(Number(e.target.value))}
-              className="p-1 text-sm border rounded bg-white"
+              className="rounded border bg-white p-1 text-sm"
             >
               {months.map((month, index) => (
                 <option key={month} value={index}>
@@ -196,7 +201,7 @@ const CalendarInput = ({
             <select
               value={currentYear}
               onChange={(e) => setCurrentYear(Number(e.target.value))}
-              className="p-1 text-sm border rounded bg-white"
+              className="rounded border bg-white p-1 text-sm"
             >
               {years.map((year) => (
                 <option key={year} value={year}>
@@ -206,11 +211,11 @@ const CalendarInput = ({
             </select>
           </div>
         )}
-        <div className="grid grid-cols-7 gap-1 sm:gap-1.5 mb-1 sm:mb-2">
+        <div className="mb-1 grid grid-cols-7 gap-1 sm:mb-2 sm:gap-1.5">
           {daysOfWeek.map((day) => (
             <div
               key={day}
-              className="text-center font-medium text-xs sm:text-sm text-gray-600 py-1"
+              className="py-1 text-center text-xs font-medium text-gray-600 sm:text-sm"
             >
               {day}
             </div>
@@ -220,7 +225,8 @@ const CalendarInput = ({
           ))}
           {days.map((day) => {
             const currentDate = new Date(currentYear, currentMonth, day);
-            const isSelected = selectedDate && currentDate.getTime() === selectedDate.getTime();
+            const isSelected =
+              selectedDate && currentDate.getTime() === selectedDate.getTime();
             const isInRange =
               selectedDate &&
               selectedEndDate &&
@@ -236,20 +242,15 @@ const CalendarInput = ({
                 key={day}
                 onClick={() => handleDateClick(day)}
                 disabled={isDisabled}
-                className={`
-                  text-center p-1 sm:p-1.5 rounded-full text-xs sm:text-sm font-medium
-                  transition-all duration-200 ease-in-out
-                  ${
-                    isSelected
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
-                      : isInRange
-                        ? 'bg-blue-100 text-blue-800 hover:bg-blue-200'
-                        : isDisabled
-                          ? 'opacity-40 cursor-not-allowed bg-gray-100'
-                          : 'hover:bg-gray-100 text-gray-700'
-                  }
-                  ${isToday && !isSelected ? 'ring-1 ring-blue-400' : ''}
-                `}
+                className={`rounded-full p-1 text-center text-xs font-medium transition-all duration-200 ease-in-out sm:p-1.5 sm:text-sm ${
+                  isSelected
+                    ? 'bg-blue-600 text-white shadow-sm hover:bg-blue-700'
+                    : isInRange
+                      ? 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                      : isDisabled
+                        ? 'cursor-not-allowed bg-gray-100 opacity-40'
+                        : 'text-gray-700 hover:bg-gray-100'
+                } ${isToday && !isSelected ? 'ring-1 ring-blue-400' : ''} `}
               >
                 {day}
               </button>
@@ -257,16 +258,16 @@ const CalendarInput = ({
           })}
         </div>
         {buttons && (
-          <div className="flex justify-between mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-200">
+          <div className="mt-3 flex justify-between border-t border-gray-200 pt-2 sm:mt-4 sm:pt-3">
             <button
               onClick={handleToday}
-              className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
+              className="rounded-md px-2 py-1 text-xs font-medium text-blue-600 transition-colors duration-200 hover:bg-blue-50 sm:px-3 sm:py-1.5 sm:text-sm"
             >
               Today
             </button>
             <button
               onClick={handleClear}
-              className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition-colors duration-200"
+              className="rounded-md px-2 py-1 text-xs font-medium text-red-600 transition-colors duration-200 hover:bg-red-50 sm:px-3 sm:py-1.5 sm:text-sm"
             >
               Clear
             </button>
@@ -291,13 +292,13 @@ const CalendarInput = ({
   return (
     <div
       ref={calendarRef}
-      className={['relative max-w-sm calendar-input-component', className]
+      className={['calendar-input-component relative max-w-sm', className]
         .filter(Boolean)
         .join(' ')}
     >
-      <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+      <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
         <svg
-          className="w-4 h-4 text-gray-500 dark:text-gray-400"
+          className="h-4 w-4 text-gray-500 dark:text-gray-400"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -318,7 +319,7 @@ const CalendarInput = ({
         }
         placeholder={placeholder}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
         {...props}
       />
       {isOpen && (

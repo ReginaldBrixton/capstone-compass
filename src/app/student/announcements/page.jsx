@@ -2,22 +2,34 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { AnnouncementCard, AnnouncementModal, SearchAndFilter } from './components';
+import {
+  AnnouncementCard,
+  AnnouncementModal,
+  SearchAndFilter,
+} from './components';
 import { announcements } from './data/announcements';
-import { AnnouncementList, Header, PageContainer, Subtitle, Title } from './styles';
+import {
+  AnnouncementList,
+  Header,
+  PageContainer,
+  Subtitle,
+  Title,
+} from './styles';
 
 export default function AnnouncementsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
-  const [filteredAnnouncements, setFilteredAnnouncements] = useState(announcements);
+  const [filteredAnnouncements, setFilteredAnnouncements] =
+    useState(announcements);
 
   useEffect(() => {
     const filtered = announcements.filter((announcement) => {
       const matchesSearch =
         announcement.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         announcement.content.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesFilter = activeFilter === 'all' || announcement.type === activeFilter;
+      const matchesFilter =
+        activeFilter === 'all' || announcement.type === activeFilter;
       return matchesSearch && matchesFilter;
     });
     setFilteredAnnouncements(filtered);

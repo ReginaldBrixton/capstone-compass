@@ -28,7 +28,12 @@ const TeamDetailsPage = ({ params }) => {
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: '📊' },
-    { id: 'members', label: 'Members', icon: '👥', count: team?.members?.length },
+    {
+      id: 'members',
+      label: 'Members',
+      icon: '👥',
+      count: team?.members?.length,
+    },
     { id: 'tasks', label: 'Tasks', icon: '✅' },
     { id: 'files', label: 'Files', icon: '📁' },
   ];
@@ -65,7 +70,11 @@ const TeamDetailsPage = ({ params }) => {
   };
 
   const handlePromoteToLeader = (memberId) => {
-    if (window.confirm('Are you sure you want to promote this member to team leader?')) {
+    if (
+      window.confirm(
+        'Are you sure you want to promote this member to team leader?'
+      )
+    ) {
       setLoading(true);
       // Simulate API call
       setTimeout(() => {
@@ -81,16 +90,18 @@ const TeamDetailsPage = ({ params }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center p-12 bg-red-50 dark:bg-red-900/20 rounded-2xl my-6"
+          className="my-6 rounded-2xl bg-red-50 p-12 text-center dark:bg-red-900/20"
         >
-          <div className="text-5xl mb-4">⚠️</div>
-          <h3 className="text-red-600 dark:text-red-400 text-xl font-bold mb-2">Team Not Found</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <div className="mb-4 text-5xl">⚠️</div>
+          <h3 className="mb-2 text-xl font-bold text-red-600 dark:text-red-400">
+            Team Not Found
+          </h3>
+          <p className="mb-6 text-gray-600 dark:text-gray-300">
             The team you're looking for doesn't exist or has been deleted.
           </p>
           <button
             onClick={() => router.push('/student/teams')}
-            className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+            className="rounded-lg bg-red-600 px-6 py-3 text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-700"
           >
             Return to Teams
           </button>
@@ -109,7 +120,11 @@ const TeamDetailsPage = ({ params }) => {
       />
 
       <ContentSection>
-        <TabNavigation tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+        <TabNavigation
+          tabs={tabs}
+          activeTab={activeTab}
+          onChange={setActiveTab}
+        />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -121,7 +136,7 @@ const TeamDetailsPage = ({ params }) => {
           >
             {activeTab === 'overview' && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <h2 className="flex items-center gap-2 text-2xl font-bold text-gray-900 dark:text-white">
                   📊 Overview
                 </h2>
                 {/* Overview content */}

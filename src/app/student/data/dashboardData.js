@@ -14,8 +14,16 @@ export const projects = [
     progress: 75,
     dueDate: 'Dec 28',
     team: [
-      { name: 'Alex Smith', avatar: '/avatars/alex.jpg', role: 'Lead Designer' },
-      { name: 'Sarah Johnson', avatar: '/avatars/sarah.jpg', role: 'Developer' },
+      {
+        name: 'Alex Smith',
+        avatar: '/avatars/alex.jpg',
+        role: 'Lead Designer',
+      },
+      {
+        name: 'Sarah Johnson',
+        avatar: '/avatars/sarah.jpg',
+        role: 'Developer',
+      },
       { name: 'Mike Brown', avatar: '/avatars/mike.jpg', role: 'UI Designer' },
     ],
     description: 'Redesigning the main website with modern UI/UX principles',
@@ -27,8 +35,16 @@ export const projects = [
     progress: 100,
     dueDate: 'Dec 24',
     team: [
-      { name: 'Emma Wilson', avatar: '/avatars/emma.jpg', role: 'Project Manager' },
-      { name: 'James Lee', avatar: '/avatars/james.jpg', role: 'Mobile Developer' },
+      {
+        name: 'Emma Wilson',
+        avatar: '/avatars/emma.jpg',
+        role: 'Project Manager',
+      },
+      {
+        name: 'James Lee',
+        avatar: '/avatars/james.jpg',
+        role: 'Mobile Developer',
+      },
     ],
     description: 'Creating a new mobile app for iOS and Android platforms',
     priority: 'medium',
@@ -39,8 +55,16 @@ export const projects = [
     progress: 35,
     dueDate: 'Dec 30',
     team: [
-      { name: 'David Chen', avatar: '/avatars/david.jpg', role: 'Database Engineer' },
-      { name: 'Lisa Wang', avatar: '/avatars/lisa.jpg', role: 'Backend Developer' },
+      {
+        name: 'David Chen',
+        avatar: '/avatars/david.jpg',
+        role: 'Database Engineer',
+      },
+      {
+        name: 'Lisa Wang',
+        avatar: '/avatars/lisa.jpg',
+        role: 'Backend Developer',
+      },
     ],
     description: 'Migrating from MySQL to PostgreSQL database',
     priority: 'high',

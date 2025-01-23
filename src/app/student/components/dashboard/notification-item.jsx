@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
+import { Avatar, AvatarFallback } from '../../../../components/ui/avatar';
+import { formatDistanceToNow } from 'date-fns';
 import {
-  Avatar,
-  AvatarFallback,
-} from "../../../../components/ui/avatar";
-import { formatDistanceToNow } from "date-fns";
-import { 
-  BellIcon, 
-  MessageSquareIcon, 
+  BellIcon,
+  MessageSquareIcon,
   PackageIcon,
-  UserIcon
-} from "lucide-react";
+  UserIcon,
+} from 'lucide-react';
 
 /**
  * NotificationItem component displays a notification with an avatar, username,
@@ -40,15 +37,15 @@ const NotificationItem = ({
 
   return (
     <div
-      className="group relative flex items-start space-x-4 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm hover:shadow-md transition-all duration-200 hover:bg-accent/5"
+      className="group relative flex items-start space-x-4 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm transition-all duration-200 hover:bg-accent/5 hover:shadow-md"
       id="notification-item"
       role="alert"
     >
-      <Avatar 
-        className="h-10 w-10 ring-2 ring-background" 
+      <Avatar
+        className="h-10 w-10 ring-2 ring-background"
         id="notification-avatar"
       >
-        <AvatarFallback 
+        <AvatarFallback
           className="bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600"
           id="notification-avatar-fallback"
         >
@@ -56,43 +53,49 @@ const NotificationItem = ({
         </AvatarFallback>
       </Avatar>
 
-      <div className="flex-1 min-w-0 space-y-1" id="notification-content">
-        <div className="flex items-center justify-between" id="notification-header">
+      <div className="min-w-0 flex-1 space-y-1" id="notification-content">
+        <div
+          className="flex items-center justify-between"
+          id="notification-header"
+        >
           <div className="flex items-center space-x-2">
-            <div className="p-1.5 rounded-full bg-accent/10">
+            <div className="rounded-full bg-accent/10 p-1.5">
               {iconMap[type]}
             </div>
-            <p 
-              className="text-sm font-medium text-foreground line-clamp-2 sm:line-clamp-1" 
+            <p
+              className="line-clamp-2 text-sm font-medium text-foreground sm:line-clamp-1"
               id="notification-text"
             >
-              <span className="font-semibold hover:text-primary transition-colors duration-150">
+              <span className="font-semibold transition-colors duration-150 hover:text-primary">
                 @{username}
-              </span>{" "}
-              <span className="text-muted-foreground">{action}</span>{" "}
-              <span className="font-medium text-primary hover:underline cursor-pointer">
+              </span>{' '}
+              <span className="text-muted-foreground">{action}</span>{' '}
+              <span className="cursor-pointer font-medium text-primary hover:underline">
                 {target}
               </span>
             </p>
           </div>
         </div>
 
-        <div 
+        <div
           className="flex items-center text-xs text-muted-foreground"
           id="notification-meta"
         >
-          <time 
+          <time
             dateTime={timestamp.toISOString()}
             className="flex items-center space-x-1"
             id="notification-timestamp"
+            suppressHydrationWarning
           >
-            <span>{formatDistanceToNow(timestamp, { addSuffix: true })}</span>
+            <span suppressHydrationWarning>
+              {formatDistanceToNow(timestamp, { addSuffix: true })}
+            </span>
           </time>
         </div>
       </div>
 
-      <div 
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      <div
+        className="absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         id="notification-type-indicator"
       >
         {iconMap[type]}

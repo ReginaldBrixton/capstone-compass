@@ -33,7 +33,9 @@ const AccordionContent = ({ children, isOpen, className = '' }) => {
         transform: `translateY(${isOpen ? 0 : -4}px)`,
       }}
     >
-      <div className="p-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{children}</div>
+      <div className="p-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+        {children}
+      </div>
     </div>
   );
 };

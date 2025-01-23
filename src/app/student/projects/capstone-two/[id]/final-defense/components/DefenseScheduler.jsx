@@ -31,9 +31,11 @@ const TimeSlot = styled(motion.button).attrs((props) => ({
 }))`
   padding: 1rem;
   border: 2px solid
-    ${(props) => (props.$isSelected ? 'var(--primary-color)' : 'var(--border-color)')};
+    ${(props) =>
+      props.$isSelected ? 'var(--primary-color)' : 'var(--border-color)'};
   border-radius: 0.5rem;
-  background: ${(props) => (props.$isSelected ? 'var(--primary-color-light)' : 'white')};
+  background: ${(props) =>
+    props.$isSelected ? 'var(--primary-color-light)' : 'white'};
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -106,18 +108,23 @@ const Requirement = styled.div.attrs((props) => ({
   gap: 0.75rem;
   padding: 0.75rem;
   background: ${(props) =>
-    props.$isComplete ? 'var(--success-color-light)' : 'var(--warning-color-light)'};
+    props.$isComplete
+      ? 'var(--success-color-light)'
+      : 'var(--warning-color-light)'};
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 
   &::before {
     content: ${(props) => (props.$isComplete ? '"✓"' : '"!"')};
     font-weight: bold;
-    color: ${(props) => (props.$isComplete ? 'var(--success-color)' : 'var(--warning-color)')};
+    color: ${(props) =>
+      props.$isComplete ? 'var(--success-color)' : 'var(--warning-color)'};
   }
 `;
 
-const ScheduleButton = styled(motion.button).attrs({ className: 'schedule-button' })`
+const ScheduleButton = styled(motion.button).attrs({
+  className: 'schedule-button',
+})`
   width: 100%;
   padding: 1rem;
   background: var(--primary-color);
@@ -138,11 +145,18 @@ const ScheduleButton = styled(motion.button).attrs({ className: 'schedule-button
   }
 `;
 
-const DefenseScheduler = ({ availableSlots, panelMembers, requirements, onSchedule }) => {
+const DefenseScheduler = ({
+  availableSlots,
+  panelMembers,
+  requirements,
+  onSchedule,
+}) => {
   const [selectedSlot, setSelectedSlot] = useState(null);
 
   const allRequirementsMet = requirements.every((req) => req.isComplete);
-  const allPanelConfirmed = panelMembers.every((member) => member.status === 'confirmed');
+  const allPanelConfirmed = panelMembers.every(
+    (member) => member.status === 'confirmed'
+  );
 
   const canSchedule = selectedSlot && allRequirementsMet && allPanelConfirmed;
 

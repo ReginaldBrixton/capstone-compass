@@ -12,7 +12,13 @@ import { AccordionContext } from './Accordion';
  * @param {string} props.className - Additional CSS classes
  * @param {React.ReactNode} props.icon - Optional icon to display
  */
-const AccordionTrigger = ({ children, value, isOpen, className = '', icon }) => {
+const AccordionTrigger = ({
+  children,
+  value,
+  isOpen,
+  className = '',
+  icon,
+}) => {
   const { toggleItem, variant } = useContext(AccordionContext);
 
   const baseClasses =
@@ -47,7 +53,9 @@ const AccordionTrigger = ({ children, value, isOpen, className = '', icon }) => 
         {icon && (
           <span
             className={`flex-shrink-0 transition-colors duration-200 ${
-              isOpen ? 'text-blue-500 dark:text-blue-400' : 'text-gray-400 dark:text-gray-500'
+              isOpen
+                ? 'text-blue-500 dark:text-blue-400'
+                : 'text-gray-400 dark:text-gray-500'
             }`}
           >
             {icon}
@@ -56,7 +64,7 @@ const AccordionTrigger = ({ children, value, isOpen, className = '', icon }) => 
         <span>{children}</span>
       </div>
       <svg
-        className={`w-4 h-4 transition-transform duration-200 text-gray-400 dark:text-gray-500 ${
+        className={`h-4 w-4 text-gray-400 transition-transform duration-200 dark:text-gray-500 ${
           isOpen ? 'rotate-180 text-blue-500 dark:text-blue-400' : ''
         }`}
         fill="none"

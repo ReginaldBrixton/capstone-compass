@@ -8,7 +8,7 @@ export function useMediaQuery(query) {
   useEffect(() => {
     // Create a MediaQueryList object
     const mediaQuery = window.matchMedia(query);
-    
+
     // Set the initial value
     setMatches(mediaQuery.matches);
 
@@ -27,4 +27,4 @@ export function useMediaQuery(query) {
   }, [query]); // Only re-run the effect if the query changes
 
   return matches;
-} 
+}

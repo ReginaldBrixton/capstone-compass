@@ -47,12 +47,20 @@ export const GradientOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
   backdrop-filter: blur(80px);
   transition: all 0.3s ease;
 
   @media (prefers-color-scheme: dark) {
-    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    background: radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
   }
 `;
 

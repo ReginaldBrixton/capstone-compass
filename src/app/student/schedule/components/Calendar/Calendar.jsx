@@ -6,7 +6,11 @@ import PropTypes from 'prop-types';
 import { CalendarHeader, DayView, MonthView, WeekView } from '../index';
 import styles from './styles/calendar.module.css';
 
-const Calendar = ({ projects = [], onProjectClick = () => {}, onDateSelect = () => {} }) => {
+const Calendar = ({
+  projects = [],
+  onProjectClick = () => {},
+  onDateSelect = () => {},
+}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState('month');
 
@@ -59,7 +63,10 @@ const Calendar = ({ projects = [], onProjectClick = () => {}, onDateSelect = () 
   };
 
   return (
-    <div className={`${styles.calendar} student-calendar`} id="student-calendar-container">
+    <div
+      className={`${styles.calendar} student-calendar`}
+      id="student-calendar-container"
+    >
       <CalendarHeader
         currentDate={currentDate}
         view={view}

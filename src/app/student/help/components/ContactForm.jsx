@@ -9,27 +9,27 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
@@ -40,7 +40,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       await onSubmit(formData);
       if (submitStatus === 'success') {
@@ -48,7 +48,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           name: '',
           email: '',
           subject: '',
-          message: ''
+          message: '',
         });
       }
     }
@@ -56,24 +56,24 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
 
   return (
     <section className="py-8" id="contact-form" aria-labelledby="contact-title">
-      <h2 
+      <h2
         id="contact-title"
-        className="text-2xl font-semibold text-slate-800 mb-6"
+        className="mb-6 text-2xl font-semibold text-slate-800"
       >
         Still Need Help?
       </h2>
@@ -83,14 +83,14 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         onSubmit={handleSubmit}
-        className="max-w-2xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-6"
+        className="mx-auto max-w-2xl rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
         noValidate
       >
         <div className="space-y-6">
           <div>
-            <label 
+            <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
               Name
             </label>
@@ -100,9 +100,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full rounded-lg border px-4 py-2 ${
                 errors.name ? 'border-red-500' : 'border-gray-200'
-              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors`}
+              } transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.name ? 'true' : 'false'}
               aria-describedby={errors.name ? 'name-error' : undefined}
               disabled={isSubmitting}
@@ -115,9 +115,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           </div>
 
           <div>
-            <label 
+            <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
               Email
             </label>
@@ -127,9 +127,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full rounded-lg border px-4 py-2 ${
                 errors.email ? 'border-red-500' : 'border-gray-200'
-              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors`}
+              } transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.email ? 'true' : 'false'}
               aria-describedby={errors.email ? 'email-error' : undefined}
               disabled={isSubmitting}
@@ -142,9 +142,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           </div>
 
           <div>
-            <label 
+            <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
               Subject
             </label>
@@ -154,9 +154,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full rounded-lg border px-4 py-2 ${
                 errors.subject ? 'border-red-500' : 'border-gray-200'
-              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors`}
+              } transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.subject ? 'true' : 'false'}
               aria-describedby={errors.subject ? 'subject-error' : undefined}
               disabled={isSubmitting}
@@ -169,9 +169,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           </div>
 
           <div>
-            <label 
+            <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
               Message
             </label>
@@ -181,9 +181,9 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className={`w-full px-4 py-2 rounded-lg border ${
+              className={`w-full rounded-lg border px-4 py-2 ${
                 errors.message ? 'border-red-500' : 'border-gray-200'
-              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors`}
+              } transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.message ? 'true' : 'false'}
               aria-describedby={errors.message ? 'message-error' : undefined}
               disabled={isSubmitting}
@@ -199,20 +199,18 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className={`px-6 py-2 rounded-lg font-medium text-white 
-                       transition-all duration-200 flex items-center gap-2
-                       ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+              className={`flex items-center gap-2 rounded-lg px-6 py-2 font-medium text-white transition-all duration-200 ${isSubmitting ? 'cursor-not-allowed bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'}`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               {isSubmitting ? (
                 <>
-                  <span className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                   Sending...
                 </>
               ) : (
                 <>
-                  <FiSend className="w-4 h-4" />
+                  <FiSend className="h-4 w-4" />
                   Send Message
                 </>
               )}
@@ -228,12 +226,12 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               >
                 {submitStatus === 'success' ? (
                   <>
-                    <FiCheck className="w-5 h-5" />
+                    <FiCheck className="h-5 w-5" />
                     <span>Message sent successfully!</span>
                   </>
                 ) : (
                   <>
-                    <FiAlertCircle className="w-5 h-5" />
+                    <FiAlertCircle className="h-5 w-5" />
                     <span>Failed to send message. Please try again.</span>
                   </>
                 )}

@@ -14,6 +14,7 @@ export async function resetPassword(prevState, formData) {
   revalidatePath('/forgot-password');
   return {
     success: true,
-    message: 'If an account exists for this email, you will receive password reset instructions.',
+    message:
+      'If an account exists for this email, you will receive password reset instructions.',
   };
 }

@@ -26,9 +26,11 @@ const svg = `
 `;
 
 // Generate icons for all sizes
-sizes.forEach(size => {
+sizes.forEach((size) => {
   sharp(Buffer.from(svg))
     .resize(size, size)
     .toFile(path.join(iconPath, `icon-${size}x${size}.png`))
-    .catch(err => console.error(`Error generating ${size}x${size} icon:`, err));
+    .catch((err) =>
+      console.error(`Error generating ${size}x${size} icon:`, err)
+    );
 });

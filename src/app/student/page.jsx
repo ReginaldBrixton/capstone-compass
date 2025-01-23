@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Button } from "../../components/ui/button";
+import { Button } from '../../components/ui/button';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
+} from '../../components/ui/card';
 import {
   MetricCard,
   RecentActivity,
@@ -14,7 +14,7 @@ import {
   ProjectCard,
   NotificationItem,
   SearchBar,
-} from "./components/dashboard";
+} from './components/dashboard';
 import {
   PlusIcon,
   LayoutDashboardIcon,
@@ -22,7 +22,7 @@ import {
   FolderIcon,
   BellIcon,
   BarChartIcon,
-} from "lucide-react";
+} from 'lucide-react';
 
 export default function DashboardPage() {
   return (
@@ -52,7 +52,10 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" id="metrics-grid">
+      <div
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        id="metrics-grid"
+      >
         <MetricCard
           title="Total Projects"
           value={12}
@@ -80,7 +83,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3" id="main-content">
-        <div className="lg:col-span-2 space-y-8" id="left-column">
+        <div className="space-y-8 lg:col-span-2" id="left-column">
           <Card className="active-projects-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-lg font-semibold">
@@ -100,9 +103,9 @@ export default function DashboardPage() {
                   progress={75}
                   dueDate="Dec 28"
                   members={[
-                    { name: "Alex Smith" },
-                    { name: "Maria Garcia" },
-                    { name: "John Doe" },
+                    { name: 'Alex Smith' },
+                    { name: 'Maria Garcia' },
+                    { name: 'John Doe' },
                   ]}
                 />
                 <ProjectCard
@@ -112,7 +115,7 @@ export default function DashboardPage() {
                   status="completed"
                   progress={100}
                   dueDate="Dec 24"
-                  members={[{ name: "Emma Wilson" }, { name: "Lucas Kim" }]}
+                  members={[{ name: 'Emma Wilson' }, { name: 'Lucas Kim' }]}
                 />
               </div>
             </CardContent>

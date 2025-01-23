@@ -9,4 +9,4 @@ export const theme = {
   transitions: {
     default: '0.3s ease-in-out',
   },
-}; 
+};

@@ -89,7 +89,9 @@ const chapters = [
 const ResultsPreview = () => (
   <ResultsSection>
     <h2>Research Results Overview</h2>
-    <p className="text-secondary mb-4">Visual representation of your key findings</p>
+    <p className="mb-4 text-secondary">
+      Visual representation of your key findings
+    </p>
 
     <ChartGrid>
       <div>
@@ -119,7 +121,7 @@ export default function CapstoneTwo() {
   return (
     <Container className="fade-in">
       <h1>Capstone Two Progress</h1>
-      <p className="text-secondary mb-4">
+      <p className="mb-4 text-secondary">
         Complete your research with data analysis and conclusions
       </p>
 
@@ -149,7 +151,11 @@ export default function CapstoneTwo() {
                   {chapter.status.replace('-', ' ')}
                 </span>
                 <span
-                  className={isDeadlineOverdue(chapter.deadline) ? 'text-danger' : 'text-secondary'}
+                  className={
+                    isDeadlineOverdue(chapter.deadline)
+                      ? 'text-danger'
+                      : 'text-secondary'
+                  }
                 >
                   Due: {new Date(chapter.deadline).toLocaleDateString()}
                 </span>

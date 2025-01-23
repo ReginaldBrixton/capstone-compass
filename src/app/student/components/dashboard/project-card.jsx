@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "../../../../components/ui/avatar";
-import { Badge } from "../../../../components/ui/badge";
-import { Card, CardContent, CardHeader } from "../../../../components/ui/card";
-import { Progress } from "../../../../components/ui/progress";
-import { cn } from "../../../../lib/utils";
+} from '../../../../components/ui/avatar';
+import { Badge } from '../../../../components/ui/badge';
+import { Card, CardContent, CardHeader } from '../../../../components/ui/card';
+import { Progress } from '../../../../components/ui/progress';
+import { cn } from '../../../../lib/utils';
 import {
   CalendarIcon,
   CheckCircleIcon,
@@ -15,7 +15,8 @@ import {
   AlertTriangleIcon,
   UsersIcon,
   ArrowUpRightIcon,
-} from "lucide-react";
+} from 'lucide-react';
+import { getAvatarUrl } from '../../../../utils/avatar';
 
 /**
  * ProjectCard component displays project details including title, description,
@@ -41,35 +42,41 @@ export const ProjectCard = ({
   members,
 }) => {
   const priorityColors = {
-    high: "text-red-700 bg-red-100 border-red-200",
-    medium: "text-yellow-700 bg-yellow-100 border-yellow-200", 
-    low: "text-green-700 bg-green-100 border-green-200"
+    high: 'text-red-700 bg-red-100 border-red-200',
+    medium: 'text-yellow-700 bg-yellow-100 border-yellow-200',
+    low: 'text-green-700 bg-green-100 border-green-200',
   };
 
   const statusIcons = {
-    "in progress": <ClockIcon className="h-4 w-4" />,
+    'in progress': <ClockIcon className="h-4 w-4" />,
     completed: <CheckCircleIcon className="h-4 w-4" />,
-    delayed: <AlertTriangleIcon className="h-4 w-4" />
+    delayed: <AlertTriangleIcon className="h-4 w-4" />,
   };
 
   const statusColors = {
-    "in progress": "text-blue-700 bg-blue-100 border-blue-200",
-    completed: "text-green-700 bg-green-100 border-green-200",
-    delayed: "text-red-700 bg-red-100 border-red-200"
+    'in progress': 'text-blue-700 bg-blue-100 border-blue-200',
+    completed: 'text-green-700 bg-green-100 border-green-200',
+    delayed: 'text-red-700 bg-red-100 border-red-200',
   };
 
   return (
-    <Card 
+    <Card
       className="overflow-hidden border-2 hover:border-primary/50"
       id="project-card"
     >
       <CardHeader className="p-6" id="project-card-header">
         <div className="space-y-4" id="project-card-header-content">
-          <div className="flex items-center justify-between" id="project-card-badges">
+          <div
+            className="flex items-center justify-between"
+            id="project-card-badges"
+          >
             <div className="flex gap-2">
               <Badge
                 variant="outline"
-                className={cn("capitalize font-medium", priorityColors[priority])}
+                className={cn(
+                  'font-medium capitalize',
+                  priorityColors[priority]
+                )}
                 id="project-card-priority-badge"
               >
                 {priority} Priority
@@ -77,7 +84,7 @@ export const ProjectCard = ({
               <Badge
                 variant="outline"
                 className={cn(
-                  "capitalize flex items-center gap-1.5 font-medium",
+                  'flex items-center gap-1.5 font-medium capitalize',
                   statusColors[status]
                 )}
                 id="project-card-status-badge"
@@ -90,14 +97,14 @@ export const ProjectCard = ({
           </div>
 
           <div className="space-y-2" id="project-card-header-details">
-            <h3 
+            <h3
               className="text-xl font-bold tracking-tight"
               id="project-card-title"
             >
               {title}
             </h3>
             <p
-              className="text-sm text-muted-foreground line-clamp-2"
+              className="line-clamp-2 text-sm text-muted-foreground"
               id="project-card-description"
             >
               {description}
@@ -113,14 +120,17 @@ export const ProjectCard = ({
               <span className="text-muted-foreground">Progress</span>
               <span className="font-medium">{progress}%</span>
             </div>
-            <Progress
-              value={progress}
-              className="h-2"
-            />
+            <Progress value={progress} className="h-2" />
           </div>
 
-          <div className="flex items-center justify-between" id="project-card-footer">
-            <div className="flex items-center gap-2 text-muted-foreground" id="project-card-due-date">
+          <div
+            className="flex items-center justify-between"
+            id="project-card-footer"
+          >
+            <div
+              className="flex items-center gap-2 text-muted-foreground"
+              id="project-card-due-date"
+            >
               <CalendarIcon className="h-4 w-4" />
               <span className="text-sm">Due {dueDate}</span>
             </div>
@@ -135,23 +145,17 @@ export const ProjectCard = ({
                   >
                     <Avatar className="h-8 w-8 border-2 border-background">
                       <AvatarImage
-                        src={member.image || `https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${encodeURIComponent(member.name)}`}
+                        src={getAvatarUrl(member.name, member.image)}
                         alt={member.name}
                       />
-                      <AvatarFallback className="bg-primary/10 text-primary">
-                        {member.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
+                      <AvatarFallback>{member.name[0]}</AvatarFallback>
                     </Avatar>
                   </div>
                 ))}
               </div>
               {members.length > 3 && (
                 <div className="flex items-center text-sm text-muted-foreground">
-                  <UsersIcon className="h-4 w-4 mr-1" />
-                  +{members.length - 3}
+                  <UsersIcon className="mr-1 h-4 w-4" />+{members.length - 3}
                 </div>
               )}
             </div>

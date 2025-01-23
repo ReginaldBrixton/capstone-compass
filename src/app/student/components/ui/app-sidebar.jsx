@@ -33,18 +33,18 @@ export function AppSidebar() {
       width: '16rem',
       transition: {
         duration: 0.2,
-        type: "tween",
-        ease: "easeOut"
-      }
+        type: 'tween',
+        ease: 'easeOut',
+      },
     },
     collapsed: {
       width: '4.5rem',
       transition: {
         duration: 0.2,
-        type: "tween",
-        ease: "easeOut"
-      }
-    }
+        type: 'tween',
+        ease: 'easeOut',
+      },
+    },
   };
 
   const contentVariants = {
@@ -52,15 +52,15 @@ export function AppSidebar() {
       opacity: 1,
       transition: {
         duration: 0.1,
-        delay: 0.1
-      }
+        delay: 0.1,
+      },
     },
     collapsed: {
       opacity: 0,
       transition: {
-        duration: 0.1
-      }
-    }
+        duration: 0.1,
+      },
+    },
   };
 
   return (
@@ -68,24 +68,24 @@ export function AppSidebar() {
       initial={false}
       animate={isCollapsed ? 'collapsed' : 'expanded'}
       variants={sidebarVariants}
-      className="app-sidebar-container hidden md:flex flex-col bg-white/90 dark:bg-gray-900/90 dark:text-gray-100 h-screen sticky top-0 transition-colors duration-300 shadow-lg border-r border-gray-200/50 dark:border-gray-800/50 rounded-r-2xl backdrop-blur-lg z-50"
+      className="app-sidebar-container sticky top-0 z-50 hidden h-screen flex-col rounded-r-2xl border-r border-gray-200/50 bg-white/90 shadow-lg backdrop-blur-lg transition-colors duration-300 dark:border-gray-800/50 dark:bg-gray-900/90 dark:text-gray-100 md:flex"
       id="app-sidebar-main"
       role="navigation"
       aria-label="Main Navigation"
     >
-      <SidebarHeader 
-        isCollapsed={isCollapsed} 
+      <SidebarHeader
+        isCollapsed={isCollapsed}
         toggleSidebar={toggleSidebar}
         className="sidebar-header-section relative z-10"
         id="sidebar-header"
       />
 
-      <motion.div 
-        className="sidebar-content-wrapper flex-1 relative overflow-hidden"
+      <motion.div
+        className="sidebar-content-wrapper relative flex-1 overflow-hidden"
         id="sidebar-content"
       >
-        <motion.nav 
-          className={`sidebar-nav h-full overflow-y-auto w-full ${isCollapsed ? 'px-0.5' : 'px-2'} py-3 scrollbar-none transition-colors duration-300`}
+        <motion.nav
+          className={`sidebar-nav h-full w-full overflow-y-auto ${isCollapsed ? 'px-0.5' : 'px-2'} scrollbar-none py-3 transition-colors duration-300`}
           id="sidebar-navigation"
           variants={contentVariants}
         >
@@ -102,8 +102,8 @@ export function AppSidebar() {
       </motion.div>
 
       {/* Background Gradient Effect */}
-      <div 
-        className="sidebar-gradient absolute inset-0 bg-gradient-to-b from-primary-50/10 via-transparent to-primary-50/10 dark:from-primary-900/10 dark:to-primary-900/10 pointer-events-none rounded-r-2xl"
+      <div
+        className="sidebar-gradient pointer-events-none absolute inset-0 rounded-r-2xl bg-gradient-to-b from-primary-50/10 via-transparent to-primary-50/10 dark:from-primary-900/10 dark:to-primary-900/10"
         id="sidebar-gradient"
       />
     </motion.aside>

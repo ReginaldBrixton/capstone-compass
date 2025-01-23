@@ -38,14 +38,20 @@ const ToastDemo = () => {
 
   const showCustomToast = () => {
     toast.custom((t) => (
-      <div className="custom-toast-content p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-2">Custom Toast</h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">This is a custom toast with actions</p>
+      <div className="custom-toast-content rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800">
+        <h3 className="mb-2 text-lg font-semibold">Custom Toast</h3>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          This is a custom toast with actions
+        </p>
         <div className="flex space-x-2">
           <Button size="sm" variant="primary" onClick={() => toast.dismiss(t)}>
             Accept
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => toast.dismiss(t)}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => toast.dismiss(t)}
+          >
             Dismiss
           </Button>
         </div>
@@ -56,7 +62,7 @@ const ToastDemo = () => {
   return (
     <div className="toast-demo space-y-8 p-8">
       <div className="basic-toasts space-y-4">
-        <h3 className="text-lg font-semibold mb-2">Basic Toasts</h3>
+        <h3 className="mb-2 text-lg font-semibold">Basic Toasts</h3>
         <div className="space-x-4">
           <Button onClick={showBasicToast}>Show Basic Toast</Button>
           <Button variant="success" onClick={showSuccessToast}>
@@ -72,7 +78,7 @@ const ToastDemo = () => {
       </div>
 
       <div className="advanced-toasts space-y-4">
-        <h3 className="text-lg font-semibold mb-2">Advanced Toasts</h3>
+        <h3 className="mb-2 text-lg font-semibold">Advanced Toasts</h3>
         <div className="space-x-4">
           <Button variant="primary" onClick={showPromiseToast}>
             Show Promise Toast

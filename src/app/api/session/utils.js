@@ -24,7 +24,8 @@ export function checkRateLimit(ip) {
   let rateLimit = storage.rateLimits.get(ip);
 
   // Reset rate limit if expired or doesn't exist
-  const isNewOrExpired = !rateLimit || now > rateLimit.windowStart + CONFIG.RATE_LIMIT_WINDOW;
+  const isNewOrExpired =
+    !rateLimit || now > rateLimit.windowStart + CONFIG.RATE_LIMIT_WINDOW;
 
   if (isNewOrExpired) {
     rateLimit = {
@@ -53,7 +54,9 @@ export function validateState(state) {
 
   // Check length
   if (state.length > CONFIG.MAX_STATE_LENGTH) {
-    throw new Error(`State length must not exceed ${CONFIG.MAX_STATE_LENGTH} characters`);
+    throw new Error(
+      `State length must not exceed ${CONFIG.MAX_STATE_LENGTH} characters`
+    );
   }
 
   // Check allowed characters
@@ -72,7 +75,9 @@ export function generateToken() {
   // Use Web Crypto API which is available in all modern environments
   const array = new Uint8Array(32); // 32 bytes = 256 bits
   crypto.getRandomValues(array);
-  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join(
+    ''
+  );
 }
 
 /**
@@ -91,7 +96,9 @@ export function verifyToken(token) {
   const isExpired = Date.now() > tokenData.expiresAt;
   if (isExpired) {
     // Clean up expired token
-    const user = [...storage.users.values()].find((user) => user.id === tokenData.userId);
+    const user = [...storage.users.values()].find(
+      (user) => user.id === tokenData.userId
+    );
 
     if (user) {
       user.isActive = false;

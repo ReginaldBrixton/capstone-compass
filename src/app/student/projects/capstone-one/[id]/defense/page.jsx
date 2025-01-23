@@ -128,7 +128,8 @@ const RequirementItem = styled.li.attrs({
   background: ${(props) =>
     props.isComplete ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)'};
   border-radius: var(--radius-md);
-  color: ${(props) => (props.isComplete ? 'var(--success-color)' : 'var(--error-color)')};
+  color: ${(props) =>
+    props.isComplete ? 'var(--success-color)' : 'var(--error-color)'};
   transition: var(--transition-normal);
 
   &:hover {

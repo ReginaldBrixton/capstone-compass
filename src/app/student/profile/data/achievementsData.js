@@ -3,13 +3,16 @@
  * @type {Object.<string, string>}
  */
 export const badgeDescriptions = {
-  'Perfect Attendance': 'Attended all classes without any absences for the semester',
+  'Perfect Attendance':
+    'Attended all classes without any absences for the semester',
   'Math Whiz':
     'Achieved an A grade and demonstrated exceptional problem-solving skills in Mathematics',
   'Science Star':
     'Outstanding performance and active participation in Science experiments and projects',
-  Bookworm: 'Exceptional reading comprehension and completed advanced literature assignments',
-  Leadership: 'Demonstrated strong leadership skills in group projects and activities',
+  Bookworm:
+    'Exceptional reading comprehension and completed advanced literature assignments',
+  Leadership:
+    'Demonstrated strong leadership skills in group projects and activities',
   'Tech Savvy': 'Excelled in computer science and digital technology courses',
   'Creative Mind': 'Showed exceptional creativity in arts and creative writing',
   'Team Player': 'Actively contributed to group work and supported peers',

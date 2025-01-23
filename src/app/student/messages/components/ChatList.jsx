@@ -105,7 +105,7 @@ const ChatList = ({ users, selectedUserId, onSelectUser }) => {
           Messages
         </Title>
         <SearchContainer>
-          <Search className="w-4 h-4 text-gray-400" />
+          <Search className="h-4 w-4 text-gray-400" />
           <SearchInput
             type="text"
             placeholder="Search chats..."

@@ -244,13 +244,21 @@ export default function NewProposal() {
   const validateField = (name, value) => {
     switch (name) {
       case 'title':
-        return value.length < 10 ? 'Title must be at least 10 characters long' : '';
+        return value.length < 10
+          ? 'Title must be at least 10 characters long'
+          : '';
       case 'problemStatement':
-        return value.length < 50 ? 'Problem statement must be at least 50 characters long' : '';
+        return value.length < 50
+          ? 'Problem statement must be at least 50 characters long'
+          : '';
       case 'objectives':
-        return value.length < 50 ? 'Objectives must be at least 50 characters long' : '';
+        return value.length < 50
+          ? 'Objectives must be at least 50 characters long'
+          : '';
       case 'methodology':
-        return value.length < 50 ? 'Methodology must be at least 50 characters long' : '';
+        return value.length < 50
+          ? 'Methodology must be at least 50 characters long'
+          : '';
       default:
         return '';
     }
@@ -319,7 +327,10 @@ export default function NewProposal() {
         </PageHeader>
 
         <ProgressBar className="proposal-progress">
-          <Progress style={{ width: `${progress}%` }} className="proposal-progress-bar" />
+          <Progress
+            style={{ width: `${progress}%` }}
+            className="proposal-progress-bar"
+          />
         </ProgressBar>
 
         <Form onSubmit={handleSubmit} className="proposal-form">

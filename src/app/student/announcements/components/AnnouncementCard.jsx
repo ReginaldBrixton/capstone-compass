@@ -27,7 +27,12 @@ const AnnouncementCard = ({ announcement, onClick }) => {
           <span
             style={{
               textTransform: 'capitalize',
-              color: type === 'urgent' ? '#E53E3E' : type === 'event' ? '#38A169' : '#4299E1',
+              color:
+                type === 'urgent'
+                  ? '#E53E3E'
+                  : type === 'event'
+                    ? '#38A169'
+                    : '#4299E1',
             }}
           >
             {type}

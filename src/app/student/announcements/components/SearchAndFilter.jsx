@@ -2,9 +2,19 @@
 
 import React from 'react';
 
-import { FilterButton, FilterGroup, SearchContainer, SearchInput } from '../styles';
+import {
+  FilterButton,
+  FilterGroup,
+  SearchContainer,
+  SearchInput,
+} from '../styles';
 
-const SearchAndFilter = ({ searchQuery, onSearchChange, activeFilter, onFilterChange }) => {
+const SearchAndFilter = ({
+  searchQuery,
+  onSearchChange,
+  activeFilter,
+  onFilterChange,
+}) => {
   const filters = [
     { id: 'all', label: 'All' },
     { id: 'urgent', label: 'Urgent' },

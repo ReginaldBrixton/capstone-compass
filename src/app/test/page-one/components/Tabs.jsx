@@ -23,7 +23,10 @@ const Tabs = ({
   const [mounted, setMounted] = React.useState(false);
 
   const disabledTabs = React.useMemo(
-    () => (typeof disabled === 'string' ? disabled.split(',').map((tab) => tab.trim()) : disabled),
+    () =>
+      typeof disabled === 'string'
+        ? disabled.split(',').map((tab) => tab.trim())
+        : disabled,
     [disabled]
   );
 
@@ -47,13 +50,19 @@ const Tabs = ({
 
   return (
     <TabsContext.Provider
-      value={{ activeTab, onTabChange: handleTabChange, orientation, disabledTabs, activationMode }}
+      value={{
+        activeTab,
+        onTabChange: handleTabChange,
+        orientation,
+        disabledTabs,
+        activationMode,
+      }}
     >
       <div
         className={cn(
           'tabs-root w-full max-w-full',
           orientation === 'vertical'
-            ? 'grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4'
+            ? 'grid grid-cols-1 gap-4 md:grid-cols-[auto_1fr]'
             : 'flex flex-col',
           className
         )}
@@ -67,35 +76,38 @@ const Tabs = ({
   );
 };
 
-const TabsList = React.forwardRef(({ className, children, loop = true, ...props }, ref) => {
-  const { orientation } = React.useContext(TabsContext);
+const TabsList = React.forwardRef(
+  ({ className, children, loop = true, ...props }, ref) => {
+    const { orientation } = React.useContext(TabsContext);
 
-  return (
-    <div
-      ref={ref}
-      role="tablist"
-      aria-orientation={orientation}
-      className={cn(
-        'inline-flex items-center justify-start rounded-md bg-muted p-1 text-muted-foreground tabs-list-component',
-        orientation === 'horizontal'
-          ? 'h-auto min-h-[2.5rem] w-full flex-wrap md:flex-nowrap'
-          : 'flex-col h-auto w-full md:w-48',
-        className
-      )}
-      data-orientation={orientation}
-      {...props}
-    >
-      {React.Children.map(children, (child) => {
-        return React.cloneElement(child, { loop });
-      })}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        role="tablist"
+        aria-orientation={orientation}
+        className={cn(
+          'tabs-list-component inline-flex items-center justify-start rounded-md bg-muted p-1 text-muted-foreground',
+          orientation === 'horizontal'
+            ? 'h-auto min-h-[2.5rem] w-full flex-wrap md:flex-nowrap'
+            : 'h-auto w-full flex-col md:w-48',
+          className
+        )}
+        data-orientation={orientation}
+        {...props}
+      >
+        {React.Children.map(children, (child) => {
+          return React.cloneElement(child, { loop });
+        })}
+      </div>
+    );
+  }
+);
 TabsList.displayName = 'TabsList';
 
 const TabsTrigger = React.forwardRef(
   ({ className, value, children, disabled = false, loop, ...props }, ref) => {
-    const { activeTab, onTabChange, orientation, disabledTabs } = React.useContext(TabsContext);
+    const { activeTab, onTabChange, orientation, disabledTabs } =
+      React.useContext(TabsContext);
     const isActive = activeTab === value;
     const isDisabled = disabled || disabledTabs.includes(value);
 
@@ -107,10 +119,13 @@ const TabsTrigger = React.forwardRef(
         aria-disabled={isDisabled}
         onClick={() => !isDisabled && onTabChange(value)}
         className={cn(
-          'relative inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-background/80 tabs-trigger-component min-w-[100px]',
-          orientation === 'horizontal' ? 'flex-1 max-w-[200px] md:flex-initial' : 'w-full',
-          isDisabled && 'opacity-50 cursor-not-allowed',
-          isActive && 'bg-background text-foreground font-bold dark:bg-white/10',
+          'tabs-trigger-component relative inline-flex min-w-[100px] items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:bg-background/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          orientation === 'horizontal'
+            ? 'max-w-[200px] flex-1 md:flex-initial'
+            : 'w-full',
+          isDisabled && 'cursor-not-allowed opacity-50',
+          isActive &&
+            'bg-background font-bold text-foreground dark:bg-white/10',
           className
         )}
         data-state={isActive ? 'active' : 'inactive'}
@@ -121,7 +136,7 @@ const TabsTrigger = React.forwardRef(
         {isActive && (
           <motion.div
             layoutId="activeTab"
-            className="absolute inset-0 bg-background dark:bg-white/10 shadow-sm rounded-sm"
+            className="absolute inset-0 rounded-sm bg-background shadow-sm dark:bg-white/10"
             transition={{ duration: 0.15 }}
             style={{
               zIndex: 0,
@@ -132,7 +147,9 @@ const TabsTrigger = React.forwardRef(
         <span
           className={cn(
             'relative z-10 truncate',
-            isActive ? 'text-foreground dark:text-white' : 'text-muted-foreground'
+            isActive
+              ? 'text-foreground dark:text-white'
+              : 'text-muted-foreground'
           )}
         >
           {children}
@@ -161,7 +178,7 @@ const TabsContent = React.forwardRef(
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 tabs-content-component w-full',
+              'tabs-content-component mt-2 w-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               className
             )}
             data-state={isActive ? 'active' : 'inactive'}

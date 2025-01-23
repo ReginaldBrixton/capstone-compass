@@ -3,7 +3,12 @@
 import React from 'react';
 
 import { ToastProvider } from './components/Toast/ToastProvider';
-import { AuthBackground, AuthLayout, GradientOverlay, MainContent } from './styles/AuthStyles';
+import {
+  AuthBackground,
+  AuthLayout,
+  GradientOverlay,
+  MainContent,
+} from './styles/AuthStyles';
 
 export default function AuthPageLayout({ children }) {
   return (

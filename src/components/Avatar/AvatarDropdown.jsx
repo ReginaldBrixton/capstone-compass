@@ -61,7 +61,7 @@ const AvatarDropdown = ({
       {isOpen && (
         <div
           ref={dropdownRef}
-          className={`absolute ${getDropdownPosition()} z-10 w-60 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+          className={`absolute ${getDropdownPosition()} z-10 w-60 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700`}
         >
           {userInfo && (
             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
@@ -89,7 +89,9 @@ const AvatarDropdown = ({
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       <div className="flex items-center gap-2">
-                        {item.icon && <span className="w-4 h-4">{item.icon}</span>}
+                        {item.icon && (
+                          <span className="h-4 w-4">{item.icon}</span>
+                        )}
                         {item.label}
                       </div>
                     </a>
@@ -108,7 +110,12 @@ AvatarDropdown.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
-  placement: PropTypes.oneOf(['bottom-start', 'bottom-end', 'top-start', 'top-end']),
+  placement: PropTypes.oneOf([
+    'bottom-start',
+    'bottom-end',
+    'top-start',
+    'top-end',
+  ]),
   userInfo: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

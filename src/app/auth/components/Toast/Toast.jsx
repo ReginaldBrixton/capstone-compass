@@ -53,7 +53,11 @@ const Toast = ({ message, type = 'info', onClose, duration = 5000 }) => {
 
   if (!shouldRender) return null;
 
-  const toastClasses = [styles.toast, styles[type], isExiting ? styles.exit : '']
+  const toastClasses = [
+    styles.toast,
+    styles[type],
+    isExiting ? styles.exit : '',
+  ]
     .filter(Boolean)
     .join(' ');
 

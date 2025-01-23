@@ -5,11 +5,17 @@ import { addUser, logoutUser, storage, updateUserActivity } from './storage';
 // Handle user registration
 export async function handleRegister({ username, password, email }, ip) {
   if (storage.users.has(username)) {
-    return NextResponse.json({ error: 'Username already exists' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Username already exists' },
+      { status: 400 }
+    );
   }
 
   if (email && storage.userEmails.has(email)) {
-    return NextResponse.json({ error: 'Email already registered' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Email already registered' },
+      { status: 400 }
+    );
   }
 
   try {

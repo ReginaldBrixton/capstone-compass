@@ -3,7 +3,13 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { CardContent, CardMeta, CardTitle, ModalContent, ModalOverlay } from '../styles';
+import {
+  CardContent,
+  CardMeta,
+  CardTitle,
+  ModalContent,
+  ModalOverlay,
+} from '../styles';
 
 const AnnouncementModal = ({ announcement, onClose }) => {
   useEffect(() => {
@@ -85,11 +91,15 @@ const AnnouncementModal = ({ announcement, onClose }) => {
             </span>
           </CardMeta>
 
-          <CardContent style={{ whiteSpace: 'pre-wrap' }}>{announcement.content}</CardContent>
+          <CardContent style={{ whiteSpace: 'pre-wrap' }}>
+            {announcement.content}
+          </CardContent>
 
           {announcement.attachments?.length > 0 && (
             <div style={{ marginTop: '24px' }}>
-              <h3 style={{ fontSize: '1.125rem', marginBottom: '16px' }}>Attachments</h3>
+              <h3 style={{ fontSize: '1.125rem', marginBottom: '16px' }}>
+                Attachments
+              </h3>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 {announcement.attachments.map((attachment, index) => (
                   <a

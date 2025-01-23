@@ -7,7 +7,13 @@ import AuthButton from '../components/Button/AuthButton';
 import InputField from '../components/Input/InputField';
 import TermsModal from '../components/TermsModal';
 import { ToastProvider, useToast } from '../components/Toast/ToastProvider';
-import { AuthContainer, AuthForm, AuthLink, AuthTitle, ErrorMessage } from '../styles/AuthStyles';
+import {
+  AuthContainer,
+  AuthForm,
+  AuthLink,
+  AuthTitle,
+  ErrorMessage,
+} from '../styles/AuthStyles';
 import {
   validateConfirmPassword,
   validateEmail,
@@ -132,7 +138,13 @@ function RegisterForm() {
       <AuthTitle>Create Account</AuthTitle>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <AuthForm onSubmit={handleSubmit}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '1rem',
+          }}
+        >
           <InputField
             type="text"
             name="firstName"
@@ -214,7 +226,13 @@ function RegisterForm() {
               }}
               disabled={isLoading}
             />
-            <span style={{ marginLeft: '0.5rem', fontSize: '0.875rem', color: '#4B5563' }}>
+            <span
+              style={{
+                marginLeft: '0.5rem',
+                fontSize: '0.875rem',
+                color: '#4B5563',
+              }}
+            >
               I accept the{' '}
               <button
                 onClick={handleTermsClick}
@@ -239,7 +257,9 @@ function RegisterForm() {
         </AuthButton>
 
         <div style={{ textAlign: 'center' }}>
-          <AuthLink href="/auth/login">Already have an account? Sign in</AuthLink>
+          <AuthLink href="/auth/login">
+            Already have an account? Sign in
+          </AuthLink>
         </div>
       </AuthForm>
 

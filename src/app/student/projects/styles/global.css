@@ -8,7 +8,8 @@
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --border-color: #e5e7eb;
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Base Styles */
@@ -21,7 +22,10 @@
 body {
   background-color: var(--background-color);
   color: var(--text-primary);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 /* Typography */
@@ -150,7 +154,7 @@ h2 {
   .container {
     padding: 0.75rem;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
   }

@@ -21,8 +21,8 @@
   line-height: 1.4;
 }
 
-.formGroup input[type="text"],
-.formGroup input[type="datetime-local"],
+.formGroup input[type='text'],
+.formGroup input[type='datetime-local'],
 .formGroup textarea,
 .formGroup select {
   width: 100%;
@@ -176,8 +176,8 @@
 
 /* Hover states */
 @media (hover: hover) {
-  .formGroup input[type="text"]:hover,
-  .formGroup input[type="datetime-local"]:hover,
+  .formGroup input[type='text']:hover,
+  .formGroup input[type='datetime-local']:hover,
   .formGroup textarea:hover,
   .formGroup select:hover {
     border-color: var(--primary);
@@ -202,8 +202,8 @@
 }
 
 /* Focus states */
-.formGroup input[type="text"]:focus,
-.formGroup input[type="datetime-local"]:focus,
+.formGroup input[type='text']:focus,
+.formGroup input[type='datetime-local']:focus,
 .formGroup textarea:focus,
 .formGroup select:focus {
   outline: none;
@@ -223,4 +223,4 @@
 .attachmentList::-webkit-scrollbar-thumb {
   background-color: var(--border);
   border-radius: 4px;
-} 
+}

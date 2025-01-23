@@ -44,11 +44,7 @@ const MyComponent = () => {
   ];
 
   return (
-    <MegaMenu
-      variant="default"
-      brandName="Company"
-      menuItems={menuItems}
-    />
+    <MegaMenu variant="default" brandName="Company" menuItems={menuItems} />
   );
 };
 ```
@@ -57,15 +53,15 @@ const MyComponent = () => {
 
 ### MegaMenu Component
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | 'default' \| 'icons' \| 'full-width' \| 'full-width-cta' | 'default' | The style variant of the mega menu |
-| logo | React.ReactNode | undefined | Logo component or image |
-| brandName | string | undefined | Name of the brand/company |
-| menuItems | MenuItem[] | [] | Array of menu items |
-| darkMode | boolean | false | Enable dark mode |
-| rtl | boolean | false | Enable RTL support |
-| className | string | '' | Additional CSS classes |
+| Prop      | Type                                                     | Default   | Description                        |
+| --------- | -------------------------------------------------------- | --------- | ---------------------------------- |
+| variant   | 'default' \| 'icons' \| 'full-width' \| 'full-width-cta' | 'default' | The style variant of the mega menu |
+| logo      | React.ReactNode                                          | undefined | Logo component or image            |
+| brandName | string                                                   | undefined | Name of the brand/company          |
+| menuItems | MenuItem[]                                               | []        | Array of menu items                |
+| darkMode  | boolean                                                  | false     | Enable dark mode                   |
+| rtl       | boolean                                                  | false     | Enable RTL support                 |
+| className | string                                                   | ''        | Additional CSS classes             |
 
 ### MenuItem Type
 
@@ -102,20 +98,25 @@ interface CTAItem {
 ## Variants
 
 ### Default
+
 Basic dropdown menu with a simple list of items.
 
 ### Icons
+
 Dropdown menu with icons next to each item.
 
 ### Full Width
+
 Full-width dropdown with multiple sections.
 
 ### Full Width with CTA
+
 Full-width dropdown with sections and a call-to-action area.
 
 ## Examples
 
 ### Icon Menu
+
 ```jsx
 const iconMenuItems = [
   { label: 'Home', href: '/' },
@@ -133,14 +134,11 @@ const iconMenuItems = [
   },
 ];
 
-<MegaMenu
-  variant="icons"
-  brandName="Company"
-  menuItems={iconMenuItems}
-/>
+<MegaMenu variant="icons" brandName="Company" menuItems={iconMenuItems} />;
 ```
 
 ### Full Width with CTA
+
 ```jsx
 const menuItems = [
   {
@@ -165,11 +163,7 @@ const menuItems = [
   },
 ];
 
-<MegaMenu
-  variant="full-width-cta"
-  brandName="Company"
-  menuItems={menuItems}
-/>
+<MegaMenu variant="full-width-cta" brandName="Company" menuItems={menuItems} />;
 ```
 
 ## Accessibility
@@ -182,6 +176,7 @@ const menuItems = [
 ## Mobile Support
 
 The component includes a responsive mobile menu that:
+
 - Transforms into a full-screen overlay on mobile devices
 - Maintains all functionality of the desktop version
 - Provides smooth animations for menu transitions
@@ -190,6 +185,7 @@ The component includes a responsive mobile menu that:
 ## Customization
 
 The component uses Tailwind CSS classes and can be customized by:
+
 1. Overriding the default classes using the `className` prop
 2. Modifying the Tailwind theme in your `tailwind.config.js`
 3. Creating variant-specific styles in your CSS
@@ -201,4 +197,4 @@ The component uses Tailwind CSS classes and can be customized by:
 3. Use icons sparingly and ensure they're meaningful
 4. Maintain consistent styling across variants
 5. Test keyboard navigation thoroughly
-6. Ensure proper contrast ratios for accessibility 
+6. Ensure proper contrast ratios for accessibility

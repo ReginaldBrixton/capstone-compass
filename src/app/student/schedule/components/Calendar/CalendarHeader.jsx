@@ -5,7 +5,13 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import styles from './styles/calendar.module.css';
 
-const CalendarHeader = ({ currentDate, view, onViewChange, onPrevious, onNext }) => {
+const CalendarHeader = ({
+  currentDate,
+  view,
+  onViewChange,
+  onPrevious,
+  onNext,
+}) => {
   const formatDate = () => {
     const options = {
       month: 'long',

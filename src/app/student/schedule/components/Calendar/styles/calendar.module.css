@@ -240,7 +240,8 @@
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 425px) { /* Mobile L */
+@media (max-width: 425px) {
+  /* Mobile L */
   .calendarHeader {
     flex-direction: column;
     align-items: stretch;
@@ -265,7 +266,8 @@
   }
 }
 
-@media (max-width: 768px) { /* Tablet */
+@media (max-width: 768px) {
+  /* Tablet */
   .viewToggle {
     width: 100%;
     justify-content: space-between;
@@ -290,4 +292,4 @@
   .event:active {
     transform: scale(0.98);
   }
-} 
+}

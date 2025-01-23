@@ -22,7 +22,8 @@ export const AlertIcon = ({ variant, className }) => {
 };
 
 AlertIcon.propTypes = {
-  variant: PropTypes.oneOf(['info', 'danger', 'success', 'warning', 'dark']).isRequired,
+  variant: PropTypes.oneOf(['info', 'danger', 'success', 'warning', 'dark'])
+    .isRequired,
   className: PropTypes.string,
 };
 

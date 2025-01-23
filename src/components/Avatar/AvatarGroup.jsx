@@ -55,82 +55,38 @@ const AvatarGroup = ({
 
   return (
     <div
-      className={`
-        flex ${direction === 'row' ? 'flex-row' : 'flex-col'}
-        ${direction === 'row' ? getOverlapClass() : '-space-y-4'} 
-        rtl:space-x-reverse 
-        group
-        ${className}
-      `}
+      className={`flex ${direction === 'row' ? 'flex-row' : 'flex-col'} ${direction === 'row' ? getOverlapClass() : '-space-y-4'} group rtl:space-x-reverse ${className} `}
     >
       {visibleAvatars.map((avatar, index) => (
         <div
           key={avatar.id || index}
-          className={`
-            relative inline-block 
-            ${direction === 'row' ? '' : 'ml-4'}
-            ${getSizeClass()}
-            transform transition-all duration-300
-            group-hover:translate-x-[${index * 10}px]
-            hover:scale-125 hover:z-50
-          `}
+          className={`relative inline-block ${direction === 'row' ? '' : 'ml-4'} ${getSizeClass()} transform transition-all duration-300 group-hover:translate-x-[${index * 10}px] hover:z-50 hover:scale-125`}
           style={{ zIndex: visibleAvatars.length - index }}
           title={avatar.name || avatar.alt}
         >
           <img
             src={avatar.src || getUIAvatarUrl(avatar.name || avatar.alt)}
             alt={avatar.name || avatar.alt}
-            className={`
-              w-full h-full object-cover
-              ${rounded ? 'rounded-full' : 'rounded-lg'}
-              ${bordered ? 'border-2 border-white dark:border-gray-800 shadow-lg' : ''}
-              ${avatar.className || ''}
-              transition-all duration-300
-              hover:ring-2 hover:ring-blue-500 dark:hover:ring-blue-400
-              hover:border-transparent
-              filter hover:brightness-110
-            `}
+            className={`h-full w-full object-cover ${rounded ? 'rounded-full' : 'rounded-lg'} ${bordered ? 'border-2 border-white shadow-lg dark:border-gray-800' : ''} ${avatar.className || ''} filter transition-all duration-300 hover:border-transparent hover:ring-2 hover:ring-blue-500 hover:brightness-110 dark:hover:ring-blue-400`}
           />
           {avatar.status && (
             <span
-              className={`
-                absolute bottom-0 right-0 h-3 w-3 rounded-full
-                border-2 border-white dark:border-gray-800
-                shadow-md
-                transition-transform duration-300
-                group-hover:scale-110
-                ${
-                  avatar.status === 'online'
-                    ? 'bg-green-400 animate-pulse'
-                    : avatar.status === 'away'
-                      ? 'bg-yellow-400'
-                      : avatar.status === 'busy'
-                        ? 'bg-red-400'
-                        : 'bg-gray-400'
-                }
-              `}
+              className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white shadow-md transition-transform duration-300 group-hover:scale-110 dark:border-gray-800 ${
+                avatar.status === 'online'
+                  ? 'animate-pulse bg-green-400'
+                  : avatar.status === 'away'
+                    ? 'bg-yellow-400'
+                    : avatar.status === 'busy'
+                      ? 'bg-red-400'
+                      : 'bg-gray-400'
+              } `}
             />
           )}
         </div>
       ))}
       {hasMore && showCounter && (
         <div
-          className={`
-            relative inline-flex items-center justify-center
-            ${getSizeClass()}
-            bg-gradient-to-br from-gray-700 to-gray-900
-            text-white font-semibold
-            border-2 border-white dark:border-gray-800
-            ${rounded ? 'rounded-full' : 'rounded-lg'}
-            shadow-lg
-            transition-all duration-300
-            hover:from-gray-600 hover:to-gray-800
-            hover:scale-110 hover:z-50
-            text-xs
-            ${size === 'lg' && 'text-base'}
-            ${size === 'xl' && 'text-lg'}
-            ${counterClassName}
-          `}
+          className={`relative inline-flex items-center justify-center ${getSizeClass()} border-2 border-white bg-gradient-to-br from-gray-700 to-gray-900 font-semibold text-white dark:border-gray-800 ${rounded ? 'rounded-full' : 'rounded-lg'} text-xs shadow-lg transition-all duration-300 hover:z-50 hover:scale-110 hover:from-gray-600 hover:to-gray-800 ${size === 'lg' && 'text-base'} ${size === 'xl' && 'text-lg'} ${counterClassName} `}
           style={{ zIndex: 0 }}
         >
           +{remainingCount}

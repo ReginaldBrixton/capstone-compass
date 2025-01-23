@@ -37,13 +37,21 @@ export async function POST(request) {
     const { recipientId, content } = await request.json();
 
     if (!recipientId || !validateMessage(content)) {
-      return NextResponse.json({ error: 'Invalid message content or recipient' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Invalid message content or recipient' },
+        { status: 400 }
+      );
     }
 
     // Check if recipient exists
-    const recipientExists = [...storage.users.values()].some(user => user.id === recipientId);
+    const recipientExists = [...storage.users.values()].some(
+      (user) => user.id === recipientId
+    );
     if (!recipientExists) {
-      return NextResponse.json({ error: 'Recipient not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Recipient not found' },
+        { status: 404 }
+      );
     }
 
     const conversationId = getConversationId(userId, recipientId);
@@ -53,16 +61,22 @@ export async function POST(request) {
       recipientId,
       content,
       timestamp: new Date().toISOString(),
-      read: false
+      read: false,
     };
 
     const conversation = storage.messages.get(conversationId) || [];
     conversation.push(message);
     storage.messages.set(conversationId, conversation);
 
-    return NextResponse.json({ message: 'Message sent successfully', messageId: message.id });
+    return NextResponse.json({
+      message: 'Message sent successfully',
+      messageId: message.id,
+    });
   } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
@@ -96,7 +110,10 @@ export async function GET(request) {
 
     return NextResponse.json({ conversations });
   } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
@@ -109,13 +126,18 @@ export async function PATCH(request) {
 
     const { messageId } = await request.json();
     if (!messageId) {
-      return NextResponse.json({ error: 'Message ID is required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Message ID is required' },
+        { status: 400 }
+      );
     }
 
     let messageFound = false;
     for (const [convId, messages] of storage.messages.entries()) {
       if (convId.includes(userId)) {
-        const message = messages.find(m => m.id === messageId && m.recipientId === userId);
+        const message = messages.find(
+          (m) => m.id === messageId && m.recipientId === userId
+        );
         if (message) {
           message.read = true;
           messageFound = true;
@@ -131,6 +153,9 @@ export async function PATCH(request) {
 
     return NextResponse.json({ message: 'Message marked as read' });
   } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

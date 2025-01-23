@@ -35,8 +35,16 @@ export default function ChatPage() {
 
   return (
     <MessagesContainer id="messages-container" className="messages-layout">
-      <StyledChatSidebar activeChat={chatId} id="chat-sidebar" className="chat-sidebar-component" />
-      <StyledChatWindow chat={chatId} id="chat-window" className="chat-window-component" />
+      <StyledChatSidebar
+        activeChat={chatId}
+        id="chat-sidebar"
+        className="chat-sidebar-component"
+      />
+      <StyledChatWindow
+        chat={chatId}
+        id="chat-window"
+        className="chat-window-component"
+      />
     </MessagesContainer>
   );
 }

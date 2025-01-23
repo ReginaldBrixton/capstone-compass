@@ -69,22 +69,11 @@ const AvatarTooltip = ({
         <div
           id={tooltipId}
           role="tooltip"
-          className={`
-            absolute ${getTooltipPosition()}
-            z-10 px-3 py-2
-            text-sm font-medium text-white
-            bg-gray-900 rounded-lg shadow-sm
-            dark:bg-gray-700
-            transition-opacity duration-300
-          `}
+          className={`absolute ${getTooltipPosition()} z-10 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white shadow-sm transition-opacity duration-300 dark:bg-gray-700`}
         >
           {tooltipText}
           <div
-            className={`
-              absolute w-2 h-2
-              ${getArrowPosition()}
-              border-4 border-transparent
-            `}
+            className={`absolute h-2 w-2 ${getArrowPosition()} border-4 border-transparent`}
           />
         </div>
       )}

@@ -39,15 +39,27 @@ const ActionHandlers = {
       onDeleteTeam?.(team.id);
     }
     setShowActions(false);
-  }
+  },
 };
 
 // Component Parts
-const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleEdit, handleDelete, router }) => (
-  <div className="team-actions-section absolute top-4 right-4 flex gap-2 z-10" ref={actionsRef} id={`team-actions-section-${team.id}`}>
+const ActionsMenu = ({
+  team,
+  showActions,
+  actionsRef,
+  handleActionClick,
+  handleEdit,
+  handleDelete,
+  router,
+}) => (
+  <div
+    className="team-actions-section absolute right-4 top-4 z-10 flex gap-2"
+    ref={actionsRef}
+    id={`team-actions-section-${team.id}`}
+  >
     <button
       onClick={handleActionClick}
-      className="team-actions-button p-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      className="team-actions-button rounded-lg bg-gray-50 p-2 transition-colors hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
       aria-label="Team actions"
       aria-expanded={showActions}
       aria-haspopup="true"
@@ -57,15 +69,18 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
     </button>
     {showActions && (
       <div
-        className="team-actions-menu absolute top-full right-0 mt-1 bg-white dark:bg-gray-900 rounded-xl shadow-lg dark:shadow-xl p-2 min-w-[200px] border border-gray-100 dark:border-gray-800"
+        className="team-actions-menu absolute right-0 top-full mt-1 min-w-[200px] rounded-xl border border-gray-100 bg-white p-2 shadow-lg dark:border-gray-800 dark:bg-gray-900 dark:shadow-xl"
         role="menu"
         aria-label="Team actions menu"
         id={`team-actions-menu-${team.id}`}
       >
-        <div className="team-menu-items-section" id={`team-menu-items-${team.id}`}>
+        <div
+          className="team-menu-items-section"
+          id={`team-menu-items-${team.id}`}
+        >
           <button
             onClick={handleEdit}
-            className="team-menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-sm flex items-center gap-2"
+            className="team-menu-item flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
             role="menuitem"
             id={`team-menu-edit-${team.id}`}
           >
@@ -73,7 +88,7 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
           </button>
           <button
             onClick={() => router.push(`/student/teams/${team.id}/members`)}
-            className="team-menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-sm flex items-center gap-2"
+            className="team-menu-item flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
             role="menuitem"
             id={`team-menu-members-${team.id}`}
           >
@@ -81,7 +96,7 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
           </button>
           <button
             onClick={() => router.push(`/student/teams/${team.id}/tasks`)}
-            className="team-menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-sm flex items-center gap-2"
+            className="team-menu-item flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
             role="menuitem"
             id={`team-menu-tasks-${team.id}`}
           >
@@ -89,7 +104,7 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
           </button>
           <button
             onClick={() => router.push(`/student/teams/${team.id}/meetings`)}
-            className="team-menu-item w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-sm flex items-center gap-2"
+            className="team-menu-item flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
             role="menuitem"
             id={`team-menu-meetings-${team.id}`}
           >
@@ -97,7 +112,7 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
           </button>
           <button
             onClick={handleDelete}
-            className="team-menu-item-delete w-full text-left px-4 py-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 text-sm flex items-center gap-2"
+            className="team-menu-item-delete flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/30"
             role="menuitem"
             id={`team-menu-delete-${team.id}`}
           >
@@ -110,19 +125,28 @@ const ActionsMenu = ({ team, showActions, actionsRef, handleActionClick, handleE
 );
 
 const TeamHeader = ({ team, router }) => (
-  <div 
+  <div
     onClick={() => router.push(`/student/teams/${team.id}`)}
-    className="team-header-section flex items-center gap-3 md:gap-4 mb-4 md:mb-5 cursor-pointer hover:opacity-80 transition-opacity" 
+    className="team-header-section mb-4 flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-80 md:mb-5 md:gap-4"
     id={`team-header-section-${team.id}`}
   >
-    <div className="team-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-xl text-xl" aria-hidden="true">
+    <div
+      className="team-icon flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 text-xl dark:bg-gray-800 md:h-12 md:w-12"
+      aria-hidden="true"
+    >
       {team.icon}
     </div>
     <div className="team-title-section">
-      <h2 className="team-name text-lg md:text-xl font-semibold text-gray-900 dark:text-white" id={`team-name-${team.id}`}>
+      <h2
+        className="team-name text-lg font-semibold text-gray-900 dark:text-white md:text-xl"
+        id={`team-name-${team.id}`}
+      >
         {team.name}
       </h2>
-      <span className="team-course text-sm md:text-base text-gray-600 dark:text-gray-400" id={`team-course-${team.id}`}>
+      <span
+        className="team-course text-sm text-gray-600 dark:text-gray-400 md:text-base"
+        id={`team-course-${team.id}`}
+      >
         {team.course}
       </span>
     </div>
@@ -130,8 +154,14 @@ const TeamHeader = ({ team, router }) => (
 );
 
 const TeamContent = ({ team }) => (
-  <div className="team-content-section space-y-4" id={`team-content-section-${team.id}`}>
-    <p className="team-description text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed" id={`team-description-${team.id}`}>
+  <div
+    className="team-content-section space-y-4"
+    id={`team-content-section-${team.id}`}
+  >
+    <p
+      className="team-description text-sm leading-relaxed text-gray-700 dark:text-gray-300 md:text-base"
+      id={`team-description-${team.id}`}
+    >
       {team.description}
     </p>
     <TeamInfo team={team} />
@@ -141,19 +171,21 @@ const TeamContent = ({ team }) => (
 );
 
 const TeamInfo = ({ team }) => (
-  <div className="team-info-section space-y-6" id={`team-info-section-${team.id}`}>
+  <div
+    className="team-info-section space-y-6"
+    id={`team-info-section-${team.id}`}
+  >
     {team.tags && team.tags.length > 0 && (
-      <div 
-        className="team-tags-section flex flex-wrap gap-2" 
-        role="list" 
-        aria-label="Team tags" 
+      <div
+        className="team-tags-section flex flex-wrap gap-2"
+        role="list"
+        aria-label="Team tags"
         id={`team-tags-section-${team.id}`}
       >
         {team.tags.map((tag) => (
-          <span 
+          <span
             key={tag}
-            className="team-tag px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 
-              text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium"
+            className="team-tag rounded-full bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
             role="listitem"
             id={`team-tag-${tag}`}
           >
@@ -164,20 +196,19 @@ const TeamInfo = ({ team }) => (
     )}
 
     {team.milestones && team.milestones.length > 0 && (
-      <div 
-        className="team-milestones-section space-y-3 bg-gray-50 dark:bg-gray-800/50 
-          rounded-xl p-4" 
-        role="list" 
-        aria-label="Team milestones" 
+      <div
+        className="team-milestones-section space-y-3 rounded-xl bg-gray-50 p-4 dark:bg-gray-800/50"
+        role="list"
+        aria-label="Team milestones"
         id={`team-milestones-section-${team.id}`}
       >
-        <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
+        <h3 className="mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
           Milestones
         </h3>
         {team.milestones.map((milestone) => (
-          <div 
+          <div
             key={milestone.id}
-            className="team-milestone flex items-center gap-3 p-2 rounded-lg" 
+            className="team-milestone flex items-center gap-3 rounded-lg p-2"
             role="listitem"
             id={`team-milestone-${milestone.id}`}
           >
@@ -185,15 +216,14 @@ const TeamInfo = ({ team }) => (
               type="checkbox"
               checked={milestone.completed}
               readOnly
-              className="milestone-checkbox h-4 w-4 rounded border-gray-300 
-                dark:border-gray-600 text-blue-600 focus:ring-blue-500"
+              className="milestone-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600"
               aria-label={`Milestone: ${milestone.title}`}
               id={`team-milestone-checkbox-${milestone.id}`}
             />
-            <span 
-              className={`milestone-title text-sm flex-1 ${
-                milestone.completed 
-                  ? 'text-gray-400 dark:text-gray-500 line-through'
+            <span
+              className={`milestone-title flex-1 text-sm ${
+                milestone.completed
+                  ? 'text-gray-400 line-through dark:text-gray-500'
                   : 'text-gray-700 dark:text-gray-300'
               }`}
               id={`team-milestone-title-${milestone.id}`}
@@ -211,13 +241,18 @@ const TeamInfo = ({ team }) => (
 );
 
 const TeamMembers = ({ team }) => (
-  <div className="team-members-section" role="list" aria-label="Team members" id={`team-members-section-${team.id}`}>
+  <div
+    className="team-members-section"
+    role="list"
+    aria-label="Team members"
+    id={`team-members-section-${team.id}`}
+  >
     <AvatarGroup
-      avatars={team.members.map(member => ({
+      avatars={team.members.map((member) => ({
         id: member.id,
         name: member.name,
         status: member.role === 'Leader' ? 'online' : 'offline',
-        className: member.role === 'Leader' ? 'ring-2 ring-yellow-400' : ''
+        className: member.role === 'Leader' ? 'ring-2 ring-yellow-400' : '',
       }))}
       max={4}
       size="sm"
@@ -232,12 +267,21 @@ const TeamMembers = ({ team }) => (
 );
 
 const TeamStats = ({ team }) => (
-  <div className="team-stats-section flex gap-4 pt-4 mt-4 border-t border-gray-100 dark:border-gray-800" id={`team-stats-section-${team.id}`}>
-    <div className="team-meetings-stat flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400" id={`team-meetings-stat-${team.id}`}>
+  <div
+    className="team-stats-section mt-4 flex gap-4 border-t border-gray-100 pt-4 dark:border-gray-800"
+    id={`team-stats-section-${team.id}`}
+  >
+    <div
+      className="team-meetings-stat flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+      id={`team-meetings-stat-${team.id}`}
+    >
       <span aria-hidden="true">📅</span>
       <span>{team.meetings} meetings</span>
     </div>
-    <div className="team-tasks-stat flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400" id={`team-tasks-stat-${team.id}`}>
+    <div
+      className="team-tasks-stat flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+      id={`team-tasks-stat-${team.id}`}
+    >
       <span aria-hidden="true">📋</span>
       <span>{team.tasks} tasks</span>
     </div>
@@ -256,15 +300,21 @@ const TeamCard = ({ team, onEditTeam, onDeleteTeam }) => {
     <div
       role="article"
       id={`team-card-container-${team.id}`}
-      className="team-card-container bg-white dark:bg-gray-900 rounded-2xl p-5 md:p-6 shadow-md dark:shadow-lg relative overflow-hidden border border-gray-100 dark:border-gray-800"
+      className="team-card-container relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 shadow-md dark:border-gray-800 dark:bg-gray-900 dark:shadow-lg md:p-6"
     >
       <ActionsMenu
         team={team}
         showActions={showActions}
         actionsRef={actionsRef}
-        handleActionClick={(e) => ActionHandlers.handleActionClick(e, showActions, setShowActions)}
-        handleEdit={(e) => ActionHandlers.handleEdit(e, team, onEditTeam, setShowActions)}
-        handleDelete={(e) => ActionHandlers.handleDelete(e, team, onDeleteTeam, setShowActions)}
+        handleActionClick={(e) =>
+          ActionHandlers.handleActionClick(e, showActions, setShowActions)
+        }
+        handleEdit={(e) =>
+          ActionHandlers.handleEdit(e, team, onEditTeam, setShowActions)
+        }
+        handleDelete={(e) =>
+          ActionHandlers.handleDelete(e, team, onDeleteTeam, setShowActions)
+        }
         router={router}
       />
       <TeamHeader team={team} router={router} />

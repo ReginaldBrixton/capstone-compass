@@ -26,7 +26,9 @@ const AccordionItem = ({ children, value, className = '' }) => {
 
   return (
     <div className={containerClasses} data-state={isOpen ? 'open' : 'closed'}>
-      {React.Children.map(children, (child) => React.cloneElement(child, { value, isOpen }))}
+      {React.Children.map(children, (child) =>
+        React.cloneElement(child, { value, isOpen })
+      )}
     </div>
   );
 };

@@ -42,12 +42,12 @@ const MessagesPage = () => {
 
   return (
     <MessagesContainer>
-      <ChatSidebar 
+      <ChatSidebar
         conversations={conversations}
         selectedConversation={selectedConversation}
         onSelectConversation={setSelectedConversation}
       />
-      <ChatWindow 
+      <ChatWindow
         conversation={selectedConversation}
         messages={messages}
         setMessages={setMessages}

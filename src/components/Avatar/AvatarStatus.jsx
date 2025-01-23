@@ -30,17 +30,17 @@ const AvatarStatus = ({
 }) => {
   return (
     <div className={`avatar-status-wrapper relative inline-block ${className}`}>
-      <Avatar src={src} alt={alt} size={size} rounded={rounded} bordered={bordered} {...props} />
+      <Avatar
+        src={src}
+        alt={alt}
+        size={size}
+        rounded={rounded}
+        bordered={bordered}
+        {...props}
+      />
       {status && (
         <span
-          className={`
-            avatar-status-indicator
-            absolute w-3.5 h-3.5
-            ${STATUS_COLORS[status]}
-            ${STATUS_POSITIONS[statusPosition]}
-            border-2 border-white dark:border-gray-800
-            rounded-full
-          `}
+          className={`avatar-status-indicator absolute h-3.5 w-3.5 ${STATUS_COLORS[status]} ${STATUS_POSITIONS[statusPosition]} rounded-full border-2 border-white dark:border-gray-800`}
         />
       )}
     </div>
@@ -54,7 +54,12 @@ AvatarStatus.propTypes = {
   rounded: PropTypes.bool,
   bordered: PropTypes.bool,
   status: PropTypes.oneOf(['online', 'offline', 'busy', 'away']),
-  statusPosition: PropTypes.oneOf(['top-right', 'top-left', 'bottom-right', 'bottom-left']),
+  statusPosition: PropTypes.oneOf([
+    'top-right',
+    'top-left',
+    'bottom-right',
+    'bottom-left',
+  ]),
   className: PropTypes.string,
 };
 

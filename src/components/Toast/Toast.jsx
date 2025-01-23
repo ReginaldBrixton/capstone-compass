@@ -16,7 +16,9 @@ const Toast = ({ ...props }) => {
   }, []);
 
   const currentTheme =
-    themeConfig[!mounted ? 'light' : theme === 'system' ? systemTheme || 'light' : theme];
+    themeConfig[
+      !mounted ? 'light' : theme === 'system' ? systemTheme || 'light' : theme
+    ];
 
   if (!mounted) {
     return null; // Don't render anything during SSR

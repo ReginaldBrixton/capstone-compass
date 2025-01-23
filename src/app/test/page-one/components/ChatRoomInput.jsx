@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
   <button
     type="button"
-    className="chat-room-file-upload-button p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+    className="chat-room-file-upload-button rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
     aria-label="Upload file"
     onClick={() => {
       const input = document.createElement('input');
@@ -59,13 +59,17 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
             progress += 10;
             onPreview((prev) =>
               prev.map((item) =>
-                item.id === fileId ? { ...item, progress: Math.min(progress, 100) } : item
+                item.id === fileId
+                  ? { ...item, progress: Math.min(progress, 100) }
+                  : item
               )
             );
             if (progress >= 100) {
               clearInterval(interval);
               onPreview((prev) =>
-                prev.map((item) => (item.id === fileId ? { ...item, uploaded: true } : item))
+                prev.map((item) =>
+                  item.id === fileId ? { ...item, uploaded: true } : item
+                )
               );
             }
           }, 500);
@@ -75,7 +79,7 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
     }}
   >
     <svg
-      className="chat-room-file-upload-icon w-5 h-5"
+      className="chat-room-file-upload-icon h-5 w-5"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -95,7 +99,7 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
 const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
   <button
     type="button"
-    className="chat-room-image-upload-button p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+    className="chat-room-image-upload-button rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
     aria-label="Upload image"
     onClick={() => {
       const input = document.createElement('input');
@@ -118,7 +122,9 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
             const scale = MAX_WIDTH / img.width;
             canvas.width = MAX_WIDTH;
             canvas.height = img.height * scale;
-            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas
+              .getContext('2d')
+              .drawImage(img, 0, 0, canvas.width, canvas.height);
             const thumbnail = canvas.toDataURL('image/jpeg', 0.8);
 
             onPreview((prev) => [
@@ -140,13 +146,17 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
               progress += 10;
               onPreview((prev) =>
                 prev.map((item) =>
-                  item.id === imageId ? { ...item, progress: Math.min(progress, 100) } : item
+                  item.id === imageId
+                    ? { ...item, progress: Math.min(progress, 100) }
+                    : item
                 )
               );
               if (progress >= 100) {
                 clearInterval(interval);
                 onPreview((prev) =>
-                  prev.map((item) => (item.id === imageId ? { ...item, uploaded: true } : item))
+                  prev.map((item) =>
+                    item.id === imageId ? { ...item, uploaded: true } : item
+                  )
                 );
               }
             }, 500);
@@ -157,7 +167,7 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
     }}
   >
     <svg
-      className="chat-room-image-upload-icon w-5 h-5"
+      className="chat-room-image-upload-icon h-5 w-5"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -195,7 +205,20 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
 
   // Expanded emoji categories
   const emojis = {
-    smileys: ['😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '😉', '😍'],
+    smileys: [
+      '😀',
+      '😃',
+      '😄',
+      '😁',
+      '😅',
+      '😂',
+      '🤣',
+      '😊',
+      '😇',
+      '🙂',
+      '😉',
+      '😍',
+    ],
     gestures: ['👍', '👎', '👌', '✌️', '🤞', '🤝', '👊', '✋', '🤚', '🖐️'],
     hearts: ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '💖', '💗', '💓'],
     activities: ['🎮', '🎲', '⚽', '🏀', '🎯', '🎨', '🎭', '🎪', '🎤', '🎧'],
@@ -214,12 +237,12 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
     <div className="chat-room-emoji-picker relative" ref={pickerRef}>
       <button
         type="button"
-        className="chat-room-emoji-picker-button p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+        className="chat-room-emoji-picker-button rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
         aria-label="Add emoji"
         onClick={() => setShowPicker(!showPicker)}
       >
         <svg
-          className="chat-room-emoji-picker-icon w-5 h-5"
+          className="chat-room-emoji-picker-icon h-5 w-5"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -235,13 +258,13 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
         </svg>
       </button>
       {showPicker && (
-        <div className="chat-room-emoji-picker-categories absolute bottom-full mb-2 p-2 bg-white dark:bg-gray-700 rounded-lg shadow-lg w-64">
-          <div className="emoji-picker-category-buttons flex gap-1 mb-2 overflow-x-auto pb-2 border-b border-gray-200 dark:border-gray-600">
+        <div className="chat-room-emoji-picker-categories absolute bottom-full mb-2 w-64 rounded-lg bg-white p-2 shadow-lg dark:bg-gray-700">
+          <div className="emoji-picker-category-buttons mb-2 flex gap-1 overflow-x-auto border-b border-gray-200 pb-2 dark:border-gray-600">
             {Object.keys(emojis).map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`emoji-picker-category-button px-2 py-1 text-sm rounded-md whitespace-nowrap ${
+                className={`emoji-picker-category-button whitespace-nowrap rounded-md px-2 py-1 text-sm ${
                   activeCategory === category
                     ? 'bg-blue-100 text-blue-600 dark:bg-blue-600 dark:text-white'
                     : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600'
@@ -251,12 +274,12 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
               </button>
             ))}
           </div>
-          <div className="emoji-picker-emojis grid grid-cols-6 gap-1 max-h-48 overflow-y-auto">
+          <div className="emoji-picker-emojis grid max-h-48 grid-cols-6 gap-1 overflow-y-auto">
             {emojis[activeCategory].map((emoji, index) => (
               <button
                 key={index}
                 onClick={() => handleEmojiClick(emoji)}
-                className="emoji-picker-emoji text-xl hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded transition-colors"
+                className="emoji-picker-emoji rounded p-1 text-xl transition-colors hover:bg-gray-100 dark:hover:bg-gray-600"
                 title={`Emoji ${emoji}`}
               >
                 {emoji}
@@ -294,23 +317,23 @@ const TextField = ({ value, onChange, onKeyDown, preview, onClearPreview }) => {
   }, [value]);
 
   return (
-    <div className="chat-room-text-field flex-1 mx-4 relative">
+    <div className="chat-room-text-field relative mx-4 flex-1">
       {preview && preview.length > 0 && (
-        <div className="chat-room-text-field-preview absolute top-0 transform -translate-y-full bg-gray-100 dark:bg-gray-700 p-2 rounded-lg flex flex-wrap items-center gap-2 max-w-full">
+        <div className="chat-room-text-field-preview absolute top-0 flex max-w-full -translate-y-full transform flex-wrap items-center gap-2 rounded-lg bg-gray-100 p-2 dark:bg-gray-700">
           {preview.map((item, index) => (
             <div
               key={index}
-              className="chat-room-text-field-preview-item flex items-center gap-2 bg-white dark:bg-gray-600 p-1 rounded"
+              className="chat-room-text-field-preview-item flex items-center gap-2 rounded bg-white p-1 dark:bg-gray-600"
             >
               {item.type === 'image' ? (
                 <img
                   src={item.url}
                   alt=""
-                  className="chat-room-text-field-preview-image h-12 w-12 object-cover rounded"
+                  className="chat-room-text-field-preview-image h-12 w-12 rounded object-cover"
                 />
               ) : (
                 <svg
-                  className="chat-room-text-field-preview-icon w-5 h-5"
+                  className="chat-room-text-field-preview-icon h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -340,16 +363,11 @@ const TextField = ({ value, onChange, onKeyDown, preview, onClearPreview }) => {
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        className="chat-room-text-field-input w-full p-2.5 text-sm text-gray-900 bg-white rounded-lg 
-          border border-gray-300 
-          focus:outline-none focus:border-blue-500
-          dark:bg-gray-800 dark:border-gray-600 dark:text-white
-          dark:focus:border-blue-500
-          dark:placeholder-gray-400
-          transition-colors duration-200
-          resize-none overflow-hidden"
+        className="chat-room-text-field-input w-full resize-none overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 transition-colors duration-200 focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
         placeholder={
-          preview && preview.length > 0 ? 'Add a message (optional)...' : 'Type a message...'
+          preview && preview.length > 0
+            ? 'Add a message (optional)...'
+            : 'Type a message...'
         }
         aria-label="Message input"
         spellCheck="true"
@@ -383,16 +401,13 @@ const SendButton = ({ onClick }) => {
   return (
     <button
       type="submit"
-      className={`chat-room-send-button relative p-2 text-blue-600 rounded-full hover:bg-blue-100 
-        dark:text-blue-500 dark:hover:bg-gray-600 transition-all duration-300
-        ${isAnimating ? 'scale-95' : 'scale-100'}`}
+      className={`chat-room-send-button relative rounded-full p-2 text-blue-600 transition-all duration-300 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600 ${isAnimating ? 'scale-95' : 'scale-100'}`}
       aria-label="Send message"
       onClick={handleClick}
     >
       {/* Main send icon */}
       <svg
-        className={`chat-room-send-button-icon w-5 h-5 transition-all duration-500 ease-in-out transform
-          ${isAnimating ? 'rotate-[720deg] scale-0' : 'rotate-0 scale-100'}`}
+        className={`chat-room-send-button-icon h-5 w-5 transform transition-all duration-500 ease-in-out ${isAnimating ? 'rotate-[720deg] scale-0' : 'rotate-0 scale-100'}`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
@@ -409,7 +424,7 @@ const SendButton = ({ onClick }) => {
       {particles.map((particle) => (
         <span
           key={particle.id}
-          className="chat-room-send-button-particle absolute inset-0 w-1 h-1 bg-blue-500 rounded-full"
+          className="chat-room-send-button-particle absolute inset-0 h-1 w-1 rounded-full bg-blue-500"
           style={{
             animation: 'particle 0.8s ease-out forwards',
             transform: `rotate(${particle.angle}rad)`,
@@ -419,11 +434,10 @@ const SendButton = ({ onClick }) => {
 
       {/* Success indicator */}
       <span
-        className={`chat-room-send-button-success-indicator absolute inset-0 flex items-center justify-center transition-all duration-300
-          ${isAnimating ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+        className={`chat-room-send-button-success-indicator absolute inset-0 flex items-center justify-center transition-all duration-300 ${isAnimating ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
       >
         <svg
-          className="w-4 h-4 animate-[ping_1s_ease-in-out_infinite]"
+          className="h-4 w-4 animate-[ping_1s_ease-in-out_infinite]"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
@@ -475,7 +489,7 @@ const ChatRoomInput = ({ onSendMessage, children }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="chat-room-input fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg"
+      className="chat-room-input fixed bottom-0 left-0 right-0 bg-white shadow-lg dark:bg-gray-800"
     >
       <div className="flex items-center px-4 py-2">
         {React.Children.map(children, (child) => {

@@ -51,9 +51,13 @@ const TeamsPage = () => {
       case 'My Teams':
         return team.members.some((m) => m.name === 'You');
       case 'Leading':
-        return team.members.some((m) => m.name === 'You' && m.role === 'Leader');
+        return team.members.some(
+          (m) => m.name === 'You' && m.role === 'Leader'
+        );
       case 'Member':
-        return team.members.some((m) => m.name === 'You' && m.role === 'Member');
+        return team.members.some(
+          (m) => m.name === 'You' && m.role === 'Member'
+        );
       default:
         return true;
     }
@@ -89,7 +93,12 @@ const TeamsPage = () => {
       ) : filteredTeams.length > 0 ? (
         <TeamsGrid className="teams-grid" id="teams-grid">
           {filteredTeams.map((team) => (
-            <TeamCard key={team.id} team={team} className="team-card" id={`team-card-${team.id}`} />
+            <TeamCard
+              key={team.id}
+              team={team}
+              className="team-card"
+              id={`team-card-${team.id}`}
+            />
           ))}
         </TeamsGrid>
       ) : (

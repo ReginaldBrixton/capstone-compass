@@ -225,7 +225,9 @@ export default function ChapterFour() {
 
       <DataVisualizationPanel>
         <h3>Data Visualizations</h3>
-        <p className="text-secondary mb-4">Insert charts and tables into your chapter</p>
+        <p className="mb-4 text-secondary">
+          Insert charts and tables into your chapter
+        </p>
 
         <div>
           <h4>Charts</h4>
@@ -281,20 +283,29 @@ export default function ChapterFour() {
           <FeedbackHeader>
             <h3>Supervisor Feedback</h3>
             <span className={`status-badge ${feedback.status}`}>
-              {feedback.status.charAt(0).toUpperCase() + feedback.status.slice(1)}
+              {feedback.status.charAt(0).toUpperCase() +
+                feedback.status.slice(1)}
             </span>
           </FeedbackHeader>
 
           {feedback.rubricScores && (
             <div>
               <h4>Evaluation Scores</h4>
-              <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-                {Object.entries(feedback.rubricScores).map(([criterion, score]) => (
-                  <RubricScore key={criterion}>
-                    <span>{criterion}:</span>
-                    <strong>{score}/5</strong>
-                  </RubricScore>
-                ))}
+              <div
+                style={{
+                  display: 'grid',
+                  gap: '1rem',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                }}
+              >
+                {Object.entries(feedback.rubricScores).map(
+                  ([criterion, score]) => (
+                    <RubricScore key={criterion}>
+                      <span>{criterion}:</span>
+                      <strong>{score}/5</strong>
+                    </RubricScore>
+                  )
+                )}
               </div>
             </div>
           )}

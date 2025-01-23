@@ -44,7 +44,7 @@ const CreateTeamModal = ({ isOpen, onClose, onSubmit }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
         onClick={onClose}
         id="modal-overlay"
       >
@@ -52,13 +52,13 @@ const CreateTeamModal = ({ isOpen, onClose, onSubmit }) => {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          transition={{ type: "spring", duration: 0.3 }}
-          className="bg-white dark:bg-gray-900 p-8 rounded-2xl w-[90%] max-w-[500px] relative shadow-xl dark:shadow-2xl"
+          transition={{ type: 'spring', duration: 0.3 }}
+          className="relative w-[90%] max-w-[500px] rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-900 dark:shadow-2xl"
           onClick={(e) => e.stopPropagation()}
           id="modal-content"
         >
           <button
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="absolute right-4 top-4 rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={onClose}
             aria-label="Close modal"
             id="close-button"
@@ -66,63 +66,100 @@ const CreateTeamModal = ({ isOpen, onClose, onSubmit }) => {
             ✕
           </button>
 
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white" id="modal-title">
+          <h2
+            className="mb-6 text-2xl font-bold text-gray-900 dark:text-white"
+            id="modal-title"
+          >
             Create New Team
           </h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5" id="create-team-form">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5"
+            id="create-team-form"
+          >
             <div className="space-y-2" id="form-group-name">
-              <label htmlFor="name" className="block font-medium text-gray-700 dark:text-gray-300" id="label-name">
+              <label
+                htmlFor="name"
+                className="block font-medium text-gray-700 dark:text-gray-300"
+                id="label-name"
+              >
                 Team Name
               </label>
               <input
                 id="name"
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 placeholder="Enter team name"
                 required
-                className="w-full p-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900"
+                className="w-full rounded-xl border-2 border-gray-200 bg-white p-3 text-sm text-gray-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-blue-900"
                 data-testid="input-name"
               />
-              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+              )}
             </div>
 
             <div className="space-y-2" id="form-group-description">
-              <label htmlFor="description" className="block font-medium text-gray-700 dark:text-gray-300" id="label-description">
+              <label
+                htmlFor="description"
+                className="block font-medium text-gray-700 dark:text-gray-300"
+                id="label-description"
+              >
                 Description
               </label>
               <textarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Describe your team's purpose and goals"
                 required
-                className="w-full p-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white min-h-[120px] resize-y transition-all focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900"
+                className="min-h-[120px] w-full resize-y rounded-xl border-2 border-gray-200 bg-white p-3 text-sm text-gray-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-blue-900"
                 data-testid="textarea-description"
               />
-              {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
+              {errors.description && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.description}
+                </p>
+              )}
             </div>
 
             <div className="space-y-2" id="form-group-course">
-              <label htmlFor="course" className="block font-medium text-gray-700 dark:text-gray-300" id="label-course">
+              <label
+                htmlFor="course"
+                className="block font-medium text-gray-700 dark:text-gray-300"
+                id="label-course"
+              >
                 Course
               </label>
               <input
                 id="course"
                 type="text"
                 value={formData.course}
-                onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, course: e.target.value })
+                }
                 placeholder="Enter course name"
                 required
-                className="w-full p-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900"
+                className="w-full rounded-xl border-2 border-gray-200 bg-white p-3 text-sm text-gray-900 transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-blue-900"
                 data-testid="input-course"
               />
-              {errors.course && <p className="text-red-500 text-sm mt-1">{errors.course}</p>}
+              {errors.course && (
+                <p className="mt-1 text-sm text-red-500">{errors.course}</p>
+              )}
             </div>
 
             <div className="space-y-2" id="form-group-icon">
-              <label htmlFor="icon" className="block font-medium text-gray-700 dark:text-gray-300" id="label-icon">
+              <label
+                htmlFor="icon"
+                className="block font-medium text-gray-700 dark:text-gray-300"
+                id="label-icon"
+              >
                 Team Icon
               </label>
               <div className="grid grid-cols-6 gap-2">
@@ -131,10 +168,10 @@ const CreateTeamModal = ({ isOpen, onClose, onSubmit }) => {
                     key={icon}
                     type="button"
                     onClick={() => setFormData({ ...formData, icon })}
-                    className={`aspect-square flex items-center justify-center text-xl rounded-lg transition-colors border-2 ${
+                    className={`flex aspect-square items-center justify-center rounded-lg border-2 text-xl transition-colors ${
                       formData.icon === icon
-                        ? 'bg-blue-100 dark:bg-blue-900 border-blue-500'
-                        : 'bg-gray-50 dark:bg-gray-800 border-transparent hover:bg-gray-100 dark:hover:bg-gray-700'
+                        ? 'border-blue-500 bg-blue-100 dark:bg-blue-900'
+                        : 'border-transparent bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700'
                     }`}
                     aria-label={`Select ${icon} icon`}
                     aria-pressed={formData.icon === icon}
@@ -149,7 +186,7 @@ const CreateTeamModal = ({ isOpen, onClose, onSubmit }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-base font-semibold transition-colors shadow-lg hover:shadow-xl disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="mt-4 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-blue-700 hover:shadow-xl disabled:cursor-not-allowed disabled:bg-gray-400"
               id="submit-button"
             >
               Create Team

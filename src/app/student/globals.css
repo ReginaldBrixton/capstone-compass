@@ -4,10 +4,15 @@
 
 @layer base {
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300;
+    @apply bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold text-gray-900 dark:text-white;
   }
 
@@ -26,11 +31,11 @@
 
 @layer components {
   .card-hover {
-    @apply transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1;
+    @apply transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl;
   }
 
   .dashboard {
-    @apply p-6 max-w-7xl mx-auto;
+    @apply mx-auto max-w-7xl p-6;
   }
 
   .dashboard-header {
@@ -38,31 +43,31 @@
   }
 
   .welcome-text {
-    @apply text-2xl text-gray-900 dark:text-white m-0;
+    @apply m-0 text-2xl text-gray-900 dark:text-white;
   }
 
   .subtitle {
-    @apply text-gray-600 dark:text-gray-300 mt-2 mb-0;
+    @apply mb-0 mt-2 text-gray-600 dark:text-gray-300;
   }
 
   .stats-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8;
+    @apply mb-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4;
   }
 
   .section-title {
-    @apply text-xl text-gray-900 dark:text-white mb-4;
+    @apply mb-4 text-xl text-gray-900 dark:text-white;
   }
 
   .projects-grid {
-    @apply grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8;
+    @apply mb-8 grid grid-cols-1 gap-5 lg:grid-cols-3;
   }
 
   .dashboard-card {
-    @apply bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm transition-colors duration-300;
+    @apply rounded-lg bg-white p-5 shadow-sm transition-colors duration-300 dark:bg-gray-800;
   }
 
   .card-content {
-    @apply flex justify-between items-center;
+    @apply flex items-center justify-between;
   }
 
   .card-text {
@@ -70,39 +75,39 @@
   }
 
   .card-title {
-    @apply text-gray-600 dark:text-gray-300 text-sm m-0;
+    @apply m-0 text-sm text-gray-600 dark:text-gray-300;
   }
 
   .card-value {
-    @apply text-gray-900 dark:text-white text-2xl font-bold my-2;
+    @apply my-2 text-2xl font-bold text-gray-900 dark:text-white;
   }
 
   .card-change {
-    @apply text-green-600 text-xs m-0;
+    @apply m-0 text-xs text-green-600;
   }
 
   .project-card {
-    @apply bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm mb-5 transition-colors duration-300;
+    @apply mb-5 rounded-lg bg-white p-5 shadow-sm transition-colors duration-300 dark:bg-gray-800;
   }
 
   .project-header {
-    @apply flex justify-between items-center mb-3;
+    @apply mb-3 flex items-center justify-between;
   }
 
   .project-title {
-    @apply text-lg m-0 text-gray-900 dark:text-white;
+    @apply m-0 text-lg text-gray-900 dark:text-white;
   }
 
   .project-status {
-    @apply bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 px-2 py-1 rounded text-xs;
+    @apply rounded bg-indigo-100 px-2 py-1 text-xs text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200;
   }
 
   .project-description {
-    @apply text-gray-600 dark:text-gray-300 text-sm my-3;
+    @apply my-3 text-sm text-gray-600 dark:text-gray-300;
   }
 
   .project-footer {
-    @apply flex justify-between items-center mt-4;
+    @apply mt-4 flex items-center justify-between;
   }
 
   .project-info {
@@ -110,23 +115,23 @@
   }
 
   .priority-tag {
-    @apply px-2 py-1 rounded text-xs;
+    @apply rounded px-2 py-1 text-xs;
   }
 
   .priority-tag.high {
-    @apply bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200;
+    @apply bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200;
   }
 
   .priority-tag.medium {
-    @apply bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-200;
+    @apply bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200;
   }
 
   .priority-tag.low {
-    @apply bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200;
+    @apply bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200;
   }
 
   .task-list {
-    @apply bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm transition-colors duration-300;
+    @apply rounded-lg bg-white p-5 shadow-sm transition-colors duration-300 dark:bg-gray-800;
   }
 
   .tasks {

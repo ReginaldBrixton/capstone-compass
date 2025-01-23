@@ -2,7 +2,9 @@
 
 import styled from 'styled-components';
 
-export const SettingsContainer = styled.div.attrs({ className: 'settings-container' })`
+export const SettingsContainer = styled.div.attrs({
+  className: 'settings-container',
+})`
   width: 100%;
   max-width: clamp(300px, 90vw, 1200px);
   margin: 0 auto;
@@ -33,7 +35,8 @@ export const TabsContainer = styled.div.attrs({ className: 'settings-tabs' })`
 export const Tab = styled.button.attrs({ className: 'settings-tab' })`
   padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
   border: none;
-  background: ${(props) => (props.active ? 'var(--primary-color, #007bff)' : 'transparent')};
+  background: ${(props) =>
+    props.active ? 'var(--primary-color, #007bff)' : 'transparent'};
   color: ${(props) => (props.active ? 'white' : 'var(--text-color, #333)')};
   border-radius: 8px;
   cursor: pointer;
@@ -42,7 +45,8 @@ export const Tab = styled.button.attrs({ className: 'settings-tab' })`
   white-space: nowrap;
 
   &:hover {
-    background: ${(props) => (props.active ? 'var(--primary-color, #007bff)' : '#f0f0f0')};
+    background: ${(props) =>
+      props.active ? 'var(--primary-color, #007bff)' : '#f0f0f0'};
   }
 `;
 
@@ -52,7 +56,9 @@ export const SettingsGrid = styled.div.attrs({ className: 'settings-grid' })`
   gap: clamp(1rem, 3vw, 2rem);
 `;
 
-export const SettingsSection = styled.section.attrs({ className: 'settings-section' })`
+export const SettingsSection = styled.section.attrs({
+  className: 'settings-section',
+})`
   background: white;
   border-radius: 12px;
   padding: clamp(1rem, 3vw, 2rem);
@@ -187,7 +193,9 @@ export const Button = styled.button.attrs({ className: 'settings-button' })`
   }
 `;
 
-export const SaveButtonContainer = styled.div.attrs({ className: 'save-button-container' })`
+export const SaveButtonContainer = styled.div.attrs({
+  className: 'save-button-container',
+})`
   position: sticky;
   bottom: 1rem;
   display: flex;

@@ -2,7 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const ChecklistContainer = styled.div.attrs({ className: 'checklist-container' })`
+const ChecklistContainer = styled.div.attrs({
+  className: 'checklist-container',
+})`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
@@ -24,7 +26,9 @@ const CategoryCard = styled(motion.div).attrs({ className: 'category-card' })`
   }
 `;
 
-const ChecklistItemStyled = styled(motion.div).attrs({ className: 'checklist-item' })`
+const ChecklistItemStyled = styled(motion.div).attrs({
+  className: 'checklist-item',
+})`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -66,7 +70,8 @@ const Checkbox = styled.input.attrs({ className: 'checklist-checkbox' })`
 const ItemText = styled.span.attrs({ className: 'checklist-item-text' })`
   flex: 1;
   text-decoration: ${(props) => (props.$checked ? 'line-through' : 'none')};
-  color: ${(props) => (props.$checked ? 'var(--text-secondary)' : 'var(--text-primary)')};
+  color: ${(props) =>
+    props.$checked ? 'var(--text-secondary)' : 'var(--text-primary)'};
 `;
 
 const ChecklistItem = ({ item, onToggle }) => {
@@ -76,7 +81,11 @@ const ChecklistItem = ({ item, onToggle }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <Checkbox type="checkbox" checked={item.checked} onChange={() => onToggle(item.id)} />
+      <Checkbox
+        type="checkbox"
+        checked={item.checked}
+        onChange={() => onToggle(item.id)}
+      />
       <ItemText $checked={item.checked}>{item.text}</ItemText>
     </ChecklistItemStyled>
   );
@@ -93,19 +102,25 @@ const Checklist = ({ items, onToggleItem }) => {
 
   return (
     <ChecklistContainer>
-      {Object.entries(categorizedItems).map(([category, categoryItems], index) => (
-        <CategoryCard
-          key={category}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-        >
-          <h3>{category}</h3>
-          {categoryItems.map((item) => (
-            <ChecklistItem key={item.id} item={item} onToggle={onToggleItem} />
-          ))}
-        </CategoryCard>
-      ))}
+      {Object.entries(categorizedItems).map(
+        ([category, categoryItems], index) => (
+          <CategoryCard
+            key={category}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <h3>{category}</h3>
+            {categoryItems.map((item) => (
+              <ChecklistItem
+                key={item.id}
+                item={item}
+                onToggle={onToggleItem}
+              />
+            ))}
+          </CategoryCard>
+        )
+      )}
     </ChecklistContainer>
   );
 };

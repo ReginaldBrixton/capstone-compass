@@ -10,7 +10,8 @@ import {
 } from '.';
 
 const AvatarDemo = () => {
-  const sampleImage = 'https://flowbite.com/docs/images/people/profile-picture-5.jpg';
+  const sampleImage =
+    'https://flowbite.com/docs/images/people/profile-picture-5.jpg';
   const avatars = [
     {
       src: sampleImage,
@@ -40,17 +41,33 @@ const AvatarDemo = () => {
   ];
 
   const dropdownItems = [
-    { label: 'Dashboard', href: '#', onClick: () => console.log('Dashboard clicked') },
-    { label: 'Settings', href: '#', onClick: () => console.log('Settings clicked') },
-    { label: 'Earnings', href: '#', onClick: () => console.log('Earnings clicked') },
+    {
+      label: 'Dashboard',
+      href: '#',
+      onClick: () => console.log('Dashboard clicked'),
+    },
+    {
+      label: 'Settings',
+      href: '#',
+      onClick: () => console.log('Settings clicked'),
+    },
+    {
+      label: 'Earnings',
+      href: '#',
+      onClick: () => console.log('Earnings clicked'),
+    },
     { divider: true },
-    { label: 'Sign out', href: '#', onClick: () => console.log('Sign out clicked') },
+    {
+      label: 'Sign out',
+      href: '#',
+      onClick: () => console.log('Sign out clicked'),
+    },
   ];
 
   return (
     <div className="space-y-8 p-4">
       <div>
-        <h2 className="text-lg font-semibold mb-4">Default Avatars</h2>
+        <h2 className="mb-4 text-lg font-semibold">Default Avatars</h2>
         <div className="flex flex-wrap gap-4">
           <Avatar src={sampleImage} alt="Default avatar" />
           <Avatar src={sampleImage} alt="Rounded avatar" rounded={false} />
@@ -58,7 +75,7 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Bordered Avatars</h2>
+        <h2 className="mb-4 text-lg font-semibold">Bordered Avatars</h2>
         <div className="flex flex-wrap gap-4">
           <Avatar
             src={sampleImage}
@@ -100,7 +117,7 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Placeholder Avatars</h2>
+        <h2 className="mb-4 text-lg font-semibold">Placeholder Avatars</h2>
         <div className="flex flex-wrap gap-4">
           <Avatar initials="JL" />
           <Avatar />
@@ -108,17 +125,21 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Status Indicator</h2>
+        <h2 className="mb-4 text-lg font-semibold">Status Indicator</h2>
         <div className="flex flex-wrap gap-4">
           <AvatarStatus src={sampleImage} alt="Online status" status="online" />
-          <AvatarStatus src={sampleImage} alt="Offline status" status="offline" />
+          <AvatarStatus
+            src={sampleImage}
+            alt="Offline status"
+            status="offline"
+          />
           <AvatarStatus src={sampleImage} alt="Busy status" status="busy" />
           <AvatarStatus src={sampleImage} alt="Away status" status="away" />
         </div>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Status Positions</h2>
+        <h2 className="mb-4 text-lg font-semibold">Status Positions</h2>
         <div className="flex flex-wrap gap-4">
           <AvatarStatus
             src={sampleImage}
@@ -148,11 +169,11 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Stacked Avatars</h2>
+        <h2 className="mb-4 text-lg font-semibold">Stacked Avatars</h2>
         <div className="space-y-8">
           {/* Default stacked avatars */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Default Stack</h3>
+            <h3 className="mb-2 text-sm font-medium">Default Stack</h3>
             <AvatarGroup
               avatars={[
                 { name: 'Alex Smith', status: 'online' },
@@ -166,18 +187,18 @@ const AvatarDemo = () => {
 
           {/* Different overlap sizes */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Overlap Variations</h3>
+            <h3 className="mb-2 text-sm font-medium">Overlap Variations</h3>
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-gray-500 mb-2">Small Overlap</p>
+                <p className="mb-2 text-sm text-gray-500">Small Overlap</p>
                 <AvatarGroup avatars={avatars} overlap="sm" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-2">Medium Overlap</p>
+                <p className="mb-2 text-sm text-gray-500">Medium Overlap</p>
                 <AvatarGroup avatars={avatars} overlap="md" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-2">Large Overlap</p>
+                <p className="mb-2 text-sm text-gray-500">Large Overlap</p>
                 <AvatarGroup avatars={avatars} overlap="lg" />
               </div>
             </div>
@@ -185,13 +206,13 @@ const AvatarDemo = () => {
 
           {/* Vertical stack */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Vertical Stack</h3>
+            <h3 className="mb-2 text-sm font-medium">Vertical Stack</h3>
             <AvatarGroup avatars={avatars.slice(0, 3)} direction="column" />
           </div>
 
           {/* Different sizes */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Different Sizes</h3>
+            <h3 className="mb-2 text-sm font-medium">Different Sizes</h3>
             <div className="space-y-4">
               <AvatarGroup avatars={avatars} size="sm" />
               <AvatarGroup avatars={avatars} size="lg" />
@@ -200,20 +221,20 @@ const AvatarDemo = () => {
 
           {/* Without counter */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Without Counter</h3>
+            <h3 className="mb-2 text-sm font-medium">Without Counter</h3>
             <AvatarGroup avatars={avatars} showCounter={false} />
           </div>
 
           {/* Square avatars */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Square Avatars</h3>
+            <h3 className="mb-2 text-sm font-medium">Square Avatars</h3>
             <AvatarGroup avatars={avatars} rounded={false} />
           </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">Sizes</h2>
+        <h2 className="mb-4 text-lg font-semibold">Sizes</h2>
         <div className="flex flex-wrap items-end gap-4">
           <Avatar src={sampleImage} alt="Extra small" size="xs" />
           <Avatar src={sampleImage} alt="Small" size="sm" />
@@ -224,10 +245,10 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">With Tooltip</h2>
+        <h2 className="mb-4 text-lg font-semibold">With Tooltip</h2>
         <div className="flex flex-wrap gap-8">
           <div>
-            <h3 className="text-sm font-medium mb-2">Top</h3>
+            <h3 className="mb-2 text-sm font-medium">Top</h3>
             <AvatarTooltip
               src={sampleImage}
               alt="Avatar with tooltip"
@@ -237,7 +258,7 @@ const AvatarDemo = () => {
             />
           </div>
           <div>
-            <h3 className="text-sm font-medium mb-2">Right</h3>
+            <h3 className="mb-2 text-sm font-medium">Right</h3>
             <AvatarTooltip
               src={sampleImage}
               alt="Avatar with tooltip"
@@ -247,7 +268,7 @@ const AvatarDemo = () => {
             />
           </div>
           <div>
-            <h3 className="text-sm font-medium mb-2">Bottom</h3>
+            <h3 className="mb-2 text-sm font-medium">Bottom</h3>
             <AvatarTooltip
               src={sampleImage}
               alt="Avatar with tooltip"
@@ -257,7 +278,7 @@ const AvatarDemo = () => {
             />
           </div>
           <div>
-            <h3 className="text-sm font-medium mb-2">Left</h3>
+            <h3 className="mb-2 text-sm font-medium">Left</h3>
             <AvatarTooltip
               src={sampleImage}
               alt="Avatar with tooltip"
@@ -270,7 +291,7 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">With Text</h2>
+        <h2 className="mb-4 text-lg font-semibold">With Text</h2>
         <div className="space-y-4">
           {/* Basic example */}
           <AvatarWithText
@@ -301,7 +322,7 @@ const AvatarDemo = () => {
 
           {/* With square avatar */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Square Avatar</h3>
+            <h3 className="mb-2 text-sm font-medium">Square Avatar</h3>
             <AvatarWithText
               src={sampleImage}
               alt="Square avatar"
@@ -313,13 +334,17 @@ const AvatarDemo = () => {
 
           {/* Without description */}
           <div>
-            <h3 className="text-sm font-medium mb-2">Without Description</h3>
-            <AvatarWithText src={sampleImage} alt="No description" name="Name Only" />
+            <h3 className="mb-2 text-sm font-medium">Without Description</h3>
+            <AvatarWithText
+              src={sampleImage}
+              alt="No description"
+              name="Name Only"
+            />
           </div>
 
           {/* With placeholder avatar */}
           <div>
-            <h3 className="text-sm font-medium mb-2">With Placeholder</h3>
+            <h3 className="mb-2 text-sm font-medium">With Placeholder</h3>
             <AvatarWithText
               initials="JD"
               alt="Placeholder"
@@ -331,10 +356,10 @@ const AvatarDemo = () => {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4">With Dropdown</h2>
+        <h2 className="mb-4 text-lg font-semibold">With Dropdown</h2>
         <div className="flex flex-wrap gap-8">
           <div>
-            <h3 className="text-sm font-medium mb-2">Bottom Start</h3>
+            <h3 className="mb-2 text-sm font-medium">Bottom Start</h3>
             <AvatarDropdown
               src={sampleImage}
               alt="User dropdown"
@@ -348,7 +373,7 @@ const AvatarDemo = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-2">Bottom End</h3>
+            <h3 className="mb-2 text-sm font-medium">Bottom End</h3>
             <AvatarDropdown
               src={sampleImage}
               alt="User dropdown"
@@ -362,7 +387,7 @@ const AvatarDemo = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-2">Top Start</h3>
+            <h3 className="mb-2 text-sm font-medium">Top Start</h3>
             <AvatarDropdown
               src={sampleImage}
               alt="User dropdown"
@@ -376,7 +401,7 @@ const AvatarDemo = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-2">Top End</h3>
+            <h3 className="mb-2 text-sm font-medium">Top End</h3>
             <AvatarDropdown
               src={sampleImage}
               alt="User dropdown"

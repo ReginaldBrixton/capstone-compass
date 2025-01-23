@@ -103,11 +103,14 @@ const Alert = ({
   return (
     <div
       id={id}
-      className={`p-4 mb-4 rounded-lg backdrop-blur-sm backdrop-filter ${styles.base} ${getBorderClasses()} ${sizeClasses[size]} ${className} transition-all duration-300 ease-in-out transform`}
+      className={`mb-4 rounded-lg p-4 backdrop-blur-sm backdrop-filter ${styles.base} ${getBorderClasses()} ${sizeClasses[size]} ${className} transform transition-all duration-300 ease-in-out`}
       role="alert"
     >
       <div className="flex items-center">
-        <AlertIcon variant={variant} className="flex-shrink-0 w-5 h-5 me-3 animate-pulse" />
+        <AlertIcon
+          variant={variant}
+          className="me-3 h-5 w-5 flex-shrink-0 animate-pulse"
+        />
         {title && (
           <>
             <span className="sr-only">{variant}</span>
@@ -130,21 +133,24 @@ const Alert = ({
       )}
 
       {list && (
-        <ul className="mt-2 space-y-1 list-disc list-inside marker:text-current">
+        <ul className="mt-2 list-inside list-disc space-y-1 marker:text-current">
           {list.map((item, index) => (
-            <li key={index} className="transition-colors duration-200 hover:opacity-80">
+            <li
+              key={index}
+              className="transition-colors duration-200 hover:opacity-80"
+            >
               {item}
             </li>
           ))}
         </ul>
       )}
 
-      <div className="flex mt-4 gap-2">
+      <div className="mt-4 flex gap-2">
         {onViewMore && (
           <button
             type="button"
             onClick={handleViewMore}
-            className={`${styles.button.base} rounded-md text-sm px-4 py-2 font-medium inline-flex items-center`}
+            className={`${styles.button.base} inline-flex items-center rounded-md px-4 py-2 text-sm font-medium`}
           >
             <svg
               className="me-2 h-4 w-4 transition-transform duration-200"
@@ -163,12 +169,12 @@ const Alert = ({
           <button
             type="button"
             onClick={handleDismiss}
-            className={`${styles.button.base} rounded-md p-2 inline-flex items-center justify-center hover:rotate-90 transition-transform duration-200`}
+            className={`${styles.button.base} inline-flex items-center justify-center rounded-md p-2 transition-transform duration-200 hover:rotate-90`}
             aria-label={dismissText}
           >
             <span className="sr-only">{dismissText}</span>
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -112,7 +112,7 @@ export default function ProjectsPage() {
   return (
     <DashboardContainer className="fade-in">
       <h1>My Research Journey</h1>
-      <p className="text-secondary mb-4">
+      <p className="mb-4 text-secondary">
         Track and manage your research progress through different phases
       </p>
 
@@ -126,7 +126,11 @@ export default function ProjectsPage() {
                 <div style={{ width: `${phase.progress}%` }} />
               </ProgressBar>
               <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
               >
                 <StatusBadge status={phase.status}>{phase.status}</StatusBadge>
                 <span>{phase.progress}% Complete</span>

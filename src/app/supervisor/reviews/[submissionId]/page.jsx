@@ -96,7 +96,7 @@ const StatusMessage = styled.div`
   padding: 0.75rem;
   border-radius: 0.375rem;
   margin-bottom: 1rem;
-  
+
   &.success {
     background: #dcfce7;
     color: #166534;
@@ -117,7 +117,7 @@ const SubmissionReview = ({ params }) => {
     methodology: { score: 0, comments: '' },
     analysis: { score: 0, comments: '' },
     presentation: { score: 0, comments: '' },
-    overallComments: ''
+    overallComments: '',
   });
 
   useEffect(() => {
@@ -138,16 +138,19 @@ const SubmissionReview = ({ params }) => {
   }, [params.submissionId]);
 
   const handleScoreChange = (category, value) => {
-    setFeedback(prev => ({
+    setFeedback((prev) => ({
       ...prev,
-      [category]: { ...prev[category], score: Math.min(100, Math.max(0, value)) }
+      [category]: {
+        ...prev[category],
+        score: Math.min(100, Math.max(0, value)),
+      },
     }));
   };
 
   const handleCommentsChange = (category, value) => {
-    setFeedback(prev => ({
+    setFeedback((prev) => ({
       ...prev,
-      [category]: { ...prev[category], comments: value }
+      [category]: { ...prev[category], comments: value },
     }));
   };
 
@@ -159,9 +162,12 @@ const SubmissionReview = ({ params }) => {
       await fetch(`/api/submissions/${params.submissionId}/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedback)
+        body: JSON.stringify(feedback),
       });
-      setStatus({ type: 'success', message: 'Feedback submitted successfully' });
+      setStatus({
+        type: 'success',
+        message: 'Feedback submitted successfully',
+      });
     } catch (error) {
       setStatus({ type: 'error', message: 'Failed to submit feedback' });
     } finally {
@@ -187,14 +193,12 @@ const SubmissionReview = ({ params }) => {
       <ContentSection>
         <div>
           <h2>Submitted Content</h2>
-          <SubmissionContent>
-            {submission?.content}
-          </SubmissionContent>
+          <SubmissionContent>{submission?.content}</SubmissionContent>
         </div>
 
         <FeedbackForm onSubmit={handleSubmit}>
           <h2>Evaluation</h2>
-          
+
           <RubricItem>
             <h3>Research Methodology</h3>
             <GradeInput
@@ -202,12 +206,16 @@ const SubmissionReview = ({ params }) => {
               min="0"
               max="100"
               value={feedback.methodology.score}
-              onChange={(e) => handleScoreChange('methodology', parseInt(e.target.value))}
+              onChange={(e) =>
+                handleScoreChange('methodology', parseInt(e.target.value))
+              }
             />
             <CommentBox
               placeholder="Comments on methodology..."
               value={feedback.methodology.comments}
-              onChange={(e) => handleCommentsChange('methodology', e.target.value)}
+              onChange={(e) =>
+                handleCommentsChange('methodology', e.target.value)
+              }
             />
           </RubricItem>
 
@@ -218,7 +226,9 @@ const SubmissionReview = ({ params }) => {
               min="0"
               max="100"
               value={feedback.analysis.score}
-              onChange={(e) => handleScoreChange('analysis', parseInt(e.target.value))}
+              onChange={(e) =>
+                handleScoreChange('analysis', parseInt(e.target.value))
+              }
             />
             <CommentBox
               placeholder="Comments on analysis..."
@@ -234,12 +244,16 @@ const SubmissionReview = ({ params }) => {
               min="0"
               max="100"
               value={feedback.presentation.score}
-              onChange={(e) => handleScoreChange('presentation', parseInt(e.target.value))}
+              onChange={(e) =>
+                handleScoreChange('presentation', parseInt(e.target.value))
+              }
             />
             <CommentBox
               placeholder="Comments on presentation..."
               value={feedback.presentation.comments}
-              onChange={(e) => handleCommentsChange('presentation', e.target.value)}
+              onChange={(e) =>
+                handleCommentsChange('presentation', e.target.value)
+              }
             />
           </RubricItem>
 
@@ -248,15 +262,16 @@ const SubmissionReview = ({ params }) => {
             <CommentBox
               placeholder="Overall feedback and suggestions..."
               value={feedback.overallComments}
-              onChange={(e) => setFeedback(prev => ({ ...prev, overallComments: e.target.value }))}
+              onChange={(e) =>
+                setFeedback((prev) => ({
+                  ...prev,
+                  overallComments: e.target.value,
+                }))
+              }
             />
           </RubricItem>
 
-          <Button
-            type="submit"
-            className="primary"
-            disabled={saving}
-          >
+          <Button type="submit" className="primary" disabled={saving}>
             {saving ? 'Submitting...' : 'Submit Review'}
           </Button>
         </FeedbackForm>

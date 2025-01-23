@@ -100,7 +100,8 @@ const AddButton = styled.button`
 const chapterFiveGuidelines = [
   {
     title: 'Research Summary',
-    description: 'Provide a concise summary of your research problem, objectives, and methodology.',
+    description:
+      'Provide a concise summary of your research problem, objectives, and methodology.',
   },
   {
     title: 'Key Findings',
@@ -109,7 +110,8 @@ const chapterFiveGuidelines = [
   },
   {
     title: 'Conclusions',
-    description: 'Draw conclusions based on your findings. Address each research objective.',
+    description:
+      'Draw conclusions based on your findings. Address each research objective.',
   },
   {
     title: 'Recommendations',
@@ -132,17 +134,20 @@ const sampleObjectives = [
 const sampleFindings = [
   {
     id: 1,
-    finding: '75% of employees reported increased productivity when working remotely',
+    finding:
+      '75% of employees reported increased productivity when working remotely',
     objective: 1,
   },
   {
     id: 2,
-    finding: 'Flexible schedules were identified as the primary factor in work-life balance',
+    finding:
+      'Flexible schedules were identified as the primary factor in work-life balance',
     objective: 2,
   },
   {
     id: 3,
-    finding: 'Regular virtual team meetings improved collaboration and engagement',
+    finding:
+      'Regular virtual team meetings improved collaboration and engagement',
     objective: 3,
   },
 ];
@@ -197,7 +202,9 @@ export default function ChapterFive() {
           {sampleFindings.map((item) => (
             <FindingCard key={item.id}>
               <p>{item.finding}</p>
-              <small className="text-secondary">Related to Objective {item.objective}</small>
+              <small className="text-secondary">
+                Related to Objective {item.objective}
+              </small>
             </FindingCard>
           ))}
         </SummarySection>
@@ -221,7 +228,9 @@ export default function ChapterFive() {
             onChange={(e) => setNewRecommendation(e.target.value)}
             placeholder="Add a new recommendation..."
           />
-          <AddButton onClick={addRecommendation}>+ Add Recommendation</AddButton>
+          <AddButton onClick={addRecommendation}>
+            + Add Recommendation
+          </AddButton>
         </SummarySection>
       </SummaryPanel>
     </div>

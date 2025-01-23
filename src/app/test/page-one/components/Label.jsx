@@ -16,7 +16,7 @@ const Label = React.memo(
         ref={ref}
         htmlFor={htmlFor}
         className={[
-          'text-sm font-medium leading-none p-2',
+          'p-2 text-sm font-medium leading-none',
           'peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
           'transition-colors duration-200',
           'hover:text-foreground/80',

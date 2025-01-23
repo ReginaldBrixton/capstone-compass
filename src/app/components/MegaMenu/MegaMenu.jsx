@@ -18,88 +18,90 @@ import MegaMenuDropdown from './MegaMenuDropdown';
 import MegaMenuMobile from './MegaMenuMobile';
 
 // Memoized MenuItem component for better performance
-const MenuItem = memo(({ item, index, activeDropdown, setActiveDropdown, variant }) => {
-  const handleDropdownClick = useCallback(() => {
-    setActiveDropdown(activeDropdown === index ? null : index);
-  }, [activeDropdown, index, setActiveDropdown]);
+const MenuItem = memo(
+  ({ item, index, activeDropdown, setActiveDropdown, variant }) => {
+    const handleDropdownClick = useCallback(() => {
+      setActiveDropdown(activeDropdown === index ? null : index);
+    }, [activeDropdown, index, setActiveDropdown]);
 
-  const dropdownVariants = {
-    hidden: { opacity: 0, y: -5 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.2,
-        ease: 'easeOut',
+    const dropdownVariants = {
+      hidden: { opacity: 0, y: -5 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.2,
+          ease: 'easeOut',
+        },
       },
-    },
-    exit: {
-      opacity: 0,
-      y: -5,
-      transition: {
-        duration: 0.2,
-        ease: 'easeIn',
+      exit: {
+        opacity: 0,
+        y: -5,
+        transition: {
+          duration: 0.2,
+          ease: 'easeIn',
+        },
       },
-    },
-  };
+    };
 
-  return (
-    <li className="relative group">
-      {item.dropdown ? (
-        <>
-          <button
-            onClick={handleDropdownClick}
-            className="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-900 hover:text-blue-600 md:w-auto md:hover:bg-transparent md:border-0 md:p-0 dark:text-white md:dark:hover:text-blue-500 group-hover:text-blue-600"
-            aria-expanded={activeDropdown === index}
+    return (
+      <li className="group relative">
+        {item.dropdown ? (
+          <>
+            <button
+              onClick={handleDropdownClick}
+              className="flex w-full items-center justify-between px-3 py-2 font-medium text-gray-900 hover:text-blue-600 group-hover:text-blue-600 dark:text-white md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:text-blue-500"
+              aria-expanded={activeDropdown === index}
+            >
+              {item.label}
+              <svg
+                className={`ms-3 h-2.5 w-2.5 transition-transform duration-200 ${
+                  activeDropdown === index ? 'rotate-180' : ''
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+            <AnimatePresence>
+              {activeDropdown === index && (
+                <motion.div
+                  variants={dropdownVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="absolute left-0 w-full md:w-auto"
+                >
+                  <MegaMenuDropdown
+                    variant={variant}
+                    content={item.dropdown}
+                    onClose={() => setActiveDropdown(null)}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </>
+        ) : (
+          <a
+            href={item.href}
+            className="block px-3 py-2 text-gray-900 transition-colors duration-200 hover:text-blue-600 group-hover:text-blue-600 dark:text-white md:p-0 md:dark:hover:text-blue-500"
           >
             {item.label}
-            <svg
-              className={`w-2.5 h-2.5 ms-3 transition-transform duration-200 ${
-                activeDropdown === index ? 'rotate-180' : ''
-              }`}
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 4 4 4-4"
-              />
-            </svg>
-          </button>
-          <AnimatePresence>
-            {activeDropdown === index && (
-              <motion.div
-                variants={dropdownVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="absolute left-0 w-full md:w-auto"
-              >
-                <MegaMenuDropdown
-                  variant={variant}
-                  content={item.dropdown}
-                  onClose={() => setActiveDropdown(null)}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </>
-      ) : (
-        <a
-          href={item.href}
-          className="block py-2 px-3 text-gray-900 hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 group-hover:text-blue-600 transition-colors duration-200"
-        >
-          {item.label}
-        </a>
-      )}
-    </li>
-  );
-});
+          </a>
+        )}
+      </li>
+    );
+  }
+);
 
 MenuItem.displayName = 'MenuItem';
 
@@ -135,16 +137,19 @@ const MegaMenu = ({
 
   return (
     <nav className={baseClasses}>
-      <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         {/* Brand/Logo Section */}
-        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          href="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           {logo && (
             <div className="h-8 w-auto transition-transform duration-200 hover:scale-105">
               {logo}
             </div>
           )}
           {brandName && (
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-200">
+            <span className="self-center whitespace-nowrap text-2xl font-semibold transition-colors duration-200 hover:text-blue-600 dark:text-white dark:hover:text-blue-500">
               {brandName}
             </span>
           )}
@@ -153,12 +158,12 @@ const MegaMenu = ({
         {/* Mobile Menu Button */}
         <button
           onClick={handleMobileToggle}
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-colors duration-200"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 transition-colors duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
           aria-expanded={isOpen}
         >
           <span className="sr-only">Toggle menu</span>
           <svg
-            className="w-5 h-5"
+            className="h-5 w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -175,8 +180,8 @@ const MegaMenu = ({
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex md:w-auto md:order-1">
-          <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+        <div className="hidden md:order-1 md:flex md:w-auto">
+          <ul className="mt-4 flex flex-col font-medium md:mt-0 md:flex-row md:space-x-8 rtl:space-x-reverse">
             {menuItems.map((item, index) => (
               <MenuItem
                 key={index}
@@ -193,7 +198,11 @@ const MegaMenu = ({
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
-            <MegaMenuMobile menuItems={menuItems} onClose={handleClose} variant={variant} />
+            <MegaMenuMobile
+              menuItems={menuItems}
+              onClose={handleClose}
+              variant={variant}
+            />
           )}
         </AnimatePresence>
       </div>

@@ -19,7 +19,9 @@ export const calculateTimeRemaining = (deadline) => {
   if (difference < 0) return { isOverdue: true, timeString: 'Overdue' };
 
   const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const hours = Math.floor(
+    (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
 
   if (days > 0) {
     return {
@@ -38,14 +40,24 @@ export const calculateTimeRemaining = (deadline) => {
 export const calculatePhaseProgress = (phase) => {
   if (!phase.chapters) return phase.progress;
 
-  const chapterProgresses = Object.values(phase.chapters).map((chapter) => chapter.progress);
-  const totalProgress = chapterProgresses.reduce((sum, progress) => sum + progress, 0);
+  const chapterProgresses = Object.values(phase.chapters).map(
+    (chapter) => chapter.progress
+  );
+  const totalProgress = chapterProgresses.reduce(
+    (sum, progress) => sum + progress,
+    0
+  );
   return Math.round(totalProgress / chapterProgresses.length);
 };
 
 export const calculateOverallProgress = (phases) => {
-  const phaseProgresses = Object.values(phases).map((phase) => calculatePhaseProgress(phase));
-  const totalProgress = phaseProgresses.reduce((sum, progress) => sum + progress, 0);
+  const phaseProgresses = Object.values(phases).map((phase) =>
+    calculatePhaseProgress(phase)
+  );
+  const totalProgress = phaseProgresses.reduce(
+    (sum, progress) => sum + progress,
+    0
+  );
   return Math.round(totalProgress / phaseProgresses.length);
 };
 
@@ -71,11 +83,15 @@ export const validateDefenseRequirements = (phase) => {
   const requirements = [
     {
       name: 'Chapters Complete',
-      isMet: Object.values(phase.chapters).every((chapter) => chapter.status === 'completed'),
+      isMet: Object.values(phase.chapters).every(
+        (chapter) => chapter.status === 'completed'
+      ),
     },
     {
       name: 'Panel Members Confirmed',
-      isMet: phase.defense.panelMembers.every((member) => member.status === 'confirmed'),
+      isMet: phase.defense.panelMembers.every(
+        (member) => member.status === 'confirmed'
+      ),
     },
     {
       name: 'Defense Date Scheduled',

@@ -17,7 +17,9 @@ const BubbleWrapper = styled.div`
   color: ${({ $isOwn }) => ($isOwn ? '#FFFFFF' : '#111827')};
   border: ${({ $isOwn }) => ($isOwn ? 'none' : '1px solid #E5E7EB')};
   box-shadow: ${({ $isOwn }) =>
-    $isOwn ? '0 2px 4px rgba(79, 70, 229, 0.2)' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
+    $isOwn
+      ? '0 2px 4px rgba(79, 70, 229, 0.2)'
+      : '0 2px 4px rgba(0, 0, 0, 0.1)'};
 `;
 
 const MessageText = styled.p`

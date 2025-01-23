@@ -11,4 +11,4 @@ export function Providers({ children }) {
       </ThemeProvider>
     </SessionProvider>
   );
-} 
+}

@@ -2,7 +2,8 @@ export const teamsData = [
   {
     id: 1,
     name: 'Physics Project Team',
-    description: 'Working on semester-end physics project about renewable energy',
+    description:
+      'Working on semester-end physics project about renewable energy',
     course: 'Physics 101',
     icon: '⚡',
     color: '#e3f2fd',

@@ -235,7 +235,9 @@ const TermsModal = dynamic(
       if (!mounted || !isOpen) return null;
 
       return (
-        <ModalOverlay onClick={(e) => e.target === e.currentTarget && onClose()}>
+        <ModalOverlay
+          onClick={(e) => e.target === e.currentTarget && onClose()}
+        >
           <ModalContent>
             <CloseButton onClick={onClose} aria-label="Close modal">
               <svg
@@ -253,33 +255,33 @@ const TermsModal = dynamic(
             <div>
               <h3>1. Acceptance of Terms</h3>
               <p>
-                By accessing and using this service, you accept and agree to be bound by the terms
-                and provision of this agreement.
+                By accessing and using this service, you accept and agree to be
+                bound by the terms and provision of this agreement.
               </p>
 
               <h3>2. User Account</h3>
               <p>
-                You are responsible for maintaining the confidentiality of your account and
-                password. You agree to accept responsibility for all activities that occur under
-                your account.
+                You are responsible for maintaining the confidentiality of your
+                account and password. You agree to accept responsibility for all
+                activities that occur under your account.
               </p>
 
               <h3>3. Privacy Policy</h3>
               <p>
-                Your use of the service is also governed by our Privacy Policy. Please review our
-                Privacy Policy to understand our practices.
+                Your use of the service is also governed by our Privacy Policy.
+                Please review our Privacy Policy to understand our practices.
               </p>
 
               <h3>4. Service Modifications</h3>
               <p>
-                We reserve the right to modify or discontinue the service with or without notice to
-                you.
+                We reserve the right to modify or discontinue the service with
+                or without notice to you.
               </p>
 
               <h3>5. Governing Law</h3>
               <p>
-                These terms shall be governed by and construed in accordance with the laws of your
-                jurisdiction.
+                These terms shall be governed by and construed in accordance
+                with the laws of your jurisdiction.
               </p>
             </div>
 

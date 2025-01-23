@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiAward, FiMail, FiMoreVertical, FiStar, FiTrash2 } from 'react-icons/fi';
+import {
+  FiAward,
+  FiMail,
+  FiMoreVertical,
+  FiStar,
+  FiTrash2,
+} from 'react-icons/fi';
 
 import ConfirmDialog from './ConfirmDialog';
 
 const getRandomColor = (name) => {
   const colors = [
-    { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300' },
-    { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
-    { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
-    { bg: 'bg-rose-100 dark:bg-rose-900/30', text: 'text-rose-700 dark:text-rose-300' },
-    { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300' },
+    {
+      bg: 'bg-purple-100 dark:bg-purple-900/30',
+      text: 'text-purple-700 dark:text-purple-300',
+    },
+    {
+      bg: 'bg-blue-100 dark:bg-blue-900/30',
+      text: 'text-blue-700 dark:text-blue-300',
+    },
+    {
+      bg: 'bg-green-100 dark:bg-green-900/30',
+      text: 'text-green-700 dark:text-green-300',
+    },
+    {
+      bg: 'bg-rose-100 dark:bg-rose-900/30',
+      text: 'text-rose-700 dark:text-rose-300',
+    },
+    {
+      bg: 'bg-amber-100 dark:bg-amber-900/30',
+      text: 'text-amber-700 dark:text-amber-300',
+    },
   ];
   const index = name.length % colors.length;
   return colors[index];
@@ -24,7 +45,12 @@ const getInitials = (name) => {
     .toUpperCase();
 };
 
-const MembersList = ({ members, onRemoveMember, onPromoteMember, isCurrentUserLeader }) => {
+const MembersList = ({
+  members,
+  onRemoveMember,
+  onPromoteMember,
+  isCurrentUserLeader,
+}) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
   const [openActionsMenu, setOpenActionsMenu] = useState(null);
@@ -37,67 +63,52 @@ const MembersList = ({ members, onRemoveMember, onPromoteMember, isCurrentUserLe
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {members.map((member) => {
             const color = getRandomColor(member.name);
             return (
               <motion.div
                 key={member.id}
-                className={`
-                  group bg-white dark:bg-gray-800 rounded-xl p-5 md:p-6
-                  shadow-sm border border-gray-100 dark:border-gray-700
-                  hover:shadow-md hover:-translate-y-1
-                  transition-all duration-300 ease-in-out
-                  relative
-                `}
+                className={`group relative rounded-xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 layout
               >
                 <div className="flex items-start gap-4">
-                  <div 
-                    className={`
-                      w-12 h-12 md:w-14 md:h-14 rounded-full
-                      flex items-center justify-center text-lg md:text-xl font-semibold
-                      ${color.bg} ${color.text}
-                      border-2 border-white dark:border-gray-700 shadow-md
-                    `}
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold md:h-14 md:w-14 md:text-xl ${color.bg} ${color.text} border-2 border-white shadow-md dark:border-gray-700`}
                   >
                     {member.avatar ? (
-                      <img 
-                        src={member.avatar} 
+                      <img
+                        src={member.avatar}
                         alt={member.name}
-                        className="w-full h-full object-cover rounded-full"
+                        className="h-full w-full rounded-full object-cover"
                       />
                     ) : (
                       getInitials(member.name)
                     )}
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 truncate">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="mb-1 truncate text-lg font-semibold text-gray-900 dark:text-white">
                       {member.name}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
                       {member.role === 'leader' ? (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm
-                          bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 font-medium"
-                        >
-                          <FiAward className="w-4 h-4" /> Leader
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
+                          <FiAward className="h-4 w-4" /> Leader
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm
-                          bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium"
-                        >
-                          <FiStar className="w-4 h-4" /> Member
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                          <FiStar className="h-4 w-4" /> Member
                         </span>
                       )}
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
+                    <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400">
                       <div className="flex items-center gap-2 truncate">
-                        <FiMail className="w-4 h-4 flex-shrink-0" />
+                        <FiMail className="h-4 w-4 flex-shrink-0" />
                         <span className="truncate">{member.email}</span>
                       </div>
                       {member.department && (
@@ -111,27 +122,21 @@ const MembersList = ({ members, onRemoveMember, onPromoteMember, isCurrentUserLe
                   {isCurrentUserLeader && member.role !== 'leader' && (
                     <>
                       <button
-                        onClick={() => setOpenActionsMenu(openActionsMenu === member.id ? null : member.id)}
-                        className="
-                          p-2 rounded-lg text-gray-500 hover:text-gray-700
-                          dark:text-gray-400 dark:hover:text-gray-200
-                          hover:bg-gray-100 dark:hover:bg-gray-700/50
-                          transition-colors duration-200
-                          focus:outline-none focus:ring-2 focus:ring-gray-500
-                        "
+                        onClick={() =>
+                          setOpenActionsMenu(
+                            openActionsMenu === member.id ? null : member.id
+                          )
+                        }
+                        className="rounded-lg p-2 text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-gray-200"
                         aria-label="Member actions"
                       >
-                        <FiMoreVertical className="w-5 h-5" />
+                        <FiMoreVertical className="h-5 w-5" />
                       </button>
 
                       <AnimatePresence>
                         {openActionsMenu === member.id && (
                           <motion.div
-                            className="
-                              absolute top-16 right-4 bg-white dark:bg-gray-800
-                              rounded-xl shadow-lg border border-gray-100 dark:border-gray-700
-                              overflow-hidden z-10 min-w-[160px]
-                            "
+                            className="absolute right-4 top-16 z-10 min-w-[160px] overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
                             initial={{ opacity: 0, scale: 0.95, y: -10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -142,15 +147,9 @@ const MembersList = ({ members, onRemoveMember, onPromoteMember, isCurrentUserLe
                                 onPromoteMember(member.id);
                                 setOpenActionsMenu(null);
                               }}
-                              className="
-                                w-full px-4 py-2.5 text-left text-sm
-                                text-amber-600 dark:text-amber-300
-                                hover:bg-amber-50 dark:hover:bg-amber-900/30
-                                transition-colors duration-200
-                                flex items-center gap-2
-                              "
+                              className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-amber-600 transition-colors duration-200 hover:bg-amber-50 dark:text-amber-300 dark:hover:bg-amber-900/30"
                             >
-                              <FiAward className="w-4 h-4" />
+                              <FiAward className="h-4 w-4" />
                               Promote to Leader
                             </button>
                             <button
@@ -159,15 +158,9 @@ const MembersList = ({ members, onRemoveMember, onPromoteMember, isCurrentUserLe
                                 setShowDeleteDialog(true);
                                 setOpenActionsMenu(null);
                               }}
-                              className="
-                                w-full px-4 py-2.5 text-left text-sm
-                                text-red-600 dark:text-red-300
-                                hover:bg-red-50 dark:hover:bg-red-900/30
-                                transition-colors duration-200
-                                flex items-center gap-2
-                              "
+                              className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-red-600 transition-colors duration-200 hover:bg-red-50 dark:text-red-300 dark:hover:bg-red-900/30"
                             >
-                              <FiTrash2 className="w-4 h-4" />
+                              <FiTrash2 className="h-4 w-4" />
                               Remove Member
                             </button>
                           </motion.div>

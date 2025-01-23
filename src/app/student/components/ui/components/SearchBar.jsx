@@ -2,9 +2,15 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-const generateUniqueId = (prefix) => `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
+const generateUniqueId = (prefix) =>
+  `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
 
-export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...', id }) {
+export function SearchBar({
+  onSearch,
+  suggestions = [],
+  placeholder = 'Search...',
+  id,
+}) {
   const [query, setQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -34,7 +40,9 @@ export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : prev));
+      setSelectedIndex((prev) =>
+        prev < filteredSuggestions.length - 1 ? prev + 1 : prev
+      );
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
@@ -64,12 +72,14 @@ export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...
 
   return (
     <div
-      className="search-container relative w-full max-w-[600px] mx-auto"
+      className="search-container relative mx-auto w-full max-w-[600px]"
       ref={searchRef}
       id={uniqueId}
       data-component="search-bar"
     >
-      <div className={`search-bar-wrapper flex items-center h-[clamp(40px,5vh,50px)] bg-white rounded-[25px] border-2 border-transparent shadow-sm transition-all duration-200 ease-in-out ${isActive ? 'border-blue-500 shadow-lg shadow-blue-100' : ''}`}>
+      <div
+        className={`search-bar-wrapper flex h-[clamp(40px,5vh,50px)] items-center rounded-[25px] border-2 border-transparent bg-white shadow-sm transition-all duration-200 ease-in-out ${isActive ? 'border-blue-500 shadow-lg shadow-blue-100' : ''}`}
+      >
         <input
           type="text"
           value={query}
@@ -77,18 +87,20 @@ export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...
           onFocus={() => setIsActive(true)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="search-input flex-1 h-full px-6 border-none bg-transparent text-base text-gray-800 rounded-[25px] focus:outline-none"
+          className="search-input h-full flex-1 rounded-[25px] border-none bg-transparent px-6 text-base text-gray-800 focus:outline-none"
           id={`${uniqueId}-input`}
           aria-label="Search"
           aria-expanded={isActive}
           aria-controls={suggestionsListId}
           aria-activedescendant={
-            selectedIndex >= 0 ? `${uniqueId}-suggestion-${selectedIndex}` : undefined
+            selectedIndex >= 0
+              ? `${uniqueId}-suggestion-${selectedIndex}`
+              : undefined
           }
           data-testid="search-input"
         />
         <button
-          className="search-submit h-full px-6 border-none bg-transparent cursor-pointer text-lg text-gray-600 hover:text-blue-500 transition-colors duration-200"
+          className="search-submit h-full cursor-pointer border-none bg-transparent px-6 text-lg text-gray-600 transition-colors duration-200 hover:text-blue-500"
           onClick={handleSearch}
           aria-label="Submit search"
           id={`${uniqueId}-submit`}
@@ -100,7 +112,7 @@ export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...
 
       {isActive && filteredSuggestions.length > 0 && (
         <ul
-          className="suggestions-list absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-xl shadow-lg py-2 max-h-[300px] overflow-y-auto z-10 list-none m-0"
+          className="suggestions-list absolute left-0 right-0 top-[calc(100%+8px)] z-10 m-0 max-h-[300px] list-none overflow-y-auto rounded-xl bg-white py-2 shadow-lg"
           id={suggestionsListId}
           role="listbox"
           data-testid="suggestions-list"
@@ -108,7 +120,7 @@ export function SearchBar({ onSearch, suggestions = [], placeholder = 'Search...
           {filteredSuggestions.map((suggestion, index) => (
             <li
               key={suggestion}
-              className={`suggestion-item px-6 py-3 cursor-pointer transition-colors duration-200 ${
+              className={`suggestion-item cursor-pointer px-6 py-3 transition-colors duration-200 ${
                 index === selectedIndex ? 'bg-blue-50' : 'hover:bg-gray-50'
               }`}
               onClick={() => handleSuggestionClick(suggestion)}

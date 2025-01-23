@@ -8,17 +8,20 @@ export const helpCategories = [
   {
     id: 2,
     title: 'Assignments Help',
-    description: 'Everything you need to know about submitting and tracking your assignments.',
+    description:
+      'Everything you need to know about submitting and tracking your assignments.',
   },
   {
     id: 3,
     title: 'Technical Support',
-    description: 'Having technical issues? Find solutions and troubleshooting guides here.',
+    description:
+      'Having technical issues? Find solutions and troubleshooting guides here.',
   },
   {
     id: 4,
     title: 'Study Resources',
-    description: 'Access study materials, guides, and additional learning resources.',
+    description:
+      'Access study materials, guides, and additional learning resources.',
   },
   {
     id: 5,
@@ -28,7 +31,8 @@ export const helpCategories = [
   {
     id: 6,
     title: 'Community Help',
-    description: 'Connect with other students and find community-driven solutions.',
+    description:
+      'Connect with other students and find community-driven solutions.',
   },
 ];
 

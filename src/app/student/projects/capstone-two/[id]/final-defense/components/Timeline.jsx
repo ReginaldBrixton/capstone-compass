@@ -18,7 +18,8 @@ const TimelineWrapper = styled.div.attrs({ className: 'timeline-wrapper' })`
 `;
 
 const TimelineItemStyled = styled(motion.div).attrs({
-  className: (props) => `timeline-item ${props.$isCompleted ? 'completed' : ''}`,
+  className: (props) =>
+    `timeline-item ${props.$isCompleted ? 'completed' : ''}`,
 })`
   position: relative;
   padding-left: 3rem;

@@ -1,7 +1,14 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { FiActivity, FiBell, FiGlobe, FiMoon, FiShield, FiUser } from 'react-icons/fi';
+import {
+  FiActivity,
+  FiBell,
+  FiGlobe,
+  FiMoon,
+  FiShield,
+  FiUser,
+} from 'react-icons/fi';
 
 import {
   Button,
@@ -326,7 +333,11 @@ export default function SettingsPage() {
     <SettingsContainer>
       <TabsContainer>
         {TABS.map(({ id, label, icon: Icon }) => (
-          <Tab key={id} active={activeTab === id} onClick={() => setActiveTab(id)}>
+          <Tab
+            key={id}
+            active={activeTab === id}
+            onClick={() => setActiveTab(id)}
+          >
             <Icon style={{ marginRight: '8px' }} />
             {label}
           </Tab>

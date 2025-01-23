@@ -71,7 +71,7 @@ const FeedbackForm = ({
   onCommentsChange,
   onSubmit,
   isSubmitting,
-  errors = {}
+  errors = {},
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,7 +81,7 @@ const FeedbackForm = ({
   return (
     <FormContainer onSubmit={handleSubmit}>
       <h2>Evaluation</h2>
-      
+
       <RubricItem>
         <h3>Research Methodology</h3>
         <GradeInput
@@ -89,7 +89,9 @@ const FeedbackForm = ({
           min="0"
           max="100"
           value={feedback.methodology.score}
-          onChange={(e) => onScoreChange('methodology', parseInt(e.target.value))}
+          onChange={(e) =>
+            onScoreChange('methodology', parseInt(e.target.value))
+          }
         />
         {errors.methodology?.score && (
           <ErrorMessage>{errors.methodology.score}</ErrorMessage>
@@ -133,7 +135,9 @@ const FeedbackForm = ({
           min="0"
           max="100"
           value={feedback.presentation.score}
-          onChange={(e) => onScoreChange('presentation', parseInt(e.target.value))}
+          onChange={(e) =>
+            onScoreChange('presentation', parseInt(e.target.value))
+          }
         />
         {errors.presentation?.score && (
           <ErrorMessage>{errors.presentation.score}</ErrorMessage>

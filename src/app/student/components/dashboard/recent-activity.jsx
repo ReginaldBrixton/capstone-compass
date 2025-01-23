@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "../../../../components/ui/avatar"; // Assuming this path is correct
-import { formatDistanceToNow } from "date-fns";
-import { FileIcon, GitCommitIcon, MessageSquareIcon } from "lucide-react";
+} from '../../../../components/ui/avatar'; // Assuming this path is correct
+import { formatDistanceToNow } from 'date-fns';
+import { FileIcon, GitCommitIcon, MessageSquareIcon } from 'lucide-react';
 
 /**
  * RecentActivity component displays a user's recent activity with an icon,
@@ -28,7 +28,7 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
 
   return (
     <div
-      className="group relative flex items-start space-x-4 rounded-md border border-border bg-card p-4 text-card-foreground shadow-sm hover:shadow-md transition-shadow duration-200"
+      className="group relative flex items-start space-x-4 rounded-md border border-border bg-card p-4 text-card-foreground shadow-sm transition-shadow duration-200 hover:shadow-md"
       id="recent-activity-container"
     >
       <Avatar className="h-10 w-10" id="activity-avatar">
@@ -39,22 +39,34 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
             id="activity-avatar-image"
           />
         ) : null}
-        <AvatarFallback className="text-sm font-semibold" id="activity-avatar-fallback">
+        <AvatarFallback
+          className="text-sm font-semibold"
+          id="activity-avatar-fallback"
+        >
           {username
-            ?.split(" ")
+            ?.split(' ')
             .map((n) => n[0])
-            .join("")
-            .toUpperCase() || "?"}
+            .join('')
+            .toUpperCase() || '?'}
         </AvatarFallback>
       </Avatar>
       <div className="flex-1 space-y-2" id="activity-content">
         <div id="activity-description-container">
-          <p className="text-sm font-medium text-foreground" id="activity-description">
-            <span className="font-semibold hover:underline transition-colors duration-150 cursor-pointer" id="activity-username">
+          <p
+            className="text-sm font-medium text-foreground"
+            id="activity-description"
+          >
+            <span
+              className="cursor-pointer font-semibold transition-colors duration-150 hover:underline"
+              id="activity-username"
+            >
               {username}
-            </span>{" "}
-            <span className="text-muted-foreground">{action}</span>{" "}
-            <span className="font-semibold hover:underline transition-colors duration-150 cursor-pointer" id="activity-target">
+            </span>{' '}
+            <span className="text-muted-foreground">{action}</span>{' '}
+            <span
+              className="cursor-pointer font-semibold transition-colors duration-150 hover:underline"
+              id="activity-target"
+            >
               {target}
             </span>
           </p>
@@ -63,14 +75,16 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
           className="flex items-center text-xs text-muted-foreground"
           id="activity-timestamp-container"
         >
-          <span className="mr-2" id="activity-icon">{iconMap[type]}</span>
+          <span className="mr-2" id="activity-icon">
+            {iconMap[type]}
+          </span>
           <span id="activity-timestamp">
             {formatDistanceToNow(timestamp, { addSuffix: true })}
           </span>
         </div>
       </div>
       <div
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         id="activity-type-icon-container"
       >
         {iconMap[type]}

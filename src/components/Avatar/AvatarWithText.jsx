@@ -21,7 +21,9 @@ const AvatarWithText = ({
       <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
         <div>{name}</div>
         {description && (
-          <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+          <div
+            className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+          >
             {description}
           </div>
         )}

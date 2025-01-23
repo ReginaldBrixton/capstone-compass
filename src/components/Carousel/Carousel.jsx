@@ -4,7 +4,13 @@
  */
 'use client';
 
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import { cn } from '@/app/utils/cn';
@@ -87,12 +93,13 @@ export function Carousel({
       <div
         key={index}
         className={cn(
-          'absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out',
+          'absolute inset-0 h-full w-full transition-transform duration-700 ease-in-out',
           {
             'translate-x-full': type === 'slide' && activeIndex < index,
             '-translate-x-full': type === 'slide' && activeIndex > index,
             'translate-x-0': type === 'slide' && activeIndex === index,
-            'opacity-0 pointer-events-none': type === 'static' && activeIndex !== index,
+            'pointer-events-none opacity-0':
+              type === 'static' && activeIndex !== index,
             'opacity-100': type === 'static' && activeIndex === index,
           }
         )}
@@ -102,11 +109,11 @@ export function Carousel({
         {item.content ? (
           item.content
         ) : (
-          <div className="relative w-full h-full">
+          <div className="relative h-full w-full">
             <img
               src={item.src}
               alt={item.alt}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         )}

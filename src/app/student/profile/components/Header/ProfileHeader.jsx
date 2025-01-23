@@ -5,8 +5,16 @@ import { Camera, Pencil, XCircle, Loader, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import { profileConstants } from '../../data';
 import ProfileInfoItem from './ProfileInfoItem';
+import { getAvatarUrl } from '../../../../../utils/avatar';
 
-const EditDialog = ({ isOpen, onClose, field, value, type = 'text', onSave }) => {
+const EditDialog = ({
+  isOpen,
+  onClose,
+  field,
+  value,
+  type = 'text',
+  onSave,
+}) => {
   const [editValue, setEditValue] = useState(value);
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
@@ -14,15 +22,17 @@ const EditDialog = ({ isOpen, onClose, field, value, type = 'text', onSave }) =>
 
   const validateField = (value, type) => {
     if (!value.trim()) return 'Field cannot be empty';
-    if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Invalid email format';
-    if (type === 'tel' && !/^\+?[\d\s()-]{7,}$/.test(value)) return 'Invalid phone format';
+    if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+      return 'Invalid email format';
+    if (type === 'tel' && !/^\+?[\d\s()-]{7,}$/.test(value))
+      return 'Invalid phone format';
     return '';
   };
 
   const handleSave = async () => {
     const validationError = validateField(editValue, type);
     if (validationError) return setError(validationError);
-    
+
     setIsSaving(true);
     try {
       await onSave(editValue);
@@ -39,20 +49,22 @@ const EditDialog = ({ isOpen, onClose, field, value, type = 'text', onSave }) =>
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-scaleIn">
-        <div className="flex items-center justify-between p-6 border-b dark:border-gray-800">
-          <h3 className="text-xl font-semibold dark:text-white">Edit {field}</h3>
-          <button 
+    <div className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+      <div className="animate-scaleIn w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-900">
+        <div className="flex items-center justify-between border-b p-6 dark:border-gray-800">
+          <h3 className="text-xl font-semibold dark:text-white">
+            Edit {field}
+          </h3>
+          <button
             onClick={onClose}
-            className="text-gray-500 hover:text-red-500 p-2 rounded-full transition-colors"
+            className="rounded-full p-2 text-gray-500 transition-colors hover:text-red-500"
             aria-label="Close dialog"
           >
-            <XCircle className="w-6 h-6" />
+            <XCircle className="h-6 w-6" />
           </button>
         </div>
-        
-        <div className="p-6 space-y-4">
+
+        <div className="space-y-4 p-6">
           <input
             ref={inputRef}
             type={type}
@@ -61,41 +73,41 @@ const EditDialog = ({ isOpen, onClose, field, value, type = 'text', onSave }) =>
               setEditValue(e.target.value);
               setError('');
             }}
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full rounded-lg border px-4 py-3 ${
               error ? 'border-red-500' : 'dark:border-gray-700'
-            } dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all`}
+            } outline-none transition-all focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white`}
             placeholder={`Enter ${field.toLowerCase()}`}
           />
-          
+
           {error && (
-            <div className="flex items-center gap-2 text-red-500 text-sm">
-              <XCircle className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-sm text-red-500">
+              <XCircle className="h-4 w-4" />
               <span>{error}</span>
             </div>
           )}
         </div>
 
-        <div className="flex gap-3 p-6 border-t dark:border-gray-800">
+        <div className="flex gap-3 border-t p-6 dark:border-gray-800">
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all disabled:opacity-50"
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition-all hover:bg-blue-700 disabled:opacity-50"
           >
             {isSaving ? (
               <>
-                <Loader className="w-5 h-5 animate-spin" />
+                <Loader className="h-5 w-5 animate-spin" />
                 Saving...
               </>
             ) : (
               <>
-                <CheckCircle className="w-5 h-5" />
+                <CheckCircle className="h-5 w-5" />
                 Save Changes
               </>
             )}
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors"
+            className="rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             Cancel
           </button>
@@ -136,25 +148,27 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-scaleIn">
-        <div className="flex items-center justify-between p-6 border-b dark:border-gray-800">
-          <h3 className="text-xl font-semibold dark:text-white">Update Profile Photo</h3>
-          <button 
+    <div className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+      <div className="animate-scaleIn w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-900">
+        <div className="flex items-center justify-between border-b p-6 dark:border-gray-800">
+          <h3 className="text-xl font-semibold dark:text-white">
+            Update Profile Photo
+          </h3>
+          <button
             onClick={onClose}
-            className="text-gray-500 hover:text-red-500 p-2 rounded-full transition-colors"
+            className="rounded-full p-2 text-gray-500 transition-colors hover:text-red-500"
             aria-label="Close dialog"
           >
-            <XCircle className="w-6 h-6" />
+            <XCircle className="h-6 w-6" />
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="space-y-6 p-6">
           <div
-            className={`border-2 border-dashed rounded-xl flex flex-col items-center justify-center aspect-square transition-all ${
-              isDragging 
+            className={`flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-dashed transition-all ${
+              isDragging
                 ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                : 'border-gray-300 dark:border-gray-700 hover:border-blue-500 cursor-pointer'
+                : 'cursor-pointer border-gray-300 hover:border-blue-500 dark:border-gray-700'
             }`}
             onDragOver={(e) => {
               e.preventDefault();
@@ -165,31 +179,34 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
             onClick={() => fileInputRef.current?.click()}
           >
             {preview ? (
-              <div className="relative w-full h-full">
+              <div className="relative h-full w-full">
                 <Image
                   src={preview}
                   alt="Preview"
                   fill
-                  className="object-cover rounded-lg"
+                  className="rounded-lg object-cover"
                 />
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setPreview(null);
                   }}
-                  className="absolute top-2 right-2 p-2 bg-red-500 hover:bg-red-600 rounded-full shadow-lg transition-colors"
+                  className="absolute right-2 top-2 rounded-full bg-red-500 p-2 shadow-lg transition-colors hover:bg-red-600"
                 >
-                  <XCircle className="w-5 h-5 text-white" />
+                  <XCircle className="h-5 w-5 text-white" />
                 </button>
               </div>
             ) : (
-              <div className="text-center p-6">
-                <Camera className="w-12 h-12 text-gray-400 mb-4 mx-auto" />
+              <div className="p-6 text-center">
+                <Camera className="mx-auto mb-4 h-12 w-12 text-gray-400" />
                 <p className="text-gray-600 dark:text-gray-400">
-                  Drag & drop image here<br />
+                  Drag & drop image here
+                  <br />
                   or click to browse
                 </p>
-                <p className="text-sm text-gray-500 mt-2">Recommended size: 500x500px</p>
+                <p className="mt-2 text-sm text-gray-500">
+                  Recommended size: 500x500px
+                </p>
               </div>
             )}
           </div>
@@ -203,17 +220,17 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
           />
         </div>
 
-        <div className="flex gap-3 p-6 border-t dark:border-gray-800">
+        <div className="flex gap-3 border-t p-6 dark:border-gray-800">
           <button
             onClick={handleSave}
             disabled={!preview}
-            className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="flex-1 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
           >
             Update Photo
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors"
+            className="rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             Cancel
           </button>
@@ -232,63 +249,66 @@ const ProfileHeader = ({ studentData, onUpdateProfile }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border dark:border-gray-800 overflow-hidden">
-      <div className="flex flex-col md:flex-row gap-6 p-6">
-        <div className="relative group flex-shrink-0">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-900 shadow-lg cursor-pointer relative">
+    <div className="overflow-hidden rounded-2xl border bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <div className="flex flex-col gap-6 p-6 md:flex-row">
+        <div className="group relative flex-shrink-0">
+          <div className="relative h-32 w-32 cursor-pointer overflow-hidden rounded-full border-4 border-white shadow-lg dark:border-gray-900">
             <Image
-              src={studentData.image || profileConstants.defaultImage}
-              alt="Profile"
+              src={getAvatarUrl(studentData.name, studentData.image)}
+              alt={`${studentData.name}'s profile picture`}
               width={128}
               height={128}
-              className="object-cover w-full h-full transition-opacity group-hover:opacity-75"
+              className="h-full w-full object-cover transition-opacity group-hover:opacity-75"
+              priority
             />
-            <div 
+            <div
               onClick={() => setIsPhotoDialogOpen(true)}
-              className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100"
             >
-              <Camera className="w-6 h-6 text-white" />
+              <Camera className="h-6 w-6 text-white" />
             </div>
           </div>
         </div>
 
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold dark:text-white cursor-pointer hover:underline">
+            <h2 className="cursor-pointer text-2xl font-bold hover:underline dark:text-white">
               <span onClick={() => handleFieldClick('Name', studentData.name)}>
                 {studentData.name}
               </span>
             </h2>
             <button
               onClick={() => handleFieldClick('Name', studentData.name)}
-              className="text-gray-500 hover:text-blue-600 transition-colors"
+              className="text-gray-500 transition-colors hover:text-blue-600"
               aria-label="Edit name"
             >
-              <Pencil className="w-5 h-5" />
+              <Pencil className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <ProfileInfoItem 
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <ProfileInfoItem
               icon="🎫"
               label="Student ID"
               value={studentData.id}
               onEdit={() => handleFieldClick('Student ID', studentData.id)}
             />
-            <ProfileInfoItem 
+            <ProfileInfoItem
               icon="📚"
               label="Grade"
               value={studentData.grade}
               onEdit={() => handleFieldClick('Grade', studentData.grade)}
             />
-            <ProfileInfoItem 
+            <ProfileInfoItem
               icon="📧"
               label="Email"
               value={studentData.email}
               type="email"
-              onEdit={() => handleFieldClick('Email', studentData.email, 'email')}
+              onEdit={() =>
+                handleFieldClick('Email', studentData.email, 'email')
+              }
             />
-            <ProfileInfoItem 
+            <ProfileInfoItem
               icon="📱"
               label="Phone"
               value={studentData.phone}

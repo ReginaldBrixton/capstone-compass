@@ -30,7 +30,7 @@ const ButtonDemo = () => {
       </div>
 
       <div className="variants space-y-4">
-        <h3 className="text-lg font-semibold mb-2">Button Variants</h3>
+        <h3 className="mb-2 text-lg font-semibold">Button Variants</h3>
         <div className="space-x-4">
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -41,7 +41,7 @@ const ButtonDemo = () => {
       </div>
 
       <div className="sizes space-y-4">
-        <h3 className="text-lg font-semibold mb-2">Button Sizes</h3>
+        <h3 className="mb-2 text-lg font-semibold">Button Sizes</h3>
         <div className="space-x-4">
           <Button size="sm">Small</Button>
           <Button size="md">Medium</Button>
@@ -50,7 +50,7 @@ const ButtonDemo = () => {
       </div>
 
       <div className="states space-y-4">
-        <h3 className="text-lg font-semibold mb-2">Button States</h3>
+        <h3 className="mb-2 text-lg font-semibold">Button States</h3>
         <div className="space-x-4">
           <Button>Normal</Button>
           <Button disabled>Disabled</Button>

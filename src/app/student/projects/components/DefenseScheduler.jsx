@@ -6,7 +6,12 @@ import { formatTime } from '../utils/dateUtils';
 
 import '../styles/DefenseScheduler.css';
 
-const DefenseScheduler = ({ availableSlots, panelMembers, requirements, onSchedule }) => {
+const DefenseScheduler = ({
+  availableSlots,
+  panelMembers,
+  requirements,
+  onSchedule,
+}) => {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [mounted, setMounted] = useState(false);
 
@@ -64,7 +69,9 @@ const DefenseScheduler = ({ availableSlots, panelMembers, requirements, onSchedu
               <h4>{member.name}</h4>
               <p>{member.role}</p>
             </div>
-            <span className={`status-badge ${member.status}`}>{member.status}</span>
+            <span className={`status-badge ${member.status}`}>
+              {member.status}
+            </span>
           </div>
         ))}
       </div>
@@ -83,7 +90,11 @@ const DefenseScheduler = ({ availableSlots, panelMembers, requirements, onSchedu
         ))}
       </div>
 
-      <button className="action-button" onClick={handleSchedule} disabled={!isReadyToSchedule()}>
+      <button
+        className="action-button"
+        onClick={handleSchedule}
+        disabled={!isReadyToSchedule()}
+      >
         Schedule Defense
       </button>
     </div>

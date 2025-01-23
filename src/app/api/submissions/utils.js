@@ -8,7 +8,7 @@ export const SUBMISSION_STATUS = {
   REVIEWED: 'reviewed',
   NEEDS_REVISION: 'needs_revision',
   APPROVED: 'approved',
-  REJECTED: 'rejected'
+  REJECTED: 'rejected',
 };
 
 // Validation rules
@@ -26,7 +26,9 @@ export function validateSubmissionStatus(status) {
 
   const validStatuses = Object.values(SUBMISSION_STATUS);
   if (!validStatuses.includes(status)) {
-    throw new Error(`Invalid status. Must be one of: ${validStatuses.join(', ')}`);
+    throw new Error(
+      `Invalid status. Must be one of: ${validStatuses.join(', ')}`
+    );
   }
 
   return true;
@@ -41,7 +43,9 @@ export function formatFeedback(feedback) {
   }
 
   if (feedback.length > MAX_FEEDBACK_LENGTH) {
-    throw new Error(`Feedback length must not exceed ${MAX_FEEDBACK_LENGTH} characters`);
+    throw new Error(
+      `Feedback length must not exceed ${MAX_FEEDBACK_LENGTH} characters`
+    );
   }
 
   // Sanitize HTML content to prevent XSS
@@ -50,7 +54,7 @@ export function formatFeedback(feedback) {
   return {
     content: sanitizedFeedback,
     timestamp: new Date().toISOString(),
-    formattedDate: formatDate(new Date())
+    formattedDate: formatDate(new Date()),
   };
 }
 
@@ -66,20 +70,20 @@ export function aggregateEvaluationResults(evaluations) {
     totalScore: 0,
     averageScore: 0,
     categoryScores: {},
-    feedbackCount: evaluations.length
+    feedbackCount: evaluations.length,
   };
 
-  evaluations.forEach(evaluation => {
+  evaluations.forEach((evaluation) => {
     validateEvaluation(evaluation);
-    
+
     results.totalScore += evaluation.score;
-    
+
     // Aggregate category scores
     if (evaluation.category) {
       if (!results.categoryScores[evaluation.category]) {
         results.categoryScores[evaluation.category] = {
           total: 0,
-          count: 0
+          count: 0,
         };
       }
       results.categoryScores[evaluation.category].total += evaluation.score;
@@ -89,9 +93,9 @@ export function aggregateEvaluationResults(evaluations) {
 
   // Calculate averages
   results.averageScore = results.totalScore / evaluations.length;
-  
+
   // Calculate category averages
-  Object.keys(results.categoryScores).forEach(category => {
+  Object.keys(results.categoryScores).forEach((category) => {
     const categoryData = results.categoryScores[category];
     categoryData.average = categoryData.total / categoryData.count;
   });
@@ -107,10 +111,14 @@ function validateEvaluation(evaluation) {
     throw new Error('Invalid evaluation object');
   }
 
-  if (typeof evaluation.score !== 'number' || 
-      evaluation.score < MIN_SCORE || 
-      evaluation.score > MAX_SCORE) {
-    throw new Error(`Score must be a number between ${MIN_SCORE} and ${MAX_SCORE}`);
+  if (
+    typeof evaluation.score !== 'number' ||
+    evaluation.score < MIN_SCORE ||
+    evaluation.score > MAX_SCORE
+  ) {
+    throw new Error(
+      `Score must be a number between ${MIN_SCORE} and ${MAX_SCORE}`
+    );
   }
 
   if (evaluation.category && typeof evaluation.category !== 'string') {
@@ -129,6 +137,6 @@ function formatDate(date) {
     month: 'long',
     day: 'numeric',
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   }).format(date);
 }

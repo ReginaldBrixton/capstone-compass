@@ -11,9 +11,9 @@ import { ChatUser } from '../../types/chat';
  */
 const ChatListItem = ({ user, isSelected, onClick }) => {
   const statusIcons = {
-    online: <CheckCircle className="w-3 h-3 text-green-500" />,
-    offline: <Circle className="w-3 h-3 text-gray-400" />,
-    away: <Clock className="w-3 h-3 text-yellow-500" />,
+    online: <CheckCircle className="h-3 w-3 text-green-500" />,
+    offline: <Circle className="h-3 w-3 text-gray-400" />,
+    away: <Clock className="h-3 w-3 text-yellow-500" />,
   };
 
   const formatTime = (date) => {
@@ -34,7 +34,7 @@ const ChatListItem = ({ user, isSelected, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`w-full p-4 flex items-center space-x-3 hover:bg-gray-50 transition-colors duration-200 ${
+      className={`flex w-full items-center space-x-3 p-4 transition-colors duration-200 hover:bg-gray-50 ${
         isSelected ? 'bg-indigo-50 ring-2 ring-indigo-500' : ''
       }`}
       aria-label={`Chat with ${user.name}`}
@@ -43,23 +43,29 @@ const ChatListItem = ({ user, isSelected, onClick }) => {
         <img
           src={user.avatar}
           alt={user.name}
-          className="w-12 h-12 rounded-full object-cover shadow-sm"
+          className="h-12 w-12 rounded-full object-cover shadow-sm"
         />
         <span className="absolute bottom-0 right-0 flex items-center justify-center">
           {statusIcons[user.status]}
         </span>
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex justify-between items-baseline">
-          <h3 className="text-sm font-semibold text-gray-900 truncate">{user.name}</h3>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-baseline justify-between">
+          <h3 className="truncate text-sm font-semibold text-gray-900">
+            {user.name}
+          </h3>
           {user.lastSeen && (
-            <span className="text-xs text-gray-400">{formatTime(user.lastSeen)}</span>
+            <span className="text-xs text-gray-400">
+              {formatTime(user.lastSeen)}
+            </span>
           )}
         </div>
-        <div className="mt-1 flex justify-between items-center">
-          <span className="text-sm text-gray-500 truncate">{getLastMessagePreview()}</span>
+        <div className="mt-1 flex items-center justify-between">
+          <span className="truncate text-sm text-gray-500">
+            {getLastMessagePreview()}
+          </span>
           {user.unreadCount > 0 && (
-            <span className="ml-2 bg-indigo-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-sm">
+            <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white shadow-sm">
               {user.unreadCount}
             </span>
           )}

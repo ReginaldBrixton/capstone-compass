@@ -173,7 +173,8 @@ const ProgressHeader = styled.div`
   }
 
   strong {
-    color: ${(props) => (props.progress >= 100 ? 'var(--success-color)' : 'var(--text-primary)')};
+    color: ${(props) =>
+      props.progress >= 100 ? 'var(--success-color)' : 'var(--text-primary)'};
   }
 `;
 
@@ -212,7 +213,9 @@ const TimeRemaining = ({ timeRemaining, deadline }) => (
       <line x1="3" y1="10" x2="21" y2="10" />
     </svg>
     <span>Deadline:</span>
-    <span className={`time-remaining ${timeRemaining?.isOverdue ? 'overdue' : ''}`}>
+    <span
+      className={`time-remaining ${timeRemaining?.isOverdue ? 'overdue' : ''}`}
+    >
       {formatDate(deadline)} ({timeRemaining?.timeString})
     </span>
   </MetaItem>
@@ -271,21 +274,33 @@ const PageHeader = ({
               </MetaItem>
             )}
 
-            {deadline && <TimeRemaining timeRemaining={timeRemaining} deadline={deadline} />}
+            {deadline && (
+              <TimeRemaining
+                timeRemaining={timeRemaining}
+                deadline={deadline}
+              />
+            )}
           </MetaInfo>
         </TitleSection>
 
         <ActionButtons>
           {actions.secondaryAction && (
-            <Button className="secondary" onClick={actions.secondaryAction.onClick}>
-              {actions.secondaryAction.icon && <span>{actions.secondaryAction.icon}</span>}
+            <Button
+              className="secondary"
+              onClick={actions.secondaryAction.onClick}
+            >
+              {actions.secondaryAction.icon && (
+                <span>{actions.secondaryAction.icon}</span>
+              )}
               {actions.secondaryAction.label}
             </Button>
           )}
 
           {actions.primaryAction && (
             <Button className="primary" onClick={actions.primaryAction.onClick}>
-              {actions.primaryAction.icon && <span>{actions.primaryAction.icon}</span>}
+              {actions.primaryAction.icon && (
+                <span>{actions.primaryAction.icon}</span>
+              )}
               {actions.primaryAction.label}
             </Button>
           )}

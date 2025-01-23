@@ -53,11 +53,20 @@ const SendButton = styled.button`
 
 const ChatWindow = ({ className }) => {
   return (
-    <WindowContainer className={`chat-window-container ${className || ''}`} id="chat-window-main">
-      <MessageArea className="chat-window-message-area" id="chat-window-messages">
+    <WindowContainer
+      className={`chat-window-container ${className || ''}`}
+      id="chat-window-main"
+    >
+      <MessageArea
+        className="chat-window-message-area"
+        id="chat-window-messages"
+      >
         {/* Messages will be rendered here */}
       </MessageArea>
-      <InputArea className="chat-window-input-area" id="chat-window-input-section">
+      <InputArea
+        className="chat-window-input-area"
+        id="chat-window-input-section"
+      >
         <MessageInput
           type="text"
           placeholder="Type your message..."

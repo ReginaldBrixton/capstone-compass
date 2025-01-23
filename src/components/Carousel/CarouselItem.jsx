@@ -18,7 +18,12 @@ import { useCarousel } from './Carousel';
  * @property {React.ReactNode} children - Content of the carousel item
  */
 
-export function CarouselItem({ id, value: providedValue, className, children }) {
+export function CarouselItem({
+  id,
+  value: providedValue,
+  className,
+  children,
+}) {
   const { activeIndex, type } = useCarousel();
   const value = providedValue ?? parseInt(id?.split('-')[1]) - 1 ?? 0;
   const isActive = activeIndex === value;
@@ -27,7 +32,7 @@ export function CarouselItem({ id, value: providedValue, className, children }) 
     <div
       id={id}
       className={cn(
-        'absolute inset-0 w-full h-full transition-all duration-700 ease-in-out',
+        'absolute inset-0 h-full w-full transition-all duration-700 ease-in-out',
         {
           'translate-x-full': type === 'slide' && activeIndex < value,
           '-translate-x-full': type === 'slide' && activeIndex > value,
@@ -41,9 +46,12 @@ export function CarouselItem({ id, value: providedValue, className, children }) 
       aria-hidden={!isActive}
     >
       {React.isValidElement(children) && children.type === 'img' ? (
-        <div className="relative w-full h-full">
+        <div className="relative h-full w-full">
           {React.cloneElement(children, {
-            className: cn('absolute inset-0 w-full h-full object-cover', children.props.className),
+            className: cn(
+              'absolute inset-0 w-full h-full object-cover',
+              children.props.className
+            ),
           })}
         </div>
       ) : (

@@ -44,7 +44,11 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      background: linear-gradient(to right, rgba(6, 95, 70, 0.2), rgba(6, 95, 70, 0.1));
+      background: linear-gradient(
+        to right,
+        rgba(6, 95, 70, 0.2),
+        rgba(6, 95, 70, 0.1)
+      );
       border-color: #059669;
       color: #6ee7b7;
     }
@@ -60,7 +64,11 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      background: linear-gradient(to right, rgba(153, 27, 27, 0.2), rgba(153, 27, 27, 0.1));
+      background: linear-gradient(
+        to right,
+        rgba(153, 27, 27, 0.2),
+        rgba(153, 27, 27, 0.1)
+      );
       border-color: #dc2626;
       color: #fecaca;
     }
@@ -76,7 +84,11 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      background: linear-gradient(to right, rgba(30, 64, 175, 0.2), rgba(30, 64, 175, 0.1));
+      background: linear-gradient(
+        to right,
+        rgba(30, 64, 175, 0.2),
+        rgba(30, 64, 175, 0.1)
+      );
       border-color: #3b82f6;
       color: #93c5fd;
     }
@@ -92,7 +104,11 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      background: linear-gradient(to right, rgba(146, 64, 14, 0.2), rgba(146, 64, 14, 0.1));
+      background: linear-gradient(
+        to right,
+        rgba(146, 64, 14, 0.2),
+        rgba(146, 64, 14, 0.1)
+      );
       border-color: #d97706;
       color: #fcd34d;
     }

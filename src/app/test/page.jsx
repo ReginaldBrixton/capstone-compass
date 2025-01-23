@@ -10,12 +10,12 @@ const TestPage = () => {
   const [size, setSize] = useState('');
 
   return (
-    <div className="test-page min-h-screen p-8 bg-gray-50 dark:bg-gray-900">
-      <h1 className="test-page__title text-3xl font-bold mb-8 text-gray-900 dark:text-white">
+    <div className="test-page min-h-screen bg-gray-50 p-8 dark:bg-gray-900">
+      <h1 className="test-page__title mb-8 text-3xl font-bold text-gray-900 dark:text-white">
         Select Component Demo
       </h1>
 
-      <div className="test-page__grid grid gap-8 max-w-md">
+      <div className="test-page__grid grid max-w-md gap-8">
         {/* Theme Selector */}
         <div className="test-page__selector space-y-2">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -63,7 +63,9 @@ const TestPage = () => {
 
         {/* Size Selector */}
         <div className="test-page__selector space-y-2">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Size</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Size
+          </label>
           <Select
             placeholder="Select size"
             value={size}

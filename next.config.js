@@ -14,9 +14,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'google-fonts',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60 // 1 year
-        }
-      }
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+        },
+      },
     },
     {
       // Font files
@@ -26,9 +26,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-font-assets',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 7 * 24 * 60 * 60 // 1 week
-        }
-      }
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+        },
+      },
     },
     {
       // Images
@@ -38,9 +38,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-image-assets',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // Next.js Image Optimization
@@ -50,9 +50,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'next-image',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // Audio files
@@ -63,9 +63,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-audio-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // JavaScript files
@@ -75,9 +75,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-js-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // Stylesheets
@@ -87,9 +87,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-style-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // Data files
@@ -99,9 +99,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-data-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // Same-origin non-API routes
@@ -114,9 +114,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'others',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       // API routes
@@ -129,10 +129,10 @@ const withPWA = require('next-pwa')({
         cacheName: 'apis',
         expiration: {
           maxEntries: 16,
-          maxAgeSeconds: 12 * 60 * 60 // 12 hours
+          maxAgeSeconds: 12 * 60 * 60, // 12 hours
         },
-        networkTimeoutSeconds: 10
-      }
+        networkTimeoutSeconds: 10,
+      },
     },
     {
       // Cross-origin requests
@@ -142,12 +142,12 @@ const withPWA = require('next-pwa')({
         cacheName: 'cross-origin',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 3600 // 1 hour
+          maxAgeSeconds: 3600, // 1 hour
         },
-        networkTimeoutSeconds: 10
-      }
-    }
-  ]
+        networkTimeoutSeconds: 10,
+      },
+    },
+  ],
 });
 
 /** @type {import('next').NextConfig} */
@@ -155,23 +155,17 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizeCss: true,
-    scrollRestoration: true
+    scrollRestoration: true,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'avatar.vercel.sh',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'api.dicebear.com',
-        port: '',
-        pathname: '/**',
-      }
+    domains: [
+      'images.unsplash.com',
+      'source.unsplash.com',
+      'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com',
+      'avatar.vercel.sh',
     ],
+    formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
@@ -190,7 +184,7 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
     return config;
-  }
+  },
 };
 
 module.exports = withPWA(nextConfig);

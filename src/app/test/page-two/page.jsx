@@ -13,7 +13,7 @@ import {
 const PageTwo = () => {
   return (
     <div className="page-two-container">
-      <h1 className="text-2xl font-bold mb-4">Selector Component Demo</h1>
+      <h1 className="mb-4 text-2xl font-bold">Selector Component Demo</h1>
 
       <Select>
         <SelectTrigger>

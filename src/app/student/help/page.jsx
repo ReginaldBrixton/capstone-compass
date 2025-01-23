@@ -37,8 +37,8 @@ export default function HelpPage() {
 
     // Filter FAQs
     const matchedFAQs = faqs.filter(
-      (faq) => 
-        faq.question.toLowerCase().includes(normalizedTerm) || 
+      (faq) =>
+        faq.question.toLowerCase().includes(normalizedTerm) ||
         faq.answer.toLowerCase().includes(normalizedTerm)
     );
     setFilteredFAQs(matchedFAQs);
@@ -83,16 +83,19 @@ export default function HelpPage() {
   }, [isModalOpen]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white" id="help-page">
-      <main className="p-4 md:p-8 max-w-7xl mx-auto" role="main">
-        <motion.h1 
+    <div
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
+      id="help-page"
+    >
+      <main className="mx-auto max-w-7xl p-4 md:p-8" role="main">
+        <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-slate-800 mb-8 text-3xl md:text-4xl font-bold text-center relative"
+          className="relative mb-8 text-center text-3xl font-bold text-slate-800 md:text-4xl"
           id="help-title"
         >
           Help & Support
-          <span className="block w-12 h-1 bg-blue-500 mx-auto mt-2 rounded-sm" />
+          <span className="mx-auto mt-2 block h-1 w-12 rounded-sm bg-blue-500" />
         </motion.h1>
 
         <motion.div
@@ -101,22 +104,18 @@ export default function HelpPage() {
           transition={{ delay: 0.2 }}
           className="space-y-8"
         >
-          <SearchBar 
-            onSearch={handleSearch} 
+          <SearchBar
+            onSearch={handleSearch}
             value={searchTerm}
-            className="max-w-2xl mx-auto"
+            className="mx-auto max-w-2xl"
           />
 
-          <HelpCategories 
-            categories={filteredCategories} 
+          <HelpCategories
+            categories={filteredCategories}
             onCategoryClick={handleCategoryClick}
           />
 
-          <FAQ 
-            faqs={filteredFAQs} 
-            openFAQ={openFAQ} 
-            setOpenFAQ={setOpenFAQ} 
-          />
+          <FAQ faqs={filteredFAQs} openFAQ={openFAQ} setOpenFAQ={setOpenFAQ} />
 
           <ContactForm
             onSubmit={handleSubmit}
@@ -132,7 +131,7 @@ export default function HelpPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
               id="category-modal"
               role="dialog"
               aria-labelledby="modal-title"
@@ -144,22 +143,22 @@ export default function HelpPage() {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-lg p-6 max-w-lg w-full mx-auto relative shadow-xl"
+                className="relative mx-auto w-full max-w-lg rounded-lg bg-white p-6 shadow-xl"
               >
-                <button 
-                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors p-2 rounded-full hover:bg-gray-100"
+                <button
+                  className="absolute right-4 top-4 rounded-full p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
                   onClick={() => setIsModalOpen(false)}
                   aria-label="Close modal"
                 >
-                  <FiX className="w-6 h-6" />
+                  <FiX className="h-6 w-6" />
                 </button>
-                <h2 
+                <h2
                   id="modal-title"
-                  className="text-2xl font-semibold text-slate-800 mb-4"
+                  className="mb-4 text-2xl font-semibold text-slate-800"
                 >
                   {selectedCategory.title}
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="leading-relaxed text-gray-600">
                   {selectedCategory.description}
                 </p>
               </motion.div>

@@ -9,7 +9,9 @@ import Checklist from './components/Checklist';
 import DefenseScheduler from './components/DefenseScheduler';
 import Timeline from './components/Timeline';
 
-const PageContainer = styled(motion.div).attrs({ className: 'final-defense-page' })`
+const PageContainer = styled(motion.div).attrs({
+  className: 'final-defense-page',
+})`
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -65,9 +67,24 @@ const presentationChecklist = [
 ];
 
 const timelineEvents = [
-  { id: 1, title: 'Submit Final Manuscript', date: '2024-06-01', isCompleted: false },
-  { id: 2, title: 'Schedule Defense Date', date: '2024-06-15', isCompleted: false },
-  { id: 3, title: 'Submit Presentation Slides', date: '2024-06-25', isCompleted: false },
+  {
+    id: 1,
+    title: 'Submit Final Manuscript',
+    date: '2024-06-01',
+    isCompleted: false,
+  },
+  {
+    id: 2,
+    title: 'Schedule Defense Date',
+    date: '2024-06-15',
+    isCompleted: false,
+  },
+  {
+    id: 3,
+    title: 'Submit Presentation Slides',
+    date: '2024-06-25',
+    isCompleted: false,
+  },
   { id: 4, title: 'Final Defense', date: '2024-07-01', isCompleted: false },
 ];
 
@@ -79,14 +96,38 @@ const sampleSlots = [
 ];
 
 const samplePanelMembers = [
-  { id: 1, name: 'Prof. David Anderson', role: 'Panel Chair', status: 'confirmed' },
-  { id: 2, name: 'Dr. Lisa Wong', role: 'External Examiner', status: 'pending' },
-  { id: 3, name: 'Dr. James Martinez', role: 'Technical Expert', status: 'confirmed' },
-  { id: 4, name: 'Prof. Sarah Thompson', role: 'Subject Matter Expert', status: 'pending' },
+  {
+    id: 1,
+    name: 'Prof. David Anderson',
+    role: 'Panel Chair',
+    status: 'confirmed',
+  },
+  {
+    id: 2,
+    name: 'Dr. Lisa Wong',
+    role: 'External Examiner',
+    status: 'pending',
+  },
+  {
+    id: 3,
+    name: 'Dr. James Martinez',
+    role: 'Technical Expert',
+    status: 'confirmed',
+  },
+  {
+    id: 4,
+    name: 'Prof. Sarah Thompson',
+    role: 'Subject Matter Expert',
+    status: 'pending',
+  },
 ];
 
 const defenseRequirements = [
-  { id: 1, description: 'All chapters approved by supervisor', isComplete: true },
+  {
+    id: 1,
+    description: 'All chapters approved by supervisor',
+    isComplete: true,
+  },
   { id: 2, description: 'Final manuscript submitted', isComplete: false },
   { id: 3, description: 'Presentation slides reviewed', isComplete: false },
   { id: 4, description: 'Mock defense completed', isComplete: false },
@@ -101,7 +142,9 @@ export default function FinalDefense() {
 
   const handleCheckItem = (id) => {
     setChecklist((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
+      prev.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
     );
   };
 

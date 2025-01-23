@@ -39,9 +39,10 @@ export const SearchBar = styled.div`
 
   input {
     width: 100%;
-    padding: clamp(0.875rem, 2vw, 1rem) clamp(2.5rem, 4vw, 3rem) clamp(0.875rem, 2vw, 1rem)
-      clamp(1rem, 2vw, 1.25rem);
-    border: 2px solid ${({ theme }) => (theme === 'dark' ? '#2d2d2d' : '#eef2f6')};
+    padding: clamp(0.875rem, 2vw, 1rem) clamp(2.5rem, 4vw, 3rem)
+      clamp(0.875rem, 2vw, 1rem) clamp(1rem, 2vw, 1.25rem);
+    border: 2px solid
+      ${({ theme }) => (theme === 'dark' ? '#2d2d2d' : '#eef2f6')};
     border-radius: 16px;
     font-size: clamp(0.875rem, 2vw, 1rem);
     transition: all 0.2s ease;
@@ -102,15 +103,29 @@ export const FilterTab = styled.button`
   white-space: nowrap;
   background: ${(props) =>
     props.$active ? '#007bff' : props.theme === 'dark' ? '#2d2d2d' : '#f8fafc'};
-  color: ${(props) => (props.$active ? '#ffffff' : props.theme === 'dark' ? '#e2e8f0' : '#64748b')};
+  color: ${(props) =>
+    props.$active ? '#ffffff' : props.theme === 'dark' ? '#e2e8f0' : '#64748b'};
   border: 1px solid
-    ${(props) => (props.$active ? '#007bff' : props.theme === 'dark' ? '#3d3d3d' : '#e2e8f0')};
+    ${(props) =>
+      props.$active
+        ? '#007bff'
+        : props.theme === 'dark'
+          ? '#3d3d3d'
+          : '#e2e8f0'};
 
   &:hover {
     background: ${(props) =>
-      props.$active ? '#0056b3' : props.theme === 'dark' ? '#3d3d3d' : '#f1f5f9'};
+      props.$active
+        ? '#0056b3'
+        : props.theme === 'dark'
+          ? '#3d3d3d'
+          : '#f1f5f9'};
     border-color: ${(props) =>
-      props.$active ? '#0056b3' : props.theme === 'dark' ? '#4a4a4a' : '#cbd5e1'};
+      props.$active
+        ? '#0056b3'
+        : props.theme === 'dark'
+          ? '#4a4a4a'
+          : '#cbd5e1'};
   }
 `;
 
@@ -130,7 +145,9 @@ export const TeamCard = styled.div`
   border-radius: 20px;
   padding: clamp(1.25rem, 3vw, 1.5rem);
   box-shadow: ${({ theme }) =>
-    theme === 'dark' ? '0 4px 20px rgba(0, 0, 0, 0.2)' : '0 4px 20px rgba(0, 0, 0, 0.05)'};
+    theme === 'dark'
+      ? '0 4px 20px rgba(0, 0, 0, 0.2)'
+      : '0 4px 20px rgba(0, 0, 0, 0.05)'};
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -140,7 +157,9 @@ export const TeamCard = styled.div`
   &:hover {
     transform: translateY(-4px) scale(1.01);
     box-shadow: ${({ theme }) =>
-      theme === 'dark' ? '0 12px 24px rgba(0, 0, 0, 0.3)' : '0 12px 24px rgba(0, 0, 0, 0.08)'};
+      theme === 'dark'
+        ? '0 12px 24px rgba(0, 0, 0, 0.3)'
+        : '0 12px 24px rgba(0, 0, 0, 0.08)'};
   }
 
   .team-actions {
@@ -204,7 +223,8 @@ export const TeamIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${(props) => props.color || (props.theme === 'dark' ? '#2d2d2d' : '#f1f5f9')};
+  background: ${(props) =>
+    props.color || (props.theme === 'dark' ? '#2d2d2d' : '#f1f5f9')};
   border-radius: 12px;
   font-size: clamp(1.25rem, 3vw, 1.5rem);
 `;
@@ -257,7 +277,8 @@ export const TeamStats = styled.div`
   gap: clamp(1rem, 2vw, 1.5rem);
   margin-top: clamp(1rem, 2vw, 1.25rem);
   padding-top: clamp(1rem, 2vw, 1.25rem);
-  border-top: 1px solid ${({ theme }) => (theme === 'dark' ? '#2d2d2d' : '#eef2f6')};
+  border-top: 1px solid
+    ${({ theme }) => (theme === 'dark' ? '#2d2d2d' : '#eef2f6')};
 
   .stat {
     display: flex;
@@ -317,11 +338,14 @@ export const PopupMenu = styled.div`
   background: ${({ theme }) => (theme === 'dark' ? '#1a1a1a' : 'white')};
   border-radius: 12px;
   box-shadow: ${({ theme }) =>
-    theme === 'dark' ? '0 10px 25px rgba(0, 0, 0, 0.3)' : '0 10px 25px rgba(0, 0, 0, 0.1)'};
+    theme === 'dark'
+      ? '0 10px 25px rgba(0, 0, 0, 0.3)'
+      : '0 10px 25px rgba(0, 0, 0, 0.1)'};
   padding: 0.5rem;
   min-width: 200px;
   opacity: ${(props) => (props.$isOpen ? 1 : 0)};
-  transform: ${(props) => (props.$isOpen ? 'translateY(0)' : 'translateY(-10px)')};
+  transform: ${(props) =>
+    props.$isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   pointer-events: ${(props) => (props.$isOpen ? 'auto' : 'none')};
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 100;
@@ -334,7 +358,8 @@ export const PopupMenuItem = styled.button`
   padding: 0.75rem 1rem;
   border: none;
   background: none;
-  color: ${(props) => (props.$danger ? '#ef4444' : props.theme === 'dark' ? '#ffffff' : '#1a1a1a')};
+  color: ${(props) =>
+    props.$danger ? '#ef4444' : props.theme === 'dark' ? '#ffffff' : '#1a1a1a'};
   font-size: 0.875rem;
   border-radius: 8px;
   cursor: pointer;

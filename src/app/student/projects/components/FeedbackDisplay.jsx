@@ -15,8 +15,8 @@ const FeedbackDisplay = ({ submissionId }) => {
         setLoading(true);
         const response = await fetch(`/api/submissions?id=${submissionId}`, {
           headers: {
-            'Authorization': `Bearer ${session?.token}`
-          }
+            Authorization: `Bearer ${session?.token}`,
+          },
         });
 
         if (!response.ok) {
@@ -39,15 +39,15 @@ const FeedbackDisplay = ({ submissionId }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center p-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      <div className="flex items-center justify-center p-4">
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+      <div className="rounded-md border border-red-200 bg-red-50 p-4">
         <p className="text-red-600">Error: {error}</p>
       </div>
     );
@@ -55,7 +55,7 @@ const FeedbackDisplay = ({ submissionId }) => {
 
   if (!feedback) {
     return (
-      <div className="p-4 bg-gray-50 border border-gray-200 rounded-md">
+      <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
         <p className="text-gray-600">No feedback available yet.</p>
       </div>
     );
@@ -67,7 +67,7 @@ const FeedbackDisplay = ({ submissionId }) => {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -76,30 +76,38 @@ const FeedbackDisplay = ({ submissionId }) => {
       pending: 'bg-yellow-100 text-yellow-800',
       approved: 'bg-green-100 text-green-800',
       rejected: 'bg-red-100 text-red-800',
-      default: 'bg-gray-100 text-gray-800'
+      default: 'bg-gray-100 text-gray-800',
     };
     return statusColors[status] || statusColors.default;
   };
 
   return (
-    <div className="bg-white shadow-sm rounded-lg p-6 space-y-4">
-      <div className="flex justify-between items-start">
-        <h3 className="text-lg font-semibold text-gray-900">{feedback.title}</h3>
-        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(feedback.status)}`}>
+    <div className="space-y-4 rounded-lg bg-white p-6 shadow-sm">
+      <div className="flex items-start justify-between">
+        <h3 className="text-lg font-semibold text-gray-900">
+          {feedback.title}
+        </h3>
+        <span
+          className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusColor(feedback.status)}`}
+        >
           {feedback.status.charAt(0).toUpperCase() + feedback.status.slice(1)}
         </span>
       </div>
 
       {feedback.feedback && (
         <div className="mt-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Supervisor Feedback:</h4>
-          <div className="bg-gray-50 rounded-md p-4">
-            <p className="text-gray-800 whitespace-pre-wrap">{feedback.feedback}</p>
+          <h4 className="mb-2 text-sm font-medium text-gray-700">
+            Supervisor Feedback:
+          </h4>
+          <div className="rounded-md bg-gray-50 p-4">
+            <p className="whitespace-pre-wrap text-gray-800">
+              {feedback.feedback}
+            </p>
           </div>
         </div>
       )}
 
-      <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
+      <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
         <span>Last updated: {formatDate(feedback.updatedAt)}</span>
         <span>Created: {formatDate(feedback.createdAt)}</span>
       </div>

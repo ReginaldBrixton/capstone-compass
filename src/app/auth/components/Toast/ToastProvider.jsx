@@ -32,7 +32,11 @@ export const ToastProvider = ({ children }) => {
       {children}
       <div className={styles.toastContainer}>
         {toasts.map((toast) => (
-          <Toast key={toast.id} {...toast} onClose={() => removeToast(toast.id)} />
+          <Toast
+            key={toast.id}
+            {...toast}
+            onClose={() => removeToast(toast.id)}
+          />
         ))}
       </div>
     </ToastContext.Provider>

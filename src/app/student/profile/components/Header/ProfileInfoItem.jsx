@@ -7,11 +7,11 @@ const ProfileInfoItem = ({
   value,
   onEdit,
   type = 'text',
-  className = ''
+  className = '',
 }) => {
   return (
-    <div 
-      className={`flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer ${className}`}
+    <div
+      className={`flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${className}`}
       onClick={onEdit}
       role="button"
       tabIndex={0}
@@ -27,9 +27,9 @@ const ProfileInfoItem = ({
       </div>
 
       {/* Text Content */}
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-        <p className="font-medium dark:text-white truncate">
+        <p className="truncate font-medium dark:text-white">
           {value || 'Not specified'}
         </p>
       </div>
@@ -45,7 +45,7 @@ const ProfileInfoItem = ({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="lucide lucide-pencil w-5 h-5 text-gray-400 hover:text-blue-600 transition-colors"
+        className="lucide lucide-pencil h-5 w-5 text-gray-400 transition-colors hover:text-blue-600"
         aria-label={`Edit ${label}`}
       >
         <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
@@ -62,7 +62,7 @@ ProfileInfoItem.propTypes = {
   value: PropTypes.string,
   onEdit: PropTypes.func.isRequired,
   type: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ProfileInfoItem;

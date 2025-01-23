@@ -132,7 +132,12 @@ const SearchLabel = ({ children, disable }) => children;
  * @param {string} [props.style='default'] - Style variant for the input.
  * @returns {JSX.Element} The rendered search input component.
  */
-const SearchInput = ({ id = 'search-input', children, className, style = 'default' }) => {
+const SearchInput = ({
+  id = 'search-input',
+  children,
+  className,
+  style = 'default',
+}) => {
   // Default values
   let value = '';
   let onChange = () => {};
@@ -182,7 +187,8 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
 
   // Parse style prop to get variants
   const styles = style.split(' ');
-  const shape = styles.find((s) => ['circle', 'box', 'default'].includes(s)) || 'default';
+  const shape =
+    styles.find((s) => ['circle', 'box', 'default'].includes(s)) || 'default';
   const state = styles.find((s) => ['success', 'error'].includes(s));
 
   return (
@@ -190,7 +196,7 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
       {label && !labelDisabled && (
         <label
           htmlFor={id}
-          className="block mb-2 pl-1 text-sm font-medium text-gray-900 dark:text-gray-100"
+          className="mb-2 block pl-1 text-sm font-medium text-gray-900 dark:text-gray-100"
         >
           {label}
         </label>
@@ -211,7 +217,7 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
             'border border-gray-300 dark:border-gray-600',
             'focus:outline-none focus:ring-2',
             !state &&
-              'focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+              'focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400',
             state && styleVariants[state],
             styleVariants[shape],
             'placeholder-gray-500 dark:placeholder-gray-400',
@@ -226,7 +232,7 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
             className={cn(
               'absolute right-3',
               'p-1',
-              'flex items-center justify-center w-8 h-8',
+              'flex h-8 w-8 items-center justify-center',
               iconOnClick && 'cursor-pointer',
               !iconOnClick && 'pointer-events-none',
               'text-gray-500 dark:text-gray-400',
@@ -239,7 +245,7 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
             )}
             aria-label="Search"
           >
-            <span className="w-5 h-5">{icon}</span>
+            <span className="h-5 w-5">{icon}</span>
           </button>
         )}
       </div>
@@ -247,5 +253,11 @@ const SearchInput = ({ id = 'search-input', children, className, style = 'defaul
   );
 };
 
-export { SearchValue, SearchOnChange, SearchPlaceholder, SearchIcon, SearchLabel };
+export {
+  SearchValue,
+  SearchOnChange,
+  SearchPlaceholder,
+  SearchIcon,
+  SearchLabel,
+};
 export default SearchInput;

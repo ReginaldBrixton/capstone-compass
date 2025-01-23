@@ -28,55 +28,50 @@ const getStatusStyles = (status) => {
 
 const TaskCard = ({ task, onEdit, onDelete }) => (
   <motion.div
-    className={`
-      bg-white dark:bg-gray-800 rounded-xl p-5 md:p-6
-      shadow-sm border border-gray-100 dark:border-gray-700
-      hover:shadow-md hover:-translate-y-1
-      transition-all duration-300 ease-in-out
-    `}
+    className={`rounded-xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6`}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     layout
   >
-    <div className="flex justify-between items-start gap-4 mb-4">
+    <div className="mb-4 flex items-start justify-between gap-4">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
         {task.title}
       </h3>
-      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusStyles(task.status)}`}>
+      <span
+        className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusStyles(task.status)}`}
+      >
         {task.status}
       </span>
     </div>
 
-    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+    <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
       {task.description}
     </p>
 
-    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+    <div className="mt-auto flex flex-wrap items-center gap-4 border-t border-gray-100 pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
       <div className="flex items-center gap-2">
-        <FiCalendar className="w-4 h-4" />
+        <FiCalendar className="h-4 w-4" />
         <span>Due: {task.dueDate}</span>
       </div>
       <div className="flex items-center gap-2">
-        <FiUser className="w-4 h-4" />
+        <FiUser className="h-4 w-4" />
         <span>{task.assignee}</span>
       </div>
-      <div className="flex items-center gap-2 ml-auto">
+      <div className="ml-auto flex items-center gap-2">
         <button
           onClick={() => onEdit(task)}
-          className="p-2 rounded-lg text-blue-600 bg-blue-100 dark:text-blue-300 dark:bg-blue-900/30
-            hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors duration-200"
+          className="rounded-lg bg-blue-100 p-2 text-blue-600 transition-colors duration-200 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50"
           title="Edit task"
         >
-          <FiEdit2 className="w-4 h-4" />
+          <FiEdit2 className="h-4 w-4" />
         </button>
         <button
           onClick={() => onDelete(task)}
-          className="p-2 rounded-lg text-red-600 bg-red-100 dark:text-red-300 dark:bg-red-900/30
-            hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors duration-200"
+          className="rounded-lg bg-red-100 p-2 text-red-600 transition-colors duration-200 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
           title="Delete task"
         >
-          <FiTrash2 className="w-4 h-4" />
+          <FiTrash2 className="h-4 w-4" />
         </button>
       </div>
     </div>
@@ -177,19 +172,12 @@ const TasksSection = ({ teamId }) => {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <motion.button
-          className={`
-            flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium
-            bg-blue-500 text-white hover:bg-blue-600
-            dark:bg-blue-600 dark:hover:bg-blue-700
-            transition-all duration-200
-            hover:shadow-md hover:-translate-y-0.5 active:translate-y-0
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-          `}
+          className={`flex items-center gap-2 rounded-xl bg-blue-500 px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-700`}
           onClick={handleCreateTask}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <FiPlus className="w-5 h-5" />
+          <FiPlus className="h-5 w-5" />
           Create Task
         </motion.button>
       </div>
@@ -198,12 +186,7 @@ const TasksSection = ({ teamId }) => {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="
-            px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700
-            bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-            transition-colors duration-200
-          "
+          className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
         >
           <option value="all">All Status</option>
           <option value="pending">Pending</option>
@@ -214,12 +197,7 @@ const TasksSection = ({ teamId }) => {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="
-            px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700
-            bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-            transition-colors duration-200
-          "
+          className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
         >
           <option value="dueDate">Sort by Due Date</option>
           <option value="priority">Sort by Priority</option>
@@ -231,32 +209,27 @@ const TasksSection = ({ teamId }) => {
           placeholder="Search tasks..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="
-            flex-1 min-w-[200px] px-4 py-2 rounded-lg
-            border border-gray-200 dark:border-gray-700
-            bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
-            placeholder-gray-400 dark:placeholder-gray-500
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-            transition-colors duration-200
-          "
+          className="min-w-[200px] flex-1 rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 placeholder-gray-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder-gray-500"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {loading ? (
             <motion.div
-              className="col-span-full text-center py-12"
+              className="col-span-full py-12 text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 dark:border-blue-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">Loading tasks...</p>
+              <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-blue-500 dark:border-blue-400" />
+              <p className="text-gray-600 dark:text-gray-400">
+                Loading tasks...
+              </p>
             </motion.div>
           ) : filteredTasks.length === 0 ? (
             <motion.div
-              className="col-span-full text-center py-12"
+              className="col-span-full py-12 text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

@@ -217,9 +217,11 @@ const DeadlineIndicator = styled.div.attrs({
   align-items: center;
   gap: var(--spacing-xs);
   font-size: clamp(0.75rem, 2vw, 0.875rem);
-  color: ${(props) => (props.isOverdue ? 'var(--error-color)' : 'var(--text-secondary)')};
+  color: ${(props) =>
+    props.isOverdue ? 'var(--error-color)' : 'var(--text-secondary)'};
   padding: var(--spacing-xs) var(--spacing-sm);
-  background: ${(props) => (props.isOverdue ? 'rgba(239, 68, 68, 0.1)' : 'transparent')};
+  background: ${(props) =>
+    props.isOverdue ? 'rgba(239, 68, 68, 0.1)' : 'transparent'};
   border-radius: var(--radius-md);
 
   svg {
@@ -275,8 +277,8 @@ export default function CapstoneOne() {
       <div className="page-header">
         <h1 className="page-title">Capstone One Progress</h1>
         <p className="page-description">
-          Track and manage your progress through each chapter of your capstone project. Complete the
-          chapters in sequence and submit for review.
+          Track and manage your progress through each chapter of your capstone
+          project. Complete the chapters in sequence and submit for review.
         </p>
       </div>
 
@@ -284,7 +286,11 @@ export default function CapstoneOne() {
 
       <ChapterGrid>
         {chapters.map((chapter) => (
-          <ChapterCard key={chapter.id} chapterId={chapter.id} status={chapter.status}>
+          <ChapterCard
+            key={chapter.id}
+            chapterId={chapter.id}
+            status={chapter.status}
+          >
             <div className="chapter-header">
               <h2>{chapter.title}</h2>
               <StatusIndicator status={chapter.status}>
@@ -299,11 +305,15 @@ export default function CapstoneOne() {
             <div className="chapter-content">
               <p>{chapter.description}</p>
 
-              <DeadlineIndicator isOverdue={isDeadlineOverdue(chapter.deadline)}>
+              <DeadlineIndicator
+                isOverdue={isDeadlineOverdue(chapter.deadline)}
+              >
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
                 </svg>
-                <span>Deadline: {new Date(chapter.deadline).toLocaleDateString()}</span>
+                <span>
+                  Deadline: {new Date(chapter.deadline).toLocaleDateString()}
+                </span>
                 {isDeadlineOverdue(chapter.deadline) && <span>(Overdue)</span>}
               </DeadlineIndicator>
             </div>

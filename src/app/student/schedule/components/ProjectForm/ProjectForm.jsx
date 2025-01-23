@@ -43,7 +43,9 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
           type="text"
           id="title"
           value={formData.title}
-          onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, title: e.target.value }))
+          }
           required
           aria-required="true"
           placeholder="Enter project title"
@@ -58,7 +60,9 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
         <textarea
           id="description"
           value={formData.description}
-          onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, description: e.target.value }))
+          }
           required
           aria-required="true"
           placeholder="Enter project description"
@@ -75,7 +79,9 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
           type="datetime-local"
           id="deadline"
           value={formData.deadline}
-          onChange={(e) => setFormData((prev) => ({ ...prev, deadline: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, deadline: e.target.value }))
+          }
           required
           aria-required="true"
           className={`${styles.dateInput} project-form__date-input`}
@@ -89,7 +95,9 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
         <select
           id="category"
           value={formData.category}
-          onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, category: e.target.value }))
+          }
           className={`${styles.select} project-form__select`}
         >
           <option value="pending" className="project-form__option">
@@ -108,7 +116,9 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
         <label htmlFor="attachments" className="project-form__label">
           Attachments
         </label>
-        <div className={`${styles.fileInputWrapper} project-form__file-wrapper`}>
+        <div
+          className={`${styles.fileInputWrapper} project-form__file-wrapper`}
+        >
           <input
             type="file"
             id="attachments"
@@ -116,19 +126,30 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
             onChange={handleFileChange}
             className={`${styles.fileInput} project-form__file-input`}
           />
-          <div className={`${styles.fileInputLabel} project-form__file-label`}>Choose Files</div>
+          <div className={`${styles.fileInputLabel} project-form__file-label`}>
+            Choose Files
+          </div>
         </div>
         {formData.attachments.length > 0 && (
-          <div className={`${styles.attachmentList} project-form__attachment-list`}>
+          <div
+            className={`${styles.attachmentList} project-form__attachment-list`}
+          >
             {formData.attachments.map((file, index) => (
-              <div key={index} className={`${styles.attachmentItem} project-form__attachment-item`}>
-                <span className={`${styles.fileName} project-form__file-name`}>{file.name}</span>
+              <div
+                key={index}
+                className={`${styles.attachmentItem} project-form__attachment-item`}
+              >
+                <span className={`${styles.fileName} project-form__file-name`}>
+                  {file.name}
+                </span>
                 <button
                   type="button"
                   onClick={() =>
                     setFormData((prev) => ({
                       ...prev,
-                      attachments: prev.attachments.filter((_, i) => i !== index),
+                      attachments: prev.attachments.filter(
+                        (_, i) => i !== index
+                      ),
                     }))
                   }
                   className={`${styles.removeBtn} project-form__remove-btn`}
@@ -150,7 +171,10 @@ const ProjectForm = ({ onSubmit, initialData, onClose }) => {
         >
           Cancel
         </button>
-        <button type="submit" className={`${styles.submitBtn} project-form__submit-btn`}>
+        <button
+          type="submit"
+          className={`${styles.submitBtn} project-form__submit-btn`}
+        >
           {initialData ? 'Update Project' : 'Create Project'}
         </button>
       </div>

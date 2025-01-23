@@ -14,7 +14,7 @@ export const profileConstants = {
     tablet: 992,
     desktop: 1200,
   },
-  defaultImage: '/placeholder-avatar.jpg',
+  defaultImage: '/images/default-avatar.svg',
 };
 
 export const formFields = [

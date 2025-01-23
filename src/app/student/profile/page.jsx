@@ -2,36 +2,41 @@
 
 import React from 'react';
 
-import { AcademicProgress, Achievements, ProfileHeader, RecentActivity } from './components';
+import {
+  AcademicProgress,
+  Achievements,
+  ProfileHeader,
+  RecentActivity,
+} from './components';
 import { studentData } from './data';
 
 export default function ProfilePage() {
   return (
-    <div 
+    <div
       id="student-profile"
-      className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 p-4 md:p-8 text-gray-900 dark:text-gray-100 transition-colors duration-300"
+      className="min-h-screen w-full bg-gray-50 p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100 md:p-8"
     >
-      <div 
+      <div
         id="profile-container"
-        className="max-w-7xl mx-auto flex flex-col gap-6 md:gap-10 px-4 md:px-8 animate-fadeIn"
+        className="animate-fadeIn mx-auto flex max-w-7xl flex-col gap-6 px-4 md:gap-10 md:px-8"
       >
         <ProfileHeader studentData={studentData} />
 
-        <div 
+        <div
           id="profile-content"
-          className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-6 md:gap-10 w-full"
+          className="grid w-full grid-cols-1 gap-6 md:gap-10 lg:grid-cols-[2fr,1fr]"
         >
-          <div 
+          <div
             id="main-content"
-            className="flex flex-col gap-6 md:gap-10 w-full min-w-0"
+            className="flex w-full min-w-0 flex-col gap-6 md:gap-10"
           >
             <AcademicProgress subjects={studentData.subjects} />
             <RecentActivity activities={studentData.recentActivity} />
           </div>
 
-          <div 
+          <div
             id="sidebar-content"
-            className="flex flex-col gap-6 md:gap-10 w-full min-w-0"
+            className="flex w-full min-w-0 flex-col gap-6 md:gap-10"
           >
             <Achievements badges={studentData.badges} />
           </div>

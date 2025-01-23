@@ -6,7 +6,13 @@ import { useRouter } from 'next/navigation';
 import AuthButton from '../components/Button/AuthButton';
 import InputField from '../components/Input/InputField';
 import { ToastProvider, useToast } from '../components/Toast/ToastProvider';
-import { AuthContainer, AuthForm, AuthLink, AuthTitle, ErrorMessage } from '../styles/AuthStyles';
+import {
+  AuthContainer,
+  AuthForm,
+  AuthLink,
+  AuthTitle,
+  ErrorMessage,
+} from '../styles/AuthStyles';
 import { validateEmail } from '../utils/validation';
 
 const RememberMeCheckbox = ({ checked, onChange, disabled }) => (
@@ -36,7 +42,9 @@ const RememberMeCheckbox = ({ checked, onChange, disabled }) => (
         }}
         disabled={disabled}
       />
-      <span style={{ marginLeft: '0.5rem', fontSize: '0.875rem', color: '#4B5563' }}>
+      <span
+        style={{ marginLeft: '0.5rem', fontSize: '0.875rem', color: '#4B5563' }}
+      >
         Remember me
       </span>
     </label>

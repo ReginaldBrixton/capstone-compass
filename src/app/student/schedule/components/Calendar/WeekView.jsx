@@ -54,7 +54,9 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
       </div>
       {weekDates.map((date, dayIndex) => (
         <div key={dayIndex} className={styles.dayColumn}>
-          <div className={`${styles.weekDay} ${isToday(date) ? styles.today : ''}`}>
+          <div
+            className={`${styles.weekDay} ${isToday(date) ? styles.today : ''}`}
+          >
             {weekDays[dayIndex]}
             <span className={styles.dayNumber}>{date.getDate()}</span>
           </div>

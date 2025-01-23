@@ -19,10 +19,12 @@ const Button = ({
 
   const variantClasses = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
+    secondary:
+      'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
     success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',
     error: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    warning: 'bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500',
+    warning:
+      'bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500',
   };
 
   const buttonClasses = `
@@ -53,7 +55,13 @@ const Button = ({
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'error', 'warning']),
+  variant: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'success',
+    'error',
+    'warning',
+  ]),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   disabled: PropTypes.bool,
   className: PropTypes.string,

@@ -124,7 +124,9 @@ const MobileNavItem = styled(Link)`
 `;
 
 const DeadlineIndicator = ({ isOverdue, children }) => (
-  <span className={`deadline-indicator ${isOverdue ? 'overdue' : ''}`}>{children}</span>
+  <span className={`deadline-indicator ${isOverdue ? 'overdue' : ''}`}>
+    {children}
+  </span>
 );
 
 export default function ProjectsLayout({ children }) {
@@ -170,8 +172,11 @@ export default function ProjectsLayout({ children }) {
             ))}
           </NavLinks>
 
-          <DeadlineIndicator isOverdue={isDeadlineOverdue(projectProgress.nextDeadline)}>
-            Next Deadline: {new Date(projectProgress.nextDeadline).toLocaleDateString()}
+          <DeadlineIndicator
+            isOverdue={isDeadlineOverdue(projectProgress.nextDeadline)}
+          >
+            Next Deadline:{' '}
+            {new Date(projectProgress.nextDeadline).toLocaleDateString()}
           </DeadlineIndicator>
         </NavContent>
       </TopNav>

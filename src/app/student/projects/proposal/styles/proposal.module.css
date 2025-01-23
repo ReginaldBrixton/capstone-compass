@@ -182,7 +182,7 @@
   .proposal-field {
     gap: var(--space-xs);
   }
-  
+
   .proposal-actions {
     display: flex;
     gap: var(--space-sm);
@@ -198,10 +198,12 @@
 }
 
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .hover-lift:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-} 
+}

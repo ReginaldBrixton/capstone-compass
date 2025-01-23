@@ -17,7 +17,7 @@ import {
   TextField,
   Button,
   CircularProgress,
-  Divider
+  Divider,
 } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 
@@ -60,7 +60,7 @@ export default function SupervisorMessages() {
   useEffect(() => {
     const fetchMessages = async () => {
       if (!selectedStudent) return;
-      
+
       try {
         setLoading(true);
         const response = await fetch(`/api/messages/${selectedStudent.id}`);
@@ -79,11 +79,13 @@ export default function SupervisorMessages() {
 
     // Set up SSE for real-time messages
     if (selectedStudent) {
-      const eventSource = new EventSource(`/api/messages/sse/${selectedStudent.id}`);
-      
+      const eventSource = new EventSource(
+        `/api/messages/sse/${selectedStudent.id}`
+      );
+
       eventSource.onmessage = (event) => {
         const newMessage = JSON.parse(event.data);
-        setMessages(prev => [...prev, newMessage]);
+        setMessages((prev) => [...prev, newMessage]);
       };
 
       return () => {
@@ -110,7 +112,7 @@ export default function SupervisorMessages() {
 
       if (response.ok) {
         const sentMessage = await response.json();
-        setMessages(prev => [...prev, sentMessage]);
+        setMessages((prev) => [...prev, sentMessage]);
         setNewMessage('');
       }
     } catch (error) {
@@ -122,7 +124,12 @@ export default function SupervisorMessages() {
 
   if (status === 'loading' || loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="80vh"
+      >
         <CircularProgress />
       </Box>
     );
@@ -157,7 +164,14 @@ export default function SupervisorMessages() {
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Paper sx={{ p: 2, height: '70vh', display: 'flex', flexDirection: 'column' }}>
+          <Paper
+            sx={{
+              p: 2,
+              height: '70vh',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
             {selectedStudent ? (
               <>
                 <Typography variant="h6" gutterBottom>
@@ -170,7 +184,10 @@ export default function SupervisorMessages() {
                       key={message.id}
                       sx={{
                         display: 'flex',
-                        justifyContent: message.senderId === session?.user?.id ? 'flex-end' : 'flex-start',
+                        justifyContent:
+                          message.senderId === session?.user?.id
+                            ? 'flex-end'
+                            : 'flex-start',
                         mb: 2,
                       }}
                     >
@@ -178,12 +195,24 @@ export default function SupervisorMessages() {
                         sx={{
                           p: 2,
                           maxWidth: '70%',
-                          bgcolor: message.senderId === session?.user?.id ? 'primary.light' : 'grey.100',
-                          color: message.senderId === session?.user?.id ? 'white' : 'inherit',
+                          bgcolor:
+                            message.senderId === session?.user?.id
+                              ? 'primary.light'
+                              : 'grey.100',
+                          color:
+                            message.senderId === session?.user?.id
+                              ? 'white'
+                              : 'inherit',
                         }}
                       >
-                        <Typography variant="body1">{message.content}</Typography>
-                        <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+                        <Typography variant="body1">
+                          {message.content}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          display="block"
+                          sx={{ mt: 1 }}
+                        >
                           {new Date(message.timestamp).toLocaleString()}
                         </Typography>
                       </Paper>

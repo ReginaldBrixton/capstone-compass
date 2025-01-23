@@ -10,8 +10,8 @@ export default function FAQ({ faqs }) {
 
   if (!faqs.length) {
     return (
-      <div 
-        className="text-center py-8 text-gray-500"
+      <div
+        className="py-8 text-center text-gray-500"
         role="status"
         aria-live="polite"
       >
@@ -22,33 +22,33 @@ export default function FAQ({ faqs }) {
 
   return (
     <section className="py-8" id="faq-section" aria-labelledby="faq-title">
-      <h2 
-        id="faq-title"
-        className="text-2xl font-semibold text-slate-800 mb-6"
-      >
+      <h2 id="faq-title" className="mb-6 text-2xl font-semibold text-slate-800">
         Frequently Asked Questions
       </h2>
 
       <div className="space-y-4" role="tablist">
         {faqs.map((faq, index) => {
           const isOpen = openItem === faq.id;
-          
+
           return (
             <motion.div
               key={faq.id}
               initial={false}
-              animate={{ backgroundColor: isOpen ? 'rgb(249, 250, 251)' : 'rgb(255, 255, 255)' }}
-              className="border border-gray-200 rounded-lg overflow-hidden"
+              animate={{
+                backgroundColor: isOpen
+                  ? 'rgb(249, 250, 251)'
+                  : 'rgb(255, 255, 255)',
+              }}
+              className="overflow-hidden rounded-lg border border-gray-200"
               role="tab"
             >
               <button
                 onClick={() => setOpenItem(isOpen ? null : faq.id)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between
-                         hover:bg-gray-50 transition-colors duration-200"
+                className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50"
                 aria-expanded={isOpen}
                 aria-controls={`faq-answer-${faq.id}`}
               >
-                <span className="font-medium text-slate-800 pr-8">
+                <span className="pr-8 font-medium text-slate-800">
                   {faq.question}
                 </span>
                 <motion.span
@@ -56,7 +56,7 @@ export default function FAQ({ faqs }) {
                   transition={{ duration: 0.2 }}
                   className="flex-shrink-0 text-gray-400"
                 >
-                  <FiChevronDown className="w-5 h-5" />
+                  <FiChevronDown className="h-5 w-5" />
                 </motion.span>
               </button>
 
@@ -71,21 +71,20 @@ export default function FAQ({ faqs }) {
                     role="tabpanel"
                     aria-labelledby={`faq-question-${faq.id}`}
                   >
-                    <div className="px-6 pb-4 pt-2 text-gray-600 prose prose-sm max-w-none">
+                    <div className="prose prose-sm max-w-none px-6 pb-4 pt-2 text-gray-600">
                       {typeof faq.answer === 'string' ? (
                         <p>{faq.answer}</p>
                       ) : (
                         faq.answer
                       )}
-                      
+
                       {faq.links && faq.links.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-3">
                           {faq.links.map((link, i) => (
                             <a
                               key={i}
                               href={link.url}
-                              className="inline-flex items-center text-sm text-blue-600 
-                                       hover:text-blue-800 hover:underline"
+                              className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 hover:underline"
                               target="_blank"
                               rel="noopener noreferrer"
                             >

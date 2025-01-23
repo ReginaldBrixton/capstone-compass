@@ -44,27 +44,36 @@ const Avatar = ({
   };
 
   if (src) {
-    return <img src={src} alt={alt} className={getAvatarClasses()} onClick={onClick} />;
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className={getAvatarClasses()}
+        onClick={onClick}
+      />
+    );
   }
 
   if (initials) {
     return (
       <div
-        className={`${getAvatarClasses()} bg-gray-100 dark:bg-gray-600 flex items-center justify-center`}
+        className={`${getAvatarClasses()} flex items-center justify-center bg-gray-100 dark:bg-gray-600`}
         onClick={onClick}
       >
-        <span className="font-medium text-gray-600 dark:text-gray-300">{initials}</span>
+        <span className="font-medium text-gray-600 dark:text-gray-300">
+          {initials}
+        </span>
       </div>
     );
   }
 
   return (
     <div
-      className={`${getAvatarClasses()} bg-gray-100 dark:bg-gray-600 relative overflow-hidden`}
+      className={`${getAvatarClasses()} relative overflow-hidden bg-gray-100 dark:bg-gray-600`}
       onClick={onClick}
     >
       <svg
-        className="absolute w-12 h-12 text-gray-400 -left-1"
+        className="absolute -left-1 h-12 w-12 text-gray-400"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"

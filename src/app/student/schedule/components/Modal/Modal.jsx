@@ -65,8 +65,14 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         className={`${styles.modalContent} ${isMounted ? styles.open : ''} schedule-modal-content`}
         id="schedule-modal-content"
       >
-        <div className={`${styles.modalHeader} schedule-modal-header`} id="schedule-modal-header">
-          <h2 className={`${styles.modalTitle} schedule-modal-title`} id="modal-title">
+        <div
+          className={`${styles.modalHeader} schedule-modal-header`}
+          id="schedule-modal-header"
+        >
+          <h2
+            className={`${styles.modalTitle} schedule-modal-title`}
+            id="modal-title"
+          >
             {title}
           </h2>
           <button
@@ -78,7 +84,10 @@ const Modal = ({ isOpen, onClose, title, children }) => {
             ×
           </button>
         </div>
-        <div className={`${styles.modalBody} schedule-modal-body`} id="schedule-modal-body">
+        <div
+          className={`${styles.modalBody} schedule-modal-body`}
+          id="schedule-modal-body"
+        >
           {children}
         </div>
       </div>

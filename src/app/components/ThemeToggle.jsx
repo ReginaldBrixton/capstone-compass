@@ -14,10 +14,10 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="w-12 h-6 rounded-full bg-gray-200 dark:bg-gray-700 relative transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="relative h-6 w-12 rounded-full bg-gray-200 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-gray-700"
         aria-label="Toggle theme"
       >
-        <div className="w-5 h-5 rounded-full bg-white absolute left-0.5 top-0.5 transform transition-transform duration-300" />
+        <div className="absolute left-0.5 top-0.5 h-5 w-5 transform rounded-full bg-white transition-transform duration-300" />
       </button>
     );
   }
@@ -25,19 +25,16 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-12 h-6 rounded-full bg-gray-200 dark:bg-gray-700 relative transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 hover:bg-gray-300 dark:hover:bg-gray-600"
+      className="relative h-6 w-12 rounded-full bg-gray-200 transition-colors duration-300 hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-gray-700 dark:hover:bg-gray-600"
       aria-label="Toggle theme"
     >
       <span className="sr-only">Toggle theme</span>
       <div
-        className={`
-          w-5 h-5 rounded-full bg-white absolute top-0.5 transition-transform duration-300 flex items-center justify-center
-          ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0.5'}
-        `}
+        className={`absolute top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-white transition-transform duration-300 ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0.5'} `}
       >
         {theme === 'dark' ? (
           <svg
-            className="w-3 h-3 text-gray-800"
+            className="h-3 w-3 text-gray-800"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -52,7 +49,7 @@ export default function ThemeToggle() {
           </svg>
         ) : (
           <svg
-            className="w-3 h-3 text-yellow-500"
+            className="h-3 w-3 text-yellow-500"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

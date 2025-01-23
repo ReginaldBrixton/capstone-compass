@@ -14,12 +14,12 @@ export default function SupervisorDashboard() {
         const mockSubmissions = [
           {
             id: 1,
-            status: 'pending'
+            status: 'pending',
           },
           {
             id: 2,
-            status: 'in_review'
-          }
+            status: 'in_review',
+          },
         ];
         const pendingCount = mockSubmissions.filter(
           (sub) => sub.status === 'pending'
@@ -34,42 +34,47 @@ export default function SupervisorDashboard() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Supervisor Dashboard</h1>
+      <h1 className="mb-6 text-2xl font-bold">Supervisor Dashboard</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div className="p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">My Students</h2>
-          <p className="text-gray-600">View and manage your assigned students</p>
+        <div className="rounded-lg bg-white p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold">My Students</h2>
+          <p className="text-gray-600">
+            View and manage your assigned students
+          </p>
           <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
             onClick={() => router.push('/supervisor/students')}
           >
             View Students
           </button>
         </div>
-        <div className="p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Project Reviews</h2>
+        <div className="rounded-lg bg-white p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold">Project Reviews</h2>
           <p className="text-gray-600">Review and grade student submissions</p>
           {pendingSubmissions > 0 && (
-            <div className="mt-2 mb-2">
-              <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-semibold">
-                {pendingSubmissions} pending {pendingSubmissions === 1 ? 'review' : 'reviews'}
+            <div className="mb-2 mt-2">
+              <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-semibold text-red-800">
+                {pendingSubmissions} pending{' '}
+                {pendingSubmissions === 1 ? 'review' : 'reviews'}
               </span>
             </div>
           )}
           <button
-            className={`mt-4 px-4 py-2 text-white rounded ${pendingSubmissions > 0 
-              ? 'bg-red-500 hover:bg-red-600 animate-pulse' 
-              : 'bg-green-500 hover:bg-green-600'}`}
+            className={`mt-4 rounded px-4 py-2 text-white ${
+              pendingSubmissions > 0
+                ? 'animate-pulse bg-red-500 hover:bg-red-600'
+                : 'bg-green-500 hover:bg-green-600'
+            }`}
             onClick={() => router.push('/supervisor/reviews')}
           >
             View Submissions
           </button>
         </div>
-        <div className="p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Schedule</h2>
+        <div className="rounded-lg bg-white p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold">Schedule</h2>
           <p className="text-gray-600">Manage meetings and consultations</p>
           <button
-            className="mt-4 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+            className="mt-4 rounded bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
             onClick={() => router.push('/supervisor/schedule')}
           >
             View Schedule

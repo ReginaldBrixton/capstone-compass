@@ -87,7 +87,9 @@ function projectReducer(state, action) {
             chapters: {
               ...state.phases[action.payload.phase].chapters,
               [action.payload.chapter]: {
-                ...state.phases[action.payload.phase].chapters[action.payload.chapter],
+                ...state.phases[action.payload.phase].chapters[
+                  action.payload.chapter
+                ],
                 status: action.payload.status,
                 progress: action.payload.progress,
               },
@@ -126,7 +128,9 @@ function projectReducer(state, action) {
     case PROJECT_ACTIONS.UPDATE_PANEL_MEMBER:
       const phase = state.phases[action.payload.phase];
       const updatedPanelMembers = phase.defense.panelMembers.map((member) =>
-        member.id === action.payload.memberId ? { ...member, ...action.payload.updates } : member
+        member.id === action.payload.memberId
+          ? { ...member, ...action.payload.updates }
+          : member
       );
 
       return {
@@ -179,7 +183,10 @@ export function ProjectProvider({ children }) {
   // Calculate overall progress whenever phases change
   useEffect(() => {
     const phases = Object.values(state.phases);
-    const totalProgress = phases.reduce((sum, phase) => sum + phase.progress, 0);
+    const totalProgress = phases.reduce(
+      (sum, phase) => sum + phase.progress,
+      0
+    );
     const overallProgress = Math.round(totalProgress / phases.length);
 
     if (overallProgress !== state.overallProgress) {
@@ -243,7 +250,9 @@ export function ProjectProvider({ children }) {
     saveDraft,
   };
 
-  return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
+  return (
+    <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>
+  );
 }
 
 // Custom Hook

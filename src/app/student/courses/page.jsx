@@ -182,10 +182,16 @@ export default function CoursesPage() {
         <FilterTab active={filter === 'all'} onClick={() => setFilter('all')}>
           All Courses
         </FilterTab>
-        <FilterTab active={filter === 'ongoing'} onClick={() => setFilter('ongoing')}>
+        <FilterTab
+          active={filter === 'ongoing'}
+          onClick={() => setFilter('ongoing')}
+        >
           Ongoing
         </FilterTab>
-        <FilterTab active={filter === 'completed'} onClick={() => setFilter('completed')}>
+        <FilterTab
+          active={filter === 'completed'}
+          onClick={() => setFilter('completed')}
+        >
           Completed
         </FilterTab>
       </FilterTabs>

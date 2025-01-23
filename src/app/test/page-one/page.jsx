@@ -9,9 +9,9 @@ export default function PageOne() {
   const [rangeDate, setRangeDate] = useState(null);
 
   return (
-    <div className="page-one-component p-8 space-y-8">
-      <div className="max-w-md mx-auto space-y-6">
-        <h1 className="text-2xl font-bold mb-6">Calendar Component Tests</h1>
+    <div className="page-one-component space-y-8 p-8">
+      <div className="mx-auto max-w-md space-y-6">
+        <h1 className="mb-6 text-2xl font-bold">Calendar Component Tests</h1>
 
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">Basic Calendar</h2>

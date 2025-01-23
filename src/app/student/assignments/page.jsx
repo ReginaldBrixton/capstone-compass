@@ -86,7 +86,9 @@ export default function AssignmentsPage() {
               <p>{assignment.subject}</p>
               <p>Due: {assignment.dueDate}</p>
             </div>
-            <StatusBadge status={assignment.status}>{assignment.status}</StatusBadge>
+            <StatusBadge status={assignment.status}>
+              {assignment.status}
+            </StatusBadge>
           </AssignmentCard>
         ))}
       </AssignmentList>

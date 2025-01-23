@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiEdit2, FiFile, FiFolder, FiFolderPlus, FiTrash2, FiUpload } from 'react-icons/fi';
+import {
+  FiEdit2,
+  FiFile,
+  FiFolder,
+  FiFolderPlus,
+  FiTrash2,
+  FiUpload,
+} from 'react-icons/fi';
 import styled from 'styled-components';
 
 import ConfirmDialog from './ConfirmDialog';
@@ -248,10 +255,34 @@ const FilesSection = ({ teamId }) => {
       try {
         // Replace with actual API call
         const mockFiles = [
-          { id: 1, name: 'Project Documentation', type: 'folder', itemCount: 5, path: '/' },
-          { id: 2, name: 'Meeting Notes.docx', type: 'file', size: '256 KB', path: '/' },
-          { id: 3, name: 'Design Assets', type: 'folder', itemCount: 12, path: '/' },
-          { id: 4, name: 'Presentation.pptx', type: 'file', size: '4.2 MB', path: '/' },
+          {
+            id: 1,
+            name: 'Project Documentation',
+            type: 'folder',
+            itemCount: 5,
+            path: '/',
+          },
+          {
+            id: 2,
+            name: 'Meeting Notes.docx',
+            type: 'file',
+            size: '256 KB',
+            path: '/',
+          },
+          {
+            id: 3,
+            name: 'Design Assets',
+            type: 'folder',
+            itemCount: 12,
+            path: '/',
+          },
+          {
+            id: 4,
+            name: 'Presentation.pptx',
+            type: 'file',
+            size: '4.2 MB',
+            path: '/',
+          },
         ];
 
         setTimeout(() => {
@@ -372,15 +403,23 @@ const FilesSection = ({ teamId }) => {
   return (
     <Container className="FilesSection-container">
       <ActionBar className="FilesSection-actionBar">
-        <ActionButton className="FilesSection-uploadButton" onClick={() => setShowUpload(true)}>
+        <ActionButton
+          className="FilesSection-uploadButton"
+          onClick={() => setShowUpload(true)}
+        >
           <FiUpload /> Upload Files
         </ActionButton>
-        <ActionButton className="FilesSection-newFolderButton" onClick={handleCreateFolder}>
+        <ActionButton
+          className="FilesSection-newFolderButton"
+          onClick={handleCreateFolder}
+        >
           <FiFolderPlus /> New Folder
         </ActionButton>
       </ActionBar>
 
-      <BreadcrumbNav className="FilesSection-breadcrumbNav">{getBreadcrumbs()}</BreadcrumbNav>
+      <BreadcrumbNav className="FilesSection-breadcrumbNav">
+        {getBreadcrumbs()}
+      </BreadcrumbNav>
 
       <FilterBar className="FilesSection-filterBar">
         <FilterSelect
@@ -419,7 +458,11 @@ const FilesSection = ({ teamId }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ textAlign: 'center', padding: '2rem', gridColumn: '1 / -1' }}
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                gridColumn: '1 / -1',
+              }}
             >
               Loading files...
             </motion.div>
@@ -429,7 +472,11 @@ const FilesSection = ({ teamId }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ textAlign: 'center', padding: '2rem', gridColumn: '1 / -1' }}
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                gridColumn: '1 / -1',
+              }}
             >
               No files found
             </motion.div>
@@ -442,21 +489,31 @@ const FilesSection = ({ teamId }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 onClick={() =>
-                  file.type === 'folder' && handleNavigate(currentPath + file.name + '/')
+                  file.type === 'folder' &&
+                  handleNavigate(currentPath + file.name + '/')
                 }
-                style={{ cursor: file.type === 'folder' ? 'pointer' : 'default' }}
+                style={{
+                  cursor: file.type === 'folder' ? 'pointer' : 'default',
+                }}
               >
                 <FileHeader className="FilesSection-fileHeader">
-                  <div className="icon">{file.type === 'folder' ? <FiFolder /> : <FiFile />}</div>
+                  <div className="icon">
+                    {file.type === 'folder' ? <FiFolder /> : <FiFile />}
+                  </div>
                   <FileInfo className="FilesSection-fileInfo">
                     <h3 className="FilesSection-fileName">{file.name}</h3>
                     <div className="meta">
-                      {file.type === 'folder' ? `${file.itemCount} items` : file.size}
+                      {file.type === 'folder'
+                        ? `${file.itemCount} items`
+                        : file.size}
                     </div>
                   </FileInfo>
                 </FileHeader>
                 <FileActions className="FilesSection-fileActions">
-                  <IconButton className="FilesSection-editButton" aria-label="Edit">
+                  <IconButton
+                    className="FilesSection-editButton"
+                    aria-label="Edit"
+                  >
                     <FiEdit2 />
                   </IconButton>
                   <IconButton
@@ -498,9 +555,17 @@ const FilesSection = ({ teamId }) => {
               </div>
               <h3>Upload Files</h3>
               <p>Drag and drop files here or click to browse</p>
-              <ActionButton className="FilesSection-chooseFilesButton" as="label">
+              <ActionButton
+                className="FilesSection-chooseFilesButton"
+                as="label"
+              >
                 <FiUpload /> Choose Files
-                <input type="file" multiple onChange={handleUpload} accept="*/*" />
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleUpload}
+                  accept="*/*"
+                />
               </ActionButton>
             </UploadZone>
           </UploadOverlay>

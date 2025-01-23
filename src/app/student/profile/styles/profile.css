@@ -3,7 +3,9 @@
   background: var(--background-light);
   padding: clamp(1rem, 3vw, 2rem);
   color: var(--text-primary);
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
   width: 100%;
 }
 
@@ -118,13 +120,17 @@
     background-color: var(--primary-color);
   }
 
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     background-color: rgba(255, 255, 255, 0.1);
     color: #e4e4e4;
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  input:focus, select:focus, textarea:focus {
+  input:focus,
+  select:focus,
+  textarea:focus {
     border-color: var(--primary-color);
     background-color: rgba(255, 255, 255, 0.15);
   }

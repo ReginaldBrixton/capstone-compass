@@ -20,7 +20,12 @@ import { useCarousel } from './Carousel';
 export function CarouselControls({
   className,
   prevIcon = (
-    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+    <svg
+      className="h-4 w-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 6 10"
+    >
       <path
         stroke="currentColor"
         strokeLinecap="round"
@@ -31,7 +36,12 @@ export function CarouselControls({
     </svg>
   ),
   nextIcon = (
-    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+    <svg
+      className="h-4 w-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 6 10"
+    >
       <path
         stroke="currentColor"
         strokeLinecap="round"
