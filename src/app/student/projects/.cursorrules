@@ -1,0 +1,19 @@
+# Global rules for the projects section
+# File organization
+src/app/student/projects/
+  ├── components/      # Reusable components
+  ├── styles/         # Global styles
+  ├── proposal/       # Proposal-related pages
+  ├── capstone-one/   # Capstone One pages
+  └── capstone-two/   # Capstone Two pages
+
+# Coding standards
+- Use 'use client' directive for client components
+- Use styled-components for styling
+- Follow component-based architecture
+- Keep components small and focused
+- Use proper semantic HTML
+- Ensure accessibility standards
+- Implement responsive design
+- Use proper error handling
+- Follow React best practices

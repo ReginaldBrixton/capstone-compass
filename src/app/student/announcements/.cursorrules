@@ -1,0 +1,36 @@
+# Announcements Module Rules
+
+# Component Structure
+- Each component should be in its own file
+- Use functional components with hooks
+- Include 'use client' directive for client components
+- Keep styled components in the styles directory
+
+# Styling
+- Use styled-components for all styling
+- Follow the design system colors and spacing
+- Implement responsive design using media queries
+
+# Data Management
+- Keep static data in the data directory
+- Use proper data structures for announcements
+
+# Accessibility
+- Include proper ARIA labels
+- Use semantic HTML elements
+- Ensure keyboard navigation support
+
+# Performance
+- Optimize state updates
+- Use proper dependency arrays in useEffect
+- Implement loading states
+
+# Error Handling
+- Show clear error messages
+- Handle loading states gracefully
+- Provide user feedback
+
+# Documentation
+- Include comments for complex logic
+- Document component props
+- Maintain clear file structure

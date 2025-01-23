@@ -1,0 +1,163 @@
+.scheduler-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.datetime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.time-slot {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.time-slot:hover {
+  background: #f7f7f7;
+}
+
+.time-slot.selected {
+  background: #3498db;
+  color: white;
+}
+
+.time-slot:disabled {
+  background: #f7f7f7;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.panel-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ddd;
+}
+
+.panel-member {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f7f7f7;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+}
+
+.panel-info {
+  flex: 1;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.status-badge.confirmed {
+  background: #dcfce7;
+  color: #059669;
+}
+
+.status-badge.pending {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.requirements-list {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f7f7f7;
+  border-radius: 0.375rem;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.requirement::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: transparent;
+}
+
+.requirement.complete::before {
+  border-color: #2ecc71;
+  background: #2ecc71;
+}
+
+.action-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 1rem;
+}
+
+.action-button:hover {
+  background: #1d4ed8;
+}
+
+.action-button:disabled {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+/* Time Remaining Styles */
+.time-remaining {
+  color: #666;
+  font-weight: 500;
+}
+
+.time-remaining.overdue {
+  color: #e74c3c;
+}
+
+/* Deadline Indicator Styles */
+.deadline-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.deadline-indicator.overdue {
+  color: #e74c3c;
+}

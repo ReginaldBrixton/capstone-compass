@@ -1,0 +1,7 @@
+// Teams page rules
+- Use styled components for styling
+- Follow component-based architecture
+- Implement proper error handling
+- Ensure accessibility standards
+- Use dynamic routing for team details
+- Implement proper loading states

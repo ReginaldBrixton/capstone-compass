@@ -1,0 +1,85 @@
+{
+    "rules": [
+        {
+            "pattern": "src/app/**/*.{jsx,tsx}",
+            "exclude": [
+                "node_modules/**"
+            ],
+            "conventions": [
+                {
+                    "type": "naming",
+                    "pattern": "^[A-Z][a-zA-Z]*(?:Page|Layout)?$",
+                    "message": "Page/Layout component names should be PascalCase"
+                },
+                {
+                    "type": "import",
+                    "pattern": "^'use client'",
+                    "message": "Client components should have 'use client' directive at the top"
+                },
+                {
+                    "type": "style",
+                    "pattern": "\\.module\\.scss$",
+                    "message": "Component styles should use CSS Modules with .module.scss extension"
+                }
+            ]
+        },
+        {
+            "pattern": "src/app/api/**/*.{js,ts}",
+            "conventions": [
+                {
+                    "type": "naming",
+                    "pattern": "^[a-z][a-zA-Z]*$",
+                    "message": "API route handlers should be camelCase"
+                },
+                {
+                    "type": "structure",
+                    "required": [
+                        "route.{js,ts}",
+                        "controller.{js,ts}"
+                    ],
+                    "message": "API routes should have separate route and controller files"
+                }
+            ]
+        },
+        {
+            "pattern": "**/*.scss",
+            "conventions": [
+                {
+                    "type": "naming",
+                    "pattern": "^[a-z][a-zA-Z]*$",
+                    "message": "SCSS class names should be camelCase"
+                },
+                {
+                    "type": "import",
+                    "pattern": "^@use.*variables",
+                    "message": "SCSS files should import variables from the central _variables.scss"
+                }
+            ]
+        },
+        {
+            "pattern": "src/styles/**/*.scss",
+            "conventions": [
+                {
+                    "type": "naming",
+                    "pattern": "^_[a-z][a-zA-Z]*$",
+                    "message": "Partial SCSS files should start with underscore"
+                }
+            ]
+        },
+        {
+            "pattern": "**/*.{js,jsx,ts,tsx}",
+            "conventions": [
+                {
+                    "type": "import",
+                    "pattern": "^@/",
+                    "message": "Use absolute imports with @/ prefix"
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "bun": true,
+        "nextjs": true,
+        "typescript": true
+    }
+}

@@ -1,0 +1,226 @@
+.projectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  height: 100%;
+  min-height: min-content;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: var(--text);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.4;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="datetime-local"],
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.4;
+  transition: all 0.2s ease;
+  min-width: 0;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 5rem;
+  max-height: 12rem;
+}
+
+.fileInputWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 3rem;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.fileInputLabel {
+  padding: 0.75rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attachmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  max-height: 9rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.attachmentItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--background);
+  border-radius: 6px;
+  min-height: 2.5rem;
+}
+
+.fileName {
+  flex: 1;
+  font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.cancelBtn,
+.submitBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.cancelBtn {
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text);
+  min-width: 6rem;
+}
+
+.submitBtn {
+  background: var(--primary);
+  border: none;
+  color: white;
+  min-width: 8rem;
+}
+
+@media (max-width: 768px) {
+  .projectForm {
+    gap: 1rem;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+    padding-top: 1rem;
+    gap: 0.75rem;
+  }
+
+  .cancelBtn,
+  .submitBtn {
+    width: 100%;
+    padding: 0.875rem;
+  }
+}
+
+/* Hover states */
+@media (hover: hover) {
+  .formGroup input[type="text"]:hover,
+  .formGroup input[type="datetime-local"]:hover,
+  .formGroup textarea:hover,
+  .formGroup select:hover {
+    border-color: var(--primary);
+  }
+
+  .fileInputLabel:hover {
+    border-color: var(--primary);
+    background: var(--background);
+  }
+
+  .removeBtn:hover {
+    background: var(--background);
+  }
+
+  .cancelBtn:hover {
+    background: var(--surface);
+  }
+
+  .submitBtn:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Focus states */
+.formGroup input[type="text"]:focus,
+.formGroup input[type="datetime-local"]:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Scrollbar Styles */
+.attachmentList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.attachmentList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.attachmentList::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 4px;
+} 

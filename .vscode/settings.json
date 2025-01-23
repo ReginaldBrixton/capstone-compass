@@ -1,0 +1,44 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "node_modules": true,
+    "**/.next": true,
+    ".next": true,
+    "**/.vscode": true,
+    ".vscode": true,
+    "src\\app/fonts": true,
+    ".husky": true
+  },
+  "explorerExclude.backup": {},
+  "favorites.resources": [
+    {
+      "filePath": "src\\app\\auth",
+      "group": "Default"
+    }
+  ],
+  "folder-color.pathColors": [
+    {
+      "folderPath": "next-template\\src\\app\\api\\",
+      "color": "foldercolorizer.color_0066cc"
+    },
+    {
+      "folderPath": "next-template\\src\\app\\student\\announcements\\",
+      "badge": "An"
+    },
+    {
+      "folderPath": "next-template\\src\\app\\supervisor\\",
+      "badge": "SU",
+      "color": "foldercolorizer.color_3366ff"
+    },
+    {
+      "folderPath": "next-template\\src\\app\\student\\profile\\",
+      "badge": "PR"
+    }
+  ]
+}

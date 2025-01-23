@@ -1,0 +1,10 @@
+# Chat Components Rules
+- Use 'use client' directive for all components
+- Follow component structure:
+  - Styled components at the top
+  - Component logic in the middle
+  - Export at the bottom
+- Use proper aria-labels for accessibility
+- Keep components focused on single responsibility
+- Use styled-components for styling
+- Implement proper error handling and loading states

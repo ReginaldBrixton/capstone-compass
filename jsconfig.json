@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["app/components/*"],
+      "@/styles/*": ["app/styles/*"],
+      "@/utils/*": ["app/utils/*"], 
+      "@/hooks/*": ["app/hooks/*"],
+      "@/contexts/*": ["app/contexts/*"]
+    },
+    "jsx": "react",
+    "target": "es6", 
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": ["**/*.jsx", "**/*.js"],
+  "exclude": ["node_modules"]
+}
