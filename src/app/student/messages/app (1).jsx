@@ -1,26 +1,16 @@
-"use client"
-
 import React, { useState } from "react"
 import ChatLayout from "./components/chat-layout"
 import MessageList from "./components/message-list"
 import InputArea from "./components/input-area"
 import { generateId } from "./utils/generateId"
 
-const MessagesPage = () => {
+const App = () => {
   const [messages, setMessages] = useState([
-    { 
-      id: generateId(), 
-      content: "Hello! How can I help you today?", 
-      sender: "bot" 
-    },
+    { id: generateId(), content: "Hello! How can I help you today?", sender: "bot" },
   ])
 
   const handleSendMessage = (content) => {
-    const newMessage = { 
-      id: generateId(), 
-      content, 
-      sender: "user" 
-    }
+    const newMessage = { id: generateId(), content, sender: "user" }
     setMessages([...messages, newMessage])
 
     // Simulate bot response
@@ -35,13 +25,12 @@ const MessagesPage = () => {
   }
 
   return (
-    <div className="messages-container h-screen w-full" id="messages-page">
-      <ChatLayout>
-        <MessageList messages={messages} />
-        <InputArea onSendMessage={handleSendMessage} />
-      </ChatLayout>
-    </div>
+    <ChatLayout>
+      <MessageList messages={messages} />
+      <InputArea onSendMessage={handleSendMessage} />
+    </ChatLayout>
   )
 }
 
-export default MessagesPage 
+export default App
+

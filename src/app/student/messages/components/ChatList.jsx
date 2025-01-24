@@ -1,138 +1,65 @@
-import React from 'react';
-import { Search } from 'lucide-react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState, useEffect } from "react"
+import { debounce } from "../utils/helpers"
 
-import { ChatUser } from '../../types/chat';
-import ChatListItem from './ChatListItem';
+const ChatList = ({ onSelectChat }) => {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [chats, setChats] = useState([
+    { id: "1", name: "John Doe", lastMessage: "Hey, how are you?", time: "2h", online: true },
+    { id: "2", name: "Jane Smith", lastMessage: "See you later!", time: "1d", online: false },
+    { id: "3", name: "Bob Johnson", lastMessage: "Thanks for the help!", time: "3d", online: true },
+  ])
 
-// Keyframes for animations
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+  const [filteredChats, setFilteredChats] = useState(chats)
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: white;
-  border-right: 1px solid #e5e7eb;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  const debouncedSearch = debounce((term) => {
+    const filtered = chats.filter(
+      (chat) =>
+        chat.name.toLowerCase().includes(term.toLowerCase()) ||
+        chat.lastMessage.toLowerCase().includes(term.toLowerCase()),
+    )
+    setFilteredChats(filtered)
+  }, 300)
 
-  @media (max-width: 770px) {
-    width: 100%;
-    border-right: none;
-    box-shadow: none;
-  }
-`;
-
-const Header = styled.div`
-  padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: white;
-  animation: ${fadeIn} 0.3s ease-in-out;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-`;
-
-const SearchContainer = styled.div`
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  padding: 0.5rem;
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  border: none;
-  background: none;
-  outline: none;
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  color: #111827;
-
-  &::placeholder {
-    color: #6b7280;
-  }
-`;
-
-const ChatListContainer = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem;
-  animation: ${fadeIn} 0.3s ease-in-out;
-`;
-
-const EmptyState = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: #6b7280;
-  font-size: 0.875rem;
-`;
-
-/**
- * @param {Object} props
- * @param {ChatUser[]} props.users - Array of chat users
- * @param {string} [props.selectedUserId] - ID of selected user
- * @param {(userId: string) => void} props.onSelectUser - Callback when user is selected
- */
-const ChatList = ({ users, selectedUserId, onSelectUser }) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
-
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    debouncedSearch(searchTerm)
+  }, [searchTerm])
 
   return (
-    <Container id="chat-list-container" className="chat-list-container">
-      <Header id="chat-list-header" className="chat-list-header">
-        <Title id="chat-list-title" className="chat-list-title">
-          Messages
-        </Title>
-        <SearchContainer>
-          <Search className="h-4 w-4 text-gray-400" />
-          <SearchInput
-            type="text"
-            placeholder="Search chats..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search chats"
-          />
-        </SearchContainer>
-      </Header>
-      <ChatListContainer id="chat-list-items" className="chat-list-items">
-        {filteredUsers.length > 0 ? (
-          filteredUsers.map((user) => (
-            <ChatListItem
-              key={user.id}
-              user={user}
-              isSelected={user.id === selectedUserId}
-              onClick={() => onSelectUser(user.id)}
-              id={`chat-list-item-${user.id}`}
-              className={`chat-list-item ${user.id === selectedUserId ? 'selected' : ''}`}
-            />
-          ))
-        ) : (
-          <EmptyState>No chats found</EmptyState>
-        )}
-      </ChatListContainer>
-    </Container>
-  );
-};
+    <div className="w-full md:w-80 bg-white border-r border-gray-300 flex flex-col">
+      <div className="p-4 border-b border-gray-300">
+        <h2 className="text-xl font-semibold mb-2">Chats</h2>
+        <input
+          type="text"
+          placeholder="Search chats..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="overflow-y-auto flex-grow">
+        {filteredChats.map((chat) => (
+          <div
+            key={chat.id}
+            className="flex items-center p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50"
+            onClick={() => onSelectChat(chat)}
+          >
+            <div className="relative">
+              <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+              {chat.online && (
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
+              )}
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold">{chat.name}</h3>
+              <p className="text-sm text-gray-600 truncate">{chat.lastMessage}</p>
+            </div>
+            <span className="text-xs text-gray-500">{chat.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
-export default ChatList;
+export default ChatList
+
