@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Message from "./Message"
 import MessageInput from "./MessageInput"
 import ChatHeader from "./ChatHeader"
@@ -11,6 +11,16 @@ const ChatWindow = ({ chatId }) => {
   const [chat, setChat] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isTyping, setIsTyping] = useState(false)
+  const [replyingTo, setReplyingTo] = useState(null)
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   useEffect(() => {
     setLoading(true)
@@ -25,26 +35,35 @@ const ChatWindow = ({ chatId }) => {
   const handleSendMessage = (content, file) => {
     const newMessage = {
       id: Date.now(),
-      senderId: 1, // Assuming current user's ID is 1
+      senderId: 1,
       content: file ? URL.createObjectURL(file) : content,
       timestamp: new Date().toISOString(),
       type: file ? (file.type.startsWith("image/") ? "image" : "file") : "text",
+      replyTo: replyingTo,
     }
     setMessages((prev) => [...prev, newMessage])
+    setReplyingTo(null)
+  }
+
+  const handleReply = (message) => {
+    setReplyingTo(message)
   }
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full" id="chat-window-loading">
-        <p className="text-gray-600">Loading messages...</p>
+      <div className="flex items-center justify-center h-screen bg-gray-50" id="chat-window-loading">
+        <div className="flex flex-col items-center space-y-3">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          <p className="text-gray-600 text-base">Loading messages...</p>
+        </div>
       </div>
     )
   }
 
   if (!chat) {
     return (
-      <div className="flex items-center justify-center h-full" id="chat-window-error">
-        <p className="text-gray-600">Chat not found</p>
+      <div className="flex items-center justify-center h-screen bg-gray-50" id="chat-window-error">
+        <p className="text-gray-600 text-base">Chat not found</p>
       </div>
     )
   }
@@ -52,35 +71,50 @@ const ChatWindow = ({ chatId }) => {
   const otherUser = chatData.users.find((user) => user.id !== 1)
 
   return (
-    <div className="flex flex-col h-screen max-h-screen" id={`chat-window-${chatId}`}>
+    <div className="flex flex-col h-screen bg-white" id={`chat-window-${chatId}`}>
       <ChatHeader 
         chatName={otherUser.name}
         avatar={otherUser.avatar}
         isOnline={otherUser.isOnline}
         isTyping={isTyping}
-        isMobile={window.innerWidth <= 768}
+        isMobile={true}
+        lastSeen={otherUser.lastSeen}
       />
+      
       <div 
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" 
+        className="flex-1 overflow-y-auto px-4 py-6 space-y-6 bg-gray-50" 
         id="messages-container"
       >
-        {messages.map((message) => (
-          <Message 
-            key={message.id} 
-            message={message}
-            onReply={(msg) => console.log("Reply to:", msg)}
-            onReaction={(msgId, reaction) => console.log("React:", msgId, reaction)}
-          />
-        ))}
+        <div className="max-w-3xl mx-auto w-full space-y-6">
+          {messages.map((message) => (
+            <Message 
+              key={message.id} 
+              message={message}
+              onReply={(msg) => setReplyingTo(msg)}
+              onReaction={(msgId, reaction) => {
+                setMessages(prev => prev.map(m => 
+                  m.id === msgId 
+                    ? { ...m, reactions: [...(m.reactions || []), { emoji: reaction, userId: 1 }] }
+                    : m
+                ))
+              }}
+            />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
-      <MessageInput 
-        onSendMessage={handleSendMessage}
-        onTypingStart={() => setIsTyping(true)}
-        onTypingEnd={() => setIsTyping(false)}
-      />
+
+      <div className="w-full max-w-3xl mx-auto px-4">
+        <MessageInput 
+          onSendMessage={handleSendMessage}
+          onTypingStart={() => setIsTyping(true)}
+          onTypingEnd={() => setIsTyping(false)}
+          replyingTo={replyingTo}
+          onCancelReply={() => setReplyingTo(null)}
+        />
+      </div>
     </div>
   )
 }
 
 export default ChatWindow
-

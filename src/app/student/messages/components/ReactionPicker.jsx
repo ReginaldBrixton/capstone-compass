@@ -4,12 +4,12 @@ import React from "react"
 import { motion } from "framer-motion"
 
 const reactions = [
-  { emoji: "👍", name: "thumbs up" },
-  { emoji: "❤️", name: "heart" },
-  { emoji: "😂", name: "joy" },
-  { emoji: "😮", name: "wow" },
-  { emoji: "😢", name: "sad" },
-  { emoji: "😡", name: "angry" },
+  { emoji: "👍", name: "thumbs up", color: "bg-blue-100" },
+  { emoji: "❤️", name: "heart", color: "bg-red-100" },
+  { emoji: "😂", name: "joy", color: "bg-yellow-100" },
+  { emoji: "😮", name: "wow", color: "bg-purple-100" },
+  { emoji: "😢", name: "sad", color: "bg-gray-100" },
+  { emoji: "😡", name: "angry", color: "bg-orange-100" },
 ]
 
 const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
@@ -19,29 +19,46 @@ const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.8, opacity: 0 }}
       className={`
-        absolute ${position === "bottom" ? "bottom-full mb-2" : "top-full mt-2"} 
-        left-0 bg-white rounded-full shadow-lg p-1 z-50 border border-gray-200
+        absolute ${position === "bottom" ? "bottom-full mb-2" : "top-full mt-2"}
+        left-0 bg-white rounded-lg shadow-xl p-2 z-50 border-2 border-gray-200
       `}
+      id="reaction-picker"
     >
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center gap-1" id="reactions-container">
         {reactions.map((reaction) => (
           <motion.button
             key={reaction.name}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className={`
+              p-2.5 rounded-lg transition-all duration-200 
+              ${reaction.color} hover:brightness-95 
+              flex items-center justify-center
+              shadow-sm hover:shadow-md
+            `}
             onClick={() => {
-              onSelect(reaction)
-              onClose()
+              onSelect(reaction.emoji);
+              onClose();
             }}
             aria-label={`React with ${reaction.name}`}
+            id={`reaction-${reaction.name}`}
           >
-            <span className="text-xl">{reaction.emoji}</span>
+            <span className="text-2xl transform hover:scale-110 transition-transform">
+              {reaction.emoji}
+            </span>
           </motion.button>
         ))}
       </div>
+      <div 
+        className={`
+          absolute ${position === "bottom" ? "-bottom-2" : "-top-2"}
+          left-4 w-4 h-4 bg-white border-2 border-gray-200
+          transform rotate-45 -z-10
+        `}
+        id="reaction-picker-arrow"
+      />
     </motion.div>
   )
 }
 
-export default ReactionPicker 
+export default ReactionPicker

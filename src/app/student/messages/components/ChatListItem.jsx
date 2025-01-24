@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import chatData from "../data/chatData.json"
 
 const formatTime = (timestamp) => {
@@ -24,22 +25,39 @@ const ChatListItem = ({ chat }) => {
 
   return (
     <div
-      className="flex items-center p-3 hover:bg-gray-100 cursor-pointer transition-colors duration-200"
+      className="flex items-center gap-2 p-2 sm:p-3 md:p-4 hover:bg-gray-100/90 active:bg-gray-200/80 
+        cursor-pointer transition-all duration-200 border-b border-gray-100 last:border-b-0
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg
+        hover:shadow-sm"
       id={`chat-item-${chat.id}`}
       onClick={() => router.push(`/student/messages/${chat.id}`)}
+      role="button"
+      tabIndex={0}
     >
-      <img 
-        src={otherUser.avatar || "/placeholder.svg"} 
-        alt={otherUser.name} 
-        className="w-12 h-12 rounded-full mr-3 object-cover" 
-      />
-      <div className="flex-1 min-w-0">
-        <h3 className="font-semibold truncate">{otherUser.name}</h3>
-        <p className="text-sm text-gray-500 truncate">{lastMessage.content}</p>
+      <div className="relative flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12">
+        <Image
+          src={otherUser.avatar || "/placeholder.svg"}
+          alt={otherUser.name}
+          fill
+          className="rounded-full object-cover"
+          sizes="(max-width: 640px) 40px, 48px"
+        />
       </div>
-      <span className="text-xs text-gray-400 ml-2 whitespace-nowrap">
-        {timeString}
-      </span>
+
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="font-semibold text-sm sm:text-base text-gray-900 truncate">
+            {otherUser.name}
+          </h3>
+          <span className="text-[10px] sm:text-xs text-gray-400 flex-shrink-0">
+            {timeString}
+          </span>
+        </div>
+        
+        <p className="text-xs sm:text-sm text-gray-500 truncate max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">
+          {lastMessage.content}
+        </p>
+      </div>
     </div>
   )
 }
