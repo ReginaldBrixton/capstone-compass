@@ -1,9 +1,11 @@
+"use client"
+
 import React from "react"
 import Picker from "emoji-picker-react"
 
 const EmojiPicker = ({ onEmojiSelect }) => {
-  const handleEmojiClick = (event, emojiObject) => {
-    onEmojiSelect(emojiObject.emoji)
+  const handleEmojiClick = (emojiData) => {
+    onEmojiSelect(emojiData.emoji)
   }
 
   return (
@@ -13,6 +15,7 @@ const EmojiPicker = ({ onEmojiSelect }) => {
           onEmojiClick={handleEmojiClick}
           width="100%"
           height="100%"
+          lazyLoadEmojis={true}
         />
       </div>
     </div>

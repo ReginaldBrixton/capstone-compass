@@ -19,22 +19,27 @@ const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.8, opacity: 0 }}
       className={`
-        absolute ${position === "bottom" ? "bottom-full mb-2" : "top-full mt-2"}
-        left-0 bg-white rounded-lg shadow-xl p-2 z-50 border-2 border-gray-200
+        absolute ${position === "bottom" ? "bottom-full mb-1" : "top-full mt-1"}
+        left-0 bg-white rounded-md shadow-lg p-1 z-50 border border-gray-200
+        max-w-[calc(100vw-2rem)] overflow-x-auto
       `}
       id="reaction-picker"
     >
-      <div className="flex items-center gap-1" id="reactions-container">
+      <div 
+        className="flex items-center gap-0.5 sm:gap-1" 
+        id="reactions-container"
+      >
         {reactions.map((reaction) => (
           <motion.button
             key={reaction.name}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`
-              p-2.5 rounded-lg transition-all duration-200 
-              ${reaction.color} hover:brightness-95 
+              p-1.5 sm:p-2 rounded-md transition-all duration-200
+              ${reaction.color} hover:brightness-95
               flex items-center justify-center
-              shadow-sm hover:shadow-md
+              shadow-sm hover:shadow
+              min-w-[2rem] sm:min-w-[2.5rem]
             `}
             onClick={() => {
               onSelect(reaction.emoji);
@@ -43,7 +48,7 @@ const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
             aria-label={`React with ${reaction.name}`}
             id={`reaction-${reaction.name}`}
           >
-            <span className="text-2xl transform hover:scale-110 transition-transform">
+            <span className="text-base sm:text-lg transform hover:scale-105 transition-transform">
               {reaction.emoji}
             </span>
           </motion.button>
@@ -51,8 +56,8 @@ const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
       </div>
       <div 
         className={`
-          absolute ${position === "bottom" ? "-bottom-2" : "-top-2"}
-          left-4 w-4 h-4 bg-white border-2 border-gray-200
+          absolute ${position === "bottom" ? "-bottom-1" : "-top-1"}
+          left-4 w-2 h-2 bg-white border border-gray-200
           transform rotate-45 -z-10
         `}
         id="reaction-picker-arrow"
