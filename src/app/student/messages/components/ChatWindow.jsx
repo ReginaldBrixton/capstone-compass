@@ -1,166 +1,86 @@
-import React, { useState, useRef, useEffect } from "react"
-import { generateId } from "../../../../utils/generateId"
-import ChatMessage from "./ChatMessage"
-import ChatInput from "./ChatInput"
+"use client"
 
-const ChatWindow = ({ chat, onBack, isMobile }) => {
-  const [messages, setMessages] = useState([
-    { id: "1", content: "Hey there!", sender: "user", timestamp: new Date() },
-    { id: "2", content: "Hi! How are you?", sender: "other", timestamp: new Date() },
-  ])
-  const [replyingTo, setReplyingTo] = useState(null)
-  const [isScrolledToBottom, setIsScrolledToBottom] = useState(true)
-  const messageListRef = useRef(null)
+import React, { useState, useEffect } from "react"
+import Message from "./Message"
+import MessageInput from "./MessageInput"
+import ChatHeader from "./ChatHeader"
+import chatData from "../data/chatData.json"
 
-  useEffect(() => {
-    if (messageListRef.current && isScrolledToBottom) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight
-    }
-  }, [messages, isScrolledToBottom])
+const ChatWindow = ({ chatId }) => {
+  const [messages, setMessages] = useState([])
+  const [chat, setChat] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [isTyping, setIsTyping] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (messageListRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = messageListRef.current
-        const isBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 10
-        setIsScrolledToBottom(isBottom)
-      }
+    setLoading(true)
+    const foundChat = chatData.chats.find((c) => c.id === chatId)
+    if (foundChat) {
+      setChat(foundChat)
+      setMessages(foundChat.messages)
     }
-
-    messageListRef.current?.addEventListener("scroll", handleScroll)
-    return () => messageListRef.current?.removeEventListener("scroll", handleScroll)
-  }, [])
+    setLoading(false)
+  }, [chatId])
 
   const handleSendMessage = (content, file) => {
     const newMessage = {
-      id: generateId(),
-      content,
-      sender: "user",
-      timestamp: new Date(),
-      file,
-      replyTo: replyingTo,
+      id: Date.now(),
+      senderId: 1, // Assuming current user's ID is 1
+      content: file ? URL.createObjectURL(file) : content,
+      timestamp: new Date().toISOString(),
+      type: file ? (file.type.startsWith("image/") ? "image" : "file") : "text",
     }
-    setMessages([...messages, newMessage])
-    setReplyingTo(null)
-    setIsScrolledToBottom(true)
+    setMessages((prev) => [...prev, newMessage])
   }
 
-  const handleForward = (messageId) => {
-    console.log("Forward message:", messageId)
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-full" id="chat-window-loading">
+        <p className="text-gray-600">Loading messages...</p>
+      </div>
+    )
   }
 
-  const handleReply = (messageId) => {
-    const messageToReply = messages.find((m) => m.id === messageId)
-    setReplyingTo(messageToReply)
+  if (!chat) {
+    return (
+      <div className="flex items-center justify-center h-full" id="chat-window-error">
+        <p className="text-gray-600">Chat not found</p>
+      </div>
+    )
   }
 
-  const handleEdit = (messageId, newContent) => {
-    setMessages(messages.map(msg => 
-      msg.id === messageId ? { ...msg, content: newContent, edited: true } : msg
-    ))
-  }
-
-  const handleDelete = (messageId) => {
-    setMessages(messages.filter((m) => m.id !== messageId))
-  }
-
-  const handleReport = (messageId) => {
-    console.log("Report message:", messageId)
-  }
+  const otherUser = chatData.users.find((user) => user.id !== 1)
 
   return (
-    <div className="flex flex-col w-full h-full bg-gray-50" id="chat-window">
-      {/* Header */}
-      <header className="flex items-center h-14 md:h-16 px-3 md:px-6 bg-white border-b border-gray-200 shrink-0 sticky top-0 z-10" id="chat-header">
-        {isMobile && (
-          <button 
-            onClick={onBack}
-            className="mr-2 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="Back"
-            id="back-button"
-          >
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-        )}
-        {chat ? (
-          <div className="flex items-center min-w-0 flex-1 gap-3" id="chat-info">
-            <div className="w-9 h-9 md:w-10 md:h-10 bg-blue-600 rounded-full flex-shrink-0 flex items-center justify-center text-white text-base" id="chat-avatar">
-              {chat.name?.[0]?.toUpperCase() || "?"}
-            </div>
-            <div className="min-w-0 flex-1">
-              <h2 className="text-base font-medium text-gray-900 truncate">{chat.name}</h2>
-              <p className="text-sm text-gray-500 truncate">{chat.status || "Active now"}</p>
-            </div>
-          </div>
-        ) : (
-          <div className="text-base text-gray-500 flex-1 truncate" id="empty-chat-message">
-            Select a conversation to start messaging
-          </div>
-        )}
-      </header>
-
-      {/* Messages Container */}
-      <div className="flex-1 overflow-hidden" id="messages-container">
-        <div 
-          ref={messageListRef}
-          className="h-full overflow-y-auto px-3 md:px-6 py-4 space-y-4"
-          id="message-list"
-        >
-          {messages.map((message) => (
-            <ChatMessage
-              key={message.id}
-              message={message}
-              onForward={handleForward}
-              onReply={handleReply}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onReport={handleReport}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* New Message Indicator */}
-      {!isScrolledToBottom && messages.length > 0 && (
-        <div className="fixed bottom-20 right-4 z-10" id="new-message-indicator">
-          <button
-            className="bg-white text-gray-700 px-4 py-1.5 rounded-full shadow-md hover:bg-gray-50 border border-gray-200 transition-colors text-sm font-medium"
-            onClick={() => {
-              messageListRef.current?.scrollTo({
-                top: messageListRef.current.scrollHeight,
-                behavior: "smooth"
-              })
-            }}
-          >
-            New messages ↓
-          </button>
-        </div>
-      )}
-
-      {/* Input Area */}
-      <div className="bg-white border-t border-gray-200 shrink-0" id="input-area">
-        <div className="max-w-screen-xl mx-auto px-3 md:px-6 py-3">
-          <ChatInput 
-            onSendMessage={handleSendMessage}
-            replyingTo={replyingTo}
-            onCancelReply={() => setReplyingTo(null)}
+    <div className="flex flex-col h-screen max-h-screen" id={`chat-window-${chatId}`}>
+      <ChatHeader 
+        chatName={otherUser.name}
+        avatar={otherUser.avatar}
+        isOnline={otherUser.isOnline}
+        isTyping={isTyping}
+        isMobile={window.innerWidth <= 768}
+      />
+      <div 
+        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" 
+        id="messages-container"
+      >
+        {messages.map((message) => (
+          <Message 
+            key={message.id} 
+            message={message}
+            onReply={(msg) => console.log("Reply to:", msg)}
+            onReaction={(msgId, reaction) => console.log("React:", msgId, reaction)}
           />
-        </div>
+        ))}
       </div>
+      <MessageInput 
+        onSendMessage={handleSendMessage}
+        onTypingStart={() => setIsTyping(true)}
+        onTypingEnd={() => setIsTyping(false)}
+      />
     </div>
   )
 }
 
 export default ChatWindow
+

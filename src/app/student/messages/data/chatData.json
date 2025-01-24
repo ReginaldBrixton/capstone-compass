@@ -1,0 +1,124 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "avatar": "/placeholder.svg?height=50&width=50",
+      "status": "online",
+      "lastSeen": "2023-05-20T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "avatar": "/placeholder.svg?height=50&width=50",
+      "status": "offline",
+      "lastSeen": "2023-05-20T09:15:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Alice Johnson",
+      "avatar": "/placeholder.svg?height=50&width=50",
+      "status": "online",
+      "lastSeen": "2023-05-20T11:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Bob Brown",
+      "avatar": "/placeholder.svg?height=50&width=50",
+      "status": "offline",
+      "lastSeen": "2023-05-20T08:45:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Charlie Davis",
+      "avatar": "/placeholder.svg?height=50&width=50",
+      "status": "online",
+      "lastSeen": "2023-05-20T11:15:00Z"
+    }
+  ],
+  "chats": [
+    {
+      "id": 1,
+      "participants": [1, 2],
+      "messages": [
+        {
+          "id": 1,
+          "senderId": 1,
+          "content": "Hey Jane, how are you?",
+          "timestamp": "2023-05-20T10:00:00Z",
+          "type": "text"
+        },
+        {
+          "id": 2,
+          "senderId": 2,
+          "content": "Hi John! I'm good, thanks. How about you?",
+          "timestamp": "2023-05-20T10:05:00Z",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "participants": [1, 3],
+      "messages": [
+        {
+          "id": 1,
+          "senderId": 1,
+          "content": "Alice, did you see the latest project update?",
+          "timestamp": "2023-05-20T11:00:00Z",
+          "type": "text"
+        },
+        {
+          "id": 2,
+          "senderId": 3,
+          "content": "Yes, I did. It looks great!",
+          "timestamp": "2023-05-20T11:05:00Z",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "participants": [2, 4],
+      "messages": [
+        {
+          "id": 1,
+          "senderId": 2,
+          "content": "Hey Bob, are you joining the meeting later?",
+          "timestamp": "2023-05-20T10:15:00Z",
+          "type": "text"
+        },
+        {
+          "id": 2,
+          "senderId": 4,
+          "content": "Yes, I will be there!",
+          "timestamp": "2023-05-20T10:20:00Z",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": 1,
+      "userId": 1,
+      "content": "/placeholder.svg?height=200&width=200",
+      "timestamp": "2023-05-20T09:00:00Z",
+      "expiresAt": "2023-05-21T09:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "content": "/placeholder.svg?height=200&width=200",
+      "timestamp": "2023-05-20T10:30:00Z",
+      "expiresAt": "2023-05-21T10:30:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "content": "/placeholder.svg?height=200&width=200",
+      "timestamp": "2023-05-20T11:30:00Z",
+      "expiresAt": "2023-05-21T11:30:00Z"
+    }
+  ]
+}

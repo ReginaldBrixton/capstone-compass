@@ -46,7 +46,7 @@ export function MobileNavbar() {
   return (
     <>
       <nav
-        className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200/50 bg-white/90 backdrop-blur-lg dark:border-gray-800/50 dark:bg-gray-900/90 md:hidden"
+        className="relative z-10 border-b border-gray-200/50 bg-white/90 backdrop-blur-lg dark:border-gray-800/50 dark:bg-gray-900/90"
         id="mobile-nav"
       >
         <div className="flex items-center justify-between px-4 py-3">
@@ -108,7 +108,7 @@ export function MobileNavbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-20 bg-black/50 backdrop-blur-sm md:hidden"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -121,7 +121,7 @@ export function MobileNavbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 20 }}
-            className="fixed bottom-0 right-0 top-[62px] z-50 w-64 overflow-y-auto bg-white shadow-xl dark:bg-gray-900 md:hidden"
+            className="fixed bottom-0 right-0 top-[62px] z-30 w-64 overflow-y-auto bg-white shadow-xl dark:bg-gray-900 md:hidden"
           >
             <div className="py-4">
               <MenuItems />

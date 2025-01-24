@@ -68,7 +68,7 @@ export function AppSidebar() {
       initial={false}
       animate={isCollapsed ? 'collapsed' : 'expanded'}
       variants={sidebarVariants}
-      className="app-sidebar-container sticky top-0 z-50 hidden h-screen flex-col rounded-r-2xl border-r border-gray-200/50 bg-white/90 shadow-lg backdrop-blur-lg transition-colors duration-300 dark:border-gray-800/50 dark:bg-gray-900/90 dark:text-gray-100 md:flex"
+      className="app-sidebar-container h-screen flex-col rounded-r-2xl border-r border-gray-200/50 bg-white/90 shadow-lg backdrop-blur-lg transition-colors duration-300 dark:border-gray-800/50 dark:bg-gray-900/90 dark:text-gray-100"
       id="app-sidebar-main"
       role="navigation"
       aria-label="Main Navigation"
@@ -76,7 +76,7 @@ export function AppSidebar() {
       <SidebarHeader
         isCollapsed={isCollapsed}
         toggleSidebar={toggleSidebar}
-        className="sidebar-header-section relative z-10"
+        className="sidebar-header-section relative z-1"
         id="sidebar-header"
       />
 
@@ -94,7 +94,7 @@ export function AppSidebar() {
       </motion.div>
 
       <motion.div
-        className="sidebar-profile-wrapper relative z-10 mt-auto w-full px-0.5"
+        className="sidebar-profile-wrapper relative z-1 mt-auto w-full px-0.5"
         id="sidebar-profile"
         variants={contentVariants}
       >

@@ -28,23 +28,26 @@ export default function StudentLayout({ children }) {
       id={generateUniqueId('layout-container')}
       suppressHydrationWarning
     >
-      <AppSidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
+      {/* Fixed sidebar container */}
+      <div className="sidebar-container hidden md:block">
+        <AppSidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
+      </div>
 
+      {/* Main content area */}
       <motion.div
         layout
         className="main-content relative flex w-full min-w-0 flex-1 flex-col"
         id={generateUniqueId('main-content')}
         suppressHydrationWarning
-        animate={{
-          marginLeft: isSidebarOpen ? '0' : '-16rem',
-          transition: {
-            duration: 0.2,
-            ease: 'easeInOut',
-          },
-        }}
       >
+        {/* Mobile navigation - only visible on mobile */}
+        <div className="md:hidden">
+          <MobileNavbar />
+        </div>
+
+        {/* Main scrollable area */}
         <main
-          className="main-area scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent m-0 w-full flex-1 overflow-y-auto bg-gray-50 p-6 pb-24 transition-colors duration-300 dark:bg-gray-900"
+          className="main-area scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent m-0 w-full flex-1 overflow-y-auto bg-gray-50 p-6 pb-24 transition-colors duration-300 dark:bg-gray-900 md:mt-0"
           id={generateUniqueId('main-area')}
         >
           <motion.div
@@ -57,8 +60,6 @@ export default function StudentLayout({ children }) {
             {children}
           </motion.div>
         </main>
-
-        <MobileNavbar />
       </motion.div>
     </div>
   );
