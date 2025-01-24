@@ -5,9 +5,9 @@ import ChatLayout from "./components/ChatLayout"
 
 const MessagesPage = () => {
   return (
-    <div className="messages-page-container h-screen w-full" id="messages-page">
+    <main className="messages-page fixed inset-0 flex flex-col bg-gray-50" id="messages-page">
       <ChatLayout />
-    </div>
+    </main>
   )
 }
 
