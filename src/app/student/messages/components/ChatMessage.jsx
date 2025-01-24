@@ -21,7 +21,6 @@ const ChatMessage = React.memo(({ message, onForward, onReply, onEdit, onDelete,
 
   const handleContextMenu = (e) => {
     e.preventDefault()
-    const rect = messageRef.current.getBoundingClientRect()
     const menuWidth = 150
     const menuHeight = 200
     const { x, y } = getContextMenuPosition(
@@ -45,11 +44,13 @@ const ChatMessage = React.memo(({ message, onForward, onReply, onEdit, onDelete,
       ref={messageRef}
       className={`flex mb-4 ${message.sender === "user" ? "justify-end" : "justify-start"} animate-fadeIn`}
       onContextMenu={handleContextMenu}
+      id="chat-message-container"
     >
       <div
         className={`max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg p-3 ${
           message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
         } shadow-md transition-all duration-200 ease-in-out hover:shadow-lg`}
+        id="chat-message-content"
       >
         {message.replyTo && (
           <div className="reply-container mb-2 text-sm">
@@ -102,4 +103,3 @@ const ChatMessage = React.memo(({ message, onForward, onReply, onEdit, onDelete,
 ChatMessage.displayName = "ChatMessage"
 
 export default ChatMessage
-

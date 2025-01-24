@@ -16,38 +16,38 @@ const ContextMenu = ({ x, y, onClose, onForward, onReply, onEdit, onDelete, onRe
     }
   }, [onClose])
 
+  const menuItems = [
+    { label: "Forward", onClick: onForward, icon: "→" },
+    { label: "Reply", onClick: onReply, icon: "↩" },
+    { label: "Edit", onClick: onEdit, icon: "✎" },
+    { label: "Delete", onClick: onDelete, icon: "🗑" },
+    { label: "Report", onClick: onReport, icon: "⚠" },
+  ]
+
   return (
     <div
       ref={menuRef}
-      className="absolute bg-white rounded-lg shadow-lg border border-gray-200 z-50"
-      style={{ top: y, left: x }}
+      className="fixed bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50 min-w-[160px]"
+      style={{ 
+        top: y, 
+        left: x,
+        maxWidth: "calc(100vw - 24px)",
+        maxHeight: "calc(100vh - 24px)"
+      }}
+      id="context-menu"
     >
-      <ul className="py-2">
-        <li>
-          <button onClick={onForward} className="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Forward
-          </button>
-        </li>
-        <li>
-          <button onClick={onReply} className="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Reply
-          </button>
-        </li>
-        <li>
-          <button onClick={onEdit} className="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Edit
-          </button>
-        </li>
-        <li>
-          <button onClick={onDelete} className="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Delete
-          </button>
-        </li>
-        <li>
-          <button onClick={onReport} className="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Report
-          </button>
-        </li>
+      <ul className="text-[15px]">
+        {menuItems.map(({ label, onClick, icon }) => (
+          <li key={label}>
+            <button 
+              onClick={onClick}
+              className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              <span className="text-gray-400 text-base">{icon}</span>
+              {label}
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   )

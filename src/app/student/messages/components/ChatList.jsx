@@ -22,10 +22,10 @@ const ChatList = ({ onSelectChat }) => {
 
   useEffect(() => {
     debouncedSearch(searchTerm)
-  }, [searchTerm])
+  }, [searchTerm, chats, debouncedSearch])
 
   return (
-    <div className="w-full md:w-80 bg-white border-r border-gray-300 flex flex-col">
+    <div className="w-full md:w-80 bg-white border-r border-gray-300 flex flex-col" id="chat-list">
       <div className="p-4 border-b border-gray-300">
         <h2 className="text-xl font-semibold mb-2">Chats</h2>
         <input
@@ -34,6 +34,7 @@ const ChatList = ({ onSelectChat }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="search-input"
         />
       </div>
       <div className="overflow-y-auto flex-grow">
@@ -42,6 +43,7 @@ const ChatList = ({ onSelectChat }) => {
             key={chat.id}
             className="flex items-center p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50"
             onClick={() => onSelectChat(chat)}
+            id={`chat-${chat.id}`}
           >
             <div className="relative">
               <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
@@ -62,4 +64,3 @@ const ChatList = ({ onSelectChat }) => {
 }
 
 export default ChatList
-

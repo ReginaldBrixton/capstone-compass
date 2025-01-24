@@ -1,1 +1,7 @@
-use bun instead of npm or pnpm
+Use bun instead of npm or pnpm or yarn
+Use tailwind css for the css styling
+Use .jsx instead of .tsx
+Use javascript instead of typescript
+Sourcery - Use block braces for ifs, whiles, etc.sourcery(suggestion:use-braces)
+Always have a special className and ID in the html tags
+remove any declared but its value is never read.ts errors
