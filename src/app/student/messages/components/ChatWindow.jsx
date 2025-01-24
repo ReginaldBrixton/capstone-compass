@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { generateId } from "../utils/helpers"
+import { generateId } from "../../../../utils/helpers"
 import ChatMessage from "./ChatMessage"
 import ChatInput from "./ChatInput"
 

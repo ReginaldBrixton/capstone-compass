@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react"
 import EmojiPicker from "emoji-picker-react"
-import { formatFileSize } from "../utils/helpers"
+import { formatFileSize } from "../../../../utils/helpers"
 
 const ChatInput = ({ onSendMessage, replyingTo, onCancelReply }) => {
   const [inputMessage, setInputMessage] = useState("")

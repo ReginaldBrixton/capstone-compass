@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { debounce } from "../utils/helpers"
+import { debounce } from "../../../../utils/helpers"
 
 const ChatList = ({ onSelectChat }) => {
   const [searchTerm, setSearchTerm] = useState("")

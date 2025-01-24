@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { formatTime, formatFileSize, getContextMenuPosition } from "../utils/helpers"
+import { formatTime, formatFileSize, getContextMenuPosition } from "../../../../utils/helpers"
 import ContextMenu from "./ContextMenu"
 
 const ChatMessage = React.memo(({ message, onForward, onReply, onEdit, onDelete, onReport }) => {
