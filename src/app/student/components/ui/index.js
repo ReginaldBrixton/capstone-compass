@@ -1,5 +1,3 @@
-'use client';
-
 // Barrel file for UI components
 export { AppSidebar } from './app-sidebar';
 export { MobileNavbar } from './mobile-navbar';
