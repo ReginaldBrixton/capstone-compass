@@ -1,22 +1,35 @@
 "use client";
 
-import React from "react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const Portal = ({ children }) => {
+const Portal = ({ children, container }) => {
   const [mounted, setMounted] = useState(false);
+  const [portalContainer, setPortalContainer] = useState(null);
 
   useEffect(() => {
     setMounted(true);
-    return () => setMounted(false);
-  }, []);
+    const customContainer = container || document.body;
+    
+    if (!customContainer) return;
 
-  if (!mounted) {
-    return null;
-  }
+    // Create a dedicated container for the portal
+    const portalNode = document.createElement("div");
+    portalNode.setAttribute("data-portal-container", "");
+    customContainer.appendChild(portalNode);
+    setPortalContainer(portalNode);
 
-  return createPortal(children, document.body);
+    return () => {
+      if (portalNode && portalNode.parentElement) {
+        portalNode.parentElement.removeChild(portalNode);
+      }
+      setMounted(false);
+    };
+  }, [container]);
+
+  if (!mounted || !portalContainer) return null;
+
+  return createPortal(children, portalContainer);
 };
 
 Portal.displayName = "Portal";

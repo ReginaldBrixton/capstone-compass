@@ -10,15 +10,16 @@ import {
   DropdownSeparator,
 } from "../dropdown";
 
-export function SidebarFooter({
+export const SidebarFooter = React.forwardRef(({
   children,
   className = '',
   showBorder = true,
-}) {
+}, ref) => {
   const { isCollapsed } = useSidebar();
 
   return (
     <div
+      ref={ref}
       className={`
         flex items-center justify-center
         p-4
@@ -29,9 +30,11 @@ export function SidebarFooter({
       {children}
     </div>
   );
-}
+});
 
-export function SidebarFooterUser({
+SidebarFooter.displayName = "SidebarFooter";
+
+export const SidebarFooterUser = React.forwardRef(({
   avatar,
   name,
   description,
@@ -39,7 +42,7 @@ export function SidebarFooterUser({
   onSettingsClick,
   onLogoutClick,
   className = '',
-}) {
+}, ref) => {
   const { isCollapsed } = useSidebar();
 
   const userAvatar = avatar ? (
@@ -67,6 +70,7 @@ export function SidebarFooterUser({
     <DropdownMenu position="top" align="center">
       <DropdownTrigger asChild>
         <button
+          ref={ref}
           type="button"
           className={`
             flex items-center justify-center
@@ -106,4 +110,6 @@ export function SidebarFooterUser({
       </DropdownContent>
     </DropdownMenu>
   );
-}
+});
+
+SidebarFooterUser.displayName = "SidebarFooterUser";
