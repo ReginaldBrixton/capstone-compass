@@ -1,5 +1,4 @@
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar'; // Assuming this path is correct
 import { formatDistanceToNow } from 'date-fns';
 import { FileIcon, GitCommitIcon, MessageSquareIcon } from 'lucide-react';
 
@@ -17,86 +16,72 @@ import { FileIcon, GitCommitIcon, MessageSquareIcon } from 'lucide-react';
  */
 const RecentActivity = ({ type, username, action, target, timestamp }) => {
   const iconMap = {
-    commit: <GitCommitIcon className="h-4 w-4 text-green-500" data-oid="f9ijd8k" />,
-    file: <FileIcon className="h-4 w-4 text-blue-500" data-oid="q9mws:d" />,
-    comment: <MessageSquareIcon className="h-4 w-4 text-yellow-500" data-oid="6v7iqef" />,
+    commit: <GitCommitIcon className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />,
+    file: <FileIcon className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500" />,
+    comment: <MessageSquareIcon className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500" />,
   };
+
+  const initials = username
+    ?.split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase() || '?';
+
   return (
     <div
-      className="group relative flex items-start space-x-4 rounded-md border border-border bg-card p-4 text-card-foreground shadow-sm transition-shadow duration-200 hover:shadow-md"
-      id="recent-activity-container"
-      data-oid="6ahp6ai"
+      className="flex items-start gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full"
     >
-      <Avatar className="h-10 w-10" id="activity-avatar" data-oid="ywillo4">
+      <div
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700"
+      >
         {username ? (
-          <AvatarImage
+          <img
             src={`https://avatar.vercel.sh/${username}.png`}
             alt={username}
-            id="activity-avatar-image"
-            data-oid="atf93g."
+            className="h-full w-full rounded-full object-cover"
           />
-        ) : null}
-        <AvatarFallback
-          className="text-sm font-semibold"
-          id="activity-avatar-fallback"
-          data-oid="20cqyk-"
-        >
-          {username
-            ?.split(' ')
-            .map((n) => n[0])
-            .join('')
-            .toUpperCase() || '?'}
-        </AvatarFallback>
-      </Avatar>
-      <div className="flex-1 space-y-2" id="activity-content" data-oid="ub29tk0">
-        <div id="activity-description-container" data-oid="donkrzo">
+        ) : (
+          <span
+            className="text-xs font-medium text-gray-600 dark:text-gray-300"
+          >
+            {initials}
+          </span>
+        )}
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
           <p
-            className="text-sm font-medium text-foreground"
-            id="activity-description"
-            data-oid="lb_6g.3"
+            className="text-sm text-gray-900 dark:text-gray-100 truncate"
           >
             <span
-              className="cursor-pointer font-semibold transition-colors duration-150 hover:underline"
-              id="activity-username"
-              data-oid="tc-vza9"
+              className="font-medium hover:text-blue-600 dark:hover:text-blue-400"
             >
               {username}
-            </span>{' '}
-            <span className="text-muted-foreground" data-oid="fwl4rb6">
+            </span>
+            <span className="text-gray-600 dark:text-gray-400">
+              {' '}
               {action}
-            </span>{' '}
+            </span>
             <span
-              className="cursor-pointer font-semibold transition-colors duration-150 hover:underline"
-              id="activity-target"
-              data-oid="_gmi9:6"
+              className="font-medium hover:text-blue-600 dark:hover:text-blue-400 truncate"
             >
               {target}
             </span>
           </p>
         </div>
+
         <div
-          className="flex items-center text-xs text-muted-foreground"
-          id="activity-timestamp-container"
-          data-oid="hcwiiar"
+          className="mt-1 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400"
         >
-          <span className="mr-2" id="activity-icon" data-oid="-omt8je">
-            {iconMap[type]}
-          </span>
-          <span id="activity-timestamp" data-oid="ug05h1v">
-            {formatDistanceToNow(timestamp, {
-              addSuffix: true,
-            })}
+          {iconMap[type]}
+          <span>
+            {formatDistanceToNow(timestamp, { addSuffix: true })}
           </span>
         </div>
-      </div>
-      <div
-        className="absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-        id="activity-type-icon-container"
-        data-oid=":iczfmi"
-      >
-        {iconMap[type]}
       </div>
     </div>
   );
 };
+
 export default RecentActivity;
