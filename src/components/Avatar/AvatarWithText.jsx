@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Avatar from './Avatar';
-
 const AvatarWithText = ({
   src,
   alt,
@@ -14,15 +12,15 @@ const AvatarWithText = ({
   theme = 'light',
 }) => {
   const isDark = theme === 'dark';
-
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <Avatar src={src} alt={alt} size={size} rounded={rounded} />
-      <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-        <div>{name}</div>
+    <div className={`flex items-center gap-4 ${className}`} data-oid="sf-8oxw">
+      <Avatar src={src} alt={alt} size={size} rounded={rounded} data-oid="q81oth4" />
+      <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`} data-oid="-09ebw0">
+        <div data-oid="dn9u67d">{name}</div>
         {description && (
           <div
             className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+            data-oid="krjscjg"
           >
             {description}
           </div>
@@ -31,7 +29,6 @@ const AvatarWithText = ({
     </div>
   );
 };
-
 AvatarWithText.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
@@ -42,5 +39,4 @@ AvatarWithText.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
 };
-
 export default AvatarWithText;

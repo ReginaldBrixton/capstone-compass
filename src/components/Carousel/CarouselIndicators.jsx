@@ -28,7 +28,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { cn } from '@/app/utils/cn';
 import { useCarousel } from './Carousel';
 
@@ -49,7 +48,6 @@ export function CarouselIndicators({
 }) {
   // Get carousel context values for navigation
   const { activeIndex, setActiveIndex, itemsCount } = useCarousel();
-
   return (
     <div
       className={cn(
@@ -58,9 +56,12 @@ export function CarouselIndicators({
         'bottom-5 left-1/2',
         className
       )}
+      data-oid="d.770t."
     >
       {/* Generate indicator dots based on number of slides */}
-      {Array.from({ length: itemsCount }).map((_, index) => (
+      {Array.from({
+        length: itemsCount,
+      }).map((_, index) => (
         <button
           key={index}
           type="button"
@@ -74,12 +75,12 @@ export function CarouselIndicators({
           aria-label={`Navigate to slide ${index + 1}`}
           onClick={() => setActiveIndex(index)}
           data-carousel-slide-to={index}
+          data-oid="dqv5en4"
         />
       ))}
     </div>
   );
 }
-
 CarouselIndicators.propTypes = {
   className: PropTypes.string,
   activeClassName: PropTypes.string,

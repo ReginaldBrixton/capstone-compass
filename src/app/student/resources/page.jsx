@@ -2,18 +2,15 @@
 
 import React from 'react';
 import styled from 'styled-components';
-
 const ResourcesContainer = styled.div`
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 `;
-
 const Title = styled.h1`
   color: #333;
   margin-bottom: 20px;
 `;
-
 const SearchBar = styled.div`
   margin-bottom: 30px;
 
@@ -30,13 +27,11 @@ const SearchBar = styled.div`
     }
   }
 `;
-
 const ResourceGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 `;
-
 const ResourceCard = styled.div`
   background: white;
   border-radius: 10px;
@@ -59,7 +54,6 @@ const ResourceCard = styled.div`
     margin: 0;
   }
 `;
-
 const ResourceType = styled.span`
   display: inline-block;
   padding: 5px 10px;
@@ -80,13 +74,11 @@ const ResourceType = styled.span`
   font-size: 12px;
   margin-bottom: 10px;
 `;
-
 const FilterTabs = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 `;
-
 const FilterTab = styled.button`
   padding: 8px 16px;
   border: none;
@@ -132,30 +124,33 @@ const sampleResources = [
     description: "Study notes for Shakespeare's plays",
   },
 ];
-
 export default function ResourcesPage() {
   return (
-    <ResourcesContainer>
-      <Title>Learning Resources</Title>
+    <ResourcesContainer data-oid="j.rfwzr">
+      <Title data-oid="na4zye5">Learning Resources</Title>
 
-      <SearchBar>
-        <input type="text" placeholder="Search for resources..." />
+      <SearchBar data-oid="f6r7s2h">
+        <input type="text" placeholder="Search for resources..." data-oid="ruwjq8:" />
       </SearchBar>
 
-      <FilterTabs>
-        <FilterTab active>All Resources</FilterTab>
-        <FilterTab>PDFs</FilterTab>
-        <FilterTab>Videos</FilterTab>
-        <FilterTab>Links</FilterTab>
+      <FilterTabs data-oid="9jmu77h">
+        <FilterTab active data-oid="3b4xj_a">
+          All Resources
+        </FilterTab>
+        <FilterTab data-oid="8enh6n1">PDFs</FilterTab>
+        <FilterTab data-oid="2d_5dp9">Videos</FilterTab>
+        <FilterTab data-oid="z61qypl">Links</FilterTab>
       </FilterTabs>
 
-      <ResourceGrid>
+      <ResourceGrid data-oid="38cea5_">
         {sampleResources.map((resource) => (
-          <ResourceCard key={resource.id} className="resource-card">
-            <ResourceType type={resource.type}>{resource.type}</ResourceType>
-            <h3>{resource.title}</h3>
-            <p>{resource.subject}</p>
-            <p>{resource.description}</p>
+          <ResourceCard key={resource.id} className="resource-card" data-oid="_w5vqzk">
+            <ResourceType type={resource.type} data-oid="96ny.pe">
+              {resource.type}
+            </ResourceType>
+            <h3 data-oid="g7t56ae">{resource.title}</h3>
+            <p data-oid="ii7l7cs">{resource.subject}</p>
+            <p data-oid="osf8cu_">{resource.description}</p>
           </ResourceCard>
         ))}
       </ResourceGrid>

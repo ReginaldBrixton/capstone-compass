@@ -3,9 +3,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import styled from 'styled-components';
-
 import { DefenseScheduler } from '../../../components';
-
 const DefenseContainer = styled.div.attrs({
   className: 'defense-container',
 })`
@@ -14,7 +12,6 @@ const DefenseContainer = styled.div.attrs({
   padding: var(--spacing-lg);
   min-height: 100vh;
 `;
-
 const PageHeader = styled.div.attrs({
   className: 'defense-header',
 })`
@@ -46,7 +43,6 @@ const PageHeader = styled.div.attrs({
     margin: 0 auto;
   }
 `;
-
 const ContentGrid = styled.div.attrs({
   className: 'defense-content-grid',
 })`
@@ -55,7 +51,6 @@ const ContentGrid = styled.div.attrs({
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 `;
-
 const Card = styled.div.attrs({
   className: (props) => `defense-card ${props.className || ''}`,
 })`
@@ -74,7 +69,6 @@ const Card = styled.div.attrs({
     border-bottom: 2px solid var(--border-color);
   }
 `;
-
 const GuidelinesList = styled.ul.attrs({
   className: 'guidelines-list',
 })`
@@ -85,7 +79,6 @@ const GuidelinesList = styled.ul.attrs({
   flex-direction: column;
   gap: var(--spacing-md);
 `;
-
 const GuidelineItem = styled.li.attrs({
   className: 'guideline-item',
 })`
@@ -106,7 +99,6 @@ const GuidelineItem = styled.li.attrs({
     font-weight: bold;
   }
 `;
-
 const RequirementsList = styled.ul.attrs({
   className: 'requirements-list',
 })`
@@ -117,7 +109,6 @@ const RequirementsList = styled.ul.attrs({
   flex-direction: column;
   gap: var(--spacing-sm);
 `;
-
 const RequirementItem = styled.li.attrs({
   className: 'requirement-item',
 })`
@@ -128,8 +119,7 @@ const RequirementItem = styled.li.attrs({
   background: ${(props) =>
     props.isComplete ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)'};
   border-radius: var(--radius-md);
-  color: ${(props) =>
-    props.isComplete ? 'var(--success-color)' : 'var(--error-color)'};
+  color: ${(props) => (props.isComplete ? 'var(--success-color)' : 'var(--error-color)')};
   transition: var(--transition-normal);
 
   &:hover {
@@ -141,7 +131,6 @@ const RequirementItem = styled.li.attrs({
     height: 20px;
   }
 `;
-
 const PanelMembersList = styled.div.attrs({
   className: 'panel-members-list',
 })`
@@ -149,7 +138,6 @@ const PanelMembersList = styled.div.attrs({
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: var(--spacing-md);
 `;
-
 const PanelMemberCard = styled.div.attrs({
   className: (props) => `panel-member-card status-${props.status}`,
 })`
@@ -200,14 +188,37 @@ const PanelMemberCard = styled.div.attrs({
 
 // Sample data - In a real app, this would come from an API
 const sampleSlots = [
-  { id: 1, datetime: '2024-02-15T09:00:00', isBooked: false },
-  { id: 2, datetime: '2024-02-15T10:30:00', isBooked: false },
-  { id: 3, datetime: '2024-02-15T13:00:00', isBooked: true },
-  { id: 4, datetime: '2024-02-15T14:30:00', isBooked: false },
-  { id: 5, datetime: '2024-02-16T09:00:00', isBooked: false },
-  { id: 6, datetime: '2024-02-16T10:30:00', isBooked: false },
+  {
+    id: 1,
+    datetime: '2024-02-15T09:00:00',
+    isBooked: false,
+  },
+  {
+    id: 2,
+    datetime: '2024-02-15T10:30:00',
+    isBooked: false,
+  },
+  {
+    id: 3,
+    datetime: '2024-02-15T13:00:00',
+    isBooked: true,
+  },
+  {
+    id: 4,
+    datetime: '2024-02-15T14:30:00',
+    isBooked: false,
+  },
+  {
+    id: 5,
+    datetime: '2024-02-16T09:00:00',
+    isBooked: false,
+  },
+  {
+    id: 6,
+    datetime: '2024-02-16T10:30:00',
+    isBooked: false,
+  },
 ];
-
 const samplePanelMembers = [
   {
     id: 1,
@@ -228,7 +239,6 @@ const samplePanelMembers = [
     status: 'confirmed',
   },
 ];
-
 const defenseRequirements = [
   {
     id: 1,
@@ -251,7 +261,6 @@ const defenseRequirements = [
     isComplete: false,
   },
 ];
-
 const defenseGuidelines = [
   'Prepare a 20-minute presentation covering your research objectives, methodology, and preliminary findings.',
   'Ensure your presentation includes visual aids and clear explanations of your research process.',
@@ -259,18 +268,14 @@ const defenseGuidelines = [
   'Dress professionally and arrive at least 15 minutes before your scheduled time.',
   'Have backup copies of all presentation materials.',
 ];
-
 export default function CapstoneOneDefense() {
   const params = useParams();
   const [selectedSlot, setSelectedSlot] = useState(null);
-
   const handleSlotSelect = (slot) => {
     setSelectedSlot(slot);
   };
-
   const handleScheduleDefense = async () => {
     if (!selectedSlot) return;
-
     try {
       // TODO: Implement scheduling logic
       console.log('Scheduling defense for slot:', selectedSlot);
@@ -280,34 +285,35 @@ export default function CapstoneOneDefense() {
       console.error('Error scheduling defense:', error);
     }
   };
-
   return (
-    <DefenseContainer>
-      <PageHeader>
-        <h1>Defense Scheduling</h1>
-        <p>Schedule your capstone defense and review important guidelines</p>
+    <DefenseContainer data-oid="d8ygzxt">
+      <PageHeader data-oid="se33j1e">
+        <h1 data-oid="y_:tuyb">Defense Scheduling</h1>
+        <p data-oid="3d-m4fs">Schedule your capstone defense and review important guidelines</p>
       </PageHeader>
 
-      <ContentGrid>
-        <Card className="requirements-card">
-          <h2>Requirements Checklist</h2>
-          <RequirementsList>
+      <ContentGrid data-oid="u670e0y">
+        <Card className="requirements-card" data-oid="oidgazp">
+          <h2 data-oid="za3n4x_">Requirements Checklist</h2>
+          <RequirementsList data-oid="9xt0h2p">
             {defenseRequirements.map((req) => (
-              <RequirementItem key={req.id} isComplete={req.isComplete}>
+              <RequirementItem key={req.id} isComplete={req.isComplete} data-oid="mct-dz1">
                 {req.isComplete ? (
-                  <svg viewBox="0 0 20 20" fill="currentColor">
+                  <svg viewBox="0 0 20 20" fill="currentColor" data-oid="6v52wqg">
                     <path
                       fillRule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clipRule="evenodd"
+                      data-oid="4ei1pix"
                     />
                   </svg>
                 ) : (
-                  <svg viewBox="0 0 20 20" fill="currentColor">
+                  <svg viewBox="0 0 20 20" fill="currentColor" data-oid="uqi2lm2">
                     <path
                       fillRule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                       clipRule="evenodd"
+                      data-oid="xgk.r1n"
                     />
                   </svg>
                 )}
@@ -317,36 +323,43 @@ export default function CapstoneOneDefense() {
           </RequirementsList>
         </Card>
 
-        <Card className="guidelines-card">
-          <h2>Defense Guidelines</h2>
-          <GuidelinesList>
+        <Card className="guidelines-card" data-oid="wil3jj.">
+          <h2 data-oid="c685wlo">Defense Guidelines</h2>
+          <GuidelinesList data-oid="ef3m:og">
             {defenseGuidelines.map((guideline, index) => (
-              <GuidelineItem key={index}>{guideline}</GuidelineItem>
+              <GuidelineItem key={index} data-oid="qoyjcb8">
+                {guideline}
+              </GuidelineItem>
             ))}
           </GuidelinesList>
         </Card>
 
-        <Card className="panel-card">
-          <h2>Panel Members</h2>
-          <PanelMembersList>
+        <Card className="panel-card" data-oid="c_tjmzv">
+          <h2 data-oid="bq6p5q.">Panel Members</h2>
+          <PanelMembersList data-oid="i3bdsnt">
             {samplePanelMembers.map((member) => (
-              <PanelMemberCard key={member.id} status={member.status}>
-                <h3>{member.name}</h3>
-                <div className="role">{member.role}</div>
-                <div className="status">{member.status}</div>
+              <PanelMemberCard key={member.id} status={member.status} data-oid=":hvt6ez">
+                <h3 data-oid="75-gdsm">{member.name}</h3>
+                <div className="role" data-oid="33atstq">
+                  {member.role}
+                </div>
+                <div className="status" data-oid="xmy8ebw">
+                  {member.status}
+                </div>
               </PanelMemberCard>
             ))}
           </PanelMembersList>
         </Card>
       </ContentGrid>
 
-      <Card className="scheduler-card">
-        <h2>Schedule Your Defense</h2>
+      <Card className="scheduler-card" data-oid="qkrc7:t">
+        <h2 data-oid="d_vopsc">Schedule Your Defense</h2>
         <DefenseScheduler
           availableSlots={sampleSlots}
           selectedSlot={selectedSlot}
           onSlotSelect={handleSlotSelect}
           onSchedule={handleScheduleDefense}
+          data-oid="_nxs3st"
         />
       </Card>
     </DefenseContainer>

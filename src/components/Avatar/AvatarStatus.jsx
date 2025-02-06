@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Avatar from './Avatar';
-
 const STATUS_COLORS = {
   online: 'bg-green-400',
   offline: 'bg-gray-400',
   busy: 'bg-red-400',
   away: 'bg-yellow-400',
 };
-
 const STATUS_POSITIONS = {
   'top-right': 'top-0 right-0',
   'top-left': 'top-0 left-0',
   'bottom-right': 'bottom-0 right-0',
   'bottom-left': 'bottom-0 left-0',
 };
-
 const AvatarStatus = ({
   src,
   alt,
@@ -29,7 +25,7 @@ const AvatarStatus = ({
   ...props
 }) => {
   return (
-    <div className={`avatar-status-wrapper relative inline-block ${className}`}>
+    <div className={`avatar-status-wrapper relative inline-block ${className}`} data-oid="fo:_jfx">
       <Avatar
         src={src}
         alt={alt}
@@ -37,16 +33,17 @@ const AvatarStatus = ({
         rounded={rounded}
         bordered={bordered}
         {...props}
+        data-oid="x-hiayk"
       />
       {status && (
         <span
           className={`avatar-status-indicator absolute h-3.5 w-3.5 ${STATUS_COLORS[status]} ${STATUS_POSITIONS[statusPosition]} rounded-full border-2 border-white dark:border-gray-800`}
+          data-oid="co22v5g"
         />
       )}
     </div>
   );
 };
-
 AvatarStatus.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
@@ -54,13 +51,7 @@ AvatarStatus.propTypes = {
   rounded: PropTypes.bool,
   bordered: PropTypes.bool,
   status: PropTypes.oneOf(['online', 'offline', 'busy', 'away']),
-  statusPosition: PropTypes.oneOf([
-    'top-right',
-    'top-left',
-    'bottom-right',
-    'bottom-left',
-  ]),
+  statusPosition: PropTypes.oneOf(['top-right', 'top-left', 'bottom-right', 'bottom-left']),
   className: PropTypes.string,
 };
-
 export default AvatarStatus;

@@ -2,18 +2,15 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 const CoursesContainer = styled.div`
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 `;
-
 const Title = styled.h1`
   color: #333;
   margin-bottom: 20px;
 `;
-
 const SearchBar = styled.div`
   margin-bottom: 30px;
 
@@ -30,13 +27,11 @@ const SearchBar = styled.div`
     }
   }
 `;
-
 const CourseGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 `;
-
 const CourseCard = styled.div`
   background: white;
   border-radius: 10px;
@@ -48,7 +43,6 @@ const CourseCard = styled.div`
     transform: translateY(-5px);
   }
 `;
-
 const CourseImage = styled.div`
   height: 160px;
   background: ${(props) => props.color || '#f0f0f0'};
@@ -57,7 +51,6 @@ const CourseImage = styled.div`
   justify-content: center;
   font-size: 48px;
 `;
-
 const CourseContent = styled.div`
   padding: 20px;
 
@@ -73,7 +66,6 @@ const CourseContent = styled.div`
     font-size: 14px;
   }
 `;
-
 const ProgressBar = styled.div`
   background: #e0e0e0;
   border-radius: 10px;
@@ -81,14 +73,12 @@ const ProgressBar = styled.div`
   margin: 15px 0;
   overflow: hidden;
 `;
-
 const Progress = styled.div`
   background: #4caf50;
   height: 100%;
   width: ${(props) => props.value}%;
   transition: width 0.3s ease;
 `;
-
 const CourseStats = styled.div`
   display: flex;
   justify-content: space-between;
@@ -98,13 +88,11 @@ const CourseStats = styled.div`
   font-size: 14px;
   color: #666;
 `;
-
 const FilterTabs = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 `;
-
 const FilterTab = styled.button`
   padding: 8px 16px;
   border: none;
@@ -166,50 +154,52 @@ const sampleCourses = [
     students: 30,
   },
 ];
-
 export default function CoursesPage() {
   const [filter, setFilter] = useState('all');
-
   return (
-    <CoursesContainer>
-      <Title>My Courses</Title>
+    <CoursesContainer data-oid="q85m-qn">
+      <Title data-oid="qkki26f">My Courses</Title>
 
-      <SearchBar>
-        <input type="text" placeholder="Search courses..." />
+      <SearchBar data-oid="yc_0wfu">
+        <input type="text" placeholder="Search courses..." data-oid="jbgb-9x" />
       </SearchBar>
 
-      <FilterTabs>
-        <FilterTab active={filter === 'all'} onClick={() => setFilter('all')}>
+      <FilterTabs data-oid=":62zuvw">
+        <FilterTab active={filter === 'all'} onClick={() => setFilter('all')} data-oid="a1w174h">
           All Courses
         </FilterTab>
         <FilterTab
           active={filter === 'ongoing'}
           onClick={() => setFilter('ongoing')}
+          data-oid="t-urzlf"
         >
           Ongoing
         </FilterTab>
         <FilterTab
           active={filter === 'completed'}
           onClick={() => setFilter('completed')}
+          data-oid="_0je7ik"
         >
           Completed
         </FilterTab>
       </FilterTabs>
 
-      <CourseGrid>
+      <CourseGrid data-oid="jdmr4jr">
         {sampleCourses.map((course) => (
-          <CourseCard key={course.id} className="course-card">
-            <CourseImage color={course.color}>{course.icon}</CourseImage>
-            <CourseContent>
-              <h2>{course.title}</h2>
-              <p>{course.instructor}</p>
-              <p>{course.schedule}</p>
-              <ProgressBar>
-                <Progress value={course.progress} />
+          <CourseCard key={course.id} className="course-card" data-oid="4.l.6dz">
+            <CourseImage color={course.color} data-oid="lmtt62_">
+              {course.icon}
+            </CourseImage>
+            <CourseContent data-oid="09vivx4">
+              <h2 data-oid="5ph2:ew">{course.title}</h2>
+              <p data-oid="n58h.5e">{course.instructor}</p>
+              <p data-oid="w:0b7r7">{course.schedule}</p>
+              <ProgressBar data-oid="2ik::dg">
+                <Progress value={course.progress} data-oid="w:k2v16" />
               </ProgressBar>
-              <CourseStats>
-                <span>{course.assignments} Assignments</span>
-                <span>{course.students} Students</span>
+              <CourseStats data-oid="e8_oheb">
+                <span data-oid="o0x__jj">{course.assignments} Assignments</span>
+                <span data-oid="552cnxl">{course.students} Students</span>
               </CourseStats>
             </CourseContent>
           </CourseCard>

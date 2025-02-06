@@ -1,144 +1,125 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import styled from 'styled-components';
-
-import './styles/global.css';
-
-const DashboardContainer = styled.div`
-  padding: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-`;
-
-const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-`;
-
-const ProjectCard = styled.div`
-  background: white;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  box-shadow: var(--card-shadow);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 8px;
-  background: #e5e7eb;
-  border-radius: 4px;
-  margin: 1rem 0;
-  overflow: hidden;
-
-  div {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-  }
-`;
-
-const StatusBadge = styled.span`
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: ${(props) => {
-    switch (props.status) {
-      case 'In Progress':
-        return '#dbeafe';
-      case 'Completed':
-        return '#dcfce7';
-      case 'Not Started':
-        return '#fee2e2';
-      default:
-        return '#f3f4f6';
-    }
-  }};
-  color: ${(props) => {
-    switch (props.status) {
-      case 'In Progress':
-        return '#1d4ed8';
-      case 'Completed':
-        return '#059669';
-      case 'Not Started':
-        return '#dc2626';
-      default:
-        return '#4b5563';
-    }
-  }};
-`;
+import React from "react";
+import Link from "next/link";
+import { FiAlertCircle, FiCheckCircle, FiClock, FiZap } from "react-icons/fi";
 
 const ProjectPhases = [
   {
-    id: 'proposal',
-    title: 'Research Proposal',
-    description: 'Submit and defend your research proposal',
-    route: '/student/projects/proposal',
-    status: 'Not Started',
+    id: "proposal",
+    title: "Research Proposal",
+    description: "Submit and defend your research proposal",
+    route: "/student/projects/proposal",
+    status: "Not Started",
     progress: 0,
+    icon: <FiZap className="w-5 h-5" />,
   },
   {
-    id: 'capstone-one',
-    title: 'Capstone One',
-    description: 'Complete chapters 1-3 of your thesis',
-    route: '/student/projects/capstone-one/new',
-    status: 'Not Started',
+    id: "capstone-one",
+    title: "Capstone One",
+    description: "Complete chapters 1-3 of your thesis",
+    route: "/student/projects/capstone-one/new",
+    status: "Not Started",
     progress: 0,
+    icon: <FiClock className="w-5 h-5" />,
   },
   {
-    id: 'capstone-two',
-    title: 'Capstone Two',
-    description: 'Complete chapters 4-5 and final defense',
-    route: '/student/projects/capstone-two/new',
-    status: 'Not Started',
+    id: "capstone-two",
+    title: "Capstone Two",
+    description: "Complete chapters 4-5 and final defense",
+    route: "/student/projects/capstone-two/new",
+    status: "Not Started",
     progress: 0,
+    icon: <FiCheckCircle className="w-5 h-5" />,
   },
 ];
 
 export default function ProjectsPage() {
-  const [phases, setPhases] = useState(ProjectPhases);
+  const [phases] = React.useState(ProjectPhases);
+
+  const getStatusStyles = (status) => {
+    const base = "px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-2";
+    switch (status) {
+      case "In Progress":
+        return `${base} bg-blue-500/10 text-blue-600 dark:text-blue-400`;
+      case "Completed":
+        return `${base} bg-green-500/10 text-green-600 dark:text-green-400`;
+      case "Not Started":
+        return `${base} bg-rose-500/10 text-rose-600 dark:text-rose-400`;
+      default:
+        return `${base} bg-gray-500/10 text-gray-600 dark:text-gray-400`;
+    }
+  };
 
   return (
-    <DashboardContainer className="fade-in">
-      <h1>My Research Journey</h1>
-      <p className="mb-4 text-secondary">
-        Track and manage your research progress through different phases
-      </p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-10 space-y-1">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Research Journey
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Navigate through your research milestones with guided progression
+            </p>
+          </div>
 
-      <ProjectsGrid>
-        {phases.map((phase) => (
-          <Link href={phase.route} key={phase.id}>
-            <ProjectCard>
-              <h2>{phase.title}</h2>
-              <p>{phase.description}</p>
-              <ProgressBar>
-                <div style={{ width: `${phase.progress}%` }} />
-              </ProgressBar>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <StatusBadge status={phase.status}>{phase.status}</StatusBadge>
-                <span>{phase.progress}% Complete</span>
-              </div>
-            </ProjectCard>
-          </Link>
-        ))}
-      </ProjectsGrid>
-    </DashboardContainer>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {phases.map((phase) => (
+              <Link href={phase.route} key={phase.id}>
+                <div className="group relative h-full bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-500/30 dark:hover:border-blue-900/50">
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <div className="relative space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-500/10 rounded-lg text-blue-600 dark:text-blue-400">
+                        {phase.icon}
+                      </div>
+                      <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                        {phase.title}
+                      </h2>
+                    </div>
+
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {phase.description}
+                    </p>
+
+                    <div className="space-y-3">
+                      <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 ease-out"
+                          style={{ width: `${phase.progress}%` }}
+                        />
+                      </div>
+
+                      <div className="flex justify-between items-center text-sm">
+                        <span className={getStatusStyles(phase.status)}>
+                          {phase.status === "Not Started" && <FiAlertCircle className="w-4 h-4" />}
+                          {phase.status === "In Progress" && <FiClock className="w-4 h-4" />}
+                          {phase.status === "Completed" && <FiCheckCircle className="w-4 h-4" />}
+                          {phase.status}
+                        </span>
+                        <span className="text-gray-500 dark:text-gray-400 font-medium">
+                          {phase.progress}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.toggle('dark', prefersDark);
+          `,
+        }}
+      />
+    </div>
   );
 }

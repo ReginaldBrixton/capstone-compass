@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -31,7 +30,6 @@ const ModalOverlay = styled.div`
     }
   }
 `;
-
 const ModalContent = styled.div`
   background: rgba(255, 255, 255, 0.95);
   border-radius: 1rem;
@@ -117,7 +115,6 @@ const ModalContent = styled.div`
     }
   }
 `;
-
 const ModalActions = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -130,7 +127,6 @@ const ModalActions = styled.div`
     border-top-color: #374151;
   }
 `;
-
 const Button = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -144,7 +140,6 @@ const Button = styled.button`
     box-shadow: 0 0 0 2px #2563eb;
   }
 `;
-
 const DeclineButton = styled(Button)`
   background: transparent;
   border: 1px solid #e5e7eb;
@@ -164,7 +159,6 @@ const DeclineButton = styled(Button)`
     }
   }
 `;
-
 const AcceptButton = styled(Button)`
   background: #2563eb;
   border: none;
@@ -181,7 +175,6 @@ const AcceptButton = styled(Button)`
     transform: translateY(0);
   }
 `;
-
 const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
@@ -208,38 +201,29 @@ const CloseButton = styled.button`
     }
   }
 `;
-
 const TermsModal = dynamic(
   () =>
     Promise.resolve(({ isOpen, onClose, onAccept }) => {
       const [mounted, setMounted] = useState(false);
-
       useEffect(() => {
         setMounted(true);
-
         const handleEscape = (e) => {
           if (e.key === 'Escape') onClose();
         };
-
         if (isOpen) {
           document.addEventListener('keydown', handleEscape);
           document.body.style.overflow = 'hidden';
         }
-
         return () => {
           document.removeEventListener('keydown', handleEscape);
           document.body.style.overflow = 'unset';
         };
       }, [isOpen, onClose]);
-
       if (!mounted || !isOpen) return null;
-
       return (
-        <ModalOverlay
-          onClick={(e) => e.target === e.currentTarget && onClose()}
-        >
-          <ModalContent>
-            <CloseButton onClick={onClose} aria-label="Close modal">
+        <ModalOverlay onClick={(e) => e.target === e.currentTarget && onClose()} data-oid="fgxnh6k">
+          <ModalContent data-oid="we.6.qg">
+            <CloseButton onClick={onClose} aria-label="Close modal" data-oid=":_s0vnu">
               <svg
                 width="20"
                 height="20"
@@ -247,51 +231,55 @@ const TermsModal = dynamic(
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                data-oid="of31an3"
               >
-                <path d="M18 6L6 18M6 6l12 12" />
+                <path d="M18 6L6 18M6 6l12 12" data-oid="_97z00a" />
               </svg>
             </CloseButton>
-            <h2>Terms and Conditions</h2>
-            <div>
-              <h3>1. Acceptance of Terms</h3>
-              <p>
-                By accessing and using this service, you accept and agree to be
-                bound by the terms and provision of this agreement.
+            <h2 data-oid="t:l.3i3">Terms and Conditions</h2>
+            <div data-oid="70r61c9">
+              <h3 data-oid=".5ij58c">1. Acceptance of Terms</h3>
+              <p data-oid="mp3_ha:">
+                By accessing and using this service, you accept and agree to be bound by the terms
+                and provision of this agreement.
               </p>
 
-              <h3>2. User Account</h3>
-              <p>
-                You are responsible for maintaining the confidentiality of your
-                account and password. You agree to accept responsibility for all
-                activities that occur under your account.
+              <h3 data-oid="c2_8pvh">2. User Account</h3>
+              <p data-oid="ua8pq72">
+                You are responsible for maintaining the confidentiality of your account and
+                password. You agree to accept responsibility for all activities that occur under
+                your account.
               </p>
 
-              <h3>3. Privacy Policy</h3>
-              <p>
-                Your use of the service is also governed by our Privacy Policy.
-                Please review our Privacy Policy to understand our practices.
+              <h3 data-oid="vlnkc.0">3. Privacy Policy</h3>
+              <p data-oid="qgc1wo9">
+                Your use of the service is also governed by our Privacy Policy. Please review our
+                Privacy Policy to understand our practices.
               </p>
 
-              <h3>4. Service Modifications</h3>
-              <p>
-                We reserve the right to modify or discontinue the service with
-                or without notice to you.
+              <h3 data-oid="_.x6i45">4. Service Modifications</h3>
+              <p data-oid="-4aoumz">
+                We reserve the right to modify or discontinue the service with or without notice to
+                you.
               </p>
 
-              <h3>5. Governing Law</h3>
-              <p>
-                These terms shall be governed by and construed in accordance
-                with the laws of your jurisdiction.
+              <h3 data-oid="k8h4r73">5. Governing Law</h3>
+              <p data-oid="u6q10b0">
+                These terms shall be governed by and construed in accordance with the laws of your
+                jurisdiction.
               </p>
             </div>
 
-            <ModalActions>
-              <DeclineButton onClick={onClose}>Decline</DeclineButton>
+            <ModalActions data-oid="fd7y6xh">
+              <DeclineButton onClick={onClose} data-oid="-coc6d0">
+                Decline
+              </DeclineButton>
               <AcceptButton
                 onClick={() => {
                   onAccept();
                   onClose();
                 }}
+                data-oid="0i4b8s4"
               >
                 Accept
               </AcceptButton>
@@ -300,7 +288,8 @@ const TermsModal = dynamic(
         </ModalOverlay>
       );
     }),
-  { ssr: false }
+  {
+    ssr: false,
+  }
 );
-
 export default TermsModal;

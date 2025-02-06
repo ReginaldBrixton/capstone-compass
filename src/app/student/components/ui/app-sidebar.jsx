@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MenuItems from './components/MenuItems';
-import ProfileSection from './components/ProfileSection';
+import { ProfileSection } from './components/ProfileSection';
 import SidebarHeader from './components/SidebarHeader';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
@@ -14,53 +14,23 @@ export function AppSidebar() {
 
   useEffect(() => {
     setMounted(true);
-    // Auto-collapse sidebar on mobile
-    if (isMobile) {
-      setIsCollapsed(true);
-    }
+    if (isMobile) setIsCollapsed(true);
   }, [isMobile]);
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  const toggleSidebar = () => setIsCollapsed(!isCollapsed);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   const sidebarVariants = {
-    expanded: {
-      width: '16rem',
-      transition: {
-        duration: 0.2,
-        type: 'tween',
-        ease: 'easeOut',
-      },
-    },
-    collapsed: {
-      width: '4.5rem',
-      transition: {
-        duration: 0.2,
-        type: 'tween',
-        ease: 'easeOut',
-      },
-    },
+    expanded: { width: '16rem' },
+    collapsed: { width: '4.5rem' },
+    transition: { duration: 0.2, ease: 'easeOut' }
   };
 
   const contentVariants = {
-    expanded: {
-      opacity: 1,
-      transition: {
-        duration: 0.1,
-        delay: 0.1,
-      },
-    },
-    collapsed: {
-      opacity: 0,
-      transition: {
-        duration: 0.1,
-      },
-    },
+    expanded: { opacity: 1, transition: { delay: 0.1 } },
+    collapsed: { opacity: 0 },
+    transition: { duration: 0.1 }
   };
 
   return (
@@ -68,25 +38,24 @@ export function AppSidebar() {
       initial={false}
       animate={isCollapsed ? 'collapsed' : 'expanded'}
       variants={sidebarVariants}
-      className="app-sidebar-container h-screen flex-col rounded-r-2xl border-r border-gray-200/50 bg-white/90 shadow-lg backdrop-blur-lg transition-colors duration-300 dark:border-gray-800/50 dark:bg-gray-900/90 dark:text-gray-100"
-      id="app-sidebar-main"
+      className="h-screen flex-col border-r bg-background/95 backdrop-blur-lg transition-all 
+                dark:border-dark-700/30 dark:bg-dark-900/95
+                shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]
+                hover:shadow-xl dark:hover:shadow-2xl"
       role="navigation"
       aria-label="Main Navigation"
     >
       <SidebarHeader
         isCollapsed={isCollapsed}
         toggleSidebar={toggleSidebar}
-        className="sidebar-header-section relative z-1"
-        id="sidebar-header"
+        className="border-b border-gray-100/50 dark:border-dark-700/30"
       />
 
-      <motion.div
-        className="sidebar-content-wrapper relative flex-1 overflow-hidden"
-        id="sidebar-content"
-      >
+      <motion.div className="flex-1 overflow-hidden py-4">
         <motion.nav
-          className={`sidebar-nav h-full w-full overflow-y-auto ${isCollapsed ? 'px-0.5' : 'px-2'} scrollbar-none py-3 transition-colors duration-300`}
-          id="sidebar-navigation"
+          className={`h-full w-full overflow-y-auto ${
+            isCollapsed ? 'px-2' : 'px-3'
+          } scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 dark:scrollbar-thumb-dark-500`}
           variants={contentVariants}
         >
           <MenuItems isCollapsed={isCollapsed} />
@@ -94,18 +63,14 @@ export function AppSidebar() {
       </motion.div>
 
       <motion.div
-        className="sidebar-profile-wrapper relative z-1 mt-auto w-full px-0.5"
-        id="sidebar-profile"
+        className="border-t border-gray-100/50 dark:border-dark-700/30"
         variants={contentVariants}
       >
         <ProfileSection isCollapsed={isCollapsed} />
       </motion.div>
 
-      {/* Background Gradient Effect */}
-      <div
-        className="sidebar-gradient pointer-events-none absolute inset-0 rounded-r-2xl bg-gradient-to-b from-primary-50/10 via-transparent to-primary-50/10 dark:from-primary-900/10 dark:to-primary-900/10"
-        id="sidebar-gradient"
-      />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent 
+                     dark:from-dark-700/10 pointer-events-none" />
     </motion.aside>
   );
 }

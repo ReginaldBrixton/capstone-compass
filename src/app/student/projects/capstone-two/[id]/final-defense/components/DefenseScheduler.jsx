@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styled from 'styled-components';
-
-const SchedulerContainer = styled.div.attrs({ className: 'defense-scheduler' })`
+const SchedulerContainer = styled.div.attrs({
+  className: 'defense-scheduler',
+})`
   background: white;
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
-
-const Grid = styled.div.attrs({ className: 'scheduler-grid' })`
+const Grid = styled.div.attrs({
+  className: 'scheduler-grid',
+})`
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -19,23 +21,21 @@ const Grid = styled.div.attrs({ className: 'scheduler-grid' })`
     grid-template-columns: 1fr;
   }
 `;
-
-const TimeSlotGrid = styled.div.attrs({ className: 'time-slot-grid' })`
+const TimeSlotGrid = styled.div.attrs({
+  className: 'time-slot-grid',
+})`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
 `;
-
 const TimeSlot = styled(motion.button).attrs((props) => ({
   className: `time-slot ${props.$isSelected ? 'selected' : ''}`,
 }))`
   padding: 1rem;
   border: 2px solid
-    ${(props) =>
-      props.$isSelected ? 'var(--primary-color)' : 'var(--border-color)'};
+    ${(props) => (props.$isSelected ? 'var(--primary-color)' : 'var(--border-color)')};
   border-radius: 0.5rem;
-  background: ${(props) =>
-    props.$isSelected ? 'var(--primary-color-light)' : 'white'};
+  background: ${(props) => (props.$isSelected ? 'var(--primary-color-light)' : 'white')};
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -49,15 +49,17 @@ const TimeSlot = styled(motion.button).attrs((props) => ({
     transform: translateY(-2px);
   }
 `;
-
-const PanelSection = styled.div.attrs({ className: 'panel-section' })`
+const PanelSection = styled.div.attrs({
+  className: 'panel-section',
+})`
   h3 {
     margin-bottom: 1rem;
     color: var(--primary-color);
   }
 `;
-
-const PanelMember = styled(motion.div).attrs({ className: 'panel-member' })`
+const PanelMember = styled(motion.div).attrs({
+  className: 'panel-member',
+})`
   padding: 1rem;
   background: white;
   border-radius: 0.5rem;
@@ -67,7 +69,6 @@ const PanelMember = styled(motion.div).attrs({ className: 'panel-member' })`
   justify-content: space-between;
   align-items: center;
 `;
-
 const StatusBadge = styled.span.attrs((props) => ({
   className: `status-badge ${props.$status}`,
 }))`
@@ -95,11 +96,11 @@ const StatusBadge = styled.span.attrs((props) => ({
     }
   }};
 `;
-
-const RequirementsList = styled.div.attrs({ className: 'requirements-list' })`
+const RequirementsList = styled.div.attrs({
+  className: 'requirements-list',
+})`
   margin-top: 2rem;
 `;
-
 const Requirement = styled.div.attrs((props) => ({
   className: `requirement ${props.$isComplete ? 'complete' : 'incomplete'}`,
 }))`
@@ -108,20 +109,16 @@ const Requirement = styled.div.attrs((props) => ({
   gap: 0.75rem;
   padding: 0.75rem;
   background: ${(props) =>
-    props.$isComplete
-      ? 'var(--success-color-light)'
-      : 'var(--warning-color-light)'};
+    props.$isComplete ? 'var(--success-color-light)' : 'var(--warning-color-light)'};
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 
   &::before {
     content: ${(props) => (props.$isComplete ? '"✓"' : '"!"')};
     font-weight: bold;
-    color: ${(props) =>
-      props.$isComplete ? 'var(--success-color)' : 'var(--warning-color)'};
+    color: ${(props) => (props.$isComplete ? 'var(--success-color)' : 'var(--warning-color)')};
   }
 `;
-
 const ScheduleButton = styled(motion.button).attrs({
   className: 'schedule-button',
 })`
@@ -144,22 +141,11 @@ const ScheduleButton = styled(motion.button).attrs({
     background: var(--primary-color-dark);
   }
 `;
-
-const DefenseScheduler = ({
-  availableSlots,
-  panelMembers,
-  requirements,
-  onSchedule,
-}) => {
+const DefenseScheduler = ({ availableSlots, panelMembers, requirements, onSchedule }) => {
   const [selectedSlot, setSelectedSlot] = useState(null);
-
   const allRequirementsMet = requirements.every((req) => req.isComplete);
-  const allPanelConfirmed = panelMembers.every(
-    (member) => member.status === 'confirmed'
-  );
-
+  const allPanelConfirmed = panelMembers.every((member) => member.status === 'confirmed');
   const canSchedule = selectedSlot && allRequirementsMet && allPanelConfirmed;
-
   const formatDateTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
     // Use a consistent date-time format that will be the same on server and client
@@ -170,30 +156,33 @@ const DefenseScheduler = ({
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
-
   const handleSchedule = () => {
     if (canSchedule) {
       onSchedule(selectedSlot);
     }
   };
-
   return (
-    <SchedulerContainer>
-      <h2>Schedule Your Defense</h2>
+    <SchedulerContainer data-oid="stn6lo8">
+      <h2 data-oid="62xhh.2">Schedule Your Defense</h2>
 
-      <Grid>
-        <div>
-          <h3>Available Time Slots</h3>
-          <TimeSlotGrid>
-            <AnimatePresence>
+      <Grid data-oid="rz2ehyb">
+        <div data-oid=":srkmw_">
+          <h3 data-oid="r5yk7p8">Available Time Slots</h3>
+          <TimeSlotGrid data-oid="_b24a56">
+            <AnimatePresence data-oid="1g:ye97">
               {availableSlots.map((slot) => (
                 <TimeSlot
                   key={slot.id}
                   $isSelected={selectedSlot?.id === slot.id}
                   disabled={slot.isBooked}
                   onClick={() => setSelectedSlot(slot)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{
+                    scale: 1.02,
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                  }}
+                  data-oid="mzyrurw"
                 >
                   {formatDateTime(slot.datetime)}
                 </TimeSlot>
@@ -202,29 +191,40 @@ const DefenseScheduler = ({
           </TimeSlotGrid>
         </div>
 
-        <PanelSection>
-          <h3>Panel Members</h3>
+        <PanelSection data-oid="t3q_:8l">
+          <h3 data-oid="3oce6ai">Panel Members</h3>
           {panelMembers.map((member, index) => (
             <PanelMember
               key={member.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
+              initial={{
+                opacity: 0,
+                x: -20,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                delay: index * 0.1,
+              }}
+              data-oid="i6z6b0f"
             >
-              <div>
-                <strong>{member.name}</strong>
-                <div>{member.role}</div>
+              <div data-oid="nn6k:6m">
+                <strong data-oid="h2u9swb">{member.name}</strong>
+                <div data-oid="vk._gn_">{member.role}</div>
               </div>
-              <StatusBadge $status={member.status}>{member.status}</StatusBadge>
+              <StatusBadge $status={member.status} data-oid="8qotu4x">
+                {member.status}
+              </StatusBadge>
             </PanelMember>
           ))}
         </PanelSection>
       </Grid>
 
-      <RequirementsList>
-        <h3>Requirements</h3>
+      <RequirementsList data-oid="nqhku32">
+        <h3 data-oid="k3pd092">Requirements</h3>
         {requirements.map((req) => (
-          <Requirement key={req.id} $isComplete={req.isComplete}>
+          <Requirement key={req.id} $isComplete={req.isComplete} data-oid="gdk08ed">
             {req.description}
           </Requirement>
         ))}
@@ -233,13 +233,25 @@ const DefenseScheduler = ({
       <ScheduleButton
         disabled={!canSchedule}
         onClick={handleSchedule}
-        whileHover={canSchedule ? { scale: 1.02 } : {}}
-        whileTap={canSchedule ? { scale: 0.98 } : {}}
+        whileHover={
+          canSchedule
+            ? {
+                scale: 1.02,
+              }
+            : {}
+        }
+        whileTap={
+          canSchedule
+            ? {
+                scale: 0.98,
+              }
+            : {}
+        }
+        data-oid="p0qq-z1"
       >
         Schedule Defense
       </ScheduleButton>
     </SchedulerContainer>
   );
 };
-
 export default DefenseScheduler;

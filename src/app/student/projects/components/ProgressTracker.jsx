@@ -2,13 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-
 import '../styles/global.css';
-
 const TrackerContainer = styled.div`
   margin: 2rem 0;
 `;
-
 const StepsContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -26,7 +23,6 @@ const StepsContainer = styled.div`
     z-index: 1;
   }
 `;
-
 const Step = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,32 +64,31 @@ const Step = styled.div`
     opacity: ${(props) => (props.isCompleted ? 1 : 0)};
   }
 `;
-
 const StepLabel = styled.span`
   font-size: 0.875rem;
   font-weight: 500;
-  color: ${(props) =>
-    props.isActive ? 'var(--primary-color)' : 'var(--text-secondary)'};
+  color: ${(props) => (props.isActive ? 'var(--primary-color)' : 'var(--text-secondary)')};
   text-align: center;
   max-width: 120px;
 `;
-
 const ProgressTracker = ({ steps, currentStep }) => {
   return (
-    <TrackerContainer>
-      <StepsContainer>
+    <TrackerContainer data-oid="3swjv4e">
+      <StepsContainer data-oid="rf-3.6p">
         {steps.map((step, index) => (
           <Step
             key={step.id}
             isCompleted={index < currentStep}
             isActive={index === currentStep}
+            data-oid="4hipf6."
           >
-            <StepLabel isActive={index === currentStep}>{step.label}</StepLabel>
+            <StepLabel isActive={index === currentStep} data-oid="flb4hv7">
+              {step.label}
+            </StepLabel>
           </Step>
         ))}
       </StepsContainer>
     </TrackerContainer>
   );
 };
-
 export default ProgressTracker;

@@ -1,12 +1,10 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
-
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
-
 export const metadata = {
   title: 'Student Portal',
   description: 'A comprehensive student management system',
@@ -22,19 +20,20 @@ export const metadata = {
   mobileWebApp: true,
   manifest: '/manifest.json',
 };
-
 export const viewport = {
   themeColor: '#111827',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
 };
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-white font-sans text-gray-900 antialiased dark:bg-gray-900 dark:text-white">
-        <Providers>{children}</Providers>
+    <html lang="en" className={inter.variable} suppressHydrationWarning data-oid="heca4.r">
+      <body
+        className="min-h-screen bg-white font-sans text-gray-900 antialiased dark:bg-gray-900 dark:text-white"
+        data-oid="edfs2x2"
+      >
+        <Providers data-oid=".7-.:-m">{children}</Providers>
       </body>
     </html>
   );

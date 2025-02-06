@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-
 const Label = React.memo(
   React.forwardRef(({ className, htmlFor, children, ...props }, ref) => {
     // Warn if htmlFor is missing in development
@@ -10,7 +9,6 @@ const Label = React.memo(
         'The `htmlFor` prop is missing in the Label component. This is required for accessibility.'
       );
     }
-
     return (
       <label
         ref={ref}
@@ -27,13 +25,12 @@ const Label = React.memo(
           .filter(Boolean)
           .join(' ')}
         {...props}
+        data-oid="mbk0dno"
       >
         {children}
       </label>
     );
   })
 );
-
 Label.displayName = 'Label';
-
 export { Label };

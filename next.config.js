@@ -18,8 +18,8 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 4,
           maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-        },
-      },
+        }
+      }
     },
     {
       // Font files
@@ -30,8 +30,8 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 4,
           maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
-        },
-      },
+        }
+      }
     },
     {
       // Images
@@ -42,8 +42,8 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 64,
           maxAgeSeconds: 24 * 60 * 60, // 24 hours
-        },
-      },
+        }
+      }
     },
     {
       // JavaScript and CSS
@@ -54,8 +54,8 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 32,
           maxAgeSeconds: 24 * 60 * 60, // 24 hours
-        },
-      },
+        }
+      }
     },
     {
       // API routes
@@ -69,8 +69,8 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 16,
           maxAgeSeconds: 60 * 60, // 1 hour
-        },
-      },
+        }
+      }
     },
     {
       // Static pages
@@ -84,10 +84,10 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 32,
           maxAgeSeconds: 60 * 60, // 1 hour
-        },
-      },
-    },
-  ],
+        }
+      }
+    }
+  ]
 });
 
 const nextConfig = {
@@ -95,7 +95,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     optimizeCss: true,
-    scrollRestoration: true,
+    scrollRestoration: true
   },
   images: {
     domains: [
@@ -103,22 +103,22 @@ const nextConfig = {
       'source.unsplash.com',
       'avatars.githubusercontent.com',
       'lh3.googleusercontent.com',
-      'avatar.vercel.sh',
+      'avatar.vercel.sh'
     ],
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       // Enable PWA features in production only
       config.resolve.fallback = {
         fs: false,
-        path: false,
+        path: false
       };
     }
     return config;
-  },
+  }
 };
 
 module.exports = withPWA(nextConfig);

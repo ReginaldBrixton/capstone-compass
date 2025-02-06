@@ -4,26 +4,18 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { Toaster as Sonner } from 'sonner';
-
 import { themeConfig } from '@/app/styles/theme';
-
 const Toast = ({ ...props }) => {
   const { theme = 'system', systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     setMounted(true);
   }, []);
-
   const currentTheme =
-    themeConfig[
-      !mounted ? 'light' : theme === 'system' ? systemTheme || 'light' : theme
-    ];
-
+    themeConfig[!mounted ? 'light' : theme === 'system' ? systemTheme || 'light' : theme];
   if (!mounted) {
     return null; // Don't render anything during SSR
   }
-
   return (
     <Sonner
       theme={theme}
@@ -67,10 +59,10 @@ const Toast = ({ ...props }) => {
         },
       }}
       {...props}
+      data-oid="868q37v"
     />
   );
 };
-
 Toast.propTypes = {
   position: PropTypes.oneOf([
     'top-left',
@@ -86,5 +78,4 @@ Toast.propTypes = {
   closeButton: PropTypes.bool,
   offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
 export default Toast;

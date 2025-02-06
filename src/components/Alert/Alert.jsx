@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { AlertIcon } from './AlertIcon';
-
 const VARIANT_STYLES = {
   info: {
     base: 'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400 shadow-sm shadow-blue-100 dark:shadow-none',
@@ -50,7 +48,6 @@ const VARIANT_STYLES = {
     },
   },
 };
-
 const Alert = ({
   id,
   variant = 'info',
@@ -71,50 +68,50 @@ const Alert = ({
   const [isVisible, setIsVisible] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const styles = VARIANT_STYLES[variant];
-
   const handleDismiss = () => {
     setIsVisible(false);
     if (onDismiss) {
       onDismiss();
     }
   };
-
   const handleViewMore = () => {
     setIsExpanded(!isExpanded);
     if (onViewMore) {
       onViewMore();
     }
   };
-
   if (!isVisible) return null;
-
   const sizeClasses = {
     sm: 'text-sm',
     base: 'text-base',
     lg: 'text-lg',
   };
-
   const getBorderClasses = () => {
     if (borderAccent) return styles.borderAccent;
     if (bordered) return `border ${styles.border}`;
     return '';
   };
-
   return (
     <div
       id={id}
       className={`mb-4 rounded-lg p-4 backdrop-blur-sm backdrop-filter ${styles.base} ${getBorderClasses()} ${sizeClasses[size]} ${className} transform transition-all duration-300 ease-in-out`}
       role="alert"
+      data-oid="-gdhz04"
     >
-      <div className="flex items-center">
+      <div className="flex items-center" data-oid="7hlm3r-">
         <AlertIcon
           variant={variant}
           className="me-3 h-5 w-5 flex-shrink-0 animate-pulse"
+          data-oid="d1.zm8k"
         />
         {title && (
           <>
-            <span className="sr-only">{variant}</span>
-            <span className="font-semibold tracking-wide">{title}</span>
+            <span className="sr-only" data-oid="t0o7-u-">
+              {variant}
+            </span>
+            <span className="font-semibold tracking-wide" data-oid="ofj1wa7">
+              {title}
+            </span>
           </>
         )}
       </div>
@@ -122,10 +119,11 @@ const Alert = ({
       {message && (
         <div
           className={`mt-3 leading-relaxed ${!isExpanded ? 'line-clamp-2' : ''} transition-all duration-300`}
+          data-oid="5:ejx9:"
         >
           {message}
           {link && (
-            <a href={link} className={`${styles.button.link} ml-1`}>
+            <a href={link} className={`${styles.button.link} ml-1`} data-oid="5e3ijd2">
               {linkText}
             </a>
           )}
@@ -133,11 +131,12 @@ const Alert = ({
       )}
 
       {list && (
-        <ul className="mt-2 list-inside list-disc space-y-1 marker:text-current">
+        <ul className="mt-2 list-inside list-disc space-y-1 marker:text-current" data-oid="e_v-cc3">
           {list.map((item, index) => (
             <li
               key={index}
               className="transition-colors duration-200 hover:opacity-80"
+              data-oid="2poeoyk"
             >
               {item}
             </li>
@@ -145,22 +144,29 @@ const Alert = ({
         </ul>
       )}
 
-      <div className="mt-4 flex gap-2">
+      <div className="mt-4 flex gap-2" data-oid="du.mtc_">
         {onViewMore && (
           <button
             type="button"
             onClick={handleViewMore}
             className={`${styles.button.base} inline-flex items-center rounded-md px-4 py-2 text-sm font-medium`}
+            data-oid="seh32hi"
           >
             <svg
               className="me-2 h-4 w-4 transition-transform duration-200"
-              style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)' }}
+              style={{
+                transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)',
+              }}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 20 14"
+              data-oid="o5zte.l"
             >
-              <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+              <path
+                d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
+                data-oid="64rizei"
+              />
             </svg>
             {isExpanded ? 'View less' : viewMoreText}
           </button>
@@ -171,14 +177,18 @@ const Alert = ({
             onClick={handleDismiss}
             className={`${styles.button.base} inline-flex items-center justify-center rounded-md p-2 transition-transform duration-200 hover:rotate-90`}
             aria-label={dismissText}
+            data-oid="659w85:"
           >
-            <span className="sr-only">{dismissText}</span>
+            <span className="sr-only" data-oid="qzho92d">
+              {dismissText}
+            </span>
             <svg
               className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 14 14"
+              data-oid=".3th9ce"
             >
               <path
                 stroke="currentColor"
@@ -186,6 +196,7 @@ const Alert = ({
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                data-oid="l4g3.8o"
               />
             </svg>
           </button>
@@ -194,7 +205,6 @@ const Alert = ({
     </div>
   );
 };
-
 Alert.propTypes = {
   id: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['info', 'danger', 'success', 'warning', 'dark']),
@@ -212,5 +222,4 @@ Alert.propTypes = {
   list: PropTypes.arrayOf(PropTypes.string),
   size: PropTypes.oneOf(['sm', 'base', 'lg']),
 };
-
 export default Alert;

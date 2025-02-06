@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-
 import { cn } from '@/utils/cn';
 
 /**
@@ -109,7 +108,7 @@ const SearchPlaceholder = ({ children }) => children;
  * @returns {React.ReactNode} The icon wrapped in a clickable div.
  */
 const SearchIcon = ({ children, onClick }) => (
-  <div onClick={onClick} className="cursor-pointer">
+  <div onClick={onClick} className="cursor-pointer" data-oid="rt:8wlc">
     {children}
   </div>
 );
@@ -132,12 +131,7 @@ const SearchLabel = ({ children, disable }) => children;
  * @param {string} [props.style='default'] - Style variant for the input.
  * @returns {JSX.Element} The rendered search input component.
  */
-const SearchInput = ({
-  id = 'search-input',
-  children,
-  className,
-  style = 'default',
-}) => {
+const SearchInput = ({ id = 'search-input', children, className, style = 'default' }) => {
   // Default values
   let value = '';
   let onChange = () => {};
@@ -150,7 +144,6 @@ const SearchInput = ({
   // Extract values from children
   React.Children.forEach(children, (child) => {
     if (!child) return;
-
     switch (child.type) {
       case SearchValue:
         value = child.props.children;
@@ -187,21 +180,20 @@ const SearchInput = ({
 
   // Parse style prop to get variants
   const styles = style.split(' ');
-  const shape =
-    styles.find((s) => ['circle', 'box', 'default'].includes(s)) || 'default';
+  const shape = styles.find((s) => ['circle', 'box', 'default'].includes(s)) || 'default';
   const state = styles.find((s) => ['success', 'error'].includes(s));
-
   return (
-    <div className={cn('relative w-full', className)}>
+    <div className={cn('relative w-full', className)} data-oid="ip4k3:l">
       {label && !labelDisabled && (
         <label
           htmlFor={id}
           className="mb-2 block pl-1 text-sm font-medium text-gray-900 dark:text-gray-100"
+          data-oid="ulygjw8"
         >
           {label}
         </label>
       )}
-      <div className="relative flex items-center">
+      <div className="relative flex items-center" data-oid="aqzsd58">
         <input
           id={id}
           type="text"
@@ -210,8 +202,10 @@ const SearchInput = ({
           placeholder={placeholder}
           className={cn(
             'w-full px-4 py-2.5',
-            icon && 'pr-12', // Add padding right if icon exists
-            'text-base', // Increased text size
+            icon && 'pr-12',
+            // Add padding right if icon exists
+            'text-base',
+            // Increased text size
             'text-gray-900 dark:text-gray-100',
             'bg-white dark:bg-gray-800',
             'border border-gray-300 dark:border-gray-600',
@@ -224,6 +218,7 @@ const SearchInput = ({
             'transition-all duration-200',
             'shadow-sm'
           )}
+          data-oid="ysek9xt"
         />
         {icon && (
           <button
@@ -244,20 +239,16 @@ const SearchInput = ({
               'active:shadow-[0_0_15px_rgba(37,99,235,0.6)] dark:active:shadow-[0_0_15px_rgba(59,130,246,0.6)]'
             )}
             aria-label="Search"
+            data-oid="pfp4iww"
           >
-            <span className="h-5 w-5">{icon}</span>
+            <span className="h-5 w-5" data-oid="k8nkryp">
+              {icon}
+            </span>
           </button>
         )}
       </div>
     </div>
   );
 };
-
-export {
-  SearchValue,
-  SearchOnChange,
-  SearchPlaceholder,
-  SearchIcon,
-  SearchLabel,
-};
+export { SearchValue, SearchOnChange, SearchPlaceholder, SearchIcon, SearchLabel };
 export default SearchInput;

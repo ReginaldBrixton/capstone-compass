@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { cn } from '@/app/utils/cn';
 import { useCarousel } from './Carousel';
 
@@ -18,16 +17,10 @@ import { useCarousel } from './Carousel';
  * @property {React.ReactNode} children - Content of the carousel item
  */
 
-export function CarouselItem({
-  id,
-  value: providedValue,
-  className,
-  children,
-}) {
+export function CarouselItem({ id, value: providedValue, className, children }) {
   const { activeIndex, type } = useCarousel();
   const value = providedValue ?? parseInt(id?.split('-')[1]) - 1 ?? 0;
   const isActive = activeIndex === value;
-
   return (
     <div
       id={id}
@@ -44,14 +37,12 @@ export function CarouselItem({
       )}
       data-carousel-item={isActive ? 'active' : ''}
       aria-hidden={!isActive}
+      data-oid="cv1pcsw"
     >
       {React.isValidElement(children) && children.type === 'img' ? (
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-full" data-oid="ve39oqg">
           {React.cloneElement(children, {
-            className: cn(
-              'absolute inset-0 w-full h-full object-cover',
-              children.props.className
-            ),
+            className: cn('absolute inset-0 w-full h-full object-cover', children.props.className),
           })}
         </div>
       ) : (
@@ -60,7 +51,6 @@ export function CarouselItem({
     </div>
   );
 }
-
 CarouselItem.propTypes = {
   id: PropTypes.string,
   value: PropTypes.number,

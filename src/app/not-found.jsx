@@ -2,45 +2,51 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
 const EnhancedAnimatedNotFound = () => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [hoverGlow, setHoverGlow] = useState(false);
   const [stars, setStars] = useState([]);
   const [galaxies, setGalaxies] = useState([]);
-
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 300);
 
     // Generate more stars for denser effect
     const starCount = 200;
-    const newStars = Array.from({ length: starCount }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: Math.random() * 3 + 1,
-      animationDuration: `${Math.random() * 4 + 2}s`,
-      animationDelay: `${Math.random() * 2}s`,
-    }));
+    const newStars = Array.from(
+      {
+        length: starCount,
+      },
+      (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        size: Math.random() * 3 + 1,
+        animationDuration: `${Math.random() * 4 + 2}s`,
+        animationDelay: `${Math.random() * 2}s`,
+      })
+    );
     setStars(newStars);
 
     // Generate more vibrant galaxies
     const galaxyCount = 8;
-    const newGalaxies = Array.from({ length: galaxyCount }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      scale: Math.random() * 0.8 + 0.5,
-      rotation: Math.random() * 360,
-      animationDuration: `${Math.random() * 15 + 25}s`,
-      color: `hsl(${Math.random() * 360}, 70%, 50%)`,
-    }));
+    const newGalaxies = Array.from(
+      {
+        length: galaxyCount,
+      },
+      (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        scale: Math.random() * 0.8 + 0.5,
+        rotation: Math.random() * 360,
+        animationDuration: `${Math.random() * 15 + 25}s`,
+        color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+      })
+    );
     setGalaxies(newGalaxies);
-
     return () => clearTimeout(timer);
   }, []);
-
   const styles = {
     container: {
       display: 'flex',
@@ -145,14 +151,12 @@ const EnhancedAnimatedNotFound = () => {
       boxShadow: '0 0 4px rgba(255,255,255,0.8)',
     },
   };
-
   if (!visible) {
     return null;
   }
-
   return (
-    <div style={styles.container}>
-      <div style={styles.background} />
+    <div style={styles.container} data-oid="_f:snye">
+      <div style={styles.background} data-oid="jer_cg-" />
       {galaxies.map((galaxy) => (
         <div
           key={galaxy.id}
@@ -164,9 +168,10 @@ const EnhancedAnimatedNotFound = () => {
             background: `radial-gradient(circle at 30% 30%, ${galaxy.color}, transparent 70%)`,
             animation: `moveGalaxy ${galaxy.animationDuration} linear infinite`,
           }}
+          data-oid="33y67b_"
         />
       ))}
-      <div style={styles.stars}>
+      <div style={styles.stars} data-oid="a82sgu8">
         {stars.map((star) => (
           <div
             key={star.id}
@@ -178,31 +183,39 @@ const EnhancedAnimatedNotFound = () => {
               height: `${star.size}px`,
               animation: `twinkle ${star.animationDuration} infinite ${star.animationDelay}`,
             }}
+            data-oid="h5c94np"
           />
         ))}
       </div>
-      <div style={styles.content}>
+      <div style={styles.content} data-oid="b9nmm.y">
         <h1
           style={styles.title}
           onMouseEnter={() => setHoverGlow(true)}
           onMouseLeave={() => setHoverGlow(false)}
+          data-oid=":j38h9v"
         >
           404
         </h1>
-        <p style={styles.message}>Lost in the Digital Cosmos</p>
-        <div style={styles.buttonContainer}>
+        <p style={styles.message} data-oid="ev68l21">
+          Lost in the Digital Cosmos
+        </p>
+        <div style={styles.buttonContainer} data-oid="_iy9dy4">
           <button
-            style={{ ...styles.button, ...styles.primaryButton }}
+            style={{
+              ...styles.button,
+              ...styles.primaryButton,
+            }}
             onClick={() => router.push('/')}
+            data-oid="83z:dh_"
           >
             Return Home
           </button>
-          <button style={styles.button} onClick={() => router.back()}>
+          <button style={styles.button} onClick={() => router.back()} data-oid="jql_c27">
             Go Back
           </button>
         </div>
       </div>
-      <style>
+      <style data-oid="pw6wi6n">
         {`
           @keyframes float {
             0%, 100% { transform: translateY(0) rotate(-2deg); }
@@ -229,5 +242,4 @@ const EnhancedAnimatedNotFound = () => {
     </div>
   );
 };
-
 export default EnhancedAnimatedNotFound;

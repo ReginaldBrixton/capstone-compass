@@ -1,11 +1,9 @@
 import { cn } from '../../lib/utils';
 import Image from 'next/image';
 import React from 'react';
-
 interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md' | 'lg';
 }
-
 export function Avatar({ size = 'md', className, ...props }: AvatarProps) {
   return (
     <div
@@ -17,15 +15,13 @@ export function Avatar({ size = 'md', className, ...props }: AvatarProps) {
         className
       )}
       {...props}
+      data-oid="j.-slhg"
     />
   );
 }
-
-interface AvatarImageProps
-  extends Omit<React.ComponentProps<typeof Image>, 'width' | 'height'> {
+interface AvatarImageProps extends Omit<React.ComponentProps<typeof Image>, 'width' | 'height'> {
   onLoadingStatusChange?: (status: 'loading' | 'loaded' | 'error') => void;
 }
-
 export function AvatarImage({
   className,
   onLoadingStatusChange,
@@ -43,14 +39,11 @@ export function AvatarImage({
       onLoad={() => onLoadingStatusChange?.('loaded')}
       onError={() => onLoadingStatusChange?.('error')}
       {...props}
+      data-oid="p281o1:"
     />
   );
 }
-
-export function AvatarFallback({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+export function AvatarFallback({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -58,6 +51,7 @@ export function AvatarFallback({
         className
       )}
       {...props}
+      data-oid="uc6:fwc"
     />
   );
 }

@@ -3,11 +3,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import styled from 'styled-components';
-
 import { ChapterEditor } from '../../../components';
-
 import '../../../styles/global.css';
-
 const SummaryPanel = styled.div`
   position: fixed;
   right: 2rem;
@@ -27,14 +24,12 @@ const SummaryPanel = styled.div`
     margin-top: 2rem;
   }
 `;
-
 const SummarySection = styled.div`
   background: var(--background-color);
   border-radius: 0.375rem;
   padding: 1rem;
   margin: 1rem 0;
 `;
-
 const ObjectivesList = styled.ul`
   list-style: none;
   padding: 0;
@@ -55,7 +50,6 @@ const ObjectivesList = styled.ul`
     }
   }
 `;
-
 const FindingCard = styled.div`
   background: white;
   border-radius: 0.375rem;
@@ -63,7 +57,6 @@ const FindingCard = styled.div`
   margin-bottom: 0.75rem;
   border-left: 3px solid var(--primary-color);
 `;
-
 const RecommendationInput = styled.textarea`
   width: 100%;
   padding: 0.75rem;
@@ -79,7 +72,6 @@ const RecommendationInput = styled.textarea`
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
   }
 `;
-
 const AddButton = styled.button`
   width: 100%;
   padding: 0.5rem;
@@ -96,12 +88,10 @@ const AddButton = styled.button`
     color: var(--primary-color);
   }
 `;
-
 const chapterFiveGuidelines = [
   {
     title: 'Research Summary',
-    description:
-      'Provide a concise summary of your research problem, objectives, and methodology.',
+    description: 'Provide a concise summary of your research problem, objectives, and methodology.',
   },
   {
     title: 'Key Findings',
@@ -110,8 +100,7 @@ const chapterFiveGuidelines = [
   },
   {
     title: 'Conclusions',
-    description:
-      'Draw conclusions based on your findings. Address each research objective.',
+    description: 'Draw conclusions based on your findings. Address each research objective.',
   },
   {
     title: 'Recommendations',
@@ -124,93 +113,97 @@ const chapterFiveGuidelines = [
       'Discuss any limitations of your study and how they might have affected your results.',
   },
 ];
-
 const sampleObjectives = [
   'To analyze the impact of remote work on employee productivity',
   'To identify key factors affecting work-life balance in remote settings',
   'To develop recommendations for improving remote work policies',
 ];
-
 const sampleFindings = [
   {
     id: 1,
-    finding:
-      '75% of employees reported increased productivity when working remotely',
+    finding: '75% of employees reported increased productivity when working remotely',
     objective: 1,
   },
   {
     id: 2,
-    finding:
-      'Flexible schedules were identified as the primary factor in work-life balance',
+    finding: 'Flexible schedules were identified as the primary factor in work-life balance',
     objective: 2,
   },
   {
     id: 3,
-    finding:
-      'Regular virtual team meetings improved collaboration and engagement',
+    finding: 'Regular virtual team meetings improved collaboration and engagement',
     objective: 3,
   },
 ];
-
 export default function ChapterFive() {
   const params = useParams();
   const [recommendations, setRecommendations] = useState(['']);
   const [newRecommendation, setNewRecommendation] = useState('');
-
   const handleSave = async (content) => {
     // TODO: Implement save logic
     console.log('Saving content:', content);
   };
-
   const handleSubmit = async (content) => {
     // TODO: Implement submission logic
     console.log('Submitting content:', content);
   };
-
   const addRecommendation = () => {
     if (newRecommendation.trim()) {
       setRecommendations([...recommendations, newRecommendation]);
       setNewRecommendation('');
     }
   };
-
   return (
-    <div style={{ display: 'flex', gap: '2rem' }}>
-      <div style={{ flex: 1 }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '2rem',
+      }}
+      data-oid="em830dx"
+    >
+      <div
+        style={{
+          flex: 1,
+        }}
+        data-oid="ljliozz"
+      >
         <ChapterEditor
           chapterTitle="Chapter 5: Conclusion and Recommendations"
           guidelines={chapterFiveGuidelines}
           onSave={handleSave}
           onSubmit={handleSubmit}
+          data-oid="qdmvozr"
         />
       </div>
 
-      <SummaryPanel>
-        <h3>Research Summary</h3>
+      <SummaryPanel data-oid="qe2x3rs">
+        <h3 data-oid="dxgteao">Research Summary</h3>
 
-        <SummarySection>
-          <h4>Research Objectives</h4>
-          <ObjectivesList>
+        <SummarySection data-oid="ffukf-f">
+          <h4 data-oid="ujdyt.p">Research Objectives</h4>
+          <ObjectivesList data-oid="hvb4vf.">
             {sampleObjectives.map((objective, index) => (
-              <li key={index}>{objective}</li>
+              <li key={index} data-oid="oaa5ti:">
+                {objective}
+              </li>
             ))}
           </ObjectivesList>
         </SummarySection>
 
-        <SummarySection>
-          <h4>Key Findings</h4>
+        <SummarySection data-oid="_rrvibd">
+          <h4 data-oid=":j7df3m">Key Findings</h4>
           {sampleFindings.map((item) => (
-            <FindingCard key={item.id}>
-              <p>{item.finding}</p>
-              <small className="text-secondary">
+            <FindingCard key={item.id} data-oid="7nyi3:a">
+              <p data-oid="nrdhpmq">{item.finding}</p>
+              <small className="text-secondary" data-oid="nr-1vyw">
                 Related to Objective {item.objective}
               </small>
             </FindingCard>
           ))}
         </SummarySection>
 
-        <SummarySection>
-          <h4>Recommendations</h4>
+        <SummarySection data-oid="1:cbwlp">
+          <h4 data-oid="zc-j6rw">Recommendations</h4>
           {recommendations.map((rec, index) => (
             <RecommendationInput
               key={index}
@@ -221,14 +214,16 @@ export default function ChapterFive() {
                 setRecommendations(newRecs);
               }}
               placeholder="Enter your recommendation..."
+              data-oid="tjgh5yn"
             />
           ))}
           <RecommendationInput
             value={newRecommendation}
             onChange={(e) => setNewRecommendation(e.target.value)}
             placeholder="Add a new recommendation..."
+            data-oid="5-x4rtn"
           />
-          <AddButton onClick={addRecommendation}>
+          <AddButton onClick={addRecommendation} data-oid="wn8:6ns">
             + Add Recommendation
           </AddButton>
         </SummarySection>

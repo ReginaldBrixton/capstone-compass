@@ -1,12 +1,14 @@
 'use client';
 
 import React from 'react';
-
 import styles from './styles/calendar.module.css';
-
 const DayView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
-  const hours = Array.from({ length: 24 }, (_, i) => i);
-
+  const hours = Array.from(
+    {
+      length: 24,
+    },
+    (_, i) => i
+  );
   const getProjectsForHour = (hour) => {
     return projects.filter((project) => {
       const projectDate = new Date(project.deadline);
@@ -18,17 +20,16 @@ const DayView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
       );
     });
   };
-
   return (
-    <div className={styles.dayView}>
-      <div className={styles.timeColumn}>
+    <div className={styles.dayView} data-oid="3a.muh4">
+      <div className={styles.timeColumn} data-oid="k4nmyxn">
         {hours.map((hour) => (
-          <div key={hour} className={styles.timeSlot}>
+          <div key={hour} className={styles.timeSlot} data-oid="2ww7aiy">
             {hour}:00
           </div>
         ))}
       </div>
-      <div className={styles.dayColumn}>
+      <div className={styles.dayColumn} data-oid="pmdkf5y">
         {hours.map((hour) => (
           <div
             key={hour}
@@ -38,6 +39,7 @@ const DayView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
               newDate.setHours(hour);
               onDateSelect(newDate);
             }}
+            data-oid="cllx85j"
           >
             {getProjectsForHour(hour).map((project) => (
               <div
@@ -47,6 +49,7 @@ const DayView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
                   e.stopPropagation();
                   onProjectClick(project);
                 }}
+                data-oid="57pca9f"
               >
                 {project.title}
               </div>
@@ -57,5 +60,4 @@ const DayView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
     </div>
   );
 };
-
 export default DayView;

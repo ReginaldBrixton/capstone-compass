@@ -2,25 +2,17 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
 import AuthButton from '../components/Button/AuthButton';
 import InputField from '../components/Input/InputField';
 import TermsModal from '../components/TermsModal';
 import { ToastProvider, useToast } from '../components/Toast/ToastProvider';
-import {
-  AuthContainer,
-  AuthForm,
-  AuthLink,
-  AuthTitle,
-  ErrorMessage,
-} from '../styles/AuthStyles';
+import { AuthContainer, AuthForm, AuthLink, AuthTitle, ErrorMessage } from '../styles/AuthStyles';
 import {
   validateConfirmPassword,
   validateEmail,
   validateName,
   validatePassword,
 } from '../utils/validation';
-
 function RegisterForm() {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,7 +27,6 @@ function RegisterForm() {
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const router = useRouter();
   const { addToast } = useToast();
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -43,44 +34,37 @@ function RegisterForm() {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
   const handleTermsClick = (e) => {
     e.preventDefault();
     setIsTermsModalOpen(true);
   };
-
   const handleAcceptTerms = () => {
     setFormData((prev) => ({
       ...prev,
       acceptTerms: true,
     }));
   };
-
   const validateForm = () => {
     const firstNameError = validateName(formData.firstName);
     if (firstNameError) {
       setError(firstNameError);
       return false;
     }
-
     const lastNameError = validateName(formData.lastName);
     if (lastNameError) {
       setError(lastNameError);
       return false;
     }
-
     const emailError = validateEmail(formData.email);
     if (emailError) {
       setError(emailError);
       return false;
     }
-
     const passwordError = validatePassword(formData.password);
     if (passwordError) {
       setError(passwordError);
       return false;
     }
-
     const confirmPasswordError = validateConfirmPassword(
       formData.password,
       formData.confirmPassword
@@ -89,25 +73,19 @@ function RegisterForm() {
       setError(confirmPasswordError);
       return false;
     }
-
     if (!formData.acceptTerms) {
       setError('You must accept the terms and conditions');
       return false;
     }
-
     return true;
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
     if (!validateForm()) {
       return;
     }
-
     setIsLoading(true);
-
     try {
       // Simulated registration
       console.log('Registration attempt:', {
@@ -119,7 +97,6 @@ function RegisterForm() {
 
       // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       addToast(
         'Registration successful! Please check your email to verify your account.',
         'success'
@@ -132,18 +109,18 @@ function RegisterForm() {
       setIsLoading(false);
     }
   };
-
   return (
-    <AuthContainer>
-      <AuthTitle>Create Account</AuthTitle>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      <AuthForm onSubmit={handleSubmit}>
+    <AuthContainer data-oid="923kogi">
+      <AuthTitle data-oid="bx0.2gt">Create Account</AuthTitle>
+      {error && <ErrorMessage data-oid="bc9:75n">{error}</ErrorMessage>}
+      <AuthForm onSubmit={handleSubmit} data-oid="4_18qhl">
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: '1rem',
           }}
+          data-oid="8z5r5w:"
         >
           <InputField
             type="text"
@@ -154,6 +131,7 @@ function RegisterForm() {
             required
             autoComplete="given-name"
             disabled={isLoading}
+            data-oid="o.m-wk2"
           />
           <InputField
             type="text"
@@ -164,6 +142,7 @@ function RegisterForm() {
             required
             autoComplete="family-name"
             disabled={isLoading}
+            data-oid="pljadzn"
           />
         </div>
 
@@ -176,6 +155,7 @@ function RegisterForm() {
           required
           autoComplete="email"
           disabled={isLoading}
+          data-oid="q4vx0fz"
         />
 
         <InputField
@@ -187,6 +167,7 @@ function RegisterForm() {
           required
           autoComplete="new-password"
           disabled={isLoading}
+          data-oid="c44e4.k"
         />
 
         <InputField
@@ -198,6 +179,7 @@ function RegisterForm() {
           required
           autoComplete="new-password"
           disabled={isLoading}
+          data-oid="9m2_hib"
         />
 
         <div
@@ -206,12 +188,14 @@ function RegisterForm() {
             alignItems: 'center',
             marginBottom: '0.5rem',
           }}
+          data-oid="uruh5uc"
         >
           <label
             style={{
               display: 'flex',
               alignItems: 'center',
             }}
+            data-oid="ufn84kt"
           >
             <input
               type="checkbox"
@@ -225,6 +209,7 @@ function RegisterForm() {
                 borderRadius: '0.25rem',
               }}
               disabled={isLoading}
+              data-oid="_69i:ic"
             />
             <span
               style={{
@@ -232,6 +217,7 @@ function RegisterForm() {
                 fontSize: '0.875rem',
                 color: '#4B5563',
               }}
+              data-oid="8gakcj1"
             >
               I accept the{' '}
               <button
@@ -245,6 +231,7 @@ function RegisterForm() {
                   textDecoration: 'underline',
                   font: 'inherit',
                 }}
+                data-oid="9wdvf7h"
               >
                 Terms and Conditions
               </button>
@@ -252,12 +239,17 @@ function RegisterForm() {
           </label>
         </div>
 
-        <AuthButton type="submit" disabled={isLoading}>
+        <AuthButton type="submit" disabled={isLoading} data-oid="m11jy.l">
           {isLoading ? 'Creating account...' : 'Create account'}
         </AuthButton>
 
-        <div style={{ textAlign: 'center' }}>
-          <AuthLink href="/auth/login">
+        <div
+          style={{
+            textAlign: 'center',
+          }}
+          data-oid="g:af5sn"
+        >
+          <AuthLink href="/auth/login" data-oid="jncous.">
             Already have an account? Sign in
           </AuthLink>
         </div>
@@ -270,15 +262,15 @@ function RegisterForm() {
           handleAcceptTerms();
           setIsTermsModalOpen(false);
         }}
+        data-oid="58g8ahp"
       />
     </AuthContainer>
   );
 }
-
 export default function RegisterPage() {
   return (
-    <ToastProvider>
-      <RegisterForm />
+    <ToastProvider data-oid="c3jioue">
+      <RegisterForm data-oid="c7l:361" />
     </ToastProvider>
   );
 }

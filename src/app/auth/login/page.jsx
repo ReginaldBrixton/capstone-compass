@@ -2,19 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
 import AuthButton from '../components/Button/AuthButton';
 import InputField from '../components/Input/InputField';
 import { ToastProvider, useToast } from '../components/Toast/ToastProvider';
-import {
-  AuthContainer,
-  AuthForm,
-  AuthLink,
-  AuthTitle,
-  ErrorMessage,
-} from '../styles/AuthStyles';
+import { AuthContainer, AuthForm, AuthLink, AuthTitle, ErrorMessage } from '../styles/AuthStyles';
 import { validateEmail } from '../utils/validation';
-
 const RememberMeCheckbox = ({ checked, onChange, disabled }) => (
   <div
     style={{
@@ -22,12 +14,14 @@ const RememberMeCheckbox = ({ checked, onChange, disabled }) => (
       alignItems: 'center',
       marginBottom: '0.2rem',
     }}
+    data-oid="o22gsdn"
   >
     <label
       style={{
         display: 'flex',
         alignItems: 'center',
       }}
+      data-oid="_ytxvby"
     >
       <input
         type="checkbox"
@@ -41,16 +35,21 @@ const RememberMeCheckbox = ({ checked, onChange, disabled }) => (
           borderRadius: '0.25rem',
         }}
         disabled={disabled}
+        data-oid="d77a.fp"
       />
       <span
-        style={{ marginLeft: '0.5rem', fontSize: '0.875rem', color: '#4B5563' }}
+        style={{
+          marginLeft: '0.5rem',
+          fontSize: '0.875rem',
+          color: '#4B5563',
+        }}
+        data-oid="up48kj2"
       >
         Remember me
       </span>
     </label>
   </div>
 );
-
 const AuthLinks = () => (
   <div
     style={{
@@ -61,6 +60,7 @@ const AuthLinks = () => (
       padding: '1rem 0',
       borderTop: '1px solid #E5E7EB',
     }}
+    data-oid="f6ac1g8"
   >
     <AuthLink
       href="/auth/forgot-password"
@@ -76,6 +76,7 @@ const AuthLinks = () => (
           transform: 'translateY(-1px)',
         },
       }}
+      data-oid="_vze:kx"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -87,8 +88,12 @@ const AuthLinks = () => (
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        data-oid="_1z_y4y"
       >
-        <path d="M12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+        <path
+          d="M12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+          data-oid="x_:x2wh"
+        />
       </svg>
       Forgot password?
     </AuthLink>
@@ -106,6 +111,7 @@ const AuthLinks = () => (
           transform: 'translateY(-1px)',
         },
       }}
+      data-oid="5rjgvot"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -117,17 +123,17 @@ const AuthLinks = () => (
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        data-oid="9o0a0re"
       >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-        <circle cx="8.5" cy="7" r="4"></circle>
-        <line x1="20" y1="8" x2="20" y2="14"></line>
-        <line x1="23" y1="11" x2="17" y2="11"></line>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" data-oid="4rgqq99"></path>
+        <circle cx="8.5" cy="7" r="4" data-oid="vkciqek"></circle>
+        <line x1="20" y1="8" x2="20" y2="14" data-oid=":l.x1u_"></line>
+        <line x1="23" y1="11" x2="17" y2="11" data-oid="a2::ujb"></line>
       </svg>
       Create account
     </AuthLink>
   </div>
 );
-
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -138,7 +144,6 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { addToast } = useToast();
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -146,24 +151,19 @@ const LoginForm = () => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
     const emailError = validateEmail(formData.email);
     if (emailError) {
       setError(emailError);
       return;
     }
-
     if (!formData.password) {
       setError('Password is required');
       return;
     }
-
     setIsLoading(true);
-
     try {
       // Simulated login
       console.log('Login attempt with:', {
@@ -174,11 +174,9 @@ const LoginForm = () => {
 
       // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       if (formData.rememberMe) {
         localStorage.setItem('rememberMe', 'true');
       }
-
       addToast('Login successful!', 'success');
       router.push('/dashboard');
     } catch (err) {
@@ -188,12 +186,11 @@ const LoginForm = () => {
       setIsLoading(false);
     }
   };
-
   return (
-    <AuthContainer>
-      <AuthTitle>Welcome Back</AuthTitle>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      <AuthForm onSubmit={handleSubmit}>
+    <AuthContainer data-oid="p-9_4zd">
+      <AuthTitle data-oid="54ylfb3">Welcome Back</AuthTitle>
+      {error && <ErrorMessage data-oid="wq2g.vo">{error}</ErrorMessage>}
+      <AuthForm onSubmit={handleSubmit} data-oid="oe-v-h.">
         <InputField
           type="email"
           name="email"
@@ -203,6 +200,7 @@ const LoginForm = () => {
           required
           autoComplete="email"
           disabled={isLoading}
+          data-oid="-lf.xal"
         />
         <InputField
           type="password"
@@ -213,30 +211,30 @@ const LoginForm = () => {
           required
           autoComplete="current-password"
           disabled={isLoading}
+          data-oid="8g9xuct"
         />
 
         <RememberMeCheckbox
           checked={formData.rememberMe}
           onChange={handleChange}
           disabled={isLoading}
+          data-oid="ji6f_74"
         />
 
-        <AuthButton type="submit" disabled={isLoading}>
+        <AuthButton type="submit" disabled={isLoading} data-oid="ltvpra.">
           {isLoading ? 'Signing in...' : 'Sign in'}
         </AuthButton>
 
-        <AuthLinks />
+        <AuthLinks data-oid="9mw-37." />
       </AuthForm>
     </AuthContainer>
   );
 };
-
 const LoginPage = () => {
   return (
-    <ToastProvider>
-      <LoginForm />
+    <ToastProvider data-oid="awmg0wf">
+      <LoginForm data-oid="a947vg3" />
     </ToastProvider>
   );
 };
-
 export default LoginPage;

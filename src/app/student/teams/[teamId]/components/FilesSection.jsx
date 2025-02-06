@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  FiEdit2,
-  FiFile,
-  FiFolder,
-  FiFolderPlus,
-  FiTrash2,
-  FiUpload,
-} from 'react-icons/fi';
+import { FiEdit2, FiFile, FiFolder, FiFolderPlus, FiTrash2, FiUpload } from 'react-icons/fi';
 import styled from 'styled-components';
-
 import ConfirmDialog from './ConfirmDialog';
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 3vw, 2rem);
 `;
-
 const ActionBar = styled.div`
   display: flex;
   gap: clamp(0.5rem, 2vw, 1rem);
   flex-wrap: wrap;
 `;
-
 const ActionButton = styled.button`
   display: flex;
   align-items: center;
@@ -48,13 +37,11 @@ const ActionButton = styled.button`
     height: 1.2em;
   }
 `;
-
 const FileGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: clamp(1rem, 2vw, 1.5rem);
 `;
-
 const FileCard = styled(motion.div)`
   background: white;
   border-radius: 12px;
@@ -70,7 +57,6 @@ const FileCard = styled(motion.div)`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 `;
-
 const FileHeader = styled.div`
   display: flex;
   align-items: flex-start;
@@ -81,7 +67,6 @@ const FileHeader = styled.div`
     color: #4a5568;
   }
 `;
-
 const FileInfo = styled.div`
   flex: 1;
 
@@ -97,13 +82,11 @@ const FileInfo = styled.div`
     color: #718096;
   }
 `;
-
 const FileActions = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-top: auto;
 `;
-
 const IconButton = styled.button`
   display: flex;
   align-items: center;
@@ -127,7 +110,6 @@ const IconButton = styled.button`
     height: 1.2em;
   }
 `;
-
 const UploadOverlay = styled(motion.div)`
   position: fixed;
   inset: 0;
@@ -138,7 +120,6 @@ const UploadOverlay = styled(motion.div)`
   z-index: 1000;
   padding: clamp(1rem, 3vw, 2rem);
 `;
-
 const UploadZone = styled(motion.div)`
   background: white;
   border-radius: clamp(1rem, 2vw, 1.5rem);
@@ -170,14 +151,12 @@ const UploadZone = styled(motion.div)`
     display: none;
   }
 `;
-
 const FilterBar = styled.div`
   display: flex;
   gap: 1rem;
   margin: 1rem 0;
   flex-wrap: wrap;
 `;
-
 const FilterSelect = styled.select`
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -192,7 +171,6 @@ const FilterSelect = styled.select`
     border-color: #3b82f6;
   }
 `;
-
 const SearchInput = styled.input`
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -208,7 +186,6 @@ const SearchInput = styled.input`
     border-color: #3b82f6;
   }
 `;
-
 const BreadcrumbNav = styled.div`
   display: flex;
   align-items: center;
@@ -216,7 +193,6 @@ const BreadcrumbNav = styled.div`
   margin-bottom: 1rem;
   flex-wrap: wrap;
 `;
-
 const BreadcrumbItem = styled.button`
   background: none;
   border: none;
@@ -236,7 +212,6 @@ const BreadcrumbItem = styled.button`
     color: #718096;
   }
 `;
-
 const FilesSection = ({ teamId }) => {
   const [showUpload, setShowUpload] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -247,7 +222,6 @@ const FilesSection = ({ teamId }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     // Simulated API call to fetch files
     const fetchFiles = async () => {
@@ -284,7 +258,6 @@ const FilesSection = ({ teamId }) => {
             path: '/',
           },
         ];
-
         setTimeout(() => {
           setFiles(mockFiles);
           setLoading(false);
@@ -294,14 +267,11 @@ const FilesSection = ({ teamId }) => {
         setLoading(false);
       }
     };
-
     fetchFiles();
   }, [teamId, currentPath]);
-
   const handleUpload = async (event) => {
     const files = event.target.files;
     if (!files.length) return;
-
     try {
       // Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -312,11 +282,9 @@ const FilesSection = ({ teamId }) => {
       setShowUpload(false);
     }
   };
-
   const handleCreateFolder = async () => {
     const folderName = prompt('Enter folder name:');
     if (!folderName) return;
-
     try {
       // Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -325,10 +293,8 @@ const FilesSection = ({ teamId }) => {
       console.error('Error creating folder:', error);
     }
   };
-
   const handleDelete = async () => {
     if (!selectedFile) return;
-
     try {
       // Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -341,11 +307,9 @@ const FilesSection = ({ teamId }) => {
       setSelectedFile(null);
     }
   };
-
   const handleNavigate = (path) => {
     setCurrentPath(path);
   };
-
   const getBreadcrumbs = () => {
     const parts = currentPath.split('/').filter(Boolean);
     return [
@@ -354,6 +318,7 @@ const FilesSection = ({ teamId }) => {
         onClick={() => handleNavigate('/')}
         $active={currentPath === '/'}
         $last={parts.length === 0}
+        data-oid="im_m7:o"
       >
         Root
       </BreadcrumbItem>,
@@ -365,6 +330,7 @@ const FilesSection = ({ teamId }) => {
             onClick={() => handleNavigate(path)}
             $active={currentPath === path}
             $last={index === parts.length - 1}
+            data-oid="ur5iybf"
           >
             {part}
           </BreadcrumbItem>
@@ -372,7 +338,6 @@ const FilesSection = ({ teamId }) => {
       }),
     ];
   };
-
   const filteredFiles = files
     .filter((file) => file.path === currentPath)
     .filter((file) => {
@@ -388,7 +353,6 @@ const FilesSection = ({ teamId }) => {
       if (a.type !== b.type) {
         return a.type === 'folder' ? -1 : 1;
       }
-
       switch (sortBy) {
         case 'name':
           return a.name.localeCompare(b.name);
@@ -399,46 +363,59 @@ const FilesSection = ({ teamId }) => {
           return 0;
       }
     });
-
   return (
-    <Container className="FilesSection-container">
-      <ActionBar className="FilesSection-actionBar">
+    <Container className="FilesSection-container" data-oid="24hsh4z">
+      <ActionBar className="FilesSection-actionBar" data-oid="ed97fyg">
         <ActionButton
           className="FilesSection-uploadButton"
           onClick={() => setShowUpload(true)}
+          data-oid="anl7u-i"
         >
-          <FiUpload /> Upload Files
+          <FiUpload data-oid="8plika1" /> Upload Files
         </ActionButton>
         <ActionButton
           className="FilesSection-newFolderButton"
           onClick={handleCreateFolder}
+          data-oid="j9ojf9q"
         >
-          <FiFolderPlus /> New Folder
+          <FiFolderPlus data-oid="7u-lije" /> New Folder
         </ActionButton>
       </ActionBar>
 
-      <BreadcrumbNav className="FilesSection-breadcrumbNav">
+      <BreadcrumbNav className="FilesSection-breadcrumbNav" data-oid="wgq5udj">
         {getBreadcrumbs()}
       </BreadcrumbNav>
 
-      <FilterBar className="FilesSection-filterBar">
+      <FilterBar className="FilesSection-filterBar" data-oid="dzknm40">
         <FilterSelect
           className="FilesSection-filterSelect"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
+          data-oid="j4ephw7"
         >
-          <option value="all">All Types</option>
-          <option value="file">Files</option>
-          <option value="folder">Folders</option>
+          <option value="all" data-oid="syhc68f">
+            All Types
+          </option>
+          <option value="file" data-oid=".q6l-hj">
+            Files
+          </option>
+          <option value="folder" data-oid="y331ulr">
+            Folders
+          </option>
         </FilterSelect>
 
         <FilterSelect
           className="FilesSection-sortSelect"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
+          data-oid="j2.ha24"
         >
-          <option value="name">Sort by Name</option>
-          <option value="size">Sort by Size</option>
+          <option value="name" data-oid="-2j:zms">
+            Sort by Name
+          </option>
+          <option value="size" data-oid="jgc4cpt">
+            Sort by Size
+          </option>
         </FilterSelect>
 
         <SearchInput
@@ -447,36 +424,51 @@ const FilesSection = ({ teamId }) => {
           placeholder="Search files..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          data-oid="7xx8e_c"
         />
       </FilterBar>
 
-      <FileGrid className="FilesSection-fileGrid">
-        <AnimatePresence>
+      <FileGrid className="FilesSection-fileGrid" data-oid="z.t7s1h">
+        <AnimatePresence data-oid="lukxwx8">
           {loading ? (
             <motion.div
               className="FilesSection-loading"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               style={{
                 textAlign: 'center',
                 padding: '2rem',
                 gridColumn: '1 / -1',
               }}
+              data-oid=".q5oe5h"
             >
               Loading files...
             </motion.div>
           ) : filteredFiles.length === 0 ? (
             <motion.div
               className="FilesSection-noFiles"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               style={{
                 textAlign: 'center',
                 padding: '2rem',
                 gridColumn: '1 / -1',
               }}
+              data-oid="zs3mgot"
             >
               No files found
             </motion.div>
@@ -485,36 +477,50 @@ const FilesSection = ({ teamId }) => {
               <FileCard
                 className="FilesSection-fileCard"
                 key={file.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -20,
+                }}
                 onClick={() =>
-                  file.type === 'folder' &&
-                  handleNavigate(currentPath + file.name + '/')
+                  file.type === 'folder' && handleNavigate(currentPath + file.name + '/')
                 }
                 style={{
                   cursor: file.type === 'folder' ? 'pointer' : 'default',
                 }}
+                data-oid="k:kyqq1"
               >
-                <FileHeader className="FilesSection-fileHeader">
-                  <div className="icon">
-                    {file.type === 'folder' ? <FiFolder /> : <FiFile />}
+                <FileHeader className="FilesSection-fileHeader" data-oid="_ncdgiv">
+                  <div className="icon" data-oid="odfzqvs">
+                    {file.type === 'folder' ? (
+                      <FiFolder data-oid="75p24yo" />
+                    ) : (
+                      <FiFile data-oid="_ga9.tn" />
+                    )}
                   </div>
-                  <FileInfo className="FilesSection-fileInfo">
-                    <h3 className="FilesSection-fileName">{file.name}</h3>
-                    <div className="meta">
-                      {file.type === 'folder'
-                        ? `${file.itemCount} items`
-                        : file.size}
+                  <FileInfo className="FilesSection-fileInfo" data-oid="50hypu5">
+                    <h3 className="FilesSection-fileName" data-oid="x2le1xz">
+                      {file.name}
+                    </h3>
+                    <div className="meta" data-oid=":sjde9b">
+                      {file.type === 'folder' ? `${file.itemCount} items` : file.size}
                     </div>
                   </FileInfo>
                 </FileHeader>
-                <FileActions className="FilesSection-fileActions">
+                <FileActions className="FilesSection-fileActions" data-oid="4u6-n_e">
                   <IconButton
                     className="FilesSection-editButton"
                     aria-label="Edit"
+                    data-oid="_dzts_2"
                   >
-                    <FiEdit2 />
+                    <FiEdit2 data-oid="a:t39i5" />
                   </IconButton>
                   <IconButton
                     className="FilesSection-deleteButton"
@@ -524,8 +530,9 @@ const FilesSection = ({ teamId }) => {
                       setSelectedFile(file);
                       setShowDeleteDialog(true);
                     }}
+                    data-oid="ul.2ltf"
                   >
-                    <FiTrash2 />
+                    <FiTrash2 data-oid="la9g2jb" />
                   </IconButton>
                 </FileActions>
               </FileCard>
@@ -534,37 +541,56 @@ const FilesSection = ({ teamId }) => {
         </AnimatePresence>
       </FileGrid>
 
-      <AnimatePresence>
+      <AnimatePresence data-oid="q7.3duj">
         {showUpload && (
           <UploadOverlay
             className="FilesSection-uploadOverlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
             onClick={() => setShowUpload(false)}
+            data-oid="fg9j92d"
           >
             <UploadZone
               className="FilesSection-uploadZone"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{
+                scale: 0.9,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+              exit={{
+                scale: 0.9,
+                opacity: 0,
+              }}
               onClick={(e) => e.stopPropagation()}
+              data-oid="6ut1m25"
             >
-              <div className="icon">
-                <FiUpload />
+              <div className="icon" data-oid="uuad8ep">
+                <FiUpload data-oid="453qdv9" />
               </div>
-              <h3>Upload Files</h3>
-              <p>Drag and drop files here or click to browse</p>
+              <h3 data-oid="5e_1ple">Upload Files</h3>
+              <p data-oid="uljk3rr">Drag and drop files here or click to browse</p>
               <ActionButton
                 className="FilesSection-chooseFilesButton"
                 as="label"
+                data-oid="oqn_dgi"
               >
-                <FiUpload /> Choose Files
+                <FiUpload data-oid="8tcxuy3" /> Choose Files
                 <input
                   type="file"
                   multiple
                   onChange={handleUpload}
                   accept="*/*"
+                  data-oid="3xtw2o6"
                 />
               </ActionButton>
             </UploadZone>
@@ -584,9 +610,9 @@ const FilesSection = ({ teamId }) => {
         message={`Are you sure you want to delete "${selectedFile?.name}"? This action cannot be undone.`}
         confirmText="Delete"
         icon="🗑️"
+        data-oid="02z.r0d"
       />
     </Container>
   );
 };
-
 export default FilesSection;

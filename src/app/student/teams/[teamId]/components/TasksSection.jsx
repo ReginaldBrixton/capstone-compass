@@ -10,9 +10,7 @@ import {
   FiTrash2,
   FiUser,
 } from 'react-icons/fi';
-
 import ConfirmDialog from './ConfirmDialog';
-
 const getStatusStyles = (status) => {
   switch (status) {
     case 'completed':
@@ -25,59 +23,73 @@ const getStatusStyles = (status) => {
       return 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300';
   }
 };
-
 const TaskCard = ({ task, onEdit, onDelete }) => (
   <motion.div
     className={`rounded-xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6`}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
+    initial={{
+      opacity: 0,
+      y: 20,
+    }}
+    animate={{
+      opacity: 1,
+      y: 0,
+    }}
+    exit={{
+      opacity: 0,
+      y: -20,
+    }}
     layout
+    data-oid="4z-w0.2"
   >
-    <div className="mb-4 flex items-start justify-between gap-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+    <div className="mb-4 flex items-start justify-between gap-4" data-oid="y7xesqu">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white" data-oid=".15r5sq">
         {task.title}
       </h3>
       <span
         className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusStyles(task.status)}`}
+        data-oid="4ta.2js"
       >
         {task.status}
       </span>
     </div>
 
-    <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+    <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-300" data-oid="vv5j9j4">
       {task.description}
     </p>
 
-    <div className="mt-auto flex flex-wrap items-center gap-4 border-t border-gray-100 pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
-      <div className="flex items-center gap-2">
-        <FiCalendar className="h-4 w-4" />
-        <span>Due: {task.dueDate}</span>
+    <div
+      className="mt-auto flex flex-wrap items-center gap-4 border-t border-gray-100 pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400"
+      data-oid="3yadfea"
+    >
+      <div className="flex items-center gap-2" data-oid="erjvwz:">
+        <FiCalendar className="h-4 w-4" data-oid="uy1ch:c" />
+        <span data-oid="x3z9pvs">Due: {task.dueDate}</span>
       </div>
-      <div className="flex items-center gap-2">
-        <FiUser className="h-4 w-4" />
-        <span>{task.assignee}</span>
+      <div className="flex items-center gap-2" data-oid="s7ath7q">
+        <FiUser className="h-4 w-4" data-oid="mkp6:fa" />
+        <span data-oid="hvs.pc4">{task.assignee}</span>
       </div>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-2" data-oid="z2cnfvg">
         <button
           onClick={() => onEdit(task)}
           className="rounded-lg bg-blue-100 p-2 text-blue-600 transition-colors duration-200 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50"
           title="Edit task"
+          data-oid="yrqr7zz"
         >
-          <FiEdit2 className="h-4 w-4" />
+          <FiEdit2 className="h-4 w-4" data-oid="aj9k:xx" />
         </button>
         <button
           onClick={() => onDelete(task)}
           className="rounded-lg bg-red-100 p-2 text-red-600 transition-colors duration-200 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
           title="Delete task"
+          data-oid="dl-y2v4"
         >
-          <FiTrash2 className="h-4 w-4" />
+          <FiTrash2 className="h-4 w-4" data-oid="b6ck859" />
         </button>
       </div>
     </div>
   </motion.div>
 );
-
 const TasksSection = ({ teamId }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -86,7 +98,6 @@ const TasksSection = ({ teamId }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     // Simulated API call to fetch tasks
     const fetchTasks = async () => {
@@ -106,7 +117,6 @@ const TasksSection = ({ teamId }) => {
           },
           // ... existing mock tasks ...
         ];
-
         setTimeout(() => {
           setTasks(mockTasks);
           setLoading(false);
@@ -116,18 +126,14 @@ const TasksSection = ({ teamId }) => {
         setLoading(false);
       }
     };
-
     fetchTasks();
   }, [teamId]);
-
   const handleCreateTask = () => {
     // Handle task creation logic
     console.log('Creating new task for team:', teamId);
   };
-
   const handleDeleteTask = async () => {
     if (!selectedTask) return;
-
     try {
       // Replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -140,7 +146,6 @@ const TasksSection = ({ teamId }) => {
       setSelectedTask(null);
     }
   };
-
   const filteredTasks = tasks
     .filter((task) => {
       if (filter === 'all') return true;
@@ -159,7 +164,11 @@ const TasksSection = ({ teamId }) => {
         case 'dueDate':
           return new Date(a.dueDate) - new Date(b.dueDate);
         case 'priority':
-          const priorityOrder = { High: 3, Medium: 2, Low: 1 };
+          const priorityOrder = {
+            High: 3,
+            Medium: 2,
+            Low: 1,
+          };
           return priorityOrder[b.priority] - priorityOrder[a.priority];
         case 'title':
           return a.title.localeCompare(b.title);
@@ -167,41 +176,61 @@ const TasksSection = ({ teamId }) => {
           return 0;
       }
     });
-
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="space-y-6" data-oid="ko:5v1m">
+      <div className="flex flex-wrap items-center justify-between gap-4" data-oid="kfvl_oz">
         <motion.button
           className={`flex items-center gap-2 rounded-xl bg-blue-500 px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-700`}
           onClick={handleCreateTask}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{
+            scale: 1.02,
+          }}
+          whileTap={{
+            scale: 0.98,
+          }}
+          data-oid="n.ys3ek"
         >
-          <FiPlus className="h-5 w-5" />
+          <FiPlus className="h-5 w-5" data-oid="r08jhyg" />
           Create Task
         </motion.button>
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4" data-oid=".62mnnz">
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          data-oid="hrdswlu"
         >
-          <option value="all">All Status</option>
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
+          <option value="all" data-oid=".od77rk">
+            All Status
+          </option>
+          <option value="pending" data-oid=":sfa207">
+            Pending
+          </option>
+          <option value="in-progress" data-oid="2z8he19">
+            In Progress
+          </option>
+          <option value="completed" data-oid="icq7ol0">
+            Completed
+          </option>
         </select>
 
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
           className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          data-oid="3:121z7"
         >
-          <option value="dueDate">Sort by Due Date</option>
-          <option value="priority">Sort by Priority</option>
-          <option value="title">Sort by Title</option>
+          <option value="dueDate" data-oid="8hqgv5f">
+            Sort by Due Date
+          </option>
+          <option value="priority" data-oid="9qbe:y6">
+            Sort by Priority
+          </option>
+          <option value="title" data-oid="_h.z2w4">
+            Sort by Title
+          </option>
         </select>
 
         <input
@@ -210,31 +239,54 @@ const TasksSection = ({ teamId }) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="min-w-[200px] flex-1 rounded-lg border border-gray-200 bg-white px-4 py-2 text-gray-700 placeholder-gray-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder-gray-500"
+          data-oid="bubsfxm"
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
+      <div
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
+        data-oid="p16t9px"
+      >
+        <AnimatePresence mode="popLayout" data-oid="plsgbgu">
           {loading ? (
             <motion.div
               className="col-span-full py-12 text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              data-oid="2e1e54r"
             >
-              <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-blue-500 dark:border-blue-400" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <div
+                className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-blue-500 dark:border-blue-400"
+                data-oid="fr1t0.."
+              />
+              <p className="text-gray-600 dark:text-gray-400" data-oid="dzsnl93">
                 Loading tasks...
               </p>
             </motion.div>
           ) : filteredTasks.length === 0 ? (
             <motion.div
               className="col-span-full py-12 text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              data-oid="5oraum5"
             >
-              <p className="text-gray-600 dark:text-gray-400">No tasks found</p>
+              <p className="text-gray-600 dark:text-gray-400" data-oid="-vjek2b">
+                No tasks found
+              </p>
             </motion.div>
           ) : (
             filteredTasks.map((task) => (
@@ -246,6 +298,7 @@ const TasksSection = ({ teamId }) => {
                   setSelectedTask(task);
                   setShowDeleteDialog(true);
                 }}
+                data-oid="ab:b3:3"
               />
             ))
           )}
@@ -263,9 +316,9 @@ const TasksSection = ({ teamId }) => {
         message={`Are you sure you want to delete "${selectedTask?.title}"? This action cannot be undone.`}
         confirmText="Delete"
         icon="🗑️"
+        data-oid="xpz5j6y"
       />
     </div>
   );
 };
-
 export default TasksSection;

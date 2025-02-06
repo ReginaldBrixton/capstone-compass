@@ -100,3 +100,33 @@ a {
     color-scheme: dark;
   }
 }
+
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.2s ease-out;
+}
+
+.animate-slide-down-fade {
+  animation: slide-down-fade 0.2s ease-out;
+}

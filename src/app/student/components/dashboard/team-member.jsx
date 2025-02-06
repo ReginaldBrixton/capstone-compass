@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../../../../components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../../../../components/ui/avatar';
 import { Badge } from '../../../../components/ui/badge';
 import { getAvatarUrl } from '../../../../utils/avatar';
 
@@ -18,31 +14,47 @@ import { getAvatarUrl } from '../../../../utils/avatar';
  */
 export const TeamMember = ({ name = '', role = '', imageUrl }) => {
   const avatarUrl = getAvatarUrl(name, imageUrl);
-
   return (
     <div
-      className="group flex items-center space-x-4 rounded-lg border border-border bg-card p-4 shadow-sm transition-shadow duration-200 hover:shadow-md"
+      className="group flex items-center space-x-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:scale-[1.02] hover:border-primary/30 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary/50"
       id="team-member-container"
+      data-oid="rgub9_p"
     >
       <div
-        className="transition-ring relative h-12 w-12 overflow-hidden rounded-full ring-1 ring-ring duration-200 group-hover:ring-primary"
+        className="relative h-14 w-14 overflow-hidden rounded-full ring-2 ring-slate-200 transition-all duration-300 group-hover:ring-primary-500 dark:ring-slate-600 dark:group-hover:ring-primary-400"
         id="team-member-avatar-container"
+        data-oid="d8xi2g-"
       >
-        <Avatar className="h-12 w-12">
-          <AvatarImage src={avatarUrl} alt={name} />
-          <AvatarFallback>{name[0]}</AvatarFallback>
+        <Avatar className="h-14 w-14" data-oid="ruiltiw">
+          <AvatarImage 
+            src={avatarUrl} 
+            alt={name} 
+            className="transition-opacity duration-300 group-hover:opacity-90" 
+            data-oid="khoql9m" 
+          />
+          <AvatarFallback 
+            className="bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200" 
+            data-oid="yhjne:a"
+          >
+            {name[0]}
+          </AvatarFallback>
         </Avatar>
       </div>
-      <div id="team-member-info" className="space-y-1">
-        <h3 className="cursor-pointer text-sm font-medium text-foreground transition-colors duration-150 hover:underline">
+      <div id="team-member-info" className="space-y-1.5" data-oid="w4c84u7">
+        <h3
+          className="text-lg font-semibold text-slate-800 transition-colors duration-300 hover:text-primary-600 dark:text-slate-100 dark:hover:text-primary-400"
+          data-oid="j-vt06q"
+        >
           {name || 'Anonymous User'}
         </h3>
-        <p
-          className="text-xs font-normal text-muted-foreground"
+        <Badge
+          variant="outline"
+          className="rounded-lg bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 shadow-inner dark:bg-slate-700/50 dark:text-slate-300"
           id="team-member-role"
+          data-oid="chmjx5m"
         >
-          {role || 'Member'}
-        </p>
+          {role || 'Team Member'}
+        </Badge>
       </div>
     </div>
   );

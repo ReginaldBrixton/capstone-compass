@@ -72,7 +72,7 @@ prefer_redux = false
 prefer_vanilla_css = true
 css_modules = false
 css_in_js = false
-tailwind = false
+tailwind = true
 
 # Build
 enable_minification = true

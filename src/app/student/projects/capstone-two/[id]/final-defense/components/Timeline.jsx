@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-
-const TimelineWrapper = styled.div.attrs({ className: 'timeline-wrapper' })`
+const TimelineWrapper = styled.div.attrs({
+  className: 'timeline-wrapper',
+})`
   position: relative;
   padding: 2rem 0;
 
@@ -16,10 +17,8 @@ const TimelineWrapper = styled.div.attrs({ className: 'timeline-wrapper' })`
     background: var(--border-color);
   }
 `;
-
 const TimelineItemStyled = styled(motion.div).attrs({
-  className: (props) =>
-    `timeline-item ${props.$isCompleted ? 'completed' : ''}`,
+  className: (props) => `timeline-item ${props.$isCompleted ? 'completed' : ''}`,
 })`
   position: relative;
   padding-left: 3rem;
@@ -43,8 +42,9 @@ const TimelineItemStyled = styled(motion.div).attrs({
     transform: scale(1.2);
   }
 `;
-
-const TimelineContent = styled.div.attrs({ className: 'timeline-content' })`
+const TimelineContent = styled.div.attrs({
+  className: 'timeline-content',
+})`
   background: white;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -62,7 +62,6 @@ const TimelineContent = styled.div.attrs({ className: 'timeline-content' })`
     font-size: 0.9rem;
   }
 `;
-
 const TimelineItem = ({ event, onClick }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -72,32 +71,40 @@ const TimelineItem = ({ event, onClick }) => {
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-
   return (
     <TimelineItemStyled
       $isCompleted={event.isCompleted}
       onClick={() => onClick(event)}
-      whileHover={{ x: 8 }}
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.3 }}
+      whileHover={{
+        x: 8,
+      }}
+      initial={{
+        opacity: 0,
+        x: -20,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      transition={{
+        duration: 0.3,
+      }}
+      data-oid="eo4ify_"
     >
-      <TimelineContent>
-        <h3>{event.title}</h3>
-        <p>Due: {formatDate(event.date)}</p>
+      <TimelineContent data-oid="43csdk1">
+        <h3 data-oid="494s1ln">{event.title}</h3>
+        <p data-oid="jl1f_2z">Due: {formatDate(event.date)}</p>
       </TimelineContent>
     </TimelineItemStyled>
   );
 };
-
 const Timeline = ({ events, onEventClick }) => {
   return (
-    <TimelineWrapper>
+    <TimelineWrapper data-oid="nb_d5v_">
       {events.map((event) => (
-        <TimelineItem key={event.id} event={event} onClick={onEventClick} />
+        <TimelineItem key={event.id} event={event} onClick={onEventClick} data-oid="19s5j3y" />
       ))}
     </TimelineWrapper>
   );
 };
-
 export default Timeline;

@@ -1,12 +1,11 @@
-"use client"
+'use client';
 
-import React from "react"
-import ChatListItem from "./ChatListItem"
-import chatData from "../data/chatData.json"
-
+import React from 'react';
+import ChatListItem from './ChatListItem';
+import chatData from '../data/chatData.json';
 const ChatList = ({ selectedChatId }) => {
   return (
-    <div 
+    <div
       className="
         flex flex-col
         min-h-0 max-h-[calc(100vh-4rem)]
@@ -21,26 +20,24 @@ const ChatList = ({ selectedChatId }) => {
       id="chat-list"
       role="list"
       aria-label="Chat conversations"
+      data-oid="y27_kgu"
     >
-      <div className="flex flex-col gap-1 sm:gap-2">
+      <div className="flex flex-col gap-1 sm:gap-2" data-oid="2b96al2">
         {chatData.chats.map((chat) => (
-          <div 
+          <div
             key={chat.id}
             className={`
               rounded-lg
               transition-all duration-200
               ${chat.id === selectedChatId ? 'bg-blue-50/80 shadow-sm' : ''}
             `}
+            data-oid="yr-s-ww"
           >
-            <ChatListItem 
-              chat={chat}
-              isSelected={chat.id === selectedChatId}
-            />
+            <ChatListItem chat={chat} isSelected={chat.id === selectedChatId} data-oid="eir4bb7" />
           </div>
         ))}
       </div>
     </div>
-  )
-}
-
-export default ChatList
+  );
+};
+export default ChatList;

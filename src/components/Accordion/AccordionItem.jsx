@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
 import { AccordionContext } from './Accordion';
 
 /**
@@ -13,7 +12,6 @@ import { AccordionContext } from './Accordion';
 const AccordionItem = ({ children, value, className = '' }) => {
   const { openItems, variant, flush } = useContext(AccordionContext);
   const isOpen = openItems.has(value);
-
   const baseClasses = 'transition-colors duration-200';
   const borderClasses = flush
     ? 'border-b last:border-b-0'
@@ -23,20 +21,20 @@ const AccordionItem = ({ children, value, className = '' }) => {
       ? 'border-blue-100 dark:border-blue-900/30'
       : 'border-gray-200 dark:border-gray-700/50';
   const containerClasses = `${baseClasses} ${borderClasses} ${variantClasses} ${className}`;
-
   return (
-    <div className={containerClasses} data-state={isOpen ? 'open' : 'closed'}>
+    <div className={containerClasses} data-state={isOpen ? 'open' : 'closed'} data-oid="g5rgzg:">
       {React.Children.map(children, (child) =>
-        React.cloneElement(child, { value, isOpen })
+        React.cloneElement(child, {
+          value,
+          isOpen,
+        })
       )}
     </div>
   );
 };
-
 AccordionItem.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
-
 export default AccordionItem;

@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
-
 import styles from './styles/calendar.module.css';
-
 const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const hours = Array.from({ length: 24 }, (_, i) => i);
-
+  const hours = Array.from(
+    {
+      length: 24,
+    },
+    (_, i) => i
+  );
   const getWeekDates = (date) => {
     const week = [];
     const current = new Date(date);
@@ -19,7 +21,6 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
     }
     return week;
   };
-
   const isToday = (date) => {
     const today = new Date();
     return (
@@ -28,7 +29,6 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
       date.getFullYear() === today.getFullYear()
     );
   };
-
   const getProjectsForDateAndHour = (date, hour) => {
     return projects.filter((project) => {
       const projectDate = new Date(project.deadline);
@@ -40,25 +40,26 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
       );
     });
   };
-
   const weekDates = getWeekDates(currentDate);
-
   return (
-    <div className={styles.weekView}>
-      <div className={styles.timeColumn}>
+    <div className={styles.weekView} data-oid="mmilb31">
+      <div className={styles.timeColumn} data-oid="vr:i2:1">
         {hours.map((hour) => (
-          <div key={hour} className={styles.timeSlot}>
+          <div key={hour} className={styles.timeSlot} data-oid="cpkw973">
             {hour}:00
           </div>
         ))}
       </div>
       {weekDates.map((date, dayIndex) => (
-        <div key={dayIndex} className={styles.dayColumn}>
+        <div key={dayIndex} className={styles.dayColumn} data-oid="f14n-1z">
           <div
             className={`${styles.weekDay} ${isToday(date) ? styles.today : ''}`}
+            data-oid="nu-iviv"
           >
             {weekDays[dayIndex]}
-            <span className={styles.dayNumber}>{date.getDate()}</span>
+            <span className={styles.dayNumber} data-oid="bw-ux8k">
+              {date.getDate()}
+            </span>
           </div>
           {hours.map((hour) => (
             <div
@@ -69,6 +70,7 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
                 newDate.setHours(hour);
                 onDateSelect(newDate);
               }}
+              data-oid="2hl-izz"
             >
               {getProjectsForDateAndHour(date, hour).map((project) => (
                 <div
@@ -78,6 +80,7 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
                     e.stopPropagation();
                     onProjectClick(project);
                   }}
+                  data-oid="r-hfxqh"
                 >
                   {project.title}
                 </div>
@@ -89,5 +92,4 @@ const WeekView = ({ currentDate, projects, onProjectClick, onDateSelect }) => {
     </div>
   );
 };
-
 export default WeekView;

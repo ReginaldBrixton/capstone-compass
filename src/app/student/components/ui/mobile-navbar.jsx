@@ -4,25 +4,23 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HiMenu, HiX } from 'react-icons/hi';
-import { FiSearch } from 'react-icons/fi';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, BookOpenIcon, CalendarIcon, UserGroupIcon, CheckBadgeIcon, ChartBarIcon, MegaphoneIcon, ChatBubbleLeftIcon, DocumentTextIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import MenuItems from './components/MenuItems';
+import { ProfileSection } from './components/ProfileSection';
 
-const generateUniqueId = (prefix) =>
-  `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
-
-// Navigation menu items configuration
 const menuItems = [
-  { icon: '🏠', label: 'Dashboard', href: '/student' },
-  { icon: '📚', label: 'Projects', href: '/student/projects' },
-  { icon: '📅', label: 'Schedule', href: '/student/schedule' },
-  { icon: '👥', label: 'Teams', href: '/student/teams' },
-  { icon: '✅', label: 'Assignments', href: '/student/assignments' },
-  { icon: '📈', label: 'Progress', href: '/student/progress' },
-  { icon: '📢', label: 'Notices', href: '/student/announcements' },
-  { icon: '💬', label: 'Chats', href: '/student/messages' },
-  { icon: '📚', label: 'Resources', href: '/student/resources' },
-  { icon: '❓', label: 'Help', href: '/student/help' },
+  { label: 'Dashboard', href: '/student', icon: HomeIcon },
+  { label: 'Projects', href: '/student/projects', icon: BookOpenIcon },
+  { label: 'Schedule', href: '/student/schedule', icon: CalendarIcon },
+  { label: 'Teams', href: '/student/teams', icon: UserGroupIcon },
+  { label: 'Assignments', href: '/student/assignments', icon: CheckBadgeIcon },
+  { label: 'Progress', href: '/student/progress', icon: ChartBarIcon },
+  { label: 'Notices', href: '/student/announcements', icon: MegaphoneIcon },
+  { label: 'Chats', href: '/student/messages', icon: ChatBubbleLeftIcon },
+  { label: 'Resources', href: '/student/resources', icon: DocumentTextIcon },
+  { label: 'Help', href: '/student/help', icon: QuestionMarkCircleIcon },
 ];
 
 export function MobileNavbar() {
@@ -30,52 +28,42 @@ export function MobileNavbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  useEffect(() => setIsOpen(false), [pathname]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
   }, [isOpen]);
 
   return (
     <>
-      <nav
-        className="relative z-10 border-b border-gray-200/50 bg-white/90 backdrop-blur-lg dark:border-gray-800/50 dark:bg-gray-900/90"
-        id="mobile-nav"
-      >
-        <div className="flex items-center justify-between px-4 py-3">
+      <nav className="sticky top-0 z-40 border-b border-gray-200/50 bg-background/95 backdrop-blur-lg dark:border-dark-700/30 dark:bg-dark-900/95">
+        <div className="flex h-16 items-center justify-between px-4">
           <Link href="/student" className="flex items-center space-x-2">
-            <span className="bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-xl font-bold text-transparent">
+            <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-xl font-semibold tracking-tight text-transparent">
               Student Portal
             </span>
           </Link>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-2">
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-              aria-label="Toggle search"
+              className="rounded-lg p-2 transition-colors hover:bg-gray-100/80 dark:hover:bg-dark-700/50"
+              aria-label="Search"
             >
-              <FiSearch className="h-6 w-6" />
+              <MagnifyingGlassIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
             </motion.button>
 
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-              aria-label="Toggle menu"
+              className="rounded-lg p-2 transition-colors hover:bg-gray-100/80 dark:hover:bg-dark-700/50"
+              aria-label="Menu"
             >
               {isOpen ? (
-                <HiX className="h-6 w-6" />
+                <XMarkIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
               ) : (
-                <HiMenu className="h-6 w-6" />
+                <Bars3Icon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
               )}
             </motion.button>
           </div>
@@ -87,15 +75,18 @@ export function MobileNavbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="border-t border-gray-200/50 dark:border-gray-800/50"
+              className="border-t border-gray-200/50 dark:border-dark-700/30"
             >
-              <div className="p-4">
-                <input
-                  type="search"
-                  placeholder="Search..."
-                  className="w-full rounded-lg bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-800"
-                  autoFocus
-                />
+              <div className="px-4 py-3">
+                <div className="relative">
+                  <input
+                    type="search"
+                    placeholder="Search courses, assignments..."
+                    className="w-full rounded-xl bg-gray-100/80 py-2.5 pl-11 pr-4 text-sm transition-all placeholder:text-gray-500 focus:bg-white focus:ring-2 focus:ring-primary-500/30 dark:bg-dark-800 dark:placeholder:text-gray-400 dark:focus:bg-dark-700"
+                    autoFocus
+                  />
+                  <MagnifyingGlassIcon className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
+                </div>
               </div>
             </motion.div>
           )}
@@ -104,29 +95,42 @@ export function MobileNavbar() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-20 bg-black/50 backdrop-blur-sm md:hidden"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 20 }}
-            className="fixed bottom-0 right-0 top-[62px] z-30 w-64 overflow-y-auto bg-white shadow-xl dark:bg-gray-900 md:hidden"
-          >
-            <div className="py-4">
-              <MenuItems />
-            </div>
-          </motion.div>
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', bounce: 0.1, duration: 0.4 }}
+              className="fixed bottom-0 right-0 top-0 z-40 flex w-72 flex-col bg-white/95 backdrop-blur-lg dark:bg-dark-900/95"
+            >
+              <div className="flex-1 overflow-y-auto p-4">
+                <nav className="space-y-1">
+                  {menuItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100/80 dark:text-gray-200 dark:hover:bg-dark-700/50"
+                    >
+                      <item.icon className="mr-3 h-5 w-5 flex-shrink-0 text-primary-600 dark:text-primary-400" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+
+              <div className="border-t border-gray-200/50 p-4 dark:border-dark-700/30">
+                <ProfileSection isCollapsed={false} />
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

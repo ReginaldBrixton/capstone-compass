@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 const Button = ({
   children,
   variant = 'primary',
@@ -16,17 +15,13 @@ const Button = ({
     md: 'px-4 py-2 text-base',
     lg: 'px-6 py-3 text-lg',
   };
-
   const variantClasses = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary:
-      'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
+    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
     success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',
     error: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    warning:
-      'bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500',
+    warning: 'bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500',
   };
-
   const buttonClasses = `
     button-${variant}
     ${sizeClasses[size]}
@@ -45,26 +40,17 @@ const Button = ({
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
     ${className}
   `;
-
   return (
-    <button className={buttonClasses} disabled={disabled} {...props}>
+    <button className={buttonClasses} disabled={disabled} {...props} data-oid="5k93qg6">
       {children}
     </button>
   );
 };
-
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'warning',
-  ]),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'error', 'warning']),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   disabled: PropTypes.bool,
   className: PropTypes.string,
 };
-
 export default Button;

@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
 const Container = styled.div.attrs({
   className: 'error-container',
   id: 'error-container-static',
@@ -29,7 +28,6 @@ const Container = styled.div.attrs({
     }
   }
 `;
-
 const Card = styled.div.attrs({
   className: 'error-card',
   id: 'error-card-static',
@@ -44,7 +42,6 @@ const Card = styled.div.attrs({
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 `;
-
 const ErrorMessage = styled.div.attrs({
   className: 'error-message',
   id: 'error-message-static',
@@ -55,7 +52,6 @@ const ErrorMessage = styled.div.attrs({
   border-radius: 0.5rem;
   color: #dc2626;
 `;
-
 const Button = styled.button.attrs({
   className: 'retry-button',
   id: 'retry-button-static',
@@ -74,21 +70,20 @@ const Button = styled.button.attrs({
     box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.3);
   }
 `;
-
 export default function Error({ error, reset }) {
   useEffect(() => {
     if (error) {
       console.error('Error:', error);
     }
   }, [error]);
-
   const errorMessage = error?.message || 'An unexpected error occurred';
-
   return (
-    <Container>
-      <Card>
-        <h1 className="mb-4 text-2xl font-bold">Something went wrong!</h1>
-        <ErrorMessage>{errorMessage}</ErrorMessage>
+    <Container data-oid="2-cafbw">
+      <Card data-oid="ztfaq1q">
+        <h1 className="mb-4 text-2xl font-bold" data-oid="jzzatw-">
+          Something went wrong!
+        </h1>
+        <ErrorMessage data-oid="s_a-9hp">{errorMessage}</ErrorMessage>
         <Button
           onClick={() => {
             if (typeof reset === 'function') {
@@ -96,6 +91,7 @@ export default function Error({ error, reset }) {
             }
           }}
           type="button"
+          data-oid="hhrnse6"
         >
           Try again
         </Button>

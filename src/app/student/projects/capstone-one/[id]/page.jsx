@@ -1,234 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import styled from 'styled-components';
-
 import { ProgressTracker } from '../../components';
-
-import '../../styles/global.css';
-
-const Container = styled.div.attrs({
-  className: 'capstone-one-container',
-})`
-  max-width: clamp(320px, 90vw, 1440px);
-  margin: 0 auto;
-  padding: var(--spacing-lg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-
-  .page-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .page-title {
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
-    position: relative;
-    display: inline-block;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 4px;
-      background: var(--primary-color);
-      border-radius: var(--radius-sm);
-    }
-  }
-
-  .page-description {
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-  }
-`;
-
-const ChapterGrid = styled.div.attrs({
-  className: 'chapter-grid',
-})`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
-  perspective: 1000px;
-`;
-
-const ChapterCard = styled.div.attrs({
-  className: (props) => `chapter-card chapter-${props.chapterId}`,
-  id: (props) => `chapter-${props.chapterId}`,
-})`
-  background: var(--card-bg);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--card-shadow);
-  transition: var(--transition-normal);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  transform: translateZ(0);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: ${(props) => {
-      switch (props.status) {
-        case 'completed':
-          return 'var(--success-color)';
-        case 'in-progress':
-          return 'var(--warning-color)';
-        default:
-          return 'var(--border-color)';
-      }
-    }};
-  }
-
-  &:hover {
-    transform: translateY(-8px) translateZ(20px);
-    box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  .chapter-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--spacing-sm);
-  }
-
-  .chapter-content {
-    flex: 1;
-  }
-
-  h2 {
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-xs);
-  }
-
-  p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-`;
-
-const StatusIndicator = styled.div.attrs({
-  className: 'status-indicator',
-})`
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: clamp(0.75rem, 2vw, 0.875rem);
-  font-weight: 500;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-md);
-  background: ${(props) => {
-    switch (props.status) {
-      case 'completed':
-        return 'rgba(34, 197, 94, 0.1)';
-      case 'in-progress':
-        return 'rgba(245, 158, 11, 0.1)';
-      default:
-        return 'rgba(107, 114, 128, 0.1)';
-    }
-  }};
-  color: ${(props) => {
-    switch (props.status) {
-      case 'completed':
-        return 'var(--success-color)';
-      case 'in-progress':
-        return 'var(--warning-color)';
-      default:
-        return 'var(--text-secondary)';
-    }
-  }};
-`;
-
-const ActionButton = styled.button.attrs({
-  className: (props) => `action-button action-${props.chapterId}`,
-  id: (props) => `action-${props.chapterId}`,
-})`
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: 500;
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  cursor: pointer;
-  transition: var(--transition-normal);
-  width: 100%;
-  margin-top: auto;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    transition: transform 0.5s;
-  }
-
-  &:hover:not(:disabled) {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-
-    &::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-
-  &:disabled {
-    background: var(--border-color);
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-  }
-`;
-
-const DeadlineIndicator = styled.div.attrs({
-  className: 'deadline-indicator',
-})`
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: clamp(0.75rem, 2vw, 0.875rem);
-  color: ${(props) =>
-    props.isOverdue ? 'var(--error-color)' : 'var(--text-secondary)'};
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: ${(props) =>
-    props.isOverdue ? 'rgba(239, 68, 68, 0.1)' : 'transparent'};
-  border-radius: var(--radius-md);
-
-  svg {
-    width: clamp(0.875rem, 2vw, 1rem);
-    height: clamp(0.875rem, 2vw, 1rem);
-  }
-`;
+import { FiAlertTriangle, FiCheckCircle, FiClock, FiEdit, FiFileText, FiPlay, FiEye } from 'react-icons/fi';
 
 const steps = [
   { id: 'chapter-one', label: 'Chapter 1: Introduction' },
@@ -267,76 +43,118 @@ const chapters = [
 export default function CapstoneOne() {
   const params = useParams();
   const [currentStep, setCurrentStep] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
 
-  const isDeadlineOverdue = (deadline) => {
-    return new Date(deadline) < new Date();
-  };
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  const isDeadlineOverdue = (deadline) => new Date(deadline) < new Date();
+
+  if (!hasMounted) return null;
 
   return (
-    <Container className="capstone-one-page fade-in">
-      <div className="page-header">
-        <h1 className="page-title">Capstone One Progress</h1>
-        <p className="page-description">
-          Track and manage your progress through each chapter of your capstone
-          project. Complete the chapters in sequence and submit for review.
-        </p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center mb-12 space-y-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white bg-clip-text">
+            Capstone One Progress
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Track and manage your progress through each chapter of your capstone project.
+            Complete the chapters in sequence and submit for review.
+          </p>
+        </div>
+
+        <ProgressTracker steps={steps} currentStep={currentStep} className="mb-12" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" style={{ perspective: '1000px' }}>
+          {chapters.map((chapter) => {
+            const statusColor = {
+              'completed': 'green',
+              'in-progress': 'yellow',
+              'not-started': 'gray'
+            }[chapter.status];
+
+            return (
+              <div
+                key={chapter.id}
+                className={`relative group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 ${{
+                  'completed': 'border-green-500',
+                  'in-progress': 'border-yellow-500',
+                  'not-started': 'border-gray-300 dark:border-gray-600'
+                }[chapter.status]}`}
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-2">
+                    <FiFileText className={`w-6 h-6 ${{
+                      'completed': 'text-green-500',
+                      'in-progress': 'text-yellow-500',
+                      'not-started': 'text-gray-400'
+                    }[chapter.status]}`} />
+                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                      {chapter.title}
+                    </h2>
+                  </div>
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                    statusColor === 'green' 
+                      ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+                      : statusColor === 'yellow'
+                      ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                  }`}>
+                    {chapter.status.replace('-', ' ')}
+                  </span>
+                </div>
+
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  {chapter.description}
+                </p>
+
+                <div className={`flex items-center gap-2 mb-6 p-2 rounded-lg ${
+                  isDeadlineOverdue(chapter.deadline)
+                    ? 'bg-red-100 dark:bg-red-900/20 text-red-500 dark:text-red-400'
+                    : 'bg-gray-100 dark:bg-gray-700/30 text-gray-600 dark:text-gray-400'
+                }`}>
+                  <FiClock className="flex-shrink-0" />
+                  <span className="text-sm">
+                    Deadline: {new Date(chapter.deadline).toLocaleDateString()}
+                    {isDeadlineOverdue(chapter.deadline) && (
+                      <span className="ml-2 font-medium">(Overdue)</span>
+                    )}
+                  </span>
+                </div>
+
+                <Link
+                  href={`/student/projects/capstone-one/${params.id}/${chapter.route}`}
+                  className={`w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all ${
+                    chapter.status === 'completed'
+                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
+                  } ${chapter.status === 'completed' ? 'pointer-events-none' : ''}`}
+                >
+                  {chapter.status === 'completed' ? (
+                    <>
+                      <FiEye className="w-5 h-5" />
+                      View Chapter
+                    </>
+                  ) : chapter.status === 'in-progress' ? (
+                    <>
+                      <FiEdit className="w-5 h-5" />
+                      Continue Writing
+                    </>
+                  ) : (
+                    <>
+                      <FiPlay className="w-5 h-5" />
+                      Start Chapter
+                    </>
+                  )}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
-
-      <ProgressTracker steps={steps} currentStep={currentStep} />
-
-      <ChapterGrid>
-        {chapters.map((chapter) => (
-          <ChapterCard
-            key={chapter.id}
-            chapterId={chapter.id}
-            status={chapter.status}
-          >
-            <div className="chapter-header">
-              <h2>{chapter.title}</h2>
-              <StatusIndicator status={chapter.status}>
-                {chapter.status === 'completed'
-                  ? 'Completed'
-                  : chapter.status === 'in-progress'
-                    ? 'In Progress'
-                    : 'Not Started'}
-              </StatusIndicator>
-            </div>
-
-            <div className="chapter-content">
-              <p>{chapter.description}</p>
-
-              <DeadlineIndicator
-                isOverdue={isDeadlineOverdue(chapter.deadline)}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
-                </svg>
-                <span>
-                  Deadline: {new Date(chapter.deadline).toLocaleDateString()}
-                </span>
-                {isDeadlineOverdue(chapter.deadline) && <span>(Overdue)</span>}
-              </DeadlineIndicator>
-            </div>
-
-            <Link
-              href={`/student/projects/capstone-one/${params.id}/${chapter.route}`}
-              style={{ width: '100%' }}
-            >
-              <ActionButton
-                disabled={chapter.status === 'completed'}
-                chapterId={chapter.id}
-                aria-label={`${chapter.status === 'completed' ? 'View' : chapter.status === 'in-progress' ? 'Continue' : 'Start'} ${chapter.title}`}
-              >
-                {chapter.status === 'completed'
-                  ? 'View Chapter'
-                  : chapter.status === 'in-progress'
-                    ? 'Continue Writing'
-                    : 'Start Chapter'}
-              </ActionButton>
-            </Link>
-          </ChapterCard>
-        ))}
-      </ChapterGrid>
-    </Container>
+    </div>
   );
 }

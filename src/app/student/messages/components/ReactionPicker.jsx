@@ -1,39 +1,76 @@
-"use client"
+'use client';
 
-import React from "react"
-import { motion } from "framer-motion"
-
+import React from 'react';
+import { motion } from 'framer-motion';
 const reactions = [
-  { emoji: "👍", name: "thumbs up", color: "bg-blue-100" },
-  { emoji: "❤️", name: "heart", color: "bg-red-100" },
-  { emoji: "😂", name: "joy", color: "bg-yellow-100" },
-  { emoji: "😮", name: "wow", color: "bg-purple-100" },
-  { emoji: "😢", name: "sad", color: "bg-gray-100" },
-  { emoji: "😡", name: "angry", color: "bg-orange-100" },
-]
-
-const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
+  {
+    emoji: '👍',
+    name: 'thumbs up',
+    color: 'bg-blue-100',
+  },
+  {
+    emoji: '❤️',
+    name: 'heart',
+    color: 'bg-red-100',
+  },
+  {
+    emoji: '😂',
+    name: 'joy',
+    color: 'bg-yellow-100',
+  },
+  {
+    emoji: '😮',
+    name: 'wow',
+    color: 'bg-purple-100',
+  },
+  {
+    emoji: '😢',
+    name: 'sad',
+    color: 'bg-gray-100',
+  },
+  {
+    emoji: '😡',
+    name: 'angry',
+    color: 'bg-orange-100',
+  },
+];
+const ReactionPicker = ({ onSelect, onClose, position = 'bottom' }) => {
   return (
     <motion.div
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.8, opacity: 0 }}
+      initial={{
+        scale: 0.8,
+        opacity: 0,
+      }}
+      animate={{
+        scale: 1,
+        opacity: 1,
+      }}
+      exit={{
+        scale: 0.8,
+        opacity: 0,
+      }}
       className={`
-        absolute ${position === "bottom" ? "bottom-full mb-1" : "top-full mt-1"}
+        absolute ${position === 'bottom' ? 'bottom-full mb-1' : 'top-full mt-1'}
         left-0 bg-white rounded-md shadow-lg p-1 z-50 border border-gray-200
         max-w-[calc(100vw-2rem)] overflow-x-auto
       `}
       id="reaction-picker"
+      data-oid="7843h.m"
     >
-      <div 
-        className="flex items-center gap-0.5 sm:gap-1" 
+      <div
+        className="flex items-center gap-0.5 sm:gap-1"
         id="reactions-container"
+        data-oid="hb1z-eh"
       >
         {reactions.map((reaction) => (
           <motion.button
             key={reaction.name}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{
+              scale: 0.95,
+            }}
             className={`
               p-1.5 sm:p-2 rounded-md transition-all duration-200
               ${reaction.color} hover:brightness-95
@@ -47,23 +84,27 @@ const ReactionPicker = ({ onSelect, onClose, position = "bottom" }) => {
             }}
             aria-label={`React with ${reaction.name}`}
             id={`reaction-${reaction.name}`}
+            data-oid="spv:ozj"
           >
-            <span className="text-base sm:text-lg transform hover:scale-105 transition-transform">
+            <span
+              className="text-base sm:text-lg transform hover:scale-105 transition-transform"
+              data-oid="gwwo-zg"
+            >
               {reaction.emoji}
             </span>
           </motion.button>
         ))}
       </div>
-      <div 
+      <div
         className={`
-          absolute ${position === "bottom" ? "-bottom-1" : "-top-1"}
+          absolute ${position === 'bottom' ? '-bottom-1' : '-top-1'}
           left-4 w-2 h-2 bg-white border border-gray-200
           transform rotate-45 -z-10
         `}
         id="reaction-picker-arrow"
+        data-oid="l4uln1f"
       />
     </motion.div>
-  )
-}
-
-export default ReactionPicker
+  );
+};
+export default ReactionPicker;

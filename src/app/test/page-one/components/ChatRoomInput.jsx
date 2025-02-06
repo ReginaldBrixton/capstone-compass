@@ -38,7 +38,6 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
           } else {
             thumbnail = '/file-icon.png';
           }
-
           onPreview((prev) => [
             ...(prev || []),
             {
@@ -60,7 +59,10 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
             onPreview((prev) =>
               prev.map((item) =>
                 item.id === fileId
-                  ? { ...item, progress: Math.min(progress, 100) }
+                  ? {
+                      ...item,
+                      progress: Math.min(progress, 100),
+                    }
                   : item
               )
             );
@@ -68,7 +70,12 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
               clearInterval(interval);
               onPreview((prev) =>
                 prev.map((item) =>
-                  item.id === fileId ? { ...item, uploaded: true } : item
+                  item.id === fileId
+                    ? {
+                        ...item,
+                        uploaded: true,
+                      }
+                    : item
                 )
               );
             }
@@ -77,6 +84,7 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
       };
       input.click();
     }}
+    data-oid="n9oiebl"
   >
     <svg
       className="chat-room-file-upload-icon h-5 w-5"
@@ -84,6 +92,7 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 20 20"
+      data-oid="_a.c15a"
     >
       <path
         stroke="currentColor"
@@ -91,11 +100,11 @@ const FileUpload = ({ onFileUpload, onPreview = () => {} }) => (
         strokeLinejoin="round"
         strokeWidth="2"
         d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        data-oid="ls:cr_q"
       />
     </svg>
   </button>
 );
-
 const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
   <button
     type="button"
@@ -122,11 +131,8 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
             const scale = MAX_WIDTH / img.width;
             canvas.width = MAX_WIDTH;
             canvas.height = img.height * scale;
-            canvas
-              .getContext('2d')
-              .drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
             const thumbnail = canvas.toDataURL('image/jpeg', 0.8);
-
             onPreview((prev) => [
               ...(prev || []),
               {
@@ -147,7 +153,10 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
               onPreview((prev) =>
                 prev.map((item) =>
                   item.id === imageId
-                    ? { ...item, progress: Math.min(progress, 100) }
+                    ? {
+                        ...item,
+                        progress: Math.min(progress, 100),
+                      }
                     : item
                 )
               );
@@ -155,7 +164,12 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
                 clearInterval(interval);
                 onPreview((prev) =>
                   prev.map((item) =>
-                    item.id === imageId ? { ...item, uploaded: true } : item
+                    item.id === imageId
+                      ? {
+                          ...item,
+                          uploaded: true,
+                        }
+                      : item
                   )
                 );
               }
@@ -165,6 +179,7 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
       };
       input.click();
     }}
+    data-oid="ggtk2y-"
   >
     <svg
       className="chat-room-image-upload-icon h-5 w-5"
@@ -172,10 +187,12 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 20 18"
+      data-oid="bqq:4pc"
     >
       <path
         fill="currentColor"
         d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"
+        data-oid="ncf6w.t"
       />
       <path
         stroke="currentColor"
@@ -183,6 +200,7 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
         strokeLinejoin="round"
         strokeWidth="2"
         d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
+        data-oid="win5k2k"
       />
     </svg>
   </button>
@@ -192,7 +210,6 @@ const ImageUpload = ({ onImageUpload, onPreview = () => {} }) => (
 const Emoji = ({ onEmojiSelect, setMessage, message }) => {
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef(null);
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (pickerRef.current && !pickerRef.current.contains(event.target)) {
@@ -205,41 +222,26 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
 
   // Expanded emoji categories
   const emojis = {
-    smileys: [
-      '😀',
-      '😃',
-      '😄',
-      '😁',
-      '😅',
-      '😂',
-      '🤣',
-      '😊',
-      '😇',
-      '🙂',
-      '😉',
-      '😍',
-    ],
+    smileys: ['😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '😉', '😍'],
     gestures: ['👍', '👎', '👌', '✌️', '🤞', '🤝', '👊', '✋', '🤚', '🖐️'],
     hearts: ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '💖', '💗', '💓'],
     activities: ['🎮', '🎲', '⚽', '🏀', '🎯', '🎨', '🎭', '🎪', '🎤', '🎧'],
     celebrations: ['🎉', '🎊', '🎈', '🎂', '🎁', '🎆', '✨', '🌟', '💫', '🎇'],
     nature: ['🌺', '🌸', '🌼', '🌻', '🌹', '🍀', '🌳', '🌴', '🌵', '🌿'],
   };
-
   const [activeCategory, setActiveCategory] = useState('smileys');
-
   const handleEmojiClick = (emoji) => {
     setMessage(message + emoji);
     setShowPicker(false);
   };
-
   return (
-    <div className="chat-room-emoji-picker relative" ref={pickerRef}>
+    <div className="chat-room-emoji-picker relative" ref={pickerRef} data-oid="dgo1rg6">
       <button
         type="button"
         className="chat-room-emoji-picker-button rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
         aria-label="Add emoji"
         onClick={() => setShowPicker(!showPicker)}
+        data-oid="m6ql6o4"
       >
         <svg
           className="chat-room-emoji-picker-icon h-5 w-5"
@@ -247,6 +249,7 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 20 20"
+          data-oid="6pic6xf"
         >
           <path
             stroke="currentColor"
@@ -254,33 +257,41 @@ const Emoji = ({ onEmojiSelect, setMessage, message }) => {
             strokeLinejoin="round"
             strokeWidth="2"
             d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z"
+            data-oid="k7x.x7t"
           />
         </svg>
       </button>
       {showPicker && (
-        <div className="chat-room-emoji-picker-categories absolute bottom-full mb-2 w-64 rounded-lg bg-white p-2 shadow-lg dark:bg-gray-700">
-          <div className="emoji-picker-category-buttons mb-2 flex gap-1 overflow-x-auto border-b border-gray-200 pb-2 dark:border-gray-600">
+        <div
+          className="chat-room-emoji-picker-categories absolute bottom-full mb-2 w-64 rounded-lg bg-white p-2 shadow-lg dark:bg-gray-700"
+          data-oid="c.br2ul"
+        >
+          <div
+            className="emoji-picker-category-buttons mb-2 flex gap-1 overflow-x-auto border-b border-gray-200 pb-2 dark:border-gray-600"
+            data-oid="thlz268"
+          >
             {Object.keys(emojis).map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`emoji-picker-category-button whitespace-nowrap rounded-md px-2 py-1 text-sm ${
-                  activeCategory === category
-                    ? 'bg-blue-100 text-blue-600 dark:bg-blue-600 dark:text-white'
-                    : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`emoji-picker-category-button whitespace-nowrap rounded-md px-2 py-1 text-sm ${activeCategory === category ? 'bg-blue-100 text-blue-600 dark:bg-blue-600 dark:text-white' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600'}`}
+                data-oid=".q:3eps"
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
           </div>
-          <div className="emoji-picker-emojis grid max-h-48 grid-cols-6 gap-1 overflow-y-auto">
+          <div
+            className="emoji-picker-emojis grid max-h-48 grid-cols-6 gap-1 overflow-y-auto"
+            data-oid="ou4qvm0"
+          >
             {emojis[activeCategory].map((emoji, index) => (
               <button
                 key={index}
                 onClick={() => handleEmojiClick(emoji)}
                 className="emoji-picker-emoji rounded p-1 text-xl transition-colors hover:bg-gray-100 dark:hover:bg-gray-600"
                 title={`Emoji ${emoji}`}
+                data-oid="yy:lclt"
               >
                 {emoji}
               </button>
@@ -297,39 +308,38 @@ const TextField = ({ value, onChange, onKeyDown, preview, onClearPreview }) => {
   const textareaRef = useRef(null);
   const MAX_HEIGHT = 150;
   const MIN_ROWS = 1;
-
   useEffect(() => {
     const textarea = textareaRef.current;
     if (!textarea) return;
-
     const resizeTextarea = () => {
       textarea.style.height = 'auto';
       const newHeight = Math.min(textarea.scrollHeight, MAX_HEIGHT);
       textarea.style.height = `${newHeight}px`;
     };
-
     resizeTextarea();
-
     const resizeObserver = new ResizeObserver(resizeTextarea);
     resizeObserver.observe(textarea);
-
     return () => resizeObserver.disconnect();
   }, [value]);
-
   return (
-    <div className="chat-room-text-field relative mx-4 flex-1">
+    <div className="chat-room-text-field relative mx-4 flex-1" data-oid="hhksdib">
       {preview && preview.length > 0 && (
-        <div className="chat-room-text-field-preview absolute top-0 flex max-w-full -translate-y-full transform flex-wrap items-center gap-2 rounded-lg bg-gray-100 p-2 dark:bg-gray-700">
+        <div
+          className="chat-room-text-field-preview absolute top-0 flex max-w-full -translate-y-full transform flex-wrap items-center gap-2 rounded-lg bg-gray-100 p-2 dark:bg-gray-700"
+          data-oid=".gl1ebd"
+        >
           {preview.map((item, index) => (
             <div
               key={index}
               className="chat-room-text-field-preview-item flex items-center gap-2 rounded bg-white p-1 dark:bg-gray-600"
+              data-oid="p1d7osr"
             >
               {item.type === 'image' ? (
                 <img
                   src={item.url}
                   alt=""
                   className="chat-room-text-field-preview-image h-12 w-12 rounded object-cover"
+                  data-oid=".5-dbw9"
                 />
               ) : (
                 <svg
@@ -337,18 +347,21 @@ const TextField = ({ value, onChange, onKeyDown, preview, onClearPreview }) => {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  data-oid="t.bu.tg"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    data-oid="guxjg.s"
                   />
                 </svg>
               )}
               <button
                 onClick={() => onClearPreview(item.id)}
                 className="chat-room-text-field-preview-clear-button ml-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                data-oid="9acfyjw"
               >
                 ×
               </button>
@@ -365,27 +378,26 @@ const TextField = ({ value, onChange, onKeyDown, preview, onClearPreview }) => {
         onKeyDown={onKeyDown}
         className="chat-room-text-field-input w-full resize-none overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 transition-colors duration-200 focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
         placeholder={
-          preview && preview.length > 0
-            ? 'Add a message (optional)...'
-            : 'Type a message...'
+          preview && preview.length > 0 ? 'Add a message (optional)...' : 'Type a message...'
         }
         aria-label="Message input"
         spellCheck="true"
+        data-oid="1e3xxcn"
       />
     </div>
   );
 };
-
 const SendButton = ({ onClick }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [particles, setParticles] = useState([]);
-
   const handleClick = (e) => {
     setIsAnimating(true);
     onClick?.(e);
 
     // Create particles
-    const newParticles = Array.from({ length: 8 }).map((_, i) => ({
+    const newParticles = Array.from({
+      length: 8,
+    }).map((_, i) => ({
       id: Date.now() + i,
       angle: (i * Math.PI * 2) / 8,
     }));
@@ -397,13 +409,13 @@ const SendButton = ({ onClick }) => {
       setParticles([]);
     }, 1000);
   };
-
   return (
     <button
       type="submit"
       className={`chat-room-send-button relative rounded-full p-2 text-blue-600 transition-all duration-300 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600 ${isAnimating ? 'scale-95' : 'scale-100'}`}
       aria-label="Send message"
       onClick={handleClick}
+      data-oid="u-qj6_h"
     >
       {/* Main send icon */}
       <svg
@@ -415,9 +427,10 @@ const SendButton = ({ onClick }) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        data-oid="i2sqct_"
       >
-        <line x1="22" y1="2" x2="11" y2="13"></line>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        <line x1="22" y1="2" x2="11" y2="13" data-oid="24zy-3b"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2" data-oid="qh2_owi"></polygon>
       </svg>
 
       {/* Particle effects */}
@@ -429,24 +442,27 @@ const SendButton = ({ onClick }) => {
             animation: 'particle 0.8s ease-out forwards',
             transform: `rotate(${particle.angle}rad)`,
           }}
+          data-oid="mcezwcm"
         />
       ))}
 
       {/* Success indicator */}
       <span
         className={`chat-room-send-button-success-indicator absolute inset-0 flex items-center justify-center transition-all duration-300 ${isAnimating ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}
+        data-oid="jhlvrk_"
       >
         <svg
           className="h-4 w-4 animate-[ping_1s_ease-in-out_infinite]"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
+          data-oid="k6fqbwf"
         >
-          <circle cx="12" cy="12" r="3" />
+          <circle cx="12" cy="12" r="3" data-oid="23gf4dl" />
         </svg>
       </span>
 
-      <style jsx>{`
+      <style jsx data-oid="ou3z2b.">{`
         @keyframes particle {
           0% {
             transform: rotate(${0}deg) translateY(0);
@@ -461,11 +477,9 @@ const SendButton = ({ onClick }) => {
     </button>
   );
 };
-
 const ChatRoomInput = ({ onSendMessage, children }) => {
   const [message, setMessage] = useState('');
   const [previews, setPreviews] = useState([]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message.trim() || previews.length > 0) {
@@ -474,27 +488,24 @@ const ChatRoomInput = ({ onSendMessage, children }) => {
       setPreviews([]);
     }
   };
-
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
     }
   };
-
   const handleClearPreview = (id) => {
     setPreviews((prev) => prev.filter((item) => item.id !== id));
   };
-
   return (
     <form
       onSubmit={handleSubmit}
       className="chat-room-input fixed bottom-0 left-0 right-0 bg-white shadow-lg dark:bg-gray-800"
+      data-oid="7hlv3zh"
     >
-      <div className="flex items-center px-4 py-2">
+      <div className="flex items-center px-4 py-2" data-oid="8tz.uoa">
         {React.Children.map(children, (child) => {
           if (!child) return null;
-
           if (child.type === TextField) {
             return React.cloneElement(child, {
               value: message,
@@ -504,31 +515,26 @@ const ChatRoomInput = ({ onSendMessage, children }) => {
               onClearPreview: handleClearPreview,
             });
           }
-
           if (child.type === SendButton) {
             return React.cloneElement(child, {
               onClick: handleSubmit,
             });
           }
-
           if (child.type === FileUpload || child.type === ImageUpload) {
             return React.cloneElement(child, {
               onPreview: setPreviews,
             });
           }
-
           if (child.type === Emoji) {
             return React.cloneElement(child, {
               setMessage: setMessage,
               message: message,
             });
           }
-
           return child;
         })}
       </div>
     </form>
   );
 };
-
 export { ChatRoomInput, FileUpload, ImageUpload, Emoji, TextField, SendButton };

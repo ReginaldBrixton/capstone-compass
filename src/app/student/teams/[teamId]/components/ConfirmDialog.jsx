@@ -1,18 +1,22 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-
 const overlayVariants = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0,
+  },
   visible: {
     opacity: 1,
-    transition: { duration: 0.2 },
+    transition: {
+      duration: 0.2,
+    },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.2 },
+    transition: {
+      duration: 0.2,
+    },
   },
 };
-
 const dialogVariants = {
   hidden: {
     scale: 0.95,
@@ -33,13 +37,13 @@ const dialogVariants = {
     scale: 0.95,
     opacity: 0,
     y: 20,
-    transition: { duration: 0.2 },
+    transition: {
+      duration: 0.2,
+    },
   },
 };
-
 const buttonVariants = {
-  danger:
-    'bg-red-500 hover:bg-red-600 focus:ring-red-500 dark:bg-red-600 dark:hover:bg-red-700',
+  danger: 'bg-red-500 hover:bg-red-600 focus:ring-red-500 dark:bg-red-600 dark:hover:bg-red-700',
   warning:
     'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500 dark:bg-yellow-600 dark:hover:bg-yellow-700',
   success:
@@ -49,7 +53,6 @@ const buttonVariants = {
   default:
     'bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700',
 };
-
 const ConfirmDialog = ({
   isOpen,
   onClose,
@@ -69,18 +72,15 @@ const ConfirmDialog = ({
     },
     [onClose, onConfirm]
   );
-
   React.useEffect(() => {
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
   }, [isOpen, handleKeyDown]);
-
   if (!isOpen) return null;
-
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" data-oid="zv_wi-_">
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm dark:bg-black/80 md:p-8"
         variants={overlayVariants}
@@ -92,6 +92,7 @@ const ConfirmDialog = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="dialog-title"
+        data-oid="7hkt23u"
       >
         <motion.div
           className={`w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-gray-700 dark:bg-gray-800 md:p-8 ${className}`}
@@ -101,28 +102,34 @@ const ConfirmDialog = ({
           exit="exit"
           onClick={(e) => e.stopPropagation()}
           id="confirm-dialog-container"
+          data-oid="rqox-lq"
         >
           <h2
             className="mb-4 flex items-center gap-3 text-2xl font-bold text-gray-900 dark:text-white"
             id="dialog-title"
+            data-oid=".o7fn:r"
           >
             {icon && (
-              <span className="text-3xl" role="img" aria-hidden="true">
+              <span className="text-3xl" role="img" aria-hidden="true" data-oid="5e2zrnj">
                 {icon}
               </span>
             )}
             {title}
           </h2>
 
-          <p className="mb-8 text-base leading-relaxed text-gray-600 dark:text-gray-300">
+          <p
+            className="mb-8 text-base leading-relaxed text-gray-600 dark:text-gray-300"
+            data-oid="5i.qa-_"
+          >
             {message}
           </p>
 
-          <div className="flex flex-col justify-end gap-3 sm:flex-row">
+          <div className="flex flex-col justify-end gap-3 sm:flex-row" data-oid="vesl18:">
             <button
               className={`rounded-xl px-6 py-2.5 font-medium transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 active:translate-y-0 dark:focus:ring-offset-gray-800 ${buttonVariants.secondary} `}
               onClick={onClose}
               id="confirm-dialog-cancel"
+              data-oid="-sykz8v"
             >
               {cancelText}
             </button>
@@ -130,6 +137,7 @@ const ConfirmDialog = ({
               className={`rounded-xl px-6 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 active:translate-y-0 dark:focus:ring-offset-gray-800 ${buttonVariants[variant] || buttonVariants.default} `}
               onClick={onConfirm}
               id="confirm-dialog-confirm"
+              data-oid="niy9bgs"
             >
               {confirmText}
             </button>
@@ -139,5 +147,4 @@ const ConfirmDialog = ({
     </AnimatePresence>
   );
 };
-
 export default ConfirmDialog;

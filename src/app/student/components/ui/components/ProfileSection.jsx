@@ -18,7 +18,6 @@ const ProfileSection = ({ isCollapsed }) => {
         setShowProfileMenu(false);
       }
     };
-
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setShowProfileMenu(false);
@@ -33,9 +32,7 @@ const ProfileSection = ({ isCollapsed }) => {
     };
   }, [showProfileMenu]);
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
+  const handleImageError = () => setImageError(true);
 
   return (
     <div
@@ -46,30 +43,36 @@ const ProfileSection = ({ isCollapsed }) => {
     >
       <button
         onClick={toggleProfileMenu}
-        className={`flex w-full items-center ${isCollapsed ? 'justify-center p-2' : 'p-2'} rounded-xl border border-transparent transition-colors duration-200 hover:bg-gray-100/50 dark:hover:bg-gray-800/50`}
+        className={`flex w-full items-center ${
+          isCollapsed ? 'justify-center p-2' : 'p-2'
+        } rounded-xl border border-transparent transition-all duration-200 
+        hover:bg-gray-50/80 dark:hover:bg-gray-800/80
+        focus:outline-none focus:ring-2 focus:ring-primary-500/30 dark:focus:ring-primary-400/30`}
         aria-expanded={showProfileMenu}
         aria-haspopup="true"
         aria-controls="profile-menu"
       >
-        <div
-          className={`flex items-center ${isCollapsed ? '' : 'w-full gap-3'}`}
-        >
+        <div className={`flex items-center ${isCollapsed ? '' : 'w-full gap-3'}`}>
           <div className="relative">
             <img
               src={imageError ? '/default-avatar.svg' : '/placeholder.svg'}
               alt="Profile picture"
-              className={`${isCollapsed ? 'h-8 w-8' : 'h-8 w-8'} rounded-lg border border-gray-200 object-cover`}
+              className={`${
+                isCollapsed ? 'h-9 w-9' : 'h-9 w-9'
+              } rounded-full border-2 border-white object-cover shadow-sm dark:border-gray-800`}
               loading="lazy"
               onError={handleImageError}
             />
             <div
-              className={`absolute bottom-0 right-0 ${isCollapsed ? 'h-2 w-2' : 'h-2 w-2'} rounded-full border border-white bg-green-500`}
-            ></div>
+              className={`absolute bottom-0 right-0 ${
+                isCollapsed ? 'h-2.5 w-2.5' : 'h-2.5 w-2.5'
+              } rounded-full border-2 border-white bg-green-400 dark:border-gray-900`}
+            />
           </div>
 
           {!isCollapsed && (
             <div className="flex-1 text-left">
-              <p className="truncate text-sm font-medium text-gray-700 dark:text-gray-200">
+              <p className="truncate text-sm font-semibold text-gray-800 dark:text-gray-100">
                 John Doe
               </p>
               <p className="truncate text-xs text-gray-500 dark:text-gray-400">
@@ -80,9 +83,9 @@ const ProfileSection = ({ isCollapsed }) => {
 
           {!isCollapsed && (
             <svg
-              className={`h-4 w-4 transform text-gray-400 transition-transform ${
+              className={`h-4 w-4 transform text-gray-500 transition-transform ${
                 showProfileMenu ? 'rotate-180' : ''
-              }`}
+              } dark:text-gray-300`}
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -96,26 +99,33 @@ const ProfileSection = ({ isCollapsed }) => {
         </div>
       </button>
 
-      {/* Tooltip for collapsed state */}
       {isCollapsed && (
-        <div className="pointer-events-none absolute left-full top-1/2 z-50 ml-1.5 -translate-y-1/2 whitespace-nowrap rounded-md bg-gray-900/90 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        <div
+          className="pointer-events-none absolute left-full top-1/2 z-50 ml-1.5 -translate-y-1/2 whitespace-nowrap rounded-md 
+          bg-gray-900/90 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 
+          group-hover:opacity-100 dark:bg-gray-100 dark:text-gray-900"
+        >
           John Doe
         </div>
       )}
 
       <div
         id="profile-menu"
-        className={`absolute right-0 z-50 mt-1 w-56 rounded-lg border border-gray-100 bg-white shadow-lg transition-all duration-200 dark:border-gray-700 dark:bg-gray-800 ${
+        className={`absolute right-0 z-50 mt-1 w-56 rounded-lg border border-gray-100 bg-white shadow-lg 
+        transition-all duration-150 ease-in-out dark:border-gray-700 dark:bg-gray-900 
+        ${
           showProfileMenu
             ? 'translate-y-0 opacity-100'
             : 'pointer-events-none translate-y-1 opacity-0'
         } ${isCollapsed ? 'left-full ml-1.5 -translate-y-full' : ''}`}
         role="menu"
       >
-        <div className="p-1">
+        <div className="p-1.5 space-y-1">
           <Link
             href="/student/profile"
-            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors duration-150 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700/50"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm 
+            text-gray-700 transition-colors hover:bg-gray-50 
+            dark:text-gray-200 dark:hover:bg-gray-800"
             role="menuitem"
           >
             <svg
@@ -133,7 +143,9 @@ const ProfileSection = ({ isCollapsed }) => {
 
           <Link
             href="/student/settings"
-            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors duration-150 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700/50"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm 
+            text-gray-700 transition-colors hover:bg-gray-50 
+            dark:text-gray-200 dark:hover:bg-gray-800"
             role="menuitem"
           >
             <svg
@@ -151,11 +163,13 @@ const ProfileSection = ({ isCollapsed }) => {
 
           <button
             onClick={() => console.log('logout')}
-            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors duration-150 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700/50"
+            className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm 
+            text-red-600 transition-colors hover:bg-red-50 
+            dark:text-red-300 dark:hover:bg-red-900/20"
             role="menuitem"
           >
             <svg
-              className="h-4 w-4 text-gray-500 dark:text-gray-400"
+              className="h-4 w-4 text-red-500 dark:text-red-400"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -171,4 +185,4 @@ const ProfileSection = ({ isCollapsed }) => {
   );
 };
 
-export default ProfileSection;
+export { ProfileSection };

@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { cn } from '@/app/utils/cn';
 import { useCarousel } from './Carousel';
 
@@ -25,6 +24,7 @@ export function CarouselControls({
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 6 10"
+      data-oid="palir5r"
     >
       <path
         stroke="currentColor"
@@ -32,6 +32,7 @@ export function CarouselControls({
         strokeLinejoin="round"
         strokeWidth="2"
         d="M5 1 1 5l4 4"
+        data-oid="2_ahxsa"
       />
     </svg>
   ),
@@ -41,6 +42,7 @@ export function CarouselControls({
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 6 10"
+      data-oid="plmn2cd"
     >
       <path
         stroke="currentColor"
@@ -48,46 +50,49 @@ export function CarouselControls({
         strokeLinejoin="round"
         strokeWidth="2"
         d="m1 9 4-4-4-4"
+        data-oid="fyeky.x"
       />
     </svg>
   ),
 }) {
   const { prevSlide, nextSlide } = useCarousel();
-
   const buttonClasses = cn(
     'absolute top-0 z-30 flex h-full items-center justify-center px-4',
     'cursor-pointer group focus:outline-none'
   );
-
   const iconWrapperClasses = cn(
     'inline-flex h-10 w-10 items-center justify-center rounded-full',
     'bg-white/30 group-hover:bg-white/50 dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60',
     'group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70',
     'transition-all duration-300 ease-in-out'
   );
-
   return (
-    <div className={cn('absolute inset-0', className)}>
+    <div className={cn('absolute inset-0', className)} data-oid="gcb1wd5">
       <button
         type="button"
         className={cn(buttonClasses, 'start-0')}
         onClick={prevSlide}
         aria-label="Previous slide"
+        data-oid="c7tj2e8"
       >
-        <span className={iconWrapperClasses}>{prevIcon}</span>
+        <span className={iconWrapperClasses} data-oid="qjqpujl">
+          {prevIcon}
+        </span>
       </button>
       <button
         type="button"
         className={cn(buttonClasses, 'end-0')}
         onClick={nextSlide}
         aria-label="Next slide"
+        data-oid="by15j-w"
       >
-        <span className={iconWrapperClasses}>{nextIcon}</span>
+        <span className={iconWrapperClasses} data-oid="t1_riks">
+          {nextIcon}
+        </span>
       </button>
     </div>
   );
 }
-
 CarouselControls.propTypes = {
   className: PropTypes.string,
   prevIcon: PropTypes.node,

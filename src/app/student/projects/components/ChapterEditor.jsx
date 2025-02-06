@@ -1,153 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
-import '../styles/global.css';
-
-const EditorContainer = styled.div`
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: var(--card-shadow);
-`;
-
-const EditorHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const SaveStatus = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-
-  &::before {
-    content: '';
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: ${(props) => (props.isSaving ? 'var(--warning-color)' : 'var(--success-color)')};
-  }
-`;
-
-const EditorToolbar = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background: var(--background-color);
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
-`;
-
-const ToolbarButton = styled.button`
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  &.active {
-    background: white;
-    box-shadow: var(--card-shadow);
-  }
-`;
-
-const ContentArea = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Editor = styled.div`
-  border: 1px solid var(--border-color);
-  border-radius: 0.375rem;
-  min-height: 500px;
-  padding: 1rem;
-
-  &:focus-within {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-  }
-`;
-
-const Sidebar = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const FeedbackBadge = styled.div`
-  background: var(--primary-color);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  margin-left: 1rem;
-`;
-
-const GuidelineCard = styled.div`
-  background: var(--background-color);
-  padding: 1rem;
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
-`;
-
-const WordCount = styled.div`
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  margin-top: 1rem;
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-`;
-
-const Button = styled.button`
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &.primary {
-    background: var(--primary-color);
-    color: white;
-
-    &:hover {
-      background: #1d4ed8;
-    }
-  }
-
-  &.secondary {
-    background: white;
-    border: 1px solid var(--border-color);
-
-    &:hover {
-      background: var(--background-color);
-    }
-  }
 const ChapterEditor = ({ chapterTitle, guidelines, initialContent = '', onSave, onSubmit, submissionId }) => {
   const [content, setContent] = useState(initialContent);
   const [isSaving, setIsSaving] = useState(false);
@@ -157,7 +11,6 @@ const ChapterEditor = ({ chapterTitle, guidelines, initialContent = '', onSave, 
   const [isCheckingFeedback, setIsCheckingFeedback] = useState(false);
 
   useEffect(() => {
-    // Auto-save every 30 seconds
     const autoSaveInterval = setInterval(() => {
       handleSave();
     }, 30000);
@@ -183,14 +36,11 @@ const ChapterEditor = ({ chapterTitle, guidelines, initialContent = '', onSave, 
     };
 
     checkFeedback();
-
-    // Check for new feedback every 5 minutes
     const feedbackInterval = setInterval(checkFeedback, 300000);
     return () => clearInterval(feedbackInterval);
   }, [submissionId]);
 
   useEffect(() => {
-    // Update word count
     const words = content
       .trim()
       .split(/\s+/)
@@ -223,62 +73,80 @@ const ChapterEditor = ({ chapterTitle, guidelines, initialContent = '', onSave, 
   };
 
   return (
-    <EditorContainer>
-      <EditorHeader>
+    <div className="max-w-6xl mx-auto p-8 bg-white dark:bg-gray-900 rounded-lg shadow-lg transition-colors duration-300">
+      <div className="flex justify-between items-center mb-8">
         <div>
-          <h1>{chapterTitle}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{chapterTitle}</h1>
           {hasFeedback && (
-            <FeedbackBadge>
+            <div className="inline-flex items-center bg-blue-600 dark:bg-blue-700 text-white text-sm font-medium px-3 py-1 rounded-full ml-4">
               New Feedback Available
-            </FeedbackBadge>
+            </div>
           )}
-          <SaveStatus isSaving={isSaving}>
+          <div className="flex items-center gap-2 mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <div className={`w-2 h-2 rounded-full ${isSaving ? 'bg-yellow-500' : 'bg-green-500'}`} />
             {isSaving
               ? 'Saving...'
               : lastSaved
                 ? `Last saved ${lastSaved.toLocaleTimeString()}`
                 : 'Not saved yet'}
-          </SaveStatus>
+          </div>
         </div>
-        <WordCount>{wordCount} words</WordCount>
-      </EditorHeader>
+        <div className="text-sm text-gray-600 dark:text-gray-400">
+          {wordCount} words
+        </div>
+      </div>
 
-      <EditorToolbar>
-        <ToolbarButton title="Bold">B</ToolbarButton>
-        <ToolbarButton title="Italic">I</ToolbarButton>
-        <ToolbarButton title="Underline">U</ToolbarButton>
-        <ToolbarButton title="Bullet List">•</ToolbarButton>
-        <ToolbarButton title="Numbered List">1.</ToolbarButton>
-      </EditorToolbar>
+      <div className="flex gap-2 p-2 bg-gray-100 dark:bg-gray-800 rounded-md mb-4">
+        {['B', 'I', 'U', '•', '1.'].map((btn, index) => (
+          <button
+            key={index}
+            className="px-2 py-1 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            title={['Bold', 'Italic', 'Underline', 'Bullet List', 'Numbered List'][index]}
+          >
+            {btn}
+          </button>
+        ))}
+      </div>
 
-      <ContentArea>
-        <Editor
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
+        <div
           contentEditable
           suppressContentEditableWarning
           onInput={(e) => setContent(e.currentTarget.textContent)}
           dangerouslySetInnerHTML={{ __html: content }}
+          className="min-h-[500px] p-4 border border-gray-200 dark:border-gray-700 rounded-md 
+                   focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500
+                   bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 transition-colors"
         />
 
-        <Sidebar>
-          <h3>Chapter Guidelines</h3>
+        <div className="md:block hidden space-y-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Chapter Guidelines</h3>
           {guidelines.map((guideline, index) => (
-            <GuidelineCard key={index}>
-              <h4>{guideline.title}</h4>
-              <p>{guideline.description}</p>
-            </GuidelineCard>
+            <div key={index} className="p-4 bg-gray-100 dark:bg-gray-800 rounded-md">
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-2">{guideline.title}</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">{guideline.description}</p>
+            </div>
           ))}
-        </Sidebar>
-      </ContentArea>
+        </div>
+      </div>
 
-      <ActionButtons>
-        <Button className="primary" onClick={handleSubmit}>
+      <div className="flex gap-4 mt-8">
+        <button
+          onClick={handleSubmit}
+          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md 
+                   transition-colors font-medium disabled:opacity-50"
+        >
           Submit for Review
-        </Button>
-        <Button className="secondary" onClick={handleSave}>
+        </button>
+        <button
+          onClick={handleSave}
+          className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 
+                   rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-medium"
+        >
           Save Draft
-        </Button>
-      </ActionButtons>
-    </EditorContainer>
+        </button>
+      </div>
+    </div>
   );
 };
 

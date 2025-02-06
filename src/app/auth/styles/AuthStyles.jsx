@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -13,7 +12,6 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-
 export const AuthLayout = styled.div`
   position: relative;
   min-height: 100vh;
@@ -25,7 +23,6 @@ export const AuthLayout = styled.div`
     -apple-system,
     sans-serif;
 `;
-
 export const AuthBackground = styled.div`
   position: fixed;
   top: 0;
@@ -40,30 +37,20 @@ export const AuthBackground = styled.div`
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
   }
 `;
-
 export const GradientOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle at center,
-    transparent 0%,
-    rgba(0, 0, 0, 0.02) 100%
-  );
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%);
   backdrop-filter: blur(80px);
   transition: all 0.3s ease;
 
   @media (prefers-color-scheme: dark) {
-    background: radial-gradient(
-      circle at center,
-      transparent 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
   }
 `;
-
 export const MainContent = styled.main`
   flex: 1;
   display: flex;
@@ -77,14 +64,12 @@ export const MainContent = styled.main`
     padding: 2rem;
   }
 `;
-
 export const AuthContainer = styled.div`
   width: 100%;
   max-width: 28rem;
   margin: 1rem auto;
   animation: ${fadeIn} 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 `;
-
 export const AuthForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -119,7 +104,6 @@ export const AuthForm = styled.form`
     }
   }
 `;
-
 export const AuthTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
@@ -133,7 +117,6 @@ export const AuthTitle = styled.h1`
     color: #f3f4f6;
   }
 `;
-
 export const ErrorMessage = styled.p`
   color: #dc2626;
   font-size: 0.875rem;
@@ -144,7 +127,6 @@ export const ErrorMessage = styled.p`
   border-radius: 0.5rem;
   animation: ${fadeIn} 0.3s ease;
 `;
-
 const StyledLink = styled.a`
   color: #3b82f6;
   text-decoration: none;
@@ -174,18 +156,17 @@ const StyledLink = styled.a`
     }
   }
 `;
-
 export const AuthLink = ({ href, children, ...props }) => (
-  <Link href={href} passHref legacyBehavior>
-    <StyledLink {...props}>{children}</StyledLink>
+  <Link href={href} passHref legacyBehavior data-oid="fzf-1b9">
+    <StyledLink {...props} data-oid="ky3dfv1">
+      {children}
+    </StyledLink>
   </Link>
 );
-
 export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
 `;
-
 export const StyledInput = styled.input`
   width: 100%;
   padding: 0.75rem 1rem;
@@ -220,7 +201,6 @@ export const StyledInput = styled.input`
     }
   }
 `;
-
 export const StyledButton = styled.button`
   padding: 0.75rem 0.5rem;
   background: #3b82f6;

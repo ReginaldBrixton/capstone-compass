@@ -1,7 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
-
 const ProjectContext = createContext();
 
 // Action Types
@@ -31,9 +30,18 @@ const initialState = {
       progress: 0,
       deadline: null,
       chapters: {
-        one: { status: 'not-started', progress: 0 },
-        two: { status: 'not-started', progress: 0 },
-        three: { status: 'not-started', progress: 0 },
+        one: {
+          status: 'not-started',
+          progress: 0,
+        },
+        two: {
+          status: 'not-started',
+          progress: 0,
+        },
+        three: {
+          status: 'not-started',
+          progress: 0,
+        },
       },
       defense: {
         status: 'not-scheduled',
@@ -46,8 +54,14 @@ const initialState = {
       progress: 0,
       deadline: null,
       chapters: {
-        four: { status: 'not-started', progress: 0 },
-        five: { status: 'not-started', progress: 0 },
+        four: {
+          status: 'not-started',
+          progress: 0,
+        },
+        five: {
+          status: 'not-started',
+          progress: 0,
+        },
       },
       defense: {
         status: 'not-scheduled',
@@ -76,7 +90,6 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.SET_CHAPTER_STATUS:
       return {
         ...state,
@@ -87,9 +100,7 @@ function projectReducer(state, action) {
             chapters: {
               ...state.phases[action.payload.phase].chapters,
               [action.payload.chapter]: {
-                ...state.phases[action.payload.phase].chapters[
-                  action.payload.chapter
-                ],
+                ...state.phases[action.payload.phase].chapters[action.payload.chapter],
                 status: action.payload.status,
                 progress: action.payload.progress,
               },
@@ -97,7 +108,6 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.UPDATE_DEFENSE_STATUS:
       return {
         ...state,
@@ -112,7 +122,6 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.SET_DEADLINE:
       return {
         ...state,
@@ -124,15 +133,16 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.UPDATE_PANEL_MEMBER:
       const phase = state.phases[action.payload.phase];
       const updatedPanelMembers = phase.defense.panelMembers.map((member) =>
         member.id === action.payload.memberId
-          ? { ...member, ...action.payload.updates }
+          ? {
+              ...member,
+              ...action.payload.updates,
+            }
           : member
       );
-
       return {
         ...state,
         phases: {
@@ -146,7 +156,6 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.SAVE_DRAFT:
       return {
         ...state,
@@ -158,19 +167,16 @@ function projectReducer(state, action) {
           },
         },
       };
-
     case PROJECT_ACTIONS.SET_LOADING:
       return {
         ...state,
         loading: action.payload,
       };
-
     case PROJECT_ACTIONS.SET_ERROR:
       return {
         ...state,
         error: action.payload,
       };
-
     default:
       return state;
   }
@@ -183,16 +189,14 @@ export function ProjectProvider({ children }) {
   // Calculate overall progress whenever phases change
   useEffect(() => {
     const phases = Object.values(state.phases);
-    const totalProgress = phases.reduce(
-      (sum, phase) => sum + phase.progress,
-      0
-    );
+    const totalProgress = phases.reduce((sum, phase) => sum + phase.progress, 0);
     const overallProgress = Math.round(totalProgress / phases.length);
-
     if (overallProgress !== state.overallProgress) {
       dispatch({
         type: PROJECT_ACTIONS.UPDATE_PROGRESS,
-        payload: { overall: overallProgress },
+        payload: {
+          overall: overallProgress,
+        },
       });
     }
   }, [state.phases]);
@@ -201,45 +205,60 @@ export function ProjectProvider({ children }) {
   const updateProgress = (phase, progress) => {
     dispatch({
       type: PROJECT_ACTIONS.UPDATE_PROGRESS,
-      payload: { phase, progress },
+      payload: {
+        phase,
+        progress,
+      },
     });
   };
-
   const setChapterStatus = (phase, chapter, status, progress) => {
     dispatch({
       type: PROJECT_ACTIONS.SET_CHAPTER_STATUS,
-      payload: { phase, chapter, status, progress },
+      payload: {
+        phase,
+        chapter,
+        status,
+        progress,
+      },
     });
   };
-
   const updateDefenseStatus = (phase, defenseData) => {
     dispatch({
       type: PROJECT_ACTIONS.UPDATE_DEFENSE_STATUS,
-      payload: { phase, defenseData },
+      payload: {
+        phase,
+        defenseData,
+      },
     });
   };
-
   const setDeadline = (phase, deadline) => {
     dispatch({
       type: PROJECT_ACTIONS.SET_DEADLINE,
-      payload: { phase, deadline },
+      payload: {
+        phase,
+        deadline,
+      },
     });
   };
-
   const updatePanelMember = (phase, memberId, updates) => {
     dispatch({
       type: PROJECT_ACTIONS.UPDATE_PANEL_MEMBER,
-      payload: { phase, memberId, updates },
+      payload: {
+        phase,
+        memberId,
+        updates,
+      },
     });
   };
-
   const saveDraft = (key, content) => {
     dispatch({
       type: PROJECT_ACTIONS.SAVE_DRAFT,
-      payload: { key, content },
+      payload: {
+        key,
+        content,
+      },
     });
   };
-
   const value = {
     state,
     updateProgress,
@@ -249,9 +268,10 @@ export function ProjectProvider({ children }) {
     updatePanelMember,
     saveDraft,
   };
-
   return (
-    <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>
+    <ProjectContext.Provider value={value} data-oid="i:k4hfv">
+      {children}
+    </ProjectContext.Provider>
   );
 }
 

@@ -1,9 +1,7 @@
 'use client';
 
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
-
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   return (
     <input
@@ -14,10 +12,9 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
       )}
       ref={ref}
       {...props}
+      data-oid="hlxsc-d"
     />
   );
 });
-
 Input.displayName = 'Input';
-
 export { Input };

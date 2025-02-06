@@ -3,9 +3,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronRight } from 'react-icons/fi';
-
 const container = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0,
+  },
   show: {
     opacity: 1,
     transition: {
@@ -13,12 +14,16 @@ const container = {
     },
   },
 };
-
 const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+  },
 };
-
 export default function HelpCategories({ categories, onCategoryClick }) {
   if (!categories.length) {
     return (
@@ -26,21 +31,23 @@ export default function HelpCategories({ categories, onCategoryClick }) {
         className="py-8 text-center text-gray-500"
         role="status"
         aria-live="polite"
+        data-oid="yb8wchb"
       >
         No categories found matching your search.
       </div>
     );
   }
-
   return (
     <section
       className="py-8"
       id="help-categories"
       aria-labelledby="categories-title"
+      data-oid="mu6lwip"
     >
       <h2
         id="categories-title"
         className="mb-6 text-2xl font-semibold text-slate-800"
+        data-oid="__4scyf"
       >
         Help Categories
       </h2>
@@ -50,6 +57,7 @@ export default function HelpCategories({ categories, onCategoryClick }) {
         variants={container}
         initial="hidden"
         animate="show"
+        data-oid="8qvqz68"
       >
         {categories.map((category) => (
           <motion.button
@@ -57,34 +65,46 @@ export default function HelpCategories({ categories, onCategoryClick }) {
             onClick={() => onCategoryClick(category)}
             className="group flex flex-col rounded-xl border border-gray-100 bg-white p-6 text-left shadow-sm transition-all duration-200 hover:border-blue-200 hover:shadow-md"
             variants={item}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.98,
+            }}
             aria-label={`View details for ${category.title}`}
+            data-oid=".:0_f3p"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className="mb-2 text-lg font-medium text-slate-800 group-hover:text-blue-600">
+            <div className="flex items-start justify-between" data-oid="u.sv9z8">
+              <div className="flex-1" data-oid="fcsg.bu">
+                <h3
+                  className="mb-2 text-lg font-medium text-slate-800 group-hover:text-blue-600"
+                  data-oid="d5.yqiy"
+                >
                   {category.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-gray-600">
+                <p className="text-sm leading-relaxed text-gray-600" data-oid="3volhh-">
                   {category.description}
                 </p>
               </div>
-              <FiChevronRight className="h-5 w-5 transform text-gray-400 transition-all group-hover:translate-x-1 group-hover:text-blue-500" />
+              <FiChevronRight
+                className="h-5 w-5 transform text-gray-400 transition-all group-hover:translate-x-1 group-hover:text-blue-500"
+                data-oid="7t5r1tv"
+              />
             </div>
 
             {category.topics && category.topics.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2" data-oid="775gwba">
                 {category.topics.slice(0, 3).map((topic) => (
                   <span
                     key={topic}
                     className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"
+                    data-oid="0ji82bq"
                   >
                     {topic}
                   </span>
                 ))}
                 {category.topics.length > 3 && (
-                  <span className="px-2 py-1 text-xs font-medium text-gray-500">
+                  <span className="px-2 py-1 text-xs font-medium text-gray-500" data-oid="95opcy:">
                     +{category.topics.length - 3} more
                   </span>
                 )}

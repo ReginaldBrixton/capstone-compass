@@ -26,11 +26,9 @@ const Accordion = ({
   className = '',
 }) => {
   const [openItems, setOpenItems] = useState(new Set());
-
   const toggleItem = (value) => {
     setOpenItems((prev) => {
       const newItems = new Set(prev);
-
       if (type === 'single') {
         if (newItems.has(value)) {
           // If collapsible is true, we can close the item
@@ -50,17 +48,14 @@ const Accordion = ({
           newItems.add(value);
         }
       }
-
       return newItems;
     });
   };
-
   const baseClasses = 'transition-all duration-300 ease-in-out';
   const borderClasses = flush
     ? ''
     : 'rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md';
   const containerClasses = `${baseClasses} ${borderClasses} ${className}`;
-
   return (
     <AccordionContext.Provider
       value={{
@@ -69,19 +64,20 @@ const Accordion = ({
         variant,
         flush,
       }}
+      data-oid="ivt67sf"
     >
       <div
         className={containerClasses}
         data-accordion={type}
         role="tablist"
         aria-multiselectable={type === 'multiple'}
+        data-oid="ni.a3ve"
       >
         {children}
       </div>
     </AccordionContext.Provider>
   );
 };
-
 Accordion.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['single', 'multiple']),
@@ -90,5 +86,4 @@ Accordion.propTypes = {
   variant: PropTypes.oneOf(['default', 'colored']),
   className: PropTypes.string,
 };
-
 export default Accordion;

@@ -237,12 +237,7 @@
 - `seeds`: Initial data seeds
 - `models`: Database models and relationships
 
-## Infrastructure
 
-### Deployment
-- `docker`: Containerization setup
-- `ci-cd`: Continuous integration pipeline
-- `monitoring`: Application monitoring
 
 ### Security
 - `authentication`: JWT-based auth system

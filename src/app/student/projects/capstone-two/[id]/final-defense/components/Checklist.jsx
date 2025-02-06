@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-
 const ChecklistContainer = styled.div.attrs({
   className: 'checklist-container',
 })`
@@ -10,8 +9,9 @@ const ChecklistContainer = styled.div.attrs({
   gap: 1.5rem;
   margin: 1.5rem 0;
 `;
-
-const CategoryCard = styled(motion.div).attrs({ className: 'category-card' })`
+const CategoryCard = styled(motion.div).attrs({
+  className: 'category-card',
+})`
   background: var(--background-color);
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -25,7 +25,6 @@ const CategoryCard = styled(motion.div).attrs({ className: 'category-card' })`
     padding-bottom: 0.5rem;
   }
 `;
-
 const ChecklistItemStyled = styled(motion.div).attrs({
   className: 'checklist-item',
 })`
@@ -42,8 +41,9 @@ const ChecklistItemStyled = styled(motion.div).attrs({
     background: var(--hover-color, #f8f9fa);
   }
 `;
-
-const Checkbox = styled.input.attrs({ className: 'checklist-checkbox' })`
+const Checkbox = styled.input.attrs({
+  className: 'checklist-checkbox',
+})`
   width: 1.25rem;
   height: 1.25rem;
   border: 2px solid var(--primary-color);
@@ -66,31 +66,41 @@ const Checkbox = styled.input.attrs({ className: 'checklist-checkbox' })`
     }
   }
 `;
-
-const ItemText = styled.span.attrs({ className: 'checklist-item-text' })`
+const ItemText = styled.span.attrs({
+  className: 'checklist-item-text',
+})`
   flex: 1;
   text-decoration: ${(props) => (props.$checked ? 'line-through' : 'none')};
-  color: ${(props) =>
-    props.$checked ? 'var(--text-secondary)' : 'var(--text-primary)'};
+  color: ${(props) => (props.$checked ? 'var(--text-secondary)' : 'var(--text-primary)')};
 `;
-
 const ChecklistItem = ({ item, onToggle }) => {
   return (
     <ChecklistItemStyled
-      whileHover={{ x: 4 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileHover={{
+        x: 4,
+      }}
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      data-oid="o9.zosm"
     >
       <Checkbox
         type="checkbox"
         checked={item.checked}
         onChange={() => onToggle(item.id)}
+        data-oid="jf7j80o"
       />
-      <ItemText $checked={item.checked}>{item.text}</ItemText>
+      <ItemText $checked={item.checked} data-oid="e958fn:">
+        {item.text}
+      </ItemText>
     </ChecklistItemStyled>
   );
 };
-
 const Checklist = ({ items, onToggleItem }) => {
   const categorizedItems = items.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -99,30 +109,31 @@ const Checklist = ({ items, onToggleItem }) => {
     acc[item.category].push(item);
     return acc;
   }, {});
-
   return (
-    <ChecklistContainer>
-      {Object.entries(categorizedItems).map(
-        ([category, categoryItems], index) => (
-          <CategoryCard
-            key={category}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <h3>{category}</h3>
-            {categoryItems.map((item) => (
-              <ChecklistItem
-                key={item.id}
-                item={item}
-                onToggle={onToggleItem}
-              />
-            ))}
-          </CategoryCard>
-        )
-      )}
+    <ChecklistContainer data-oid="fx.q8bv">
+      {Object.entries(categorizedItems).map(([category, categoryItems], index) => (
+        <CategoryCard
+          key={category}
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: index * 0.1,
+          }}
+          data-oid="7bn.n93"
+        >
+          <h3 data-oid="r5.00:5">{category}</h3>
+          {categoryItems.map((item) => (
+            <ChecklistItem key={item.id} item={item} onToggle={onToggleItem} data-oid="jkb67cg" />
+          ))}
+        </CategoryCard>
+      ))}
     </ChecklistContainer>
   );
 };
-
 export default Checklist;

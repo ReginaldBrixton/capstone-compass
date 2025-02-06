@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import Avatar from './Avatar';
-
 const AvatarTooltip = ({
   src,
   alt,
@@ -15,7 +13,6 @@ const AvatarTooltip = ({
   className = '',
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-
   const getTooltipPosition = () => {
     switch (placement) {
       case 'top':
@@ -30,7 +27,6 @@ const AvatarTooltip = ({
         return 'bottom-full left-1/2 -translate-x-1/2 mb-2';
     }
   };
-
   const getArrowPosition = () => {
     switch (placement) {
       case 'top':
@@ -45,14 +41,14 @@ const AvatarTooltip = ({
         return 'top-full left-1/2 -translate-x-1/2 border-t-gray-900 dark:border-t-gray-700';
     }
   };
-
   return (
-    <div className={`relative inline-block ${className}`}>
+    <div className={`relative inline-block ${className}`} data-oid="0mvpcbn">
       <div
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
         onFocus={() => setIsVisible(true)}
         onBlur={() => setIsVisible(false)}
+        data-oid="elfans4"
       >
         <Avatar
           src={src}
@@ -62,6 +58,7 @@ const AvatarTooltip = ({
           bordered={bordered}
           className="cursor-default"
           aria-describedby={tooltipId}
+          data-oid="q.:gtqp"
         />
       </div>
 
@@ -70,17 +67,18 @@ const AvatarTooltip = ({
           id={tooltipId}
           role="tooltip"
           className={`absolute ${getTooltipPosition()} z-10 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white shadow-sm transition-opacity duration-300 dark:bg-gray-700`}
+          data-oid="_etjbm."
         >
           {tooltipText}
           <div
             className={`absolute h-2 w-2 ${getArrowPosition()} border-4 border-transparent`}
+            data-oid="07zfqio"
           />
         </div>
       )}
     </div>
   );
 };
-
 AvatarTooltip.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
@@ -92,5 +90,4 @@ AvatarTooltip.propTypes = {
   placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   className: PropTypes.string,
 };
-
 export default AvatarTooltip;
