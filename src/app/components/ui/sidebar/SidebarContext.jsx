@@ -24,19 +24,43 @@ export function SidebarProvider({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-    
+  // Add resize observer to handle responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleSidebar = useCallback(() => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setIsOpen((prev) => !prev);
+      setIsOpen(prev => !prev);
+      
+      // Automatically close sidebar on mobile when clicking outside
+      if (window.innerWidth < 768) {
+        const handleClickOutside = (e) => {
+          if (!e.target.closest('aside')) {
+            setIsOpen(false);
+            document.removeEventListener('click', handleClickOutside);
+          }
+        };
+        document.addEventListener('click', handleClickOutside);
+      }
     }
   }, [isAnimating]);
 
   const toggleCollapse = useCallback(() => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setIsCollapsed((prev) => !prev);
+      setIsCollapsed(prev => !prev);
     }
   }, [isAnimating]);
 
@@ -49,19 +73,19 @@ export function SidebarProvider({
     }
   }, [isAnimating, animationDuration]);
 
+  const value = {
+    isOpen,
+    isCollapsed,
+    isAnimating,
+    toggleSidebar,
+    toggleCollapse,
+    width: defaultWidth,
+    collapsedWidth: defaultCollapsedWidth,
+    animationDuration,
+  };
+
   return (
-    <SidebarContext.Provider
-      value={{
-        isOpen,
-        isCollapsed,
-        isAnimating,
-        toggleSidebar,
-        toggleCollapse,
-        width: defaultWidth,
-        collapsedWidth: defaultCollapsedWidth,
-        animationDuration,
-      }}
-    >
+    <SidebarContext.Provider value={value}>
       {children}
     </SidebarContext.Provider>
   );
