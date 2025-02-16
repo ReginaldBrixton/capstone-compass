@@ -7,18 +7,92 @@ import { ContactForm, FAQ, HelpCategories, SearchBar } from './components';
 import { faqs, helpCategories } from './data/helpData';
 
 export default function HelpPage() {
-  // ... [keep all existing state and logic unchanged]
+  const [openFAQ, setOpenFAQ] = useState(null);
+  const [filteredCategories, setFilteredCategories] = useState(helpCategories);
+  const [filteredFAQs, setFilteredFAQs] = useState(faqs);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    const normalizedTerm = term.toLowerCase().trim();
+    if (!normalizedTerm) {
+      setFilteredCategories(helpCategories);
+      setFilteredFAQs(faqs);
+      return;
+    }
+
+    // Filter categories
+    const matchedCategories = helpCategories.filter(
+      (category) =>
+        category.title.toLowerCase().includes(normalizedTerm) ||
+        category.description.toLowerCase().includes(normalizedTerm)
+    );
+    setFilteredCategories(matchedCategories);
+
+    // Filter FAQs
+    const matchedFAQs = faqs.filter(
+      (faq) =>
+        faq.question.toLowerCase().includes(normalizedTerm) ||
+        faq.answer.toLowerCase().includes(normalizedTerm)
+    );
+    setFilteredFAQs(matchedFAQs);
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setIsModalOpen(true);
+  };
+
+  const handleSubmit = async (formData) => {
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setSubmitStatus('success');
+      // Reset form here
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle escape key for modal
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+      }
+    };
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isModalOpen]);
 
   return (
     <div
-      className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800"
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800"
       id="help-page"
       data-oid="8v9b6dl"
     >
-      <main className="flex-1 mx-auto w-full max-w-7xl p-4 md:p-8" role="main" data-oid="6-:hyr2">
+      <main className="mx-auto p-4 md:p-8" role="main" data-oid="6-:hyr2">
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{
+            opacity: 0,
+            y: -20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
           className="relative mb-8 text-center text-3xl font-bold text-slate-800 dark:text-white md:text-4xl"
           id="help-title"
           data-oid="y:07yp8"
@@ -28,22 +102,28 @@ export default function HelpPage() {
         </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="flex-1 grid grid-cols-1 gap-8"
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.2,
+          }}
+          className="space-y-8"
           data-oid="4310hw0"
         >
-          <div className="col-span-full">
+          <div className="col-span-full md:col-span-2 lg:col-span-3">
             <SearchBar
               onSearch={handleSearch}
               value={searchTerm}
-              className="mx-auto max-w-2xl w-full"
+              className="mx-auto max-w-2xl"
               data-oid="91y815o"
             />
           </div>
 
-          <div className="col-span-full">
+          <div className="col-span-full md:col-span-1 lg:col-span-1">
             <HelpCategories
               categories={filteredCategories}
               onCategoryClick={handleCategoryClick}
@@ -51,28 +131,33 @@ export default function HelpPage() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 w-full">
-            <div className="h-full">
-              <FAQ faqs={filteredFAQs} openFAQ={openFAQ} setOpenFAQ={setOpenFAQ} data-oid="x_zqxa7" />
-            </div>
-            <div className="h-full">
-              <ContactForm
-                onSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
-                submitStatus={submitStatus}
-                data-oid="c-6ws31"
-              />
-            </div>
+          <div className="col-span-full md:col-span-1 lg:col-span-1">
+            <FAQ faqs={filteredFAQs} openFAQ={openFAQ} setOpenFAQ={setOpenFAQ} data-oid="x_zqxa7" />
+          </div>
+
+          <div className="col-span-full md:col-span-2 lg:col-span-1">
+            <ContactForm
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              submitStatus={submitStatus}
+              data-oid="c-6ws31"
+            />
           </div>
         </motion.div>
 
-        {/* Category Detail Modal - keep existing modal implementation */}
+        {/* Category Detail Modal */}
         <AnimatePresence data-oid="wlmu4hv">
           {isModalOpen && selectedCategory && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 p-4"
               id="category-modal"
               role="dialog"
@@ -83,9 +168,18 @@ export default function HelpPage() {
               data-oid="46de2_3"
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                initial={{
+                  scale: 0.9,
+                  opacity: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  opacity: 1,
+                }}
+                exit={{
+                  scale: 0.9,
+                  opacity: 0,
+                }}
                 className="relative mx-auto w-full max-w-lg rounded-lg bg-white dark:bg-gray-900 p-6 shadow-xl"
                 data-oid="gcczgb0"
               >
