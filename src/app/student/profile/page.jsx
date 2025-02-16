@@ -1,104 +1,125 @@
-'use client';
+"use client"
 
-import React, { useState, useEffect } from 'react';
-import { AcademicProgress, Achievements, ProfileHeader, RecentActivity } from './components';
-import { studentData as initialStudentData } from './data';
+import { useState } from "react"
+import { Trophy, Star, Zap, BookOpen, Award, Medal, Target } from "lucide-react"
+import ProfileHeader from "./components/profile-header"
+import Achievements from "./components/achievements"
+import RecentActivity from "./components/recent-activity"
+import AcademicProgress from "./components/academic-progress"
+import SkillsInterests from "./components/skills-interests"
 
-export default function ProfilePage() {
-  const [studentData, setStudentData] = useState(initialStudentData);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const initialStudentData = {
+  id: "STU2024001",
+  name: "Alex Johnson",
+  grade: "Graduate Student",
+  email: "alex.j@school.edu",
+  phone: "+1 (555) 123-4567",
+  image: null,
+}
 
-  useEffect(() => {
-    const loadStudentData = async () => {
-      try {
-        setIsLoading(true);
-        // Here you would typically fetch data from your API
-        // For now we'll just simulate it
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setStudentData(initialStudentData);
-      } catch (err) {
-        setError('Failed to load student data');
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+const initialBadges = [
+  { id: 1, name: "Honor Roll", icon: <Star className="h-5 w-5 text-yellow-500" /> },
+  { id: 2, name: "Perfect Attendance", icon: <Trophy className="h-5 w-5 text-blue-500" /> },
+  { id: 3, name: "Research Excellence", icon: <Zap className="h-5 w-5 text-purple-500" /> },
+  { id: 4, name: "Academic Writing", icon: <BookOpen className="h-5 w-5 text-green-500" /> },
+  { id: 5, name: "Leadership Award", icon: <Award className="h-5 w-5 text-red-500" /> },
+  { id: 6, name: "Presentation Skills", icon: <Medal className="h-5 w-5 text-orange-500" /> },
+  { id: 7, name: "Capstone Excellence", icon: <Target className="h-5 w-5 text-indigo-500" /> },
+]
 
-    loadStudentData();
-  }, []);
+const initialActivities = [
+  {
+    id: 1,
+    type: "assignment",
+    action: "Submitted Capstone Proposal Draft",
+    time: "2 days ago",
+  },
+  {
+    id: 2,
+    type: "achievement",
+    action: "Completed Capstone One Milestone",
+    time: "1 week ago",
+  },
+  {
+    id: 3,
+    type: "exam",
+    action: "Passed Capstone One Defense",
+    time: "2 weeks ago",
+  },
+  {
+    id: 4,
+    type: "assignment",
+    action: "Started Capstone Two Research",
+    time: "1 month ago",
+  },
+]
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading profile...</p>
-        </div>
-      </div>
-    );
+const initialSkills = [
+  { id: "1", name: "Research Methods" },
+  { id: "2", name: "Data Analysis" },
+  { id: "3", name: "Academic Writing" },
+  { id: "4", name: "Project Management" },
+]
+
+const initialInterests = [
+  { id: "1", name: "Machine Learning" },
+  { id: "2", name: "Sustainable Energy" },
+  { id: "3", name: "Bioengineering" },
+]
+
+export default function ProfileSettings() {
+  const [studentData, setStudentData] = useState(initialStudentData)
+  const [badges] = useState(initialBadges)
+  const [activities] = useState(initialActivities)
+  const [skills, setSkills] = useState(initialSkills)
+  const [interests, setInterests] = useState(initialInterests)
+
+  const handleAddSkill = (skill) => {
+    setSkills([...skills, { id: Date.now().toString(), name: skill }])
   }
 
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center text-red-500">
-          <p>{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
+  const handleRemoveSkill = (id) => {
+    setSkills(skills.filter((skill) => skill.id !== id))
   }
 
-  // Handler for profile updates
-  const handleProfileUpdate = (updatedData) => {
-    setStudentData(updatedData);
-  };
+  const handleAddInterest = (interest) => {
+    setInterests([...interests, { id: Date.now().toString(), name: interest }])
+  }
+
+  const handleRemoveInterest = (id) => {
+    setInterests(interests.filter((interest) => interest.id !== id))
+  }
 
   return (
-    <div
-      id="student-profile"
-      className="min-h-screen w-full bg-gray-50 p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100 md:p-8"
-      data-oid="m4wsrll"
-    >
-      <div
-        id="profile-container"
-        className="animate-fadeIn mx-auto flex max-w-7xl flex-col gap-6 px-4 md:gap-10 md:px-8"
-        data-oid="1_t3cux"
-      >
-        <ProfileHeader 
-          studentData={studentData} 
-          onUpdateProfile={handleProfileUpdate}
-        />
+    <div className="min-h-screen bg-gray-50 pb-12 pt-6 dark:bg-gray-900">
+      <div className="container mx-auto max-w-7xl space-y-6 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile Settings</h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage your profile information and view your academic progress
+          </p>
+        </div>
 
-        <div
-          id="profile-content"
-          className="grid w-full grid-cols-1 gap-6 md:gap-10 lg:grid-cols-[2fr,1fr]"
-          data-oid="m8u6eut"
-        >
-          <div
-            id="main-content"
-            className="flex w-full min-w-0 flex-col gap-6 md:gap-10"
-            data-oid="ubk-rnu"
-          >
-            <AcademicProgress subjects={studentData.subjects} />
-            <RecentActivity activities={studentData.recentActivity} />
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-6">
+            <ProfileHeader studentData={studentData} onUpdateProfile={setStudentData} />
+            <SkillsInterests
+              skills={skills}
+              interests={interests}
+              onAddSkill={handleAddSkill}
+              onRemoveSkill={handleRemoveSkill}
+              onAddInterest={handleAddInterest}
+              onRemoveInterest={handleRemoveInterest}
+            />
+            <RecentActivity activities={activities} />
           </div>
 
-          <div
-            id="sidebar-content"
-            className="flex w-full min-w-0 flex-col gap-6 md:gap-10"
-            data-oid="4ui5v2b"
-          >
-            <Achievements badges={studentData.badges} />
+          <div className="space-y-6">
+            <AcademicProgress />
+            <Achievements badges={badges} />
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
