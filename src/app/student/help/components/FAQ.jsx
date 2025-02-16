@@ -9,7 +9,7 @@ export default function FAQ({ faqs }) {
   if (!faqs.length) {
     return (
       <div
-        className="py-8 text-center text-gray-500"
+        className="py-8 text-center text-gray-500 dark:text-gray-400"
         role="status"
         aria-live="polite"
         data-oid="q-.sk:g"
@@ -20,7 +20,7 @@ export default function FAQ({ faqs }) {
   }
   return (
     <section className="py-8" id="faq-section" aria-labelledby="faq-title" data-oid="qo.1uyb">
-      <h2 id="faq-title" className="mb-6 text-2xl font-semibold text-slate-800" data-oid="lha:s0n">
+      <h2 id="faq-title" className="mb-6 text-2xl font-semibold text-slate-800 dark:text-white" data-oid="lha:s0n">
         Frequently Asked Questions
       </h2>
 
@@ -33,19 +33,20 @@ export default function FAQ({ faqs }) {
               initial={false}
               animate={{
                 backgroundColor: isOpen ? 'rgb(249, 250, 251)' : 'rgb(255, 255, 255)',
+                backgroundColor: isOpen ? 'var(--faq-open-bg)' : 'var(--faq-closed-bg)', // Use CSS variables for theming
               }}
-              className="overflow-hidden rounded-lg border border-gray-200"
+              className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
               role="tab"
               data-oid="h02atfd"
             >
               <button
                 onClick={() => setOpenItem(isOpen ? null : faq.id)}
-                className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50"
+                className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700"
                 aria-expanded={isOpen}
                 aria-controls={`faq-answer-${faq.id}`}
                 data-oid="c:d64u9"
               >
-                <span className="pr-8 font-medium text-slate-800" data-oid="9yyf_uf">
+                <span className="pr-8 font-medium text-slate-800 dark:text-white" data-oid="9yyf_uf">
                   {faq.question}
                 </span>
                 <motion.span
@@ -55,7 +56,7 @@ export default function FAQ({ faqs }) {
                   transition={{
                     duration: 0.2,
                   }}
-                  className="flex-shrink-0 text-gray-400"
+                  className="flex-shrink-0 text-gray-400 dark:text-gray-500"
                   data-oid="8-8ax9t"
                 >
                   <FiChevronDown className="h-5 w-5" data-oid="tqbela4" />
@@ -86,7 +87,7 @@ export default function FAQ({ faqs }) {
                     data-oid="bwioz93"
                   >
                     <div
-                      className="prose prose-sm max-w-none px-6 pb-4 pt-2 text-gray-600"
+                      className="prose prose-sm max-w-none px-6 pb-4 pt-2 text-gray-600 dark:text-gray-400"
                       data-oid="z7o4daa"
                     >
                       {typeof faq.answer === 'string' ? (
@@ -101,7 +102,7 @@ export default function FAQ({ faqs }) {
                             <a
                               key={i}
                               href={link.url}
-                              className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                              className="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline"
                               target="_blank"
                               rel="noopener noreferrer"
                               data-oid="0h48u4p"

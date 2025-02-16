@@ -62,7 +62,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
     <section className="py-8" id="contact-form" aria-labelledby="contact-title" data-oid="-vlgysc">
       <h2
         id="contact-title"
-        className="mb-6 text-2xl font-semibold text-slate-800"
+        className="mb-6 text-2xl font-semibold text-gray-800 dark:text-white"
         data-oid="pmj1ogf"
       >
         Still Need Help?
@@ -81,7 +81,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           duration: 0.5,
         }}
         onSubmit={handleSubmit}
-        className="mx-auto max-w-2xl rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
+        className="mx-auto max-w-2xl rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-sm"
         noValidate
         data-oid="1lp4o3i"
       >
@@ -89,7 +89,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           <div data-oid="hjcqnbm">
             <label
               htmlFor="name"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
               data-oid="_2m-zfr"
             >
               Name
@@ -100,7 +100,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2 ${errors.name ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
+              className={`w-full rounded-lg border px-4 py-2 bg-white dark:bg-gray-700 dark:text-white ${errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.name ? 'true' : 'false'}
               aria-describedby={errors.name ? 'name-error' : undefined}
               disabled={isSubmitting}
@@ -116,7 +116,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           <div data-oid="1sxaiep">
             <label
               htmlFor="email"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
               data-oid="_b39rmv"
             >
               Email
@@ -127,7 +127,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2 ${errors.email ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
+              className={`w-full rounded-lg border px-4 py-2 bg-white dark:bg-gray-700 dark:text-white ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.email ? 'true' : 'false'}
               aria-describedby={errors.email ? 'email-error' : undefined}
               disabled={isSubmitting}
@@ -143,7 +143,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           <div data-oid="k7dm97g">
             <label
               htmlFor="subject"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
               data-oid=".5-dj46"
             >
               Subject
@@ -154,7 +154,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-2 ${errors.subject ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
+              className={`w-full rounded-lg border px-4 py-2 bg-white dark:bg-gray-700 dark:text-white ${errors.subject ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.subject ? 'true' : 'false'}
               aria-describedby={errors.subject ? 'subject-error' : undefined}
               disabled={isSubmitting}
@@ -170,7 +170,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
           <div data-oid="y7agzga">
             <label
               htmlFor="message"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
               data-oid="uc176l3"
             >
               Message
@@ -181,7 +181,7 @@ export default function ContactForm({ onSubmit, isSubmitting, submitStatus }) {
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className={`w-full rounded-lg border px-4 py-2 ${errors.message ? 'border-red-500' : 'border-gray-200'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
+              className={`w-full rounded-lg border px-4 py-2 bg-white dark:bg-gray-700 dark:text-white ${errors.message ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               aria-invalid={errors.message ? 'true' : 'false'}
               aria-describedby={errors.message ? 'message-error' : undefined}
               disabled={isSubmitting}

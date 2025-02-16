@@ -28,7 +28,7 @@ export default function HelpCategories({ categories, onCategoryClick }) {
   if (!categories.length) {
     return (
       <div
-        className="py-8 text-center text-gray-500"
+        className="py-8 text-center text-gray-500 dark:text-gray-400"
         role="status"
         aria-live="polite"
         data-oid="yb8wchb"
@@ -46,7 +46,7 @@ export default function HelpCategories({ categories, onCategoryClick }) {
     >
       <h2
         id="categories-title"
-        className="mb-6 text-2xl font-semibold text-slate-800"
+        className="mb-6 text-2xl font-semibold text-slate-800 dark:text-white"
         data-oid="__4scyf"
       >
         Help Categories
@@ -63,7 +63,7 @@ export default function HelpCategories({ categories, onCategoryClick }) {
           <motion.button
             key={category.id}
             onClick={() => onCategoryClick(category)}
-            className="group flex flex-col rounded-xl border border-gray-100 bg-white p-6 text-left shadow-sm transition-all duration-200 hover:border-blue-200 hover:shadow-md"
+            className="group flex flex-col rounded-xl border border-gray-100 bg-white dark:bg-gray-800 p-6 text-left shadow-sm transition-all duration-200 hover:border-blue-200 hover:shadow-md dark:hover:border-blue-700 dark:hover:shadow-lg dark:hover:shadow-blue-700/50"
             variants={item}
             whileHover={{
               scale: 1.02,
@@ -77,17 +77,17 @@ export default function HelpCategories({ categories, onCategoryClick }) {
             <div className="flex items-start justify-between" data-oid="u.sv9z8">
               <div className="flex-1" data-oid="fcsg.bu">
                 <h3
-                  className="mb-2 text-lg font-medium text-slate-800 group-hover:text-blue-600"
+                  className="mb-2 text-lg font-medium text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400"
                   data-oid="d5.yqiy"
                 >
                   {category.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-gray-600" data-oid="3volhh-">
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400" data-oid="3volhh-">
                   {category.description}
                 </p>
               </div>
               <FiChevronRight
-                className="h-5 w-5 transform text-gray-400 transition-all group-hover:translate-x-1 group-hover:text-blue-500"
+                className="h-5 w-5 transform text-gray-400 dark:text-gray-500 transition-all group-hover:translate-x-1 group-hover:text-blue-500 dark:group-hover:text-blue-400"
                 data-oid="7t5r1tv"
               />
             </div>
@@ -97,14 +97,14 @@ export default function HelpCategories({ categories, onCategoryClick }) {
                 {category.topics.slice(0, 3).map((topic) => (
                   <span
                     key={topic}
-                    className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"
+                    className="rounded-full bg-gray-100 dark:bg-gray-700 px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-300"
                     data-oid="0ji82bq"
                   >
                     {topic}
                   </span>
                 ))}
                 {category.topics.length > 3 && (
-                  <span className="px-2 py-1 text-xs font-medium text-gray-500" data-oid="95opcy:">
+                  <span className="px-2 py-1 text-xs font-medium text-gray-500 dark:text-gray-400" data-oid="95opcy:">
                     +{category.topics.length - 3} more
                   </span>
                 )}
