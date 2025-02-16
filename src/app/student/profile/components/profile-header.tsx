@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Camera, Pencil, Mail, Phone, GraduationCap } from "lucide-react"
 
+// Types & Interfaces
 interface ProfileInfoItemProps {
   icon: React.ReactNode
   label: string
@@ -12,6 +13,41 @@ interface ProfileInfoItemProps {
   onEdit: () => void
 }
 
+interface EditDialogProps {
+  field: string
+  value: string
+  type?: string
+  onSave: (value: string) => void
+  onCancel: () => void
+}
+
+interface PhotoDialogProps {
+  isOpen: boolean
+  onClose: () => void
+  onSave: (imageData: string) => void
+}
+
+interface StudentData {
+  id: string
+  name: string
+  grade: string
+  email: string
+  phone: string
+  image: string | null
+}
+
+interface ProfileHeaderProps {
+  studentData: StudentData
+  onUpdateProfile: (data: StudentData) => void
+}
+
+interface EditFieldState {
+  field: string
+  value: string
+  type?: string
+}
+
+// Utility Components
 const ProfileInfoItem: React.FC<ProfileInfoItemProps> = ({ icon, label, value, type = "text", onEdit }) => {
   return (
     <div className="group relative flex items-center justify-between rounded-lg bg-gray-50 p-3 transition-all hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -33,14 +69,7 @@ const ProfileInfoItem: React.FC<ProfileInfoItemProps> = ({ icon, label, value, t
   )
 }
 
-interface EditDialogProps {
-  field: string
-  value: string
-  type?: string
-  onSave: (value: string) => void
-  onCancel: () => void
-}
-
+// Dialog Components
 const EditDialog: React.FC<EditDialogProps> = ({ field, value, type = "text", onSave, onCancel }) => {
   const [inputValue, setInputValue] = useState(value)
 
@@ -73,12 +102,6 @@ const EditDialog: React.FC<EditDialogProps> = ({ field, value, type = "text", on
       </div>
     </div>
   )
-}
-
-interface PhotoDialogProps {
-  isOpen: boolean
-  onClose: () => void
-  onSave: (imageData: string) => void
 }
 
 const PhotoDialog: React.FC<PhotoDialogProps> = ({ isOpen, onClose, onSave }) => {
@@ -122,30 +145,13 @@ const PhotoDialog: React.FC<PhotoDialogProps> = ({ isOpen, onClose, onSave }) =>
   )
 }
 
-interface StudentData {
-  id: string
-  name: string
-  grade: string
-  email: string
-  phone: string
-  image: string | null
-}
-
-interface ProfileHeaderProps {
-  studentData: StudentData
-  onUpdateProfile: (data: StudentData) => void
-}
-
-interface EditFieldState {
-  field: string
-  value: string
-  type?: string
-}
-
+// Main Component
 export default function ProfileHeader({ studentData, onUpdateProfile }: ProfileHeaderProps) {
+  // State Management
   const [editField, setEditField] = useState<EditFieldState | null>(null)
   const [isPhotoDialogOpen, setIsPhotoDialogOpen] = useState(false)
 
+  // Event Handlers
   const handleFieldClick = (field: string, value: string, type?: string) => {
     setEditField({ field, value, type })
   }
@@ -165,73 +171,82 @@ export default function ProfileHeader({ studentData, onUpdateProfile }: ProfileH
     setIsPhotoDialogOpen(false)
   }
 
+  // Profile Photo Section
+  const renderProfilePhoto = () => (
+    <div className="group relative flex-shrink-0">
+      <div
+        className="relative h-32 w-32 cursor-pointer overflow-hidden rounded-full border-4 border-white shadow-lg dark:border-gray-900"
+        onClick={() => setIsPhotoDialogOpen(true)}
+      >
+        <Image
+          src={studentData.image || `/api/placeholder/128/128`}
+          alt={`${studentData.name}'s profile picture`}
+          width={128}
+          height={128}
+          className="h-full w-full object-cover transition-opacity group-hover:opacity-75"
+          priority
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+          <Camera className="h-6 w-6 text-white" />
+        </div>
+      </div>
+    </div>
+  )
+
+  // Profile Info Section
+  const renderProfileInfo = () => (
+    <div className="flex-1 space-y-4 text-center md:text-left">
+      <div className="flex items-center justify-center gap-3 md:justify-start">
+        <h2 className="cursor-pointer text-2xl font-bold hover:underline dark:text-white">
+          <span onClick={() => handleFieldClick("Name", studentData.name, "text")}>
+            {studentData.name}
+          </span>
+        </h2>
+        <button
+          onClick={() => handleFieldClick("Name", studentData.name, "text")}
+          className="text-gray-500 transition-colors hover:text-blue-600"
+          aria-label="Edit name"
+        >
+          <Pencil className="h-5 w-5" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <ProfileInfoItem
+          icon={<Pencil className="h-5 w-5 text-gray-500" />}
+          label="Student ID"
+          value={studentData.id}
+          onEdit={() => handleFieldClick("Student ID", studentData.id, "text")}
+        />
+        <ProfileInfoItem
+          icon={<GraduationCap className="h-5 w-5 text-gray-500" />}
+          label="Grade"
+          value={studentData.grade}
+          onEdit={() => handleFieldClick("Grade", studentData.grade, "text")}
+        />
+        <ProfileInfoItem
+          icon={<Mail className="h-5 w-5 text-gray-500" />}
+          label="Email"
+          value={studentData.email}
+          type="email"
+          onEdit={() => handleFieldClick("Email", studentData.email, "email")}
+        />
+        <ProfileInfoItem
+          icon={<Phone className="h-5 w-5 text-gray-500" />}
+          label="Phone"
+          value={studentData.phone}
+          type="tel"
+          onEdit={() => handleFieldClick("Phone", studentData.phone, "tel")}
+        />
+      </div>
+    </div>
+  )
+
   return (
     <div className="overflow-hidden rounded-2xl border bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
       <div className="flex flex-col items-center gap-6 p-6 md:flex-row md:items-start">
-        <div className="group relative flex-shrink-0">
-          <div
-            className="relative h-32 w-32 cursor-pointer overflow-hidden rounded-full border-4 border-white shadow-lg dark:border-gray-900"
-            onClick={() => setIsPhotoDialogOpen(true)}
-          >
-            <Image
-              src={studentData.image || `/api/placeholder/128/128`}
-              alt={`${studentData.name}'s profile picture`}
-              width={128}
-              height={128}
-              className="h-full w-full object-cover transition-opacity group-hover:opacity-75"
-              priority
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
-              <Camera className="h-6 w-6 text-white" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 space-y-4 text-center md:text-left">
-          <div className="flex items-center justify-center gap-3 md:justify-start">
-            <h2 className="cursor-pointer text-2xl font-bold hover:underline dark:text-white">
-              <span onClick={() => handleFieldClick("Name", studentData.name, "text")}>
-                {studentData.name}
-              </span>
-            </h2>
-            <button
-              onClick={() => handleFieldClick("Name", studentData.name, "text")}
-              className="text-gray-500 transition-colors hover:text-blue-600"
-              aria-label="Edit name"
-            >
-              <Pencil className="h-5 w-5" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            <ProfileInfoItem
-              icon={<Pencil className="h-5 w-5 text-gray-500" />}
-              label="Student ID"
-              value={studentData.id}
-              onEdit={() => handleFieldClick("Student ID", studentData.id, "text")}
-            />
-            <ProfileInfoItem
-              icon={<GraduationCap className="h-5 w-5 text-gray-500" />}
-              label="Grade"
-              value={studentData.grade}
-              onEdit={() => handleFieldClick("Grade", studentData.grade, "text")}
-            />
-            <ProfileInfoItem
-              icon={<Mail className="h-5 w-5 text-gray-500" />}
-              label="Email"
-              value={studentData.email}
-              type="email"
-              onEdit={() => handleFieldClick("Email", studentData.email, "email")}
-            />
-            <ProfileInfoItem
-              icon={<Phone className="h-5 w-5 text-gray-500" />}
-              label="Phone"
-              value={studentData.phone}
-              type="tel"
-              onEdit={() => handleFieldClick("Phone", studentData.phone, "tel")}
-            />
-          </div>
-        </div>
+        {renderProfilePhoto()}
+        {renderProfileInfo()}
       </div>
 
       {editField && (
