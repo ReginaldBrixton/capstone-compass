@@ -129,11 +129,21 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
   };
   const handleSave = async () => {
     if (!preview) return;
+    
     try {
+      // Add loading state
+      const formData = new FormData();
+      formData.append('image', preview);
+      
+      // Here you would typically upload the image to your server
+      // For now we'll just simulate it
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       await onSave(preview);
       onClose();
     } catch (error) {
       console.error('Error updating photo:', error);
+      // Add error handling UI
     }
   };
   if (!isOpen) return null;
@@ -251,6 +261,20 @@ const ProfileHeader = ({ studentData, onUpdateProfile }) => {
       type,
     });
   };
+  const handleFieldUpdate = async (field, value) => {
+    try {
+      // Here you would typically make an API call to update the field
+      // For now we'll just update the local state
+      const key = field.toLowerCase().replace(/\s+/g, '');
+      onUpdateProfile?.({
+        ...studentData,
+        [key]: value,
+      });
+    } catch (error) {
+      console.error(`Error updating ${field}:`, error);
+      // Add error handling UI
+    }
+  };
   return (
     <div
       className="overflow-hidden rounded-2xl border bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
@@ -342,11 +366,7 @@ const ProfileHeader = ({ studentData, onUpdateProfile }) => {
           onClose={() => setEditField(null)}
           {...editField}
           onSave={(value) => {
-            const key = editField.field.toLowerCase().replace(/\s+/g, '');
-            onUpdateProfile?.({
-              ...studentData,
-              [key]: value,
-            });
+            handleFieldUpdate(editField.field, value);
           }}
           data-oid="q6z3lch"
         />
