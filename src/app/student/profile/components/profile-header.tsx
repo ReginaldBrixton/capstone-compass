@@ -4,7 +4,15 @@ import { useState } from "react"
 import Image from "next/image"
 import { Camera, Pencil, Mail, Phone, GraduationCap } from "lucide-react"
 
-const ProfileInfoItem = ({ icon, label, value, type = "text", onEdit }) => {
+interface ProfileInfoItemProps {
+  icon: React.ReactNode
+  label: string
+  value: string
+  type?: string
+  onEdit: () => void
+}
+
+const ProfileInfoItem: React.FC<ProfileInfoItemProps> = ({ icon, label, value, type = "text", onEdit }) => {
   return (
     <div className="group relative flex items-center justify-between rounded-lg bg-gray-50 p-3 transition-all hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
       <div className="flex items-center gap-3">
@@ -25,7 +33,15 @@ const ProfileInfoItem = ({ icon, label, value, type = "text", onEdit }) => {
   )
 }
 
-const EditDialog = ({ field, value, type, onSave, onCancel }) => {
+interface EditDialogProps {
+  field: string
+  value: string
+  type?: string
+  onSave: (value: string) => void
+  onCancel: () => void
+}
+
+const EditDialog: React.FC<EditDialogProps> = ({ field, value, type = "text", onSave, onCancel }) => {
   const [inputValue, setInputValue] = useState(value)
 
   return (
@@ -59,7 +75,13 @@ const EditDialog = ({ field, value, type, onSave, onCancel }) => {
   )
 }
 
-const PhotoDialog = ({ isOpen, onClose, onSave }) => {
+interface PhotoDialogProps {
+  isOpen: boolean
+  onClose: () => void
+  onSave: (imageData: string) => void
+}
+
+const PhotoDialog: React.FC<PhotoDialogProps> = ({ isOpen, onClose, onSave }) => {
   if (!isOpen) return null
 
   return (
@@ -78,7 +100,9 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
               if (file) {
                 const reader = new FileReader()
                 reader.onloadend = () => {
-                  onSave(reader.result)
+                  if (typeof reader.result === "string") {
+                    onSave(reader.result)
+                  }
                 }
                 reader.readAsDataURL(file)
               }
@@ -98,26 +122,46 @@ const PhotoDialog = ({ isOpen, onClose, onSave }) => {
   )
 }
 
-export default function ProfileHeader({ studentData, onUpdateProfile }) {
-  const [editField, setEditField] = useState(null)
+interface StudentData {
+  id: string
+  name: string
+  grade: string
+  email: string
+  phone: string
+  image: string | null
+}
+
+interface ProfileHeaderProps {
+  studentData: StudentData
+  onUpdateProfile: (data: StudentData) => void
+}
+
+interface EditFieldState {
+  field: string
+  value: string
+  type?: string
+}
+
+export default function ProfileHeader({ studentData, onUpdateProfile }: ProfileHeaderProps) {
+  const [editField, setEditField] = useState<EditFieldState | null>(null)
   const [isPhotoDialogOpen, setIsPhotoDialogOpen] = useState(false)
 
-  const handleFieldClick = (field, value, type) => {
+  const handleFieldClick = (field: string, value: string, type?: string) => {
     setEditField({ field, value, type })
   }
 
-  const handleFieldUpdate = async (field, value) => {
+  const handleFieldUpdate = async (field: string, value: string) => {
     try {
-      const key = field.toLowerCase().replace(/\s+/g, "")
-      onUpdateProfile?.({ ...studentData, [key]: value })
+      const key = field.toLowerCase().replace(/\s+/g, "") as keyof StudentData
+      onUpdateProfile({ ...studentData, [key]: value })
       setEditField(null)
     } catch (error) {
       console.error(`Error updating ${field}:`, error)
     }
   }
 
-  const handlePhotoUpdate = (imageData) => {
-    onUpdateProfile?.({ ...studentData, image: imageData })
+  const handlePhotoUpdate = (imageData: string) => {
+    onUpdateProfile({ ...studentData, image: imageData })
     setIsPhotoDialogOpen(false)
   }
 
@@ -146,12 +190,12 @@ export default function ProfileHeader({ studentData, onUpdateProfile }) {
         <div className="flex-1 space-y-4 text-center md:text-left">
           <div className="flex items-center justify-center gap-3 md:justify-start">
             <h2 className="cursor-pointer text-2xl font-bold hover:underline dark:text-white">
-              <span onClick={() => handleFieldClick("Name", studentData.name)}>
+              <span onClick={() => handleFieldClick("Name", studentData.name, "text")}>
                 {studentData.name}
               </span>
             </h2>
             <button
-              onClick={() => handleFieldClick("Name", studentData.name)}
+              onClick={() => handleFieldClick("Name", studentData.name, "text")}
               className="text-gray-500 transition-colors hover:text-blue-600"
               aria-label="Edit name"
             >
@@ -164,13 +208,13 @@ export default function ProfileHeader({ studentData, onUpdateProfile }) {
               icon={<Pencil className="h-5 w-5 text-gray-500" />}
               label="Student ID"
               value={studentData.id}
-              onEdit={() => handleFieldClick("Student ID", studentData.id)}
+              onEdit={() => handleFieldClick("Student ID", studentData.id, "text")}
             />
             <ProfileInfoItem
               icon={<GraduationCap className="h-5 w-5 text-gray-500" />}
               label="Grade"
               value={studentData.grade}
-              onEdit={() => handleFieldClick("Grade", studentData.grade)}
+              onEdit={() => handleFieldClick("Grade", studentData.grade, "text")}
             />
             <ProfileInfoItem
               icon={<Mail className="h-5 w-5 text-gray-500" />}
