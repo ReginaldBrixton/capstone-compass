@@ -10,10 +10,10 @@ import SkillsInterests from "./components/skills-interests"
 
 const initialStudentData = {
   id: "STU2024001",
-  name: "Alex Johnson",
+  name: "Reginald Brixton",
   grade: "Graduate Student",
-  email: "alex.j@school.edu",
-  phone: "+1 (555) 123-4567",
+  email: "reginald.brixton@school.edu",
+  phone: "+233 (50) 629 1029",
   image: null,
 }
 
