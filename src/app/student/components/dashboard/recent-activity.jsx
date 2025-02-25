@@ -29,10 +29,10 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
 
   return (
     <div
-      className="flex items-start gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full"
+      className="flex items-start gap-2 p-2 sm:p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full transition-all duration-200 hover:shadow-sm"
     >
       <div
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700"
+        className="flex h-6 w-6 xs:h-7 xs:w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700"
       >
         {username ? (
           <img
@@ -42,7 +42,7 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
           />
         ) : (
           <span
-            className="text-xs font-medium text-gray-600 dark:text-gray-300"
+            className="text-[10px] xs:text-xs font-medium text-gray-600 dark:text-gray-300"
           >
             {initials}
           </span>
@@ -50,9 +50,9 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
       </div>
 
       <div className="min-w-0 flex-1">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2">
           <p
-            className="text-sm text-gray-900 dark:text-gray-100 truncate"
+            className="text-xs xs:text-sm text-gray-900 dark:text-gray-100 truncate"
           >
             <span
               className="font-medium hover:text-blue-600 dark:hover:text-blue-400"
@@ -66,13 +66,14 @@ const RecentActivity = ({ type, username, action, target, timestamp }) => {
             <span
               className="font-medium hover:text-blue-600 dark:hover:text-blue-400 truncate"
             >
+              {' '}
               {target}
             </span>
           </p>
         </div>
 
         <div
-          className="mt-1 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400"
+          className="mt-0.5 sm:mt-1 flex items-center gap-1 text-[10px] xs:text-xs text-gray-500 dark:text-gray-400"
         >
           {iconMap[type]}
           <span>
